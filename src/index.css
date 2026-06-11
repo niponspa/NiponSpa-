@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,300;1,400;1,600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-red: #cc0000;
+  --color-brand-red-hover: #e50000;
+  --color-brand-darkred: #800000;
+  --color-brand-black: #0a0a0a;
+  --color-brand-charcoal: #0d0d0d;
+  --color-brand-gray: #121212;
+  --color-brand-border: rgba(255, 255, 255, 0.1);
+  --color-brand-gold: #ff3333; /* Red highlight for typography previously in gold */
+  --color-brand-gold-pale: #ff6666;
+  
+  --font-heading: 'Outfit', 'Inter', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+}
+
+/* Custom styles for professional smooth scrolling and aesthetic oriental background patterns */
+html {
+  scroll-behavior: smooth;
+  background-color: #0a0a0a;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #e5e5e5;
+  background-color: #0a0a0a;
+}
+
+/* Elegant scrollbar on beautiful dark surfaces */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #cc0000;
+}
+
+/* Subtle traditional radial paper noise texture overlay (pure CSS) */
+.japanese-grid-overlay {
+  background-image: 
+    radial-gradient(rgba(204, 0, 0, 0.02) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+/* Subtle keyframes for warm breathing incense smoke glow */
+@keyframes breathingGlow {
+  0%, 100% {
+    opacity: 0.15;
+    filter: drop-shadow(0 0 15px rgba(204, 0, 0, 0.4));
+  }
+  50% {
+    opacity: 0.45;
+    filter: drop-shadow(0 0 35px rgba(204, 0, 0, 0.8));
+  }
+}
+
+.breathing-glow-accent {
+  animation: breathingGlow 8s ease-in-out infinite;
+}
+
+/* Keep logo in original colors as requested by the user */
+.logo-filter-responsive {
+  filter: none !important;
+  transition: transform 0.3s ease;
+}
+
+.theme-bw .logo-filter-responsive {
+  filter: none !important;
+}
+
+/* ==========================================
+   BLACK & WHITE (B&W) THEME OVERRIDES (WHITE BACKGROUND)
+   ========================================== */
+.theme-bw {
+  /* Re-bind Tailwind CSS custom properties for light theme style */
+  --color-brand-black: #ffffff; /* Page Background becomes pure White */
+  --color-brand-charcoal: #f9f9fb; /* Section and Container Background become clean off-white */
+  --color-brand-gray: #f3f3f5; /* Subtle element backgrounds / inputs */
+  --color-brand-border: rgba(0, 0, 0, 0.08); /* Sophisticated dark border line */
+  
+  --color-brand-red: #000000; /* Red accents replaced with deep Black */
+  --color-brand-red-hover: #1c1c1e;
+  --color-brand-darkred: #2c2c2e;
+  --color-brand-gold: #000000; /* Gold details also replaced with clean monochromatic Black */
+  --color-brand-gold-pale: #48484a;
+
+  /* Global body text and background overrides for light presentation */
+  background-color: #ffffff !important;
+  color: #1c1c1e !important;
+}
+
+/* Page backdrop adjustments */
+html:has(.theme-bw) {
+  background-color: #ffffff !important;
+}
+
+/* Ensure the scrollbar matches light theme aesthetics */
+.theme-bw::-webkit-scrollbar-track,
+html:has(.theme-bw)::-webkit-scrollbar-track {
+  background: #ffffff !important;
+}
+.theme-bw::-webkit-scrollbar-thumb,
+html:has(.theme-bw)::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15) !important;
+}
+.theme-bw::-webkit-scrollbar-thumb:hover,
+html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
+  background: #000000 !important;
+}
+
+/* Monochromatic decorative grid pattern overlay (subtle dark nodes on white canvas) */
+.theme-bw.japanese-grid-overlay,
+.theme-bw .japanese-grid-overlay {
+  background-image: 
+    radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 0),
+    radial-gradient(rgba(0, 0, 0, 0.01) 1.5px, transparent 0) !important;
+}
+
+/* Gentle monochromatic incense breathing aura */
+.theme-bw .breathing-glow-accent {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+  animation: breathingGlowBw 8s ease-in-out infinite !important;
+}
+
+@keyframes breathingGlowBw {
+  0%, 100% {
+    opacity: 0.1;
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.05));
+  }
+  50% {
+    opacity: 0.25;
+    filter: drop-shadow(0 0 35px rgba(0, 0, 0, 0.15));
+  }
+}
+
+/* 1. TYPOGRAPHY AND TEXT CONTRAST INVERSIONS */
+.theme-bw,
+.theme-bw .text-gray-200,
+.theme-bw .text-gray-300 {
+  color: #1a1a1c !important;
+}
+
+.theme-bw h1,
+.theme-bw h2,
+.theme-bw h3,
+.theme-bw h4,
+.theme-bw h5,
+.theme-bw h6,
+.theme-bw [class*="font-heading"],
+.theme-bw .text-white:not(.bg-brand-red *):not(.bg-brand-red):not(.bg-brand-red-hover *):not(.bg-brand-red-hover):not(.bg-\[\#cc0000\] *):not(.bg-\[\#cc0000\]) {
+  color: #000000 !important;
+}
+
+.theme-bw .text-gray-400 {
+  color: #48484a !important;
+}
+
+.theme-bw .text-gray-500 {
+  color: #636366 !important;
+}
+
+/* Ensure highlights and label titles also match black and white guidelines */
+.theme-bw .text-brand-gold {
+  color: #1a1a1c !important;
+}
+
+/* Selection aesthetics */
+.theme-bw *::selection {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* 2. BUTTONS, AGENDAR CTA AND BADGES OVERRIDES (SOLID BLACK ON hover/active) */
+/* Filled primary elements keep heavy contrast as solid black with white text */
+.theme-bw .bg-brand-red,
+.theme-bw .bg-brand-red-hover,
+.theme-bw .bg-\[\#cc0000\] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.theme-bw .bg-brand-red *,
+.theme-bw .bg-brand-red-hover *,
+.theme-bw .bg-\[\#cc0000\] * {
+  color: #ffffff !important;
+}
+
+/* Hover transitions on main filled elements */
+.theme-bw button.bg-brand-red:hover,
+.theme-bw a.bg-brand-red:hover,
+.theme-bw .bg-brand-red:not(span):hover,
+.theme-bw .bg-\[\#cc0000\]:hover,
+.theme-bw .hover\:bg-brand-red-hover:hover {
+  background-color: #222222 !important;
+}
+
+/* Outline / transparent buttons or pills state */
+.theme-bw .border-brand-red {
+  border-color: #000000 !important;
+}
+.theme-bw .text-brand-red {
+  color: #000000 !important;
+}
+.theme-bw .hover\:bg-brand-red\/10:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Active tab underlines and navigation markers */
+.theme-bw span.bg-brand-red {
+  background-color: #000000 !important;
+}
+
+/* 3. INPUTS, TEXTAREAS & FIELDS READING CLARITY */
+.theme-bw input,
+.theme-bw select,
+.theme-bw textarea {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+.theme-bw input:focus,
+.theme-bw select:focus,
+.theme-bw textarea:focus {
+  border-color: #000000 !important;
+  box-shadow: 0 0 0 1px #000000 !important;
+}
+.theme-bw input::placeholder,
+.theme-bw textarea::placeholder {
+  color: #8e8e93 !important;
+}
+
+/* 4. SECTIONS & CONTAINERS STRUCTURAL ALIGNMENT */
+/* Section 2 (Omotenashi) and any container styled as dark background is converted into gorgeous light blocks */
+.theme-bw section.bg-brand-charcoal,
+.theme-bw .bg-brand-charcoal {
+  background-color: #f9f9fb !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Cards element layout */
+.theme-bw .bg-white\/\[0\.04\] {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
+}
+.theme-bw .bg-white\/\[0\.04\]:hover,
+.theme-bw .hover\:border-brand-red:hover {
+  border-color: #000000 !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Specialized container components like diagnosis block */
+.theme-bw .bg-brand-charcoal\/40 {
+  background-color: rgba(0, 0, 0, 0.02) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Highlight tags with light contrasting pills */
+.theme-bw .bg-brand-red\/10,
+.theme-bw .bg-brand-red\/15 {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #000000 !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+.theme-bw .bg-brand-red\/10 *,
+.theme-bw .bg-brand-red\/15 * {
+  color: #000000 !important;
+}
+
+/* Modal layers */
+.theme-bw .bg-brand-black\/80 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Footer structure overrides */
+.theme-bw footer {
+  background-color: #f3f3f5 !important;
+  border-top-color: rgba(0, 0, 0, 0.08) !important;
+}
+.theme-bw footer * {
+  color: #48484a !important;
+}
+.theme-bw footer h4,
+.theme-bw footer h3,
+.theme-bw footer a:hover,
+.theme-bw footer p.text-white {
+  color: #000000 !important;
+}
+
+/* Interactive hover adjustments */
+.theme-bw .hover\:text-white:hover {
+  color: #000000 !important;
+}
+.theme-bw .hover\:bg-brand-gray\/40:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+.theme-bw .bg-brand-gray\/60 {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+.theme-bw .border-brand-border {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+

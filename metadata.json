@@ -1,0 +1,6 @@
+{
+  "name": "Nipon Spa",
+  "description": "Experiência premium de spa com temática cultural japonesa tradicional em Lisboa. Inclui agendamentos interativos, tratamentos tradicionais e simulação de pagamentos (MBWay, Multibanco, Cartão) em vermelho, preto e dourado.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
