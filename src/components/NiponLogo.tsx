@@ -1,4 +1,5 @@
 import React from 'react';
+import originalLogo from '../assets/images/WhatsApp Image 2026-06-10 at 13.48.56.jpeg';
 
 interface NiponLogoProps {
   layout?: 'horizontal' | 'vertical';
@@ -16,7 +17,7 @@ export default function NiponLogo({
   useOriginalImage = true
  }: NiponLogoProps) {
   
-  const originalLogoUrl = "/src/assets/images/WhatsApp Image 2026-06-10 at 13.48.56.jpeg";
+  const originalLogoUrl = originalLogo;
  
   // Render high-fidelity SVG calligraphy if the image is disabled or we fallback to it
   const renderCalligraphyCircle = () => {

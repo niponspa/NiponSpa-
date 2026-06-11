@@ -43,6 +43,10 @@ import { TRANSLATIONS } from './translations';
 import NiponLogo from './components/NiponLogo';
 import { BLOG_POSTS, BlogPost } from './data/blog';
 
+// Import image assets statically for Vite production bundles
+import spaHeroImg from './assets/images/japanese_spa_hero_1781089830835.png';
+import therapyHeroImg from './assets/images/japanese_therapy_1781089845836.png';
+
 // Let's use 2026-06-10 as our base date
 const BASE_DATE_STR = "2026-06-10";
 
@@ -54,7 +58,21 @@ const getYouTubeEmbedUrl = (url: string) => {
   if (match && match[2].length === 11) {
     videoId = match[2];
   }
-  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&playsinline=1&iv_load_policy=3&enablejsapi=1`;
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+  const params = [
+    'autoplay=1',
+    'mute=1',
+    'loop=1',
+    `playlist=${videoId}`,
+    'controls=0',
+    'showinfo=0',
+    'rel=0',
+    'playsinline=1',
+    'iv_load_policy=3',
+    'enablejsapi=1',
+    origin ? `origin=${encodeURIComponent(origin)}` : ''
+  ].filter(Boolean).join('&');
+  return `https://www.youtube-nocookie.com/embed/${videoId}?${params}`;
 };
 
 export default function App() {
@@ -692,12 +710,15 @@ export default function App() {
               {/* Background cover video with image poster fallback */}
               <div className="absolute inset-0 z-0">
                 {currentVideo.includes('youtube.com') || currentVideo.includes('youtu.be') ? (
-                  <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-brand-black">
+                  <div 
+                    className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-brand-black bg-cover bg-center"
+                    style={{ backgroundImage: `url(${spaHeroImg})` }}
+                  >
                     <iframe
                       src={getYouTubeEmbedUrl(currentVideo)}
                       title="Japanese Nature Ambient"
-                      className="absolute top-1/2 left-1/2 w-[177.77777778vh] min-w-full h-[56.25vw] min-h-full -translate-x-1/2 -translate-y-1/2 object-cover opacity-35 scale-110 pointer-events-none"
-                      allow="autoplay; encrypted-media; picture-in-picture"
+                      className="absolute top-1/2 left-1/2 w-[177.77777778vh] min-w-full h-[56.25vw] min-h-full -translate-x-1/2 -translate-y-1/2 opacity-35 scale-110 pointer-events-none"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       frameBorder="0"
                     />
                   </div>
@@ -709,7 +730,7 @@ export default function App() {
                     loop 
                     muted 
                     playsInline 
-                    poster="/src/assets/images/japanese_spa_hero_1781089830835.png"
+                    poster={spaHeroImg}
                     className="w-full h-full object-cover object-center opacity-40 transition-opacity duration-1000"
                   >
                     <source src={currentVideo} type="video/mp4" />
@@ -808,7 +829,7 @@ export default function App() {
                   <div className="relative group">
                     <div className="relative rounded-lg overflow-hidden border border-brand-border z-10 transition-shadow hover:shadow-xl duration-500">
                       <img 
-                        src="/src/assets/images/japanese_therapy_1781089845836.png" 
+                        src={therapyHeroImg} 
                         alt="Ritual Terapêutico Japonês de Pedras Basálticas" 
                         className="w-full h-[450px] object-cover transition-transform duration-700 group-hover:scale-102"
                         referrerPolicy="no-referrer"
