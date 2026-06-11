@@ -46,6 +46,17 @@ import { BLOG_POSTS, BlogPost } from './data/blog';
 // Let's use 2026-06-10 as our base date
 const BASE_DATE_STR = "2026-06-10";
 
+const getYouTubeEmbedUrl = (url: string) => {
+  if (!url) return '';
+  let videoId = 'AY5qcIq5u2g';
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  if (match && match[2].length === 11) {
+    videoId = match[2];
+  }
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&playsinline=1&iv_load_policy=3&enablejsapi=1`;
+};
+
 export default function App() {
   // Local states
   const [lang, setLang] = useState<'pt' | 'en'>('pt');
@@ -59,7 +70,11 @@ export default function App() {
   });
 
   const [currentVideo, setCurrentVideo] = useState<string>(() => {
-    return localStorage.getItem('nipon_spa_bg_video') || 'https://assets.mixkit.co/videos/preview/mixkit-bamboo-trees-gently-blowing-in-the-wind-32536-large.mp4';
+    const saved = localStorage.getItem('nipon_spa_bg_video');
+    if (saved && (saved.includes('youtube') || saved.includes('youtu.be'))) {
+      return saved;
+    }
+    return 'https://www.youtube.com/watch?v=AY5qcIq5u2g';
   });
 
   const t = TRANSLATIONS[lang];
@@ -676,18 +691,30 @@ export default function App() {
             <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
               {/* Background cover video with image poster fallback */}
               <div className="absolute inset-0 z-0">
-                <video 
-                  key={currentVideo}
-                  ref={videoRef}
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline 
-                  poster="/src/assets/images/japanese_spa_hero_1781089830835.png"
-                  className="w-full h-full object-cover object-center opacity-40 transition-opacity duration-1000"
-                >
-                  <source src={currentVideo} type="video/mp4" />
-                </video>
+                {currentVideo.includes('youtube.com') || currentVideo.includes('youtu.be') ? (
+                  <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-brand-black">
+                    <iframe
+                      src={getYouTubeEmbedUrl(currentVideo)}
+                      title="Japanese Nature Ambient"
+                      className="absolute top-1/2 left-1/2 w-[177.77777778vh] min-w-full h-[56.25vw] min-h-full -translate-x-1/2 -translate-y-1/2 object-cover opacity-35 scale-110 pointer-events-none"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      frameBorder="0"
+                    />
+                  </div>
+                ) : (
+                  <video 
+                    key={currentVideo}
+                    ref={videoRef}
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    poster="/src/assets/images/japanese_spa_hero_1781089830835.png"
+                    className="w-full h-full object-cover object-center opacity-40 transition-opacity duration-1000"
+                  >
+                    <source src={currentVideo} type="video/mp4" />
+                  </video>
+                )}
                 {/* Master gradients overlays */}
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-brand-black/40"></div>
               </div>
