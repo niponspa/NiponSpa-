@@ -138,20 +138,31 @@ export const INITIAL_REVIEWS: Review[] = [
 ];
 
 export function generateAvailableSlots(dateString: string): string[] {
-  const charSum = dateString.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  const isWeekend = new Date(dateString).getDay() % 6 === 0;
+  // Parse YYYY-MM-DD safely to avoid local timezone shifts
+  const parts = dateString.split('-');
+  const year = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10) - 1;
+  const day = parseInt(parts[2], 10);
+  const d = new Date(year, month, day);
+  const dayOfWeek = d.getDay(); // 0 is Sunday, 1 is Monday, ..., 6 is Saturday
   
-  const allPossibleSlots = [
-    '09:00', '10:00', '11:00', '12:00', '13:00',
-    '14:00', '15:00', '16:00', '17:00', '18:00',
-    '19:00', '20:00'
-  ];
+  if (dayOfWeek === 0) {
+    // Sunday is Closed
+    return [];
+  }
+  
+  let slots: string[] = [];
+  if (dayOfWeek === 6) {
+    // Saturday: 10:00 - 17:00
+    slots = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
+  } else {
+    // Monday to Friday: 11:00 - 20:00
+    slots = ['11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+  }
 
-  return allPossibleSlots.filter((_, index) => {
-    if (isWeekend) {
-      if (index < 1 || index > 9) return false;
-    }
-    return (charSum + index * 17) % 3 !== 0;
+  const charSum = dateString.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  return slots.filter((_, index) => {
+    return (charSum + index * 17) % 4 !== 0;
   });
 }
 

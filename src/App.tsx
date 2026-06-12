@@ -19,6 +19,7 @@ import {
   ShieldCheck, 
   Check, 
   ChevronRight, 
+  ChevronDown,
   Plus, 
   Trash2, 
   Copy, 
@@ -178,7 +179,7 @@ export default function App() {
       setStaffError('');
       localStorage.setItem('nipon_staff_auth', 'true');
     } else {
-      setStaffError(lang === 'pt' ? 'Credenciais incorretas. Tente: staff / nipon2026' : 'Incorrect credentials. Try: staff / nipon2026');
+      setStaffError(lang === 'pt' ? 'Credenciais incorretas.' : 'Incorrect credentials.');
     }
   };
 
@@ -192,6 +193,127 @@ export default function App() {
 
   // Video programmatic autoplay helpers
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Zen sound effects for title hover
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const mainGainRef = useRef<GainNode | null>(null);
+  const oscsRef = useRef<OscillatorNode[]>([]);
+  const fadeTimeoutRef = useRef<number | null>(null);
+
+  const startZenSound = () => {
+    try {
+      if (fadeTimeoutRef.current) {
+        window.clearTimeout(fadeTimeoutRef.current);
+        fadeTimeoutRef.current = null;
+      }
+
+      if (!audioCtxRef.current) {
+        audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+
+      const ctx = audioCtxRef.current;
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+
+      const now = ctx.currentTime;
+
+      // If already playing, fade it back up softly without re-triggering new nodes
+      if (mainGainRef.current && oscsRef.current.length > 0) {
+        mainGainRef.current.gain.cancelScheduledValues(now);
+        mainGainRef.current.gain.setValueAtTime(mainGainRef.current.gain.value, now);
+        mainGainRef.current.gain.linearRampToValueAtTime(0.12, now + 1.2);
+        return;
+      }
+
+      // Stop any orphan oscillators safely
+      oscsRef.current.forEach(osc => {
+        try { osc.stop(); } catch(e) {}
+      });
+      oscsRef.current = [];
+
+      // Create a master volume control node
+      const mainGain = ctx.createGain();
+      mainGain.gain.setValueAtTime(0, now);
+      mainGain.connect(ctx.destination);
+      mainGainRef.current = mainGain;
+
+      // Premium harmonics to construct an authentic resonance of a bronze Zen Singing Bowl
+      const harmonics = [
+        { freq: 108, gain: 0.7, detune: -2 }, // Low grounded drone
+        { freq: 162, gain: 0.4, detune: 2 },  // Perfect fifth spacer
+        { freq: 216, gain: 0.5, detune: -1 }, // Gentle octave
+        { freq: 324, gain: 0.35, detune: 3 }, // Minor atmospheric shimmer
+        { freq: 432, gain: 0.2, detune: -3 }, // Calming sacred ratio resonance
+        { freq: 648, gain: 0.1, detune: 4 }   // Airy metallic chime-like tone
+      ];
+
+      harmonics.forEach(h => {
+        const osc = ctx.createOscillator();
+        const oscGain = ctx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(h.freq, now);
+        osc.detune.setValueAtTime(h.detune, now);
+        
+        oscGain.gain.setValueAtTime(h.gain, now);
+        
+        osc.connect(oscGain);
+        oscGain.connect(mainGain);
+        
+        osc.start(now);
+        oscsRef.current.push(osc);
+      });
+
+      // Warm, organic slow-swell swell
+      mainGain.gain.linearRampToValueAtTime(0.12, now + 1.2);
+    } catch (err) {
+      console.warn("Failed to trigger Zen audio:", err);
+    }
+  };
+
+  const stopZenSound = () => {
+    const ctx = audioCtxRef.current;
+    const mainGain = mainGainRef.current;
+    if (!ctx || !mainGain) return;
+
+    try {
+      const now = ctx.currentTime;
+      mainGain.gain.cancelScheduledValues(now);
+      mainGain.gain.setValueAtTime(mainGain.gain.value, now);
+      
+      // Beautiful, lingering 3.2-second smooth linear fade exactly like an echo in a temple sanctuary
+      mainGain.gain.linearRampToValueAtTime(0, now + 3.2);
+
+      fadeTimeoutRef.current = window.setTimeout(() => {
+        try {
+          oscsRef.current.forEach(osc => {
+            try { osc.stop(); } catch(e) {}
+          });
+          oscsRef.current = [];
+          mainGainRef.current = null;
+        } catch(e) {}
+      }, 3300);
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (fadeTimeoutRef.current) {
+        window.clearTimeout(fadeTimeoutRef.current);
+      }
+      try {
+        oscsRef.current.forEach(osc => {
+          try { osc.stop(); } catch(e) {}
+        });
+        if (audioCtxRef.current) {
+          audioCtxRef.current.close();
+        }
+      } catch (e) {}
+    };
+  }, []);
 
   useEffect(() => {
     if (activeTab === 'home' && videoRef.current) {
@@ -671,26 +793,92 @@ export default function App() {
               </div>
 
               <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center w-full">
-                {/* Clean, minimalist Tag Badge */}
-                <div className="inline-flex items-center space-x-2 border-b border-brand-red/40 pb-2 text-[10px] font-medium text-brand-red uppercase tracking-[0.3em] mb-8">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#cc0000]"></span>
-                  <span>{t.heroTag}</span>
-                </div>
-
                 {/* Centered Headline with the correct cursive red font-serif styled Japonês */}
-                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] text-white max-w-5xl mx-auto mb-6">
+                <motion.h1 
+                  className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] text-white max-w-5xl mx-auto mb-6 select-none cursor-default"
+                  whileHover="hover"
+                  initial="initial"
+                  onMouseEnter={startZenSound}
+                  onMouseLeave={stopZenSound}
+                >
                   {lang === 'pt' ? (
                     <>
-                      {t.heroHeadline1} <br />
-                      Do Cuidado <span className="text-[#cc0000] italic font-serif font-semibold text-5xl sm:text-7xl lg:text-8xl">Japonês</span>
+                      <motion.span 
+                        className="inline-block transition-all duration-1000"
+                        variants={{
+                          initial: { letterSpacing: "-0.02em" },
+                          hover: { letterSpacing: "0.02em" }
+                        }}
+                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        {t.heroHeadline1}
+                      </motion.span> 
+                      <br />
+                      <motion.span 
+                        className="inline-block transition-all duration-1000"
+                        variants={{
+                          initial: { letterSpacing: "-0.02em" },
+                          hover: { letterSpacing: "0.01em" }
+                        }}
+                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        Do Cuidado{" "}
+                      </motion.span>
+                      <motion.span 
+                        className="text-[#cc0000] italic font-serif font-semibold text-5xl sm:text-7xl lg:text-8xl inline-block origin-center"
+                        variants={{
+                          initial: { scale: 1, y: 0, filter: "drop-shadow(0 0 0px rgba(204,0,0,0))" },
+                          hover: { 
+                            scale: 1.05, 
+                            y: -4, 
+                            filter: "drop-shadow(0 0 25px rgba(204,0,0,0.65))" 
+                          }
+                        }}
+                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        Japonês
+                      </motion.span>
                     </>
                   ) : (
                     <>
-                      {t.heroHeadline1} <br />
-                      Of Japanese <span className="text-[#cc0000] italic font-serif font-semibold text-5xl sm:text-7xl lg:text-8xl">Care</span>
+                      <motion.span 
+                        className="inline-block transition-all duration-1000"
+                        variants={{
+                          initial: { letterSpacing: "-0.02em" },
+                          hover: { letterSpacing: "0.02em" }
+                        }}
+                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        {t.heroHeadline1}
+                      </motion.span> 
+                      <br />
+                      <motion.span 
+                        className="inline-block transition-all duration-1000"
+                        variants={{
+                          initial: { letterSpacing: "-0.02em" },
+                          hover: { letterSpacing: "0.01em" }
+                        }}
+                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        Of Japanese{" "}
+                      </motion.span>
+                      <motion.span 
+                        className="text-[#cc0000] italic font-serif font-semibold text-5xl sm:text-7xl lg:text-8xl inline-block origin-center"
+                        variants={{
+                          initial: { scale: 1, y: 0, filter: "drop-shadow(0 0 0px rgba(204,0,0,0))" },
+                          hover: { 
+                            scale: 1.05, 
+                            y: -4, 
+                            filter: "drop-shadow(0 0 25px rgba(204,0,0,0.65))" 
+                          }
+                        }}
+                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        Care
+                      </motion.span>
                     </>
                   )}
-                </h1>
+                </motion.h1>
 
                 {/* Centered Sub-headline phrase with Japanese text from screenshot */}
                 <p className="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">
@@ -745,6 +933,28 @@ export default function App() {
                     <span>{t.heroBadgeReviews}</span>
                   </span>
                 </div>
+              </div>
+
+              {/* Minimalist animated Scroll Down Indicator */}
+              <div 
+                onClick={() => {
+                  window.scrollTo({
+                    top: window.innerHeight * 0.82,
+                    behavior: 'smooth'
+                  });
+                }}
+                className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center cursor-pointer z-10 group"
+              >
+                <span className="text-[8px] font-mono tracking-[0.3em] uppercase text-gray-400 group-hover:text-brand-red transition duration-300 mb-1 select-none">
+                  {lang === 'pt' ? 'Rolar para baixo' : 'Scroll down'}
+                </span>
+                <motion.div
+                  animate={{ y: [0, 4, 0] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-gray-400 group-hover:text-brand-red transition duration-300"
+                >
+                  <ChevronDown className="w-4 h-4" />
+                </motion.div>
               </div>
             </section>
 
@@ -894,10 +1104,26 @@ export default function App() {
                       )}
                     </p>
                     <div className="pt-2 font-mono text-xs text-gray-300">
-                      <p className="flex items-center justify-center lg:justify-start space-x-2 mb-1.5 text-brand-gold">
-                        <Clock className="w-4 h-4 text-brand-red shrink-0" />
-                        <span>{lang === 'pt' ? 'Todos os dias' : 'Every day'} • 09:00 - 21:00</span>
-                      </p>
+                      <div className="flex items-start justify-center lg:justify-start space-x-2 mb-1.5 text-brand-gold">
+                        <Clock className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
+                        <div className="text-left font-mono">
+                          {lang === 'pt' ? (
+                            <>
+                              <p className="font-semibold text-white">Horário de Funcionamento:</p>
+                              <p className="text-[11px] text-gray-300 font-sans">Seg. a Sex.: 11:00 - 20:00</p>
+                              <p className="text-[11px] text-gray-300 font-sans">Sábado: 10:00 - 17:00</p>
+                              <p className="text-[11px] text-gray-400 font-sans">Domingo: Encerrado</p>
+                            </>
+                          ) : (
+                            <>
+                              <p className="font-semibold text-white">Opening Hours:</p>
+                              <p className="text-[11px] text-gray-300 font-sans">Mon. to Fri.: 11:00 - 20:00</p>
+                              <p className="text-[11px] text-gray-300 font-sans">Saturday: 10:00 - 17:00</p>
+                              <p className="text-[11px] text-gray-400 font-sans">Sunday: Closed</p>
+                            </>
+                          )}
+                        </div>
+                      </div>
                       <p className="flex items-center justify-center lg:justify-start space-x-2">
                         <Phone className="w-4 h-4 text-brand-red shrink-0" />
                         <span>21 715 7010</span>
@@ -907,14 +1133,14 @@ export default function App() {
 
                   <div className="lg:col-span-2 relative rounded-3xl overflow-hidden border border-brand-border h-[250px] sm:h-[300px]">
                     {/* Visual Vector Representational Map */}
-                    <div className="absolute inset-0 bg-[#0c0a0a] flex flex-col items-center justify-center p-6 text-center">
+                    <div className="absolute inset-0 bg-white flex flex-col items-center justify-center p-6 text-center">
                       <div className="relative mb-4 flex items-center justify-center">
-                        <div className="w-10 h-10 bg-[#cc0000] text-white rounded-full flex items-center justify-center relative z-10">
+                        <div className="w-10 h-10 bg-[#cc0000] text-white rounded-full flex items-center justify-center relative z-10 shadow-md shadow-[#cc0000]/15">
                           <MapPin className="w-5 h-5" />
                         </div>
                       </div>
-                      <h4 className="text-white font-bold font-heading text-base">Rua Prista Monteiro, 20 Loja B, Lisboa</h4>
-                      <p className="text-gray-400 text-xs mt-1 max-w-md">
+                      <h4 className="text-gray-900 font-bold font-heading text-base">Rua Prista Monteiro, 20 Loja B, Lisboa</h4>
+                      <p className="text-gray-500 text-xs mt-1 max-w-md">
                         A menos de 1 km da Estrada da Luz, Benfica, de fácil acesso pela Segunda Circular.
                       </p>
                       
@@ -923,13 +1149,13 @@ export default function App() {
                           href="https://maps.google.com/?q=Rua+Prista+Monteiro+20+Lisboa" 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="bg-brand-gray border border-brand-border text-gray-300 hover:text-white px-4 py-2 rounded-full text-xs font-semibold transition"
+                          className="bg-brand-gray border border-brand-border text-gray-700 hover:text-black px-4 py-2 rounded-full text-xs font-semibold transition"
                         >
                           Abrir Google Maps
                         </a>
                         <button 
                           onClick={() => copyRefToClipboard("Rua Prista Monteiro, 20 Loja B Lisboa 1600-253")}
-                          className="bg-[#cc0000] text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-brand-red-hover transition flex items-center space-x-1.5"
+                          className="bg-[#cc0000] text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-brand-red-hover transition flex items-center space-x-1.5 shadow-md shadow-[#cc0000]/10"
                         >
                           <Copy className="w-3.5 h-3.5" />
                           <span>{isCopied ? 'Copiado!' : 'Copiar Morada'}</span>
@@ -2951,17 +3177,6 @@ export default function App() {
                   </button>
                 </form>
 
-                {/* Demo Helper box */}
-                <div className="bg-brand-black/40 border border-brand-border/60 rounded-2xl p-4 space-y-1.5 text-center">
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-brand-gold font-bold block">
-                    {lang === 'pt' ? 'Credenciais de Acesso Técnico' : 'Technical Access Credentials'}
-                  </span>
-                  <div className="text-xs text-gray-400 font-mono space-y-0.5">
-                    <p>{lang === 'pt' ? 'Utilizador' : 'Username'}: <span className="text-white font-bold select-all">staff</span></p>
-                    <p>{lang === 'pt' ? 'Senha' : 'Password'}: <span className="text-white font-bold select-all">nipon2026</span></p>
-                  </div>
-                </div>
-
               </div>
             ) : (
               /* STAGE 2: LOGGED IN WORKER WORKSPACE */
@@ -4357,13 +4572,29 @@ export default function App() {
               <h5 className="text-white font-bold font-heading uppercase tracking-widest text-xs mb-4">
                 {lang === 'pt' ? 'Protocolo de Apoio' : 'Guest Support Protocol'}
               </h5>
-              <p className="text-xs text-gray-400 leading-relaxed font-sans">
+              <div className="text-xs text-gray-400 leading-relaxed font-sans space-y-2">
                 {lang === 'pt' ? (
-                  <>O spa encontra-se aberto todos os dias uteis e feriados das <strong className="text-white">09:00h às 21:00h</strong>. Recomenda-se a chegada 10 minutos antes do início do tratamento para o escalda-pés e infusão de boas-vindas.</>
+                  <>
+                    <p className="text-gray-300 font-semibold uppercase tracking-wider text-[10px] text-brand-gold">Horário de Funcionamento</p>
+                    <ul className="space-y-0.5 font-mono text-[11px]">
+                      <li>Segunda a Sexta: <span className="text-white font-bold">11:00h às 20:00h</span></li>
+                      <li>Sábados: <span className="text-white font-bold">10:00h às 17:00h</span></li>
+                      <li>Domingos: <span className="text-brand-red font-bold">Encerrado</span></li>
+                    </ul>
+                    <p className="pt-1 text-[11px]">Recomenda-se a chegada 10 minutos antes do início do tratamento para o escalda-pés e infusão de boas-vindas.</p>
+                  </>
                 ) : (
-                  <>The spa is open daily, including weekends and holidays, from <strong className="text-white">09:00 to 21:00</strong>. We highly recommend arriving 10 minutes prior to your booking for the ritual footbath and welcome herbal tea.</>
+                  <>
+                    <p className="text-gray-300 font-semibold uppercase tracking-wider text-[10px] text-brand-gold">Opening Hours</p>
+                    <ul className="space-y-0.5 font-mono text-[11px]">
+                      <li>Mon to Fri: <span className="text-white font-bold">11:00 to 20:00</span></li>
+                      <li>Saturdays: <span className="text-white font-bold">10:00 to 17:00</span></li>
+                      <li>Sundays: <span className="text-brand-red font-bold">Closed</span></li>
+                    </ul>
+                    <p className="pt-1 text-[11px]">We highly recommend arriving 10 minutes prior to your booking for the ritual footbath and welcome herbal tea.</p>
+                  </>
                 )}
-              </p>
+              </div>
               
               <div className="text-[10px] text-brand-gold/60 font-mono">
                 © {new Date().getFullYear()} Nipon Spa. {lang === 'pt' ? 'Todos os direitos reservados.' : 'All rights reserved.'}

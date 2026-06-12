@@ -87,11 +87,11 @@ body {
   --color-brand-gray: #f3f3f5; /* Subtle element backgrounds / inputs */
   --color-brand-border: rgba(0, 0, 0, 0.08); /* Sophisticated dark border line */
   
-  --color-brand-red: #000000; /* Red accents replaced with deep Black */
-  --color-brand-red-hover: #1c1c1e;
-  --color-brand-darkred: #2c2c2e;
-  --color-brand-gold: #000000; /* Gold details also replaced with clean monochromatic Black */
-  --color-brand-gold-pale: #48484a;
+  --color-brand-red: #bc2626; /* Soft premium Japanese Urushi Red */
+  --color-brand-red-hover: #9e1c1c;
+  --color-brand-darkred: #7f1818;
+  --color-brand-gold: #a6843c; /* Elegant soft gold / bronze accent */
+  --color-brand-gold-pale: #c7a760;
 
   /* Global body text and background overrides for light presentation */
   background-color: #ffffff !important;
@@ -170,21 +170,21 @@ html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
 
 /* Ensure highlights and label titles also match black and white guidelines */
 .theme-bw .text-brand-gold {
-  color: #1a1a1c !important;
+  color: #a6843c !important;
 }
 
 /* Selection aesthetics */
 .theme-bw *::selection {
-  background-color: #000000 !important;
+  background-color: #bc2626 !important;
   color: #ffffff !important;
 }
 
-/* 2. BUTTONS, AGENDAR CTA AND BADGES OVERRIDES (SOLID BLACK ON hover/active) */
-/* Filled primary elements keep heavy contrast as solid black with white text */
+/* 2. BUTTONS, AGENDAR CTA AND BADGES OVERRIDES (SOLID RED ON hover/active) */
+/* Filled primary elements keep heavy contrast as elegant red with white text */
 .theme-bw .bg-brand-red,
 .theme-bw .bg-brand-red-hover,
 .theme-bw .bg-\[\#cc0000\] {
-  background-color: #000000 !important;
+  background-color: #bc2626 !important;
   color: #ffffff !important;
 }
 
@@ -200,23 +200,23 @@ html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
 .theme-bw .bg-brand-red:not(span):hover,
 .theme-bw .bg-\[\#cc0000\]:hover,
 .theme-bw .hover\:bg-brand-red-hover:hover {
-  background-color: #222222 !important;
+  background-color: #9e1c1c !important;
 }
 
 /* Outline / transparent buttons or pills state */
 .theme-bw .border-brand-red {
-  border-color: #000000 !important;
+  border-color: #bc2626 !important;
 }
 .theme-bw .text-brand-red {
-  color: #000000 !important;
+  color: #bc2626 !important;
 }
 .theme-bw .hover\:bg-brand-red\/10:hover {
-  background-color: rgba(0, 0, 0, 0.05) !important;
+  background-color: rgba(188, 38, 38, 0.08) !important;
 }
 
 /* Active tab underlines and navigation markers */
 .theme-bw span.bg-brand-red {
-  background-color: #000000 !important;
+  background-color: #bc2626 !important;
 }
 
 /* 3. INPUTS, TEXTAREAS & FIELDS READING CLARITY */
@@ -254,8 +254,8 @@ html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
 }
 .theme-bw .bg-white\/\[0\.04\]:hover,
 .theme-bw .hover\:border-brand-red:hover {
-  border-color: #000000 !important;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+  border-color: #bc2626 !important;
+  box-shadow: 0 10px 20px rgba(188, 38, 38, 0.05) !important;
 }
 
 /* Specialized container components like diagnosis block */
@@ -267,13 +267,13 @@ html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
 /* Highlight tags with light contrasting pills */
 .theme-bw .bg-brand-red\/10,
 .theme-bw .bg-brand-red\/15 {
-  background-color: rgba(0, 0, 0, 0.05) !important;
-  color: #000000 !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
+  background-color: rgba(188, 38, 38, 0.06) !important;
+  color: #bc2626 !important;
+  border-color: rgba(188, 38, 38, 0.15) !important;
 }
 .theme-bw .bg-brand-red\/10 *,
 .theme-bw .bg-brand-red\/15 * {
-  color: #000000 !important;
+  color: #bc2626 !important;
 }
 
 /* Modal layers */
