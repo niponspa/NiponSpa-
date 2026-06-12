@@ -134,10 +134,10 @@ export const TRANSLATIONS: Record<'pt' | 'en', TranslationSet> = {
   pt: {
     navHome: "Início",
     navTreatments: "Tratamentos",
-    navBookRitual: "Agendar Ritual",
+    navBookRitual: "Reservar",
     navReviews: "Avaliações",
-    navAbout: "Sobre o Nipon",
-    navBlog: "Blog Tradicional",
+    navAbout: "Sobre nós",
+    navBlog: "Blog",
     navMyAccount: "As Minhas Reservas",
 
     heroTag: "Estética do Cuidado & Banho em Lisboa",
@@ -248,10 +248,10 @@ export const TRANSLATIONS: Record<'pt' | 'en', TranslationSet> = {
   en: {
     navHome: "Home",
     navTreatments: "Treatments",
-    navBookRitual: "Book Ritual",
+    navBookRitual: "Reserve",
     navReviews: "Reviews",
     navAbout: "About Us",
-    navBlog: "Traditional Blog",
+    navBlog: "Blog",
     navMyAccount: "My Account",
 
     heroTag: "Aesthetics of Wellness & Bath in Lisbon",

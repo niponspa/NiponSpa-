@@ -83,9 +83,7 @@ export default function App() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [activeConsultantNeed, setActiveConsultantNeed] = useState<string | null>(null);
-  const [themeMode, setThemeMode] = useState<'red' | 'bw'>(() => {
-    return (localStorage.getItem('nipon_spa_theme') as 'red' | 'bw') || 'red';
-  });
+  const [themeMode, setThemeMode] = useState<'red' | 'bw'>('bw');
 
   const [currentVideo, setCurrentVideo] = useState<string>(() => {
     const saved = localStorage.getItem('nipon_spa_bg_video');
@@ -468,11 +466,11 @@ export default function App() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-6 text-xs font-semibold tracking-widest uppercase h-full items-center relative">
               <button 
-                onClick={() => { setActiveTab('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'home' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
+                onClick={() => { setActiveTab('about'); }}
+                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'about' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
               >
-                {t.navHome}
-                {activeTab === 'home' && (
+                {t.navAbout}
+                {activeTab === 'about' && (
                   <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
                 )}
               </button>
@@ -482,33 +480,6 @@ export default function App() {
               >
                 {t.navTreatments}
                 {activeTab === 'therapies' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
-                )}
-              </button>
-              <button 
-                onClick={() => { setActiveTab('booking'); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'booking' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
-              >
-                {t.navBookRitual}
-                {activeTab === 'booking' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
-                )}
-              </button>
-              <button 
-                onClick={() => { setActiveTab('reviews'); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'reviews' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
-              >
-                {t.navReviews}
-                {activeTab === 'reviews' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
-                )}
-              </button>
-              <button 
-                onClick={() => { setActiveTab('about'); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'about' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
-              >
-                {t.navAbout}
-                {activeTab === 'about' && (
                   <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
                 )}
               </button>
@@ -541,29 +512,7 @@ export default function App() {
                 </button>
               </div>
 
-              {/* Theme Mode Selector */}
-              <div className="flex items-center space-x-1 p-1 bg-white/5 border border-white/10 rounded-full text-[9px] font-bold tracking-widest uppercase">
-                <button 
-                  onClick={() => {
-                    setThemeMode('red');
-                    localStorage.setItem('nipon_spa_theme', 'red');
-                  }}
-                  className={`px-1.5 sm:px-2 py-0.5 rounded-full cursor-pointer transition ${themeMode === 'red' ? 'bg-[#cc0000] text-white' : 'text-gray-400 hover:text-white'}`}
-                  title={lang === 'pt' ? 'Tema Vermelho & Preto' : 'Red & Black Theme'}
-                >
-                  RED
-                </button>
-                <button 
-                  onClick={() => {
-                    setThemeMode('bw');
-                    localStorage.setItem('nipon_spa_theme', 'bw');
-                  }}
-                  className={`px-1.5 sm:px-2 py-0.5 rounded-full cursor-pointer transition ${themeMode === 'bw' ? 'bg-white text-black' : 'text-gray-400 hover:text-white'}`}
-                  title={lang === 'pt' ? 'Tema Preto & Branco' : 'Black & White Theme'}
-                >
-                  B&W
-                </button>
-              </div>
+
 
               {/* Staff Portal Lock Button */}
               <button 
@@ -581,17 +530,16 @@ export default function App() {
                 )}
               </button>
 
-              {/* My Account Outlined Button */}
+              {/* Primary Reservar Button */}
               <button 
-                onClick={() => { setActiveTab('bookings'); }} 
-                className="border border-brand-red/80 px-4 py-2 hover:bg-brand-red/10 text-brand-red text-[10px] font-bold uppercase tracking-widest transition-all duration-300 relative rounded-full"
+                onClick={() => { setActiveTab('booking'); }} 
+                className={`px-5 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 relative rounded-full border ${
+                  activeTab === 'booking'
+                    ? 'bg-[#cc0000] border-[#cc0000] text-white shadow-lg shadow-[#cc0000]/15'
+                    : 'border-brand-red bg-brand-red text-white hover:bg-brand-red-hover hover:border-brand-red-hover'
+                }`}
               >
-                {t.navMyAccount}
-                {bookings.length > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-brand-red text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-brand-black">
-                    {bookings.length}
-                  </span>
-                )}
+                {t.navBookRitual}
               </button>
 
               {/* Mobile Hamburger Button */}
@@ -629,10 +577,10 @@ export default function App() {
             {/* Navigation links inside drawer */}
             <div className="flex-1 flex flex-col justify-center space-y-8 py-12 text-center">
               <button 
-                onClick={() => { setActiveTab('home'); setIsMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'home' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }}
+                className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'about' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
-                {t.navHome}
+                {t.navAbout}
               </button>
               <button 
                 onClick={() => { setActiveTab('therapies'); setSelectedCategory('all'); setIsMobileMenuOpen(false); }}
@@ -641,40 +589,16 @@ export default function App() {
                 {t.navTreatments}
               </button>
               <button 
-                onClick={() => { setActiveTab('booking'); setIsMobileMenuOpen(false); }}
-                className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'booking' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
-              >
-                {t.navBookRitual}
-              </button>
-              <button 
-                onClick={() => { setActiveTab('reviews'); setIsMobileMenuOpen(false); }}
-                className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'reviews' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
-              >
-                {t.navReviews}
-              </button>
-              <button 
-                onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }}
-                className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'about' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
-              >
-                {t.navAbout}
-              </button>
-              <button 
                 onClick={() => { setActiveTab('blog'); setSelectedBlogPost(null); setIsMobileMenuOpen(false); }}
                 className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'blog' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navBlog}
               </button>
               <button 
-                onClick={() => { setActiveTab('bookings'); setIsMobileMenuOpen(false); }}
-                className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'bookings' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                onClick={() => { setActiveTab('booking'); setIsMobileMenuOpen(false); }}
+                className="text-xl font-extrabold tracking-widest uppercase py-3 px-6 rounded-full border border-brand-red bg-brand-red text-white hover:bg-brand-red-hover transition duration-200"
               >
-                {t.navMyAccount}
-              </button>
-              <button 
-                onClick={() => { setActiveTab('staff-portal'); setIsMobileMenuOpen(false); }}
-                className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'staff-portal' ? 'text-brand-red font-extrabold font-semibold text-brand-gold' : 'text-gray-500 hover:text-white'}`}
-              >
-                {lang === 'pt' ? 'Área do Staff' : 'Staff Portal'}
+                {t.navBookRitual}
               </button>
             </div>
 
@@ -698,23 +622,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
-                <span className="text-xs uppercase tracking-widest text-gray-500 font-mono">Espaço / Aesthetics</span>
-                <div className="flex items-center space-x-1 p-1 bg-white/5 border border-white/10 rounded text-[10px] font-bold tracking-widest uppercase">
-                  <button 
-                    onClick={() => { setThemeMode('red'); localStorage.setItem('nipon_spa_theme', 'red'); }}
-                    className={`px-3 py-1.5 rounded-[2px] cursor-pointer transition ${themeMode === 'red' ? 'bg-brand-red text-white' : 'text-gray-400 hover:text-white'}`}
-                  >
-                    RED
-                  </button>
-                  <button 
-                    onClick={() => { setThemeMode('bw'); localStorage.setItem('nipon_spa_theme', 'bw'); }}
-                    className={`px-3 py-1.5 rounded-[2px] cursor-pointer transition ${themeMode === 'bw' ? 'bg-white text-black' : 'text-gray-400 hover:text-white'}`}
-                  >
-                    B&W
-                  </button>
-                </div>
-              </div>
+
             </div>
           </div>
         )}
