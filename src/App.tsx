@@ -197,8 +197,37 @@ export default function App() {
   // Zen sound effects for title hover
   const audioCtxRef = useRef<AudioContext | null>(null);
   const mainGainRef = useRef<GainNode | null>(null);
-  const oscsRef = useRef<OscillatorNode[]>([]);
+  const noiseSourceRef = useRef<AudioBufferSourceNode | null>(null);
+  const filterNodeRef = useRef<BiquadFilterNode | null>(null);
+  const lfoRef = useRef<OscillatorNode | null>(null);
+  const bubbleTimerRef = useRef<number | null>(null);
   const fadeTimeoutRef = useRef<number | null>(null);
+
+  const createNoiseBuffer = (ctx: AudioContext) => {
+    const bufferSize = ctx.sampleRate * 2;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    return buffer;
+  };
+
+  const stopImmediateNodes = () => {
+    if (bubbleTimerRef.current) {
+      window.clearTimeout(bubbleTimerRef.current);
+      bubbleTimerRef.current = null;
+    }
+    if (noiseSourceRef.current) {
+      try { noiseSourceRef.current.stop(); } catch(e) {}
+      noiseSourceRef.current = null;
+    }
+    if (lfoRef.current) {
+      try { lfoRef.current.stop(); } catch(e) {}
+      lfoRef.current = null;
+    }
+    filterNodeRef.current = null;
+  };
 
   const startZenSound = () => {
     try {
@@ -219,56 +248,108 @@ export default function App() {
       const now = ctx.currentTime;
 
       // If already playing, fade it back up softly without re-triggering new nodes
-      if (mainGainRef.current && oscsRef.current.length > 0) {
+      if (mainGainRef.current && noiseSourceRef.current) {
         mainGainRef.current.gain.cancelScheduledValues(now);
         mainGainRef.current.gain.setValueAtTime(mainGainRef.current.gain.value, now);
-        mainGainRef.current.gain.linearRampToValueAtTime(0.12, now + 1.2);
+        mainGainRef.current.gain.linearRampToValueAtTime(0.20, now + 1.2);
         return;
       }
 
-      // Stop any orphan oscillators safely
-      oscsRef.current.forEach(osc => {
-        try { osc.stop(); } catch(e) {}
-      });
-      oscsRef.current = [];
+      // Cleanup any previous nodes
+      stopImmediateNodes();
 
-      // Create a master volume control node
+      // Master Gain Node for the background waterfall/stream flow
       const mainGain = ctx.createGain();
       mainGain.gain.setValueAtTime(0, now);
       mainGain.connect(ctx.destination);
       mainGainRef.current = mainGain;
 
-      // Premium harmonics to construct an authentic resonance of a bronze Zen Singing Bowl
-      const harmonics = [
-        { freq: 108, gain: 0.7, detune: -2 }, // Low grounded drone
-        { freq: 162, gain: 0.4, detune: 2 },  // Perfect fifth spacer
-        { freq: 216, gain: 0.5, detune: -1 }, // Gentle octave
-        { freq: 324, gain: 0.35, detune: 3 }, // Minor atmospheric shimmer
-        { freq: 432, gain: 0.2, detune: -3 }, // Calming sacred ratio resonance
-        { freq: 648, gain: 0.1, detune: 4 }   // Airy metallic chime-like tone
-      ];
+      // Create white noise source for water rush
+      const noise = ctx.createBufferSource();
+      noise.buffer = createNoiseBuffer(ctx);
+      noise.loop = true;
+      noiseSourceRef.current = noise;
 
-      harmonics.forEach(h => {
-        const osc = ctx.createOscillator();
-        const oscGain = ctx.createGain();
-        
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(h.freq, now);
-        osc.detune.setValueAtTime(h.detune, now);
-        
-        oscGain.gain.setValueAtTime(h.gain, now);
-        
-        osc.connect(oscGain);
-        oscGain.connect(mainGain);
-        
-        osc.start(now);
-        oscsRef.current.push(osc);
-      });
+      // Filter to shape raw white noise into soothing flowing water
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      // Wet rumble around 320Hz, bandwidth (Q) of 1.2
+      filter.frequency.setValueAtTime(320, now);
+      filter.Q.setValueAtTime(1.2, now);
+      filterNodeRef.current = filter;
 
-      // Warm, organic slow-swell swell
-      mainGain.gain.linearRampToValueAtTime(0.12, now + 1.2);
+      // Highpass filter to cut muddy low-end frequencies below 140Hz
+      const lowCut = ctx.createBiquadFilter();
+      lowCut.type = 'highpass';
+      lowCut.frequency.setValueAtTime(140, now);
+
+      // Connect noise -> bandpass -> highpass -> mainGain
+      noise.connect(filter);
+      filter.connect(lowCut);
+      lowCut.connect(mainGain);
+
+      // Create an LFO to modulate filter frequency slowly (the flowing movement of a creek)
+      const lfo = ctx.createOscillator();
+      lfo.type = 'sine';
+      lfo.frequency.setValueAtTime(0.18, now); // 0.18 Hz is an ultra slow wave
+
+      const lfoGain = ctx.createGain();
+      lfoGain.gain.setValueAtTime(110, now); // oscillate by 110Hz above/below 320Hz
+
+      lfo.connect(lfoGain);
+      lfoGain.connect(filter.frequency);
+
+      lfo.start(now);
+      lfoRef.current = lfo;
+      noise.start(now);
+
+      // Fade in the background flow gently
+      mainGain.gain.linearRampToValueAtTime(0.20, now + 1.0);
+
+      // Bubbles & splashing droplets generation loop
+      const triggerBubble = () => {
+        if (!audioCtxRef.current || !mainGainRef.current) return;
+        const currentCtx = audioCtxRef.current;
+        const bNow = currentCtx.currentTime;
+
+        try {
+          // Generate a rapid frequency-sweeping sine burst that mimics a wet water droplet
+          const osc = currentCtx.createOscillator();
+          const oscGain = currentCtx.createGain();
+          
+          osc.type = 'sine';
+          
+          // Random base frequency for the bubble drop (750Hz to 1550Hz sounds super real!)
+          const baseFreq = 750 + Math.random() * 800;
+          
+          osc.frequency.setValueAtTime(baseFreq, bNow);
+          // Rise pitch up slightly as bubble releases
+          osc.frequency.exponentialRampToValueAtTime(baseFreq * (1.12 + Math.random() * 0.12), bNow + 0.15);
+
+          // Very fast envelope (attack, decay)
+          oscGain.gain.setValueAtTime(0, bNow);
+          const peakVal = 0.05 + Math.random() * 0.06;
+          oscGain.gain.linearRampToValueAtTime(peakVal, bNow + 0.015);
+          oscGain.gain.exponentialRampToValueAtTime(0.0001, bNow + 0.18);
+
+          // Connect to mainGain
+          osc.connect(oscGain);
+          oscGain.connect(mainGainRef.current);
+
+          osc.start(bNow);
+          osc.stop(bNow + 0.22);
+        } catch (e) {}
+
+        // Schedule next bubble with organic, dynamic intervals
+        const nextInterval = 60 + Math.random() * 180; // every 60ms to 240ms
+        bubbleTimerRef.current = window.setTimeout(triggerBubble, nextInterval);
+      };
+
+      // Start the bubble scheduler
+      triggerBubble();
+
     } catch (err) {
-      console.warn("Failed to trigger Zen audio:", err);
+      console.warn("Failed to trigger Zen stream audio:", err);
     }
   };
 
@@ -282,18 +363,13 @@ export default function App() {
       mainGain.gain.cancelScheduledValues(now);
       mainGain.gain.setValueAtTime(mainGain.gain.value, now);
       
-      // Beautiful, lingering 3.2-second smooth linear fade exactly like an echo in a temple sanctuary
-      mainGain.gain.linearRampToValueAtTime(0, now + 3.2);
+      // Soothing lingering 2.2s fade out
+      mainGain.gain.linearRampToValueAtTime(0, now + 2.2);
 
       fadeTimeoutRef.current = window.setTimeout(() => {
-        try {
-          oscsRef.current.forEach(osc => {
-            try { osc.stop(); } catch(e) {}
-          });
-          oscsRef.current = [];
-          mainGainRef.current = null;
-        } catch(e) {}
-      }, 3300);
+        stopImmediateNodes();
+        mainGainRef.current = null;
+      }, 2300);
     } catch (err) {
       console.warn(err);
     }
@@ -304,10 +380,11 @@ export default function App() {
       if (fadeTimeoutRef.current) {
         window.clearTimeout(fadeTimeoutRef.current);
       }
+      if (bubbleTimerRef.current) {
+        window.clearTimeout(bubbleTimerRef.current);
+      }
       try {
-        oscsRef.current.forEach(osc => {
-          try { osc.stop(); } catch(e) {}
-        });
+        stopImmediateNodes();
         if (audioCtxRef.current) {
           audioCtxRef.current.close();
         }
