@@ -355,6 +355,12 @@ export default function App() {
 
   // Finalize booking writes to state and localStorage
   const finalizeBooking = () => {
+    // Technical fallback guard
+    alert(lang === 'pt' 
+      ? 'De momento, os agendamentos online e pagamentos automáticos encontram-se bloqueados pois o site está sob construção.' 
+      : 'At this moment, online scheduling and automated payments are blocked because the website is under construction.');
+    return;
+
     if (!bookingTherapy) return;
 
     const newBooking: Booking = {
@@ -430,6 +436,22 @@ export default function App() {
   return (
     <div className={`min-h-screen bg-brand-black text-gray-200 selection:bg-brand-red selection:text-white relative overflow-hidden japanese-grid-overlay ${themeMode === 'bw' ? 'theme-bw' : ''}`}>
       
+      {/* Top Under-Construction Notification Alert Banner */}
+      <div className="bg-gradient-to-r from-[#cc0000] to-brand-darkred text-white py-3 px-4 text-center text-xs border-b border-brand-red/30 relative z-50 flex items-center justify-center space-x-2 shadow-lg">
+        <Lock className="w-4 h-4 text-brand-gold animate-pulse shrink-0" />
+        <span className="font-medium tracking-wide">
+          {lang === 'pt' ? (
+            <>
+              <strong>Aviso:</strong> O site encontra-se em <strong>Construção/Testes</strong>. Agendamentos e pagamentos eletrónicos (Stripe) estão <strong>desativados temporariamente e bloqueados</strong>.
+            </>
+          ) : (
+            <>
+              <strong>Notice:</strong> This website is under <strong>Construction/Testing</strong>. Online bookings and payments (Stripe) are <strong>temporarily disabled and blocked</strong>.
+            </>
+          )}
+        </span>
+      </div>
+
       {/* Decorative incense/glow red spheres */}
       <div className="absolute top-20 left-[-10%] w-[220px] h-[220px] rounded-full bg-brand-red/[0.03] blur-[150px] pointer-events-none breathing-glow-accent"></div>
       <div className="absolute bottom-40 right-[-10%] w-[240px] h-[240px] rounded-full bg-brand-gold/[0.02] blur-[160px] pointer-events-none"></div>
@@ -1346,6 +1368,21 @@ export default function App() {
                 {/* STEP 1: DATE & TIME SELECT */}
                 {bookingStep === 1 && (
                   <div className="space-y-6">
+                    {/* Construction warning banner in the wizard */}
+                    <div className="bg-brand-red/10 border border-brand-red/30 p-4 rounded-xl flex items-start space-x-3 text-xs text-gray-300 animate-fade-in">
+                      <Lock className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
+                      <div className="space-y-1">
+                        <p className="font-bold text-white text-sm">
+                          {lang === 'pt' ? '🔒 Plataforma em Construção' : '🔒 Platform Under Construction'}
+                        </p>
+                        <p className="leading-relaxed">
+                          {lang === 'pt' 
+                            ? 'Este website encontra-se atualmente em fase de desenvolvimento e testes. Os agendamentos e os pagamentos online correspondentes estão desativados temporariamente e bloqueados para uso público.'
+                            : 'This website is currently in testing and setup. Online scheduling and live payments are temporarily disabled and blocked for public use.'}
+                        </p>
+                      </div>
+                    </div>
+
                     {/* TREATMENT CHOOSE DROPDOWN */}
                     <div className="bg-brand-black/40 border border-brand-border/60 p-4 rounded-2xl space-y-2">
                       <label className="text-[10px] text-gray-400 font-mono uppercase block tracking-widest" htmlFor="therapy-booking-selector-page">
@@ -1554,6 +1591,21 @@ export default function App() {
                 {/* STEP 3: INTEGRATED SIMULATED PAYMENT */}
                 {bookingStep === 3 && (
                   <div className="space-y-6 animate-fade-in">
+                    {/* Construction warning banner in the checkout */}
+                    <div className="bg-brand-red/15 border border-brand-red/40 p-5 rounded-2xl flex items-start space-x-3.5 text-xs text-gray-300 shadow-xl">
+                      <Lock className="w-5 h-5 text-brand-red shrink-0 mt-0.5 animate-pulse" />
+                      <div className="space-y-1">
+                        <p className="font-bold text-white text-sm uppercase tracking-wider">
+                          {lang === 'pt' ? 'Sistema de Pagamento Bloqueado' : 'Payment Gateways Locked'}
+                        </p>
+                        <p className="leading-relaxed text-gray-300">
+                          {lang === 'pt' 
+                            ? 'Lembramos que, dado que o site está sob construção e ainda não está ligado ao gateway de pagamentos (Stripe), os pagamentos eletrónicos e reservas automáticas estão bloqueados. Não é possível concluir o booking.'
+                            : 'Since the website is currently under construction and has not yet been connected to the payment provider (Stripe), checkout transactions and live booking entries are completely locked and cannot be finalized.'}
+                        </p>
+                      </div>
+                    </div>
+
                     <div>
                       <h4 className="text-sm font-bold text-white mb-2 font-heading">{lang === 'pt' ? 'Escolha o Método de Pagamento' : 'Choose Your Preferred Payment Method'}</h4>
                       <p className="text-xs text-gray-400">
@@ -1604,14 +1656,18 @@ export default function App() {
                         </div>
 
                         {!isProcessingPayment ? (
-                          <div className="pt-2 text-center">
+                          <div className="pt-2 text-center flex flex-col items-center">
                             <button
                               type="button"
-                              onClick={handleTriggerMBWayPay}
-                              className="bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-xl transition duration-200"
+                              disabled
+                              className="bg-gray-700/60 text-gray-500 border border-brand-border/40 text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-xl cursor-not-allowed inline-flex items-center space-x-2"
                             >
-                              {lang === 'pt' ? 'Enviar Notificação de Pagamento' : 'Send Payment Notification'}
+                              <Lock className="w-3.5 h-3.5 text-brand-red" />
+                              <span>{lang === 'pt' ? 'Pagamento Bloqueado (Em Construção)' : 'Payment Blocked (In Construction)'}</span>
                             </button>
+                            <p className="text-[10px] text-brand-red/80 mt-2 font-medium">
+                              {lang === 'pt' ? '⚠️ Indisponível em fase de testes' : '⚠️ Unavailable in test phase'}
+                            </p>
                           </div>
                         ) : (
                           <div className="bg-brand-charcoal border border-brand-red/20 p-4 rounded-xl flex flex-col items-center justify-center text-center space-y-3.5">
@@ -1677,14 +1733,18 @@ export default function App() {
                           </div>
                         </div>
 
-                        <div className="pt-2 text-center">
+                        <div className="pt-2 text-center flex flex-col items-center">
                           <button
                             type="button"
-                            onClick={finalizeBooking}
-                            className="bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-xl transition duration-200"
+                            disabled
+                            className="bg-gray-700/60 text-gray-500 border border-brand-border/40 text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-xl cursor-not-allowed inline-flex items-center space-x-2"
                           >
-                            {lang === 'pt' ? 'Confirmar Pagamento Simulado' : 'Confirm Simulated Payment'}
+                            <Lock className="w-3.5 h-3.5 text-brand-red" />
+                            <span>{lang === 'pt' ? 'Agendamento Bloqueado (Em Construção)' : 'Booking Blocked (In Construction)'}</span>
                           </button>
+                          <p className="text-[10px] text-brand-red/80 mt-2 font-medium">
+                            {lang === 'pt' ? '⚠️ Sistema sob testes' : '⚠️ System under testing'}
+                          </p>
                         </div>
                       </div>
                     )}
@@ -1816,14 +1876,18 @@ export default function App() {
                             </div>
                           </div>
 
-                          <div className="pt-2 text-center">
+                          <div className="pt-2 text-center flex flex-col items-center">
                             <button
                               type="button"
-                              onClick={finalizeBooking}
-                              className="bg-brand-red hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-wider px-8 py-3 rounded-xl transition duration-200"
+                              disabled
+                              className="bg-gray-700/60 text-gray-500 border border-brand-border/40 text-xs font-bold uppercase tracking-wider px-8 py-3 rounded-xl cursor-not-allowed inline-flex items-center space-x-2"
                             >
-                              {lang === 'pt' ? `Pagar ${bookingTherapy.price}€ com Segurança` : `Pay ${bookingTherapy.price}€ Securely`}
+                              <Lock className="w-3.5 h-3.5 text-brand-red" />
+                              <span>{lang === 'pt' ? 'Pagamentos Bloqueados (Em Construção)' : 'Payments Blocked (In Construction)'}</span>
                             </button>
+                            <p className="text-[10px] text-brand-red/80 mt-2 font-medium">
+                              {lang === 'pt' ? '⚠️ Gateway de pagamentos inativo' : '⚠️ Payment gateway inactive'}
+                            </p>
                           </div>
                         </div>
                       </div>
