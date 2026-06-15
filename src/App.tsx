@@ -1564,6 +1564,19 @@ export default function App() {
                         {getTherapyDesc(therapy)}
                       </p>
 
+                      {therapy.id === 'facial-japones' && (
+                        <div className="bg-brand-red/5 border border-brand-red/25 rounded-2xl p-3 text-left my-2 space-y-1">
+                          <span className="text-[9px] text-[#cc0000] font-bold uppercase tracking-wider block">
+                            {lang === 'pt' ? '✕ Abordagem Suave & Natural' : '✕ Pure & Natural Approach'}
+                          </span>
+                          <p className="text-[10px] text-gray-300 font-sans leading-normal">
+                            {lang === 'pt'
+                              ? 'Não realizamos peelings químicos nem extração de cravos, privilegiando uma experiência purificante suave e não invasiva.'
+                              : 'We do not perform chemical peels or blackhead extractions, opting for a gentle, natural and non-invasive experience.'}
+                          </p>
+                        </div>
+                      )}
+
                       {/* Results list - SELLING THE RESULT */}
                       {therapy.results && (
                         <div className="space-y-1.5 pt-3 border-t border-brand-border/40">
@@ -1928,6 +1941,19 @@ export default function App() {
                     <p className="text-xs text-gray-400 leading-relaxed min-h-[72px]">
                       {getTherapyDesc(therapy)}
                     </p>
+
+                    {therapy.id === 'facial-japones' && (
+                      <div className="bg-brand-red/5 border border-brand-red/25 rounded-2xl p-3 text-left my-2 space-y-1">
+                        <span className="text-[9px] text-[#cc0000] font-bold uppercase tracking-wider block">
+                          {lang === 'pt' ? '✕ Abordagem Suave & Natural' : '✕ Pure & Natural Approach'}
+                        </span>
+                        <p className="text-[10px] text-gray-300 font-sans leading-normal">
+                          {lang === 'pt'
+                            ? 'Não realizamos peelings químicos nem extração de cravos, privilegiando uma experiência purificante suave e não invasiva.'
+                            : 'We do not perform chemical peels or blackhead extractions, opting for a gentle, natural and non-invasive experience.'}
+                        </p>
+                      </div>
+                    )}
 
                     {/* Results list - SELLING THE RESULT */}
                     {therapy.results && (

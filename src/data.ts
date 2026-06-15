@@ -99,6 +99,74 @@ export const THERAPIES: Therapy[] = [
       'Complete disconnection from daily stress'
     ],
     category: 'personalized'
+  },
+  // 2. Estética Corporal
+  {
+    id: 'remodelacao-corporal',
+    name: 'Programa Remodelação Corporal',
+    nameEn: 'Body Reshaping Program',
+    japaneseName: '美体成形',
+    description: 'Protocolos personalizados para melhorar a aparência da pele, promover a sensação de leveza e ajudar a redefinir os contornos corporais.',
+    descriptionEn: 'Customized protocols to improve skin appearance, promote a feeling of lightness, and help redefine body contours.',
+    duration: 60,
+    price: 80,
+    benefits: [
+      'Melhoria do edema e eliminação de líquidos em excesso',
+      'Protocolos adaptados ao seu biótipo e queixas individuais',
+      'Técnicas manuais suaves, harmonizadoras e de drenagem'
+    ],
+    benefitsEn: [
+      'Improvement of edema and elimination of excess fluids',
+      'Protocols adapted to your individual biotype and concerns',
+      'Gentle, harmonizing, and draining manual techniques'
+    ],
+    results: [
+      'Minimização visível do aspeto da celulite',
+      'Redução de medidas nas zonas-alvo selecionadas',
+      'Alívio imediato da sensação de inchaço e peso',
+      'Melhoria visível do contorno corporal global'
+    ],
+    resultsEn: [
+      'Visible reduction in the appearance of cellulite',
+      'Active measurement reduction in target areas',
+      'Immediate relief from bloating and heavy feelings',
+      'Visible improvement in overall body contouring'
+    ],
+    category: 'body-aesthetic'
+  },
+  // 3. Estética Facial
+  {
+    id: 'facial-japones',
+    name: 'Programa Facial Japonês',
+    nameEn: 'Japanese Facial Program',
+    japaneseName: '美顔美肌',
+    description: 'Inspirado em técnicas japonesas tradicionais para promover luminosidade, firmeza e revitalização da pele.',
+    descriptionEn: 'Inspired by traditional Japanese techniques to promote skin radiance, firmness, and natural revitalization.',
+    duration: 60,
+    price: 75,
+    benefits: [
+      'Massagem facial modeladora e drenante de assinatura Nipon',
+      'Utilização de toalhas quentes e aromas purificadores de lótus',
+      'Abordagem holística focada na revitalização e relaxamento'
+    ],
+    benefitsEn: [
+      'Nipon signature face shaping and draining massage',
+      'Use of warm towels and purifying lotus aromas',
+      'Holistic approach focused on revitalization and relaxation'
+    ],
+    results: [
+      'Revitalização profunda da pele cansada e sem viço',
+      'Aumento imediato da luminosidade e brilho saudável natural',
+      'Cuidados preventivos anti-idade de alta eficácia',
+      'Limpeza e hidratação profunda através de nutrição celular'
+    ],
+    resultsEn: [
+      'Deep revitalization of tired skins with loss of health glow',
+      'Immediate boost in natural luminosity and healthy tone',
+      'Highly effective preventive anti-aging skincare',
+      'Deep cleansing and hydration through therapeutic cell nourishment'
+    ],
+    category: 'facial-aesthetic'
   }
 ];
 
