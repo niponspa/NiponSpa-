@@ -403,6 +403,40 @@ export default function App() {
     }
   }, [activeTab]);
 
+  // Synchronize URL path with state-driven tabs for /reservar and standard tabs
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      if (path === '/reservar') {
+        setActiveTab('reservar');
+      } else {
+        const tabName = path.slice(1);
+        if (['home', 'about', 'therapies', 'blog', 'staff-portal', 'bookings'].includes(tabName)) {
+          setActiveTab(tabName);
+        } else {
+          setActiveTab('home');
+        }
+      }
+    };
+
+    const initialPath = window.location.pathname;
+    if (initialPath === '/reservar') {
+      setActiveTab('reservar');
+    }
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Synchronize activeTab state to the browser URL pathname for direct addressability
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    const targetPath = activeTab === 'reservar' ? '/reservar' : (activeTab === 'home' ? '/' : `/${activeTab}`);
+    if (currentPath !== targetPath) {
+      window.history.pushState(null, '', targetPath);
+    }
+  }, [activeTab]);
+
   // Load from local storage on mount
   useEffect(() => {
     const savedBookings = localStorage.getItem('nipon_spa_bookings');
@@ -482,14 +516,12 @@ export default function App() {
 
   const datesList = getAvailableDates();
 
-  // Start booking wizard
-  const handleOpenBooking = (therapy: Therapy) => {
-    setBookingTherapy(therapy);
-    setSelectedDate(datesList[0].dateString);
-    const slots = generateAvailableSlots(datesList[0].dateString);
-    setSelectedTime(slots[0] || '');
-    setBookingStep(1);
-    setActiveTab('booking');
+  // Start booking wizard (now pointing to the new integrated DOC.pt booking page)
+  const handleOpenBooking = (therapy?: Therapy) => {
+    if (therapy) {
+      setBookingTherapy(therapy);
+    }
+    setActiveTab('reservar');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -633,22 +665,6 @@ export default function App() {
   return (
     <div className={`min-h-screen bg-brand-black text-gray-200 selection:bg-brand-red selection:text-white relative overflow-hidden japanese-grid-overlay ${themeMode === 'bw' ? 'theme-bw' : ''}`}>
       
-      {/* Top Under-Construction Notification Alert Banner */}
-      <div className="bg-gradient-to-r from-[#cc0000] to-brand-darkred text-white py-3 px-4 text-center text-xs border-b border-brand-red/30 relative z-50 flex items-center justify-center space-x-2 shadow-lg">
-        <Lock className="w-4 h-4 text-brand-gold animate-pulse shrink-0" />
-        <span className="font-medium tracking-wide">
-          {lang === 'pt' ? (
-            <>
-              <strong>Aviso:</strong> O site encontra-se em <strong>Construção/Testes</strong>. Agendamentos e pagamentos eletrónicos (Stripe) estão <strong>desativados temporariamente e bloqueados</strong>.
-            </>
-          ) : (
-            <>
-              <strong>Notice:</strong> This website is under <strong>Construction/Testing</strong>. Online bookings and payments (Stripe) are <strong>temporarily disabled and blocked</strong>.
-            </>
-          )}
-        </span>
-      </div>
-
       {/* Decorative incense/glow red spheres */}
       <div className="absolute top-20 left-[-10%] w-[220px] h-[220px] rounded-full bg-brand-red/[0.03] blur-[150px] pointer-events-none breathing-glow-accent"></div>
       <div className="absolute bottom-40 right-[-10%] w-[240px] h-[240px] rounded-full bg-brand-gold/[0.02] blur-[160px] pointer-events-none"></div>
@@ -731,9 +747,9 @@ export default function App() {
 
               {/* Primary Reservar Button */}
               <button 
-                onClick={() => { setActiveTab('booking'); }} 
+                onClick={() => { setActiveTab('reservar'); }} 
                 className={`px-5 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 relative rounded-full border ${
-                  activeTab === 'booking'
+                  activeTab === 'reservar'
                     ? 'bg-[#cc0000] border-[#cc0000] text-white shadow-lg shadow-[#cc0000]/15'
                     : 'border-brand-red bg-brand-red text-white hover:bg-brand-red-hover hover:border-brand-red-hover'
                 }`}
@@ -794,8 +810,8 @@ export default function App() {
                 {t.navBlog}
               </button>
               <button 
-                onClick={() => { setActiveTab('booking'); setIsMobileMenuOpen(false); }}
-                className="text-xl font-extrabold tracking-widest uppercase py-3 px-6 rounded-full border border-brand-red bg-brand-red text-white hover:bg-brand-red-hover transition duration-200"
+                onClick={() => { setActiveTab('reservar'); setIsMobileMenuOpen(false); }}
+                className="text-xl font-extrabold tracking-widest uppercase py-3 px-6 rounded-full border border-brand-red bg-brand-red text-white hover:bg-[#cc0000] transition duration-200"
               >
                 {t.navBookRitual}
               </button>
@@ -971,12 +987,8 @@ export default function App() {
                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
                   <button 
                     onClick={() => {
-                      setActiveTab('therapies');
-                      setSelectedCategory('all');
-                      setTimeout(() => {
-                        const elem = document.getElementById('catalog-element');
-                        if (elem) elem.scrollIntoView({ behavior: 'smooth' });
-                      }, 100);
+                      setActiveTab('reservar');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     className="w-full sm:w-auto bg-[#cc0000] hover:bg-brand-red-hover text-white px-8 py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300"
                   >
@@ -1527,6 +1539,68 @@ export default function App() {
                 <p className="text-gray-400">{lang === 'pt' ? 'Nenhum tratamento tradicional encontrado nesta categoria.' : 'No traditional treatments found in this category.'}</p>
               </div>
             )}
+          </div>
+        )}
+
+        {/* TAB: NEW DOC.PT RESERVAR PAGE */}
+        {activeTab === 'reservar' && (
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-20 space-y-8 animate-fade-in" id="reservar-page">
+            {/* Page Title & Traditional Subtitle */}
+            <div className="text-center space-y-3">
+              <span className="text-brand-red font-bold text-xs uppercase tracking-widest block font-mono">
+                Omotenashi • {lang === 'pt' ? 'Reserva Segura Directa' : 'Secure Direct Booking'}
+              </span>
+              <h1 className="text-3xl md:text-5xl font-extrabold text-white font-heading tracking-tight" id="reservar-title">
+                {lang === 'pt' ? 'Reserve o seu momento' : 'Reserve your moment'}
+              </h1>
+              <p className="text-xs md:text-sm text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                {lang === 'pt' 
+                  ? 'Escolha as suas terapias de bem-estar preferidas e marque o seu horário ideal com facilidade na plataforma oficial DOC.pt. Aguardamos a sua honrosa visita para lhe proporcionar uma harmonia inigualável.' 
+                  : 'Select your preferred wellness therapies and secure your ideal time slot easily on our official DOC.pt platform. We look forward to welcoming you for an unparalleled state of harmony.'}
+              </p>
+            </div>
+
+            {/* Premium Info Panel / Fallback Section */}
+            <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 md:p-8 space-y-6 shadow-xl relative overflow-hidden">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4 border-b border-brand-border/40 pb-6">
+                <div className="flex items-center space-x-3.5 text-center sm:text-left">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#cc0000]/10 border border-[#cc0000]/30 shrink-0 mx-auto sm:mx-0">
+                    <ShieldCheck className="w-5 h-5 text-brand-red" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold text-white">
+                      {lang === 'pt' ? 'Garantia de Ligação Segura' : 'Secure Connection Guarantee'}
+                    </h3>
+                    <p className="text-xs text-gray-400 mt-1 max-w-lg">
+                      {lang === 'pt' 
+                        ? 'O formulário de agendamento é carregado diretamente dos servidores certificados da DOC.pt para proteger os seus dados.' 
+                        : 'The scheduling form is loaded directly from certified DOC.pt servers to protect your private information.'}
+                    </p>
+                  </div>
+                </div>
+
+                <a 
+                  href="https://nipon-spa-japones.doc.pt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center space-x-2 shrink-0 select-none"
+                  id="fallback-button"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>{lang === 'pt' ? 'Abrir marcação numa nova janela' : 'Open booking in new window'}</span>
+                </a>
+              </div>
+
+              {/* Booking block with responsive iframe and rounded corners - Now with taller dimensions for premium visibility */}
+              <div className="relative bg-white rounded-2xl overflow-hidden border border-brand-border shadow-inner animate-fade-in" style={{ minHeight: '1100px' }} id="booking-block-wrapper">
+                <iframe 
+                  src="https://nipon-spa-japones.doc.pt" 
+                  className="w-full h-[950px] md:h-[1350px] border-none select-none"
+                  title="Nipon Spa Booking"
+                  allow="payment"
+                />
+              </div>
+            </div>
           </div>
         )}
 
@@ -2613,7 +2687,7 @@ export default function App() {
                   
                   <div className="pt-2 flex flex-wrap gap-4 justify-center md:justify-start">
                     <button 
-                      onClick={() => { setActiveTab('booking'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                      onClick={() => { setActiveTab('reservar'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                       className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center space-x-2 cursor-pointer"
                     >
                       <span>{lang === 'pt' ? 'Marcar Sessão' : 'Book a Session'}</span>
