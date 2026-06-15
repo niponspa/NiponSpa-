@@ -1737,23 +1737,37 @@ export default function App() {
             </div>
 
 
-            {/* Category Filter Pills (Aligned with the Flyer) */}
-            <div className="flex flex-wrap items-center justify-center gap-2 max-w-3xl mx-auto border-b border-brand-border pb-6">
+            {/* Category Filter Tabs (Same visual style as the active underlined tabs in the image) */}
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 max-w-3xl mx-auto border-b border-brand-border/40 pb-0">
               {[
                 { id: 'all', label: lang === 'pt' ? 'Todos os Tratamentos' : 'All Treatment Options' },
-                { id: 'personalized', label: lang === 'pt' ? 'Protocolos Personalizados' : 'Personalized Protocols (30/60/90m)' },
+                { id: 'personalized', label: lang === 'pt' ? 'Protocolos Personalizados' : 'Personalized Protocols' },
                 { id: 'relax-muscular', label: lang === 'pt' ? 'Dores & Músculos' : 'Muscle Pain & Relax' },
                 { id: 'body-aesthetic', label: lang === 'pt' ? 'Estética Corporal' : 'Body Aesthetics' },
                 { id: 'facial-aesthetic', label: lang === 'pt' ? 'Estética Facial' : 'Facial Aesthetics' },
-              ].map(cat => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition duration-200 border ${selectedCategory === cat.id ? 'bg-[#cc0000] text-white border-[#cc0000]' : 'bg-brand-charcoal text-gray-400 hover:text-white border-brand-border hover:bg-brand-gray/40'}`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+              ].map(cat => {
+                const isActive = selectedCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`relative py-3 text-xs sm:text-[13px] font-medium tracking-wide transition duration-200 cursor-pointer ${
+                      isActive
+                        ? 'text-[#cc0000] font-bold'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    <span>{cat.label}</span>
+                    {isActive && (
+                      <motion.span 
+                        layoutId="activeTreatmentCategory"
+                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#cc0000]"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
             </div>
 
             {/* Grid display of therapies */}
