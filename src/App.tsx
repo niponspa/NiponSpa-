@@ -50,6 +50,7 @@ import { THERAPIES, INITIAL_REVIEWS, generateAvailableSlots, generateMockReferen
 import { Therapy, Booking, PaymentMethod, Review } from './types';
 import { TRANSLATIONS } from './translations';
 import NiponLogo from './components/NiponLogo';
+import GalleryView from './components/GalleryView';
 import { BLOG_POSTS, BlogPost } from './data/blog';
 
 // Import image assets statically for Vite production bundles
@@ -786,7 +787,7 @@ export default function App() {
         const possibleTabFromPath = path.slice(1);
         const possibleTabFromHash = hash.replace(/^#\/?/, '');
         
-        const validTabs = ['home', 'about', 'therapies', 'blog', 'staff-portal', 'bookings', 'reservar'];
+        const validTabs = ['home', 'about', 'therapies', 'blog', 'staff-portal', 'bookings', 'reservar', 'reviews', 'gallery'];
         
         if (validTabs.includes(possibleTabFromHash)) {
           setActiveTab(possibleTabFromHash);
@@ -1091,6 +1092,24 @@ export default function App() {
                 )}
               </button>
               <button 
+                onClick={() => { setActiveTab('gallery'); }}
+                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'gallery' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
+              >
+                {t.navGallery}
+                {activeTab === 'gallery' && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
+                )}
+              </button>
+              <button 
+                onClick={() => { setActiveTab('reviews'); }}
+                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'reviews' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
+              >
+                {t.navReviews}
+                {activeTab === 'reviews' && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
+                )}
+              </button>
+              <button 
                 onClick={() => { setActiveTab('blog'); setSelectedBlogPost(null); }}
                 className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'blog' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
               >
@@ -1182,28 +1201,40 @@ export default function App() {
             </div>
 
             {/* Navigation links inside drawer */}
-            <div className="flex-1 flex flex-col justify-center space-y-8 py-12 text-center">
+            <div className="flex-1 flex flex-col justify-center space-y-6 py-6 text-center">
               <button 
                 onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }}
-                className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'about' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'about' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navAbout}
               </button>
               <button 
                 onClick={() => { setActiveTab('therapies'); setSelectedCategory('all'); setIsMobileMenuOpen(false); }}
-                className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'therapies' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'therapies' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navTreatments}
               </button>
               <button 
+                onClick={() => { setActiveTab('gallery'); setIsMobileMenuOpen(false); }}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'gallery' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+              >
+                {t.navGallery}
+              </button>
+              <button 
+                onClick={() => { setActiveTab('reviews'); setIsMobileMenuOpen(false); }}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'reviews' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+              >
+                {t.navReviews}
+              </button>
+              <button 
                 onClick={() => { setActiveTab('blog'); setSelectedBlogPost(null); setIsMobileMenuOpen(false); }}
-                className={`text-xl font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'blog' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'blog' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navBlog}
               </button>
               <button 
                 onClick={() => { setActiveTab('reservar'); setIsMobileMenuOpen(false); }}
-                className="text-xl font-extrabold tracking-widest uppercase py-3 px-6 rounded-full border border-brand-red bg-brand-red text-white hover:bg-[#cc0000] transition duration-200"
+                className="text-lg font-extrabold tracking-widest uppercase py-2.5 px-6 rounded-full border border-brand-red bg-brand-red text-white hover:bg-[#cc0000] transition duration-200"
               >
                 {t.navBookRitual}
               </button>
@@ -3072,6 +3103,13 @@ export default function App() {
 
             </div>
 
+          </div>
+        )}
+
+        {/* TAB: GALLERY VIEW */}
+        {activeTab === 'gallery' && (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16 animate-fade-in" id="gallery-page">
+            <GalleryView lang={lang} />
           </div>
         )}
 

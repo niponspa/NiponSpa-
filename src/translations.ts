@@ -9,6 +9,7 @@ export interface TranslationSet {
   navTreatments: string;
   navBookRitual: string;
   navReviews: string;
+  navGallery: string;
   navAbout: string;
   navBlog: string;
   navMyAccount: string;
@@ -136,6 +137,7 @@ export const TRANSLATIONS: Record<'pt' | 'en', TranslationSet> = {
     navTreatments: "Tratamentos",
     navBookRitual: "Reservar",
     navReviews: "Avaliações",
+    navGallery: "Galeria",
     navAbout: "Sobre nós",
     navBlog: "Blog",
     navMyAccount: "As Minhas Reservas",
@@ -250,6 +252,7 @@ export const TRANSLATIONS: Record<'pt' | 'en', TranslationSet> = {
     navTreatments: "Treatments",
     navBookRitual: "Reserve",
     navReviews: "Reviews",
+    navGallery: "Gallery",
     navAbout: "About Us",
     navBlog: "Blog",
     navMyAccount: "My Account",
