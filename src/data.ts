@@ -15,7 +15,7 @@ export const THERAPIES: Therapy[] = [
     description: 'Tratamento express com foco na descompressão rápida da sua zona de principal desconforto (ex: costas, pescoço ou pernas). Ideal para agendas preenchidas ou alívio instantâneo.',
     descriptionEn: 'Express session focusing on rapid decompression of your main area of discomfort (e.g., back, neck, or legs). Ideal for busy agendas.',
     duration: 30,
-    price: 45,
+    price: 40,
     benefits: [
       'Revitalização e bem-estar para o seu dia a dia',
       'Desativação de pontos de gatilho de stress agudo',
@@ -46,7 +46,7 @@ export const THERAPIES: Therapy[] = [
     description: 'A nossa terapia de equilíbrio por excelência. Uma massagem de assinatura adaptada rigorosamente às suas necessidades do dia, combinando acupressão oriental e fluidez corporal.',
     descriptionEn: 'Our signature balance therapy. A bespoke treatment tailored strictly to your needs of the day, blending Eastern acupressure and therapeutic flow.',
     duration: 60,
-    price: 75,
+    price: 70,
     benefits: [
       'Harmonia profunda entre o corpo e a mente',
       'Realinhamento do fluxo de energia vital (Ki)',
@@ -77,7 +77,7 @@ export const THERAPIES: Therapy[] = [
     description: 'O teto máximo da personalização de bem-estar. Inicia com um escalda-pés reconfortante e segue para um tratamento de corpo inteiro integrando pedras quentes e alongamento terapêutico.',
     descriptionEn: 'The absolute pinnacle of personalized wellness. Begins with a soothing foot bath and merges into a full-body journey with hot volcanic stones.',
     duration: 90,
-    price: 110,
+    price: 90,
     benefits: [
       'Renovação profunda e relaxamento em todos os sentidos',
       'Combinação terapêutica de calor vulcânico e toques reflexos',

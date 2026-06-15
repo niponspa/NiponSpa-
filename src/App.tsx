@@ -35,7 +35,15 @@ import {
   BookOpen,
   VolumeX,
   X,
-  Menu
+  Menu,
+  Play,
+  Award,
+  Users,
+  History,
+  TrendingUp,
+  Video,
+  Facebook,
+  Youtube
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { THERAPIES, INITIAL_REVIEWS, generateAvailableSlots, generateMockReference } from './data';
@@ -75,6 +83,366 @@ const getYouTubeEmbedUrl = (url: string) => {
   ].filter(Boolean).join('&');
   return `https://www.youtube-nocookie.com/embed/${videoId}?${params}`;
 };
+
+interface LegacyTimelineAndNewGenProps {
+  lang: 'pt' | 'en';
+}
+
+export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) {
+  const [activeMediaTab, setActiveMediaTab] = React.useState<'youtube' | 'facebook' | 'courses' | 'events'>('youtube');
+  const [timelineStep, setTimelineStep] = React.useState<number>(0);
+
+  const steps = [
+    {
+      year: "2004",
+      title: lang === 'pt' ? "Fundação por Vanessa Nascimento" : "Founding by Vanessa Nascimento",
+      desc: lang === 'pt' 
+        ? "Fundado com a enorme paixão de Vanessa Nascimento pelas terapias de cura manuais e pela cultura oriental, o Nipon Spa surgiu como um santuário de autêntico restabelecimento físico e espiritual."
+        : "Founded through Vanessa Nascimento's great passion for ancient manual therapies and Japanese care culture, Nipon Spa rose to prominence as a physical and spiritual sanctuary.",
+      badge: lang === 'pt' ? "O Nascimento do Templo" : "The Sacred Beginning",
+      icon: History
+    },
+    {
+      year: "22 Anos de Sucesso",
+      title: lang === 'pt' ? "Crescimento & Adaptação" : "Growth & Mastery",
+      desc: lang === 'pt'
+        ? "Duas décadas de crescimento sustentável em Lisboa, cultivando a excelência no atendimento personalizado e introduzindo rituais consagrados de banhos purificadores em banheiras de madeira tradicional."
+        : "Two decades of secure growth in Lisbon, polishing our tailor-made hospitality and introducing legendary purification baths in traditional wooden frames.",
+      badge: lang === 'pt' ? "Equilíbrio & Tradição" : "Balance & Heritage",
+      icon: TrendingUp
+    },
+    {
+      year: "Mais de 50.000 + Clientes",
+      title: lang === 'pt' ? "Legado e Referência de Lisboa" : "Lisbon's Trusted Benchmark",
+      desc: lang === 'pt'
+        ? "Mais de 50 mil clientes confiaram as suas mentes e corpos ao nosso espaço, consolidando o Nipon Spa como a autoridade inquestionável em bem-estar e calmaria na capital portuguesa."
+        : "Over 50,000 patrons have surrendered their stress and fatigue to our master therapists, cementing Nipon Spa as the ultimate oasis in the Portuguese capital.",
+      badge: lang === 'pt' ? "Comunidade Alinhada" : "Aligned Community",
+      icon: Users
+    },
+    {
+      year: "Nova Geração",
+      title: lang === 'pt' ? "Karina Seito & Arissa Matsumoto" : "Karina Seito & Arissa Matsumoto",
+      desc: lang === 'pt'
+        ? "A passagem do bastão de liderança. A essência do tratamento nipónico alia-se agora a uma nova gestão estratégica com os mesmos valores tradicionais."
+        : "The leadership handoff. The original spirit of Japanese restorative care joins a new strategic leadership while maintaining the core ancestral values.",
+      badge: lang === 'pt' ? "Evolução & Sinergia" : "Evolution & Synergy",
+      icon: Sparkles
+    }
+  ];
+
+  return (
+    <div className="space-y-16 animate-fade-in text-left">
+      
+      {/* 1. O Nosso Legado - 22 Anos de Dedicação ao Bem-estar */}
+      <div className="bg-gradient-to-br from-brand-charcoal to-brand-black border border-brand-border rounded-3xl p-6 sm:p-10 relative overflow-hidden">
+        {/* Background watermark */}
+        <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none select-none">
+          <span className="text-8xl font-black font-serif text-white uppercase tracking-widest">伝承</span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div className="lg:col-span-7 space-y-6 text-left">
+            <div className="space-y-2">
+              <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-[0.22em] flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
+                {lang === 'pt' ? 'O Nosso Legado • 22 Anos' : 'Our Legacy • 22 Years'}
+              </span>
+              <h2 className="text-3xl font-light tracking-tight text-white font-heading">
+                {lang === 'pt' ? 'Dedicação Integral ao Bem-estar' : 'Unwavering Dedication to Well-being'}
+              </h2>
+            </div>
+
+            <div className="relative border-l-2 border-brand-red/30 pl-5 space-y-4">
+              <p className="text-base sm:text-lg font-serif italic text-gray-200 leading-relaxed font-normal">
+                {lang === 'pt'
+                  ? '“O Nipon Spa nasceu da paixão de Vanessa Nascimento pelas terapias manuais e pela cultura japonesa de cuidar das pessoas com atenção, respeito e excelência.”'
+                  : '“Nipon Spa was born from Vanessa Nascimento’s deep passion for manual therapies and the Japanese culture of caring for people with absolute focus, deep respect, and clinical excellence.”'}
+              </p>
+              <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-sans font-light">
+                {lang === 'pt'
+                  ? 'Ao longo de mais de duas décadas, milhares de clientes confiaram nos nossos cuidados, transformando o Nipon Spa numa referência em Lisboa. Hoje, esse legado continua através de uma nova geração que partilha os mesmos valores de dedicação, profissionalismo e atenção ao detalhe.'
+                  : 'Over more than two decades, thousands of clients have trusted our care, turning Nipon Spa into an undisputed reference in Lisbon. Today, this legacy continues through a new generation sharing the exact same values of devotion, extreme professionalism, and micro-attention to detail.'}
+              </p>
+            </div>
+          </div>
+
+          {/* Stat Cards Column */}
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4 w-full">
+            <div className="bg-brand-black/60 border border-brand-border/60 p-4 rounded-2xl text-center space-y-1 hover:border-brand-red/30 transition duration-300">
+              <span className="text-3xl font-heading font-extrabold text-brand-red block tracking-tight">22+</span>
+              <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest block">
+                {lang === 'pt' ? 'Anos em Lisboa' : 'Years in Lisbon'}
+              </span>
+            </div>
+
+            <div className="bg-brand-black/60 border border-brand-border/60 p-4 rounded-2xl text-center space-y-1 hover:border-brand-red/30 transition duration-300">
+              <span className="text-3xl font-heading font-extrabold text-[#cc0000] block tracking-tight">60.000+</span>
+              <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest block">
+                {lang === 'pt' ? 'Atendimentos Realizados' : 'Treatments Performed'}
+              </span>
+            </div>
+
+            <div className="bg-brand-black/60 border border-brand-border/60 p-4 rounded-2xl text-center space-y-1 hover:border-brand-red/30 transition duration-300">
+              <span className="text-3xl font-heading font-extrabold text-brand-gold block tracking-tight">100%</span>
+              <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest block">
+                {lang === 'pt' ? 'Protocolos Personalizados' : 'Tailored Treatment Plans'}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. LINHA DO TEMPO INTERATIVA */}
+      <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-10 space-y-8 relative">
+        <div className="space-y-2 text-center max-w-xl mx-auto">
+          <span className="text-brand-gold font-mono font-bold text-[10px] uppercase tracking-widest block">
+            {lang === 'pt' ? 'Cronologia de Excelência' : 'Chronology of Excellence'}
+          </span>
+          <h3 className="text-2xl font-bold font-heading text-white">
+            {lang === 'pt' ? 'A Nossa Linha do Tempo' : 'Our Legacy Timeline'}
+          </h3>
+          <p className="text-xs text-gray-400 font-sans">
+            {lang === 'pt' 
+              ? 'Clique nos marcos cronológicos abaixo para viajar pela história do Nipon Spa e vivenciar a nossa transitoriedade de gerações.'
+              : 'Click on the chronological milestones below to explore the history of Nipon Spa and discover our passing of the baton.'}
+          </p>
+        </div>
+
+        {/* Timeline Horizon Tabs */}
+        <div className="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto border-b border-brand-border/40 pb-6">
+          {steps.map((s, idx) => {
+            const isActive = timelineStep === idx;
+            return (
+              <button
+                key={idx}
+                onClick={() => setTimelineStep(idx)}
+                className={`flex items-center px-4 py-2.5 rounded-full border text-xs font-mono transition duration-300 cursor-pointer ${isActive ? 'bg-brand-red/10 border-[#cc0000] text-white font-extrabold' : 'bg-brand-black/75 border-brand-border text-gray-400 hover:text-white hover:border-gray-500'}`}
+              >
+                <span className="font-bold">{s.year}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Timeline Slide Detail Display */}
+        <div className="bg-brand-black/40 border border-brand-border/65 rounded-2xl p-6 sm:p-8 space-y-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-brand-border/40 pb-4">
+            <div className="space-y-1">
+              <span className="text-[9px] bg-brand-red/15 text-brand-red border border-brand-red/35 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-mono font-bold">
+                {steps[timelineStep].badge}
+              </span>
+              <h4 className="text-xl font-heading font-extrabold text-white">
+                {steps[timelineStep].title}
+              </h4>
+            </div>
+            <span className="font-mono text-xs font-bold text-brand-gold select-none bg-brand-charcoal/85 border border-brand-border px-3.5 py-1.5 rounded-xl">
+              {steps[timelineStep].year}
+            </span>
+          </div>
+
+          <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-sans max-w-4xl">
+            {steps[timelineStep].desc}
+          </p>
+
+          {/* STEP 0: 2004 (Fundação - Vanessa's Testimonial Video) */}
+          {timelineStep === 0 && (
+            <div className="space-y-4 pt-4 border-t border-brand-border/30">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono text-brand-gold font-bold uppercase tracking-[0.2em] block">
+                  {lang === 'pt' ? 'TESTEMUNHO HISTÓRICO: VANESSA NASCIMENTO' : 'HISTORICAL TESTIMONIAL: VANESSA NASCIMENTO'}
+                </span>
+                <p className="text-[10px] text-gray-500 font-mono italic">
+                  {lang === 'pt' ? 'O testemunho sincero sobre o nascimento do Nipon Spa:' : 'The heartfelt story about the inception of Nipon Spa:'}
+                </p>
+              </div>
+
+              {/* Vanessa's testimony simulated video container */}
+              <div className="relative overflow-hidden border border-brand-border bg-brand-black max-w-2xl mx-auto rounded-xl p-6 text-center space-y-4 shadow-xl">
+                <div className="absolute inset-0 opacity-15 bg-gradient-to-t from-brand-gold to-transparent pointer-events-none"></div>
+                
+                <div className="w-14 h-14 rounded-full bg-brand-charcoal border border-brand-gold flex items-center justify-center text-brand-gold mx-auto shadow animate-pulse">
+                  <Play className="w-5 h-5 text-brand-gold ml-0.5" />
+                </div>
+
+                <div className="space-y-1 relative z-10">
+                  <h5 className="text-white text-sm font-heading font-medium">
+                    {lang === 'pt' ? 'O Meu Testemunho • Por Vanessa Nascimento' : 'My Testimony • By Vanessa Nascimento'}
+                  </h5>
+                  <p className="text-xs text-gray-400 leading-relaxed font-sans max-w-md mx-auto">
+                    {lang === 'pt'
+                      ? 'Vanessa Nascimento partilha em primeira pessoa as suas inspirações, a busca pela excelência na arte de cuidar japonesa e como transformou uma visão num templo de paz no coração de Lisboa.'
+                      : 'Vanessa Nascimento shares first-hand her inspirations, the search for absolute excellence in the Japanese art of care, and how she crafted an urban sanctuary of peace in Lisbon.'}
+                  </p>
+                  <span className="text-[10px] text-brand-gold font-mono uppercase bg-brand-gold/10 border border-brand-gold/30 px-3 py-1 rounded-full inline-block mt-2 font-bold select-none">
+                    {lang === 'pt' ? '⏳ Vídeo Brevemente • Testemunho de Vanessa' : '⏳ Video Coming Soon • Vanessa’s Testimonial'}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* STEP 3: Nova Geração (Directors Information) */}
+          {timelineStep === 3 && (
+            <div className="space-y-8 pt-6 border-t border-brand-border/30 animate-fade-in">
+              <div className="text-center max-w-xl mx-auto space-y-2">
+                <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-widest block">
+                  {lang === 'pt' ? 'Tradição & Liderança' : 'Heritage & Directors'}
+                </span>
+                <h3 className="text-xl md:text-2xl font-bold font-heading text-white">
+                  {lang === 'pt' ? 'Uma Nova Geração, a Mesma Essência' : 'A New Generation, the Same Essence'}
+                </h3>
+                <p className="text-xs text-gray-400 font-sans">
+                  {lang === 'pt' 
+                    ? 'Conheça as responsáveis por conduzir o Nipon Spa com o mesmo compromisso incondicional e respeito ao ritual de acolhimento sagrado.'
+                    : 'Meet the dedicated directors carrying forward our ancestral legacy with pure values of detail, quality, and respect.'}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                {/* Component Card: Karina Seito */}
+                <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-brand-red/25 transition duration-500 relative overflow-hidden group text-left">
+                  <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+                    <span className="text-7xl font-sans text-white font-extrabold select-none font-mono">SEITO</span>
+                  </div>
+                  <div className="space-y-4">
+                    <span className="text-[9px] bg-brand-gold/15 text-brand-gold border border-brand-gold/30 px-3 py-1 rounded-full uppercase tracking-wider font-mono font-extrabold inline-block">
+                      {lang === 'pt' ? 'Diretora Estratégica' : 'Strategic Executive Director'}
+                    </span>
+                    <h4 className="text-2xl font-light text-white font-heading tracking-tight">
+                      Karina Seito
+                    </h4>
+                    <p className="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed font-light">
+                      {lang === 'pt'
+                        ? 'Responsável pela gestão estratégica e desenvolvimento do Nipon Spa, assegurando que a qualidade, a inovação e a excelência continuam a fazer parte da experiência de cada cliente.'
+                        : 'Responsible for strategic management and corporate development of Nipon Spa, ensuring that quality, safety, digital accessibility, and absolute excellence continue to form the cornerstone of every customer journey.'}
+                    </p>
+                  </div>
+                  <div className="border-t border-brand-border/40 pt-4 flex items-center justify-between text-gray-400 text-[10px] font-mono uppercase tracking-widest">
+                    <span>{lang === 'pt' ? 'GESTÃO & DESENVOLVIMENTO' : 'STRATEGIC MANAGEMENT'}</span>
+                    <span className="text-brand-red">✦ ✦ ✦</span>
+                  </div>
+                </div>
+
+                {/* Component Card: Arissa Matsumoto */}
+                <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-brand-red/25 transition duration-500 relative overflow-hidden group text-left">
+                  <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+                    <span className="text-7xl font-sans text-white font-extrabold select-none font-mono">ARISSA</span>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-[9px] bg-brand-red/15 text-brand-red border border-brand-red/30 px-3 py-1 rounded-full uppercase tracking-wider font-mono font-extrabold inline-block">
+                        {lang === 'pt' ? 'Diretora de Omotenashi' : 'Director of Omotenashi & Tradition'}
+                      </span>
+                      <span className="text-[9px] bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-1 rounded-full uppercase tracking-wider font-mono font-extrabold inline-block">
+                        {lang === 'pt' ? '• Ritual Japonês • Experiência Humana' : '• Japanese Ritual • Human Experience'}
+                      </span>
+                    </div>
+                    <h4 className="text-2xl font-light text-white font-heading tracking-tight">
+                      Arissa Matsumoto
+                    </h4>
+                    <p className="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed font-light">
+                      {lang === 'pt'
+                        ? 'Sob a sua coordenação, nossa equipa cultiva a arte da atenção invisível e rituais sagrados de atendimento. Especialista em técnicas de rituais de acupressão profundos e harmonização de corpo, mente e Ki.'
+                        : 'Under her expert care, our team cultivates the Japanese art of invisible thoughtfulness and deep restorative rituals, specializing in Kyoto pressure-point styling and full spiritual balance.'}
+                    </p>
+                  </div>
+                  <div className="border-t border-brand-border/40 pt-4 flex items-center justify-between text-gray-400 text-[10px] font-mono uppercase tracking-widest">
+                    <span>{lang === 'pt' ? 'RITUAIS & EXPERIÊNCIA HUMANA' : 'JAPANESE RITUALS & TRADITION'}</span>
+                    <span className="text-brand-red">✦ ✦ ✦</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      </div>
+
+
+
+      {/* 4. PORQUE ESCOLHER O NIPON SPA */}
+      <div className="bg-gradient-to-br from-brand-charcoal/30 to-brand-black border border-brand-border rounded-3xl p-6 sm:p-10 space-y-8">
+        <div className="text-center max-w-xl mx-auto space-y-2">
+          <span className="text-brand-gold font-mono font-bold text-[10px] uppercase tracking-widest block">
+            {lang === 'pt' ? 'Diferenciais do Nosso Templo' : 'Why Choose Nipon Spa'}
+          </span>
+          <h3 className="text-2xl font-bold font-heading text-white">
+            {lang === 'pt' ? 'Porque escolher o Nipon Spa?' : 'Why Choose the Nipon Spa?'}
+          </h3>
+          <p className="text-xs text-gray-400 font-sans">
+            {lang === 'pt' 
+              ? 'Uma síntese dos pilares que tornaram os nossos rituais tradicionais num marco insubstituível em Lisboa.'
+              : 'Our key competitive advantages that make every physical treatment an unforgettable milestone of peace.'}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            {
+              title: lang === 'pt' ? 'Cultura japonesa autêntica' : 'Authentic Japanese Culture',
+              desc: lang === 'pt' 
+                ? 'Nossos banhos purificadores em madeira hinoki, infusão de chá matcha biológico e rituais transportam-no verdadeiramente para Quioto.'
+                : 'Our custom Hinoki hot tubs, botanical scent profile, and organic matcha teas convey Kyoto’s true zen.',
+              icon: Flower2
+            },
+            {
+              title: lang === 'pt' ? 'Formação com mestres japoneses' : 'Trained with Japanese Masters',
+              desc: lang === 'pt' 
+                ? 'Todos os nossos terapeutas são formados e certificados nas linhagens mais tradicionais de massagem oriental.'
+                : 'Every practitioner is certified and trained under rigorous traditional lineages of Eastern acupressure.',
+              icon: Award
+            },
+            {
+              title: lang === 'pt' ? 'Atendimento Omotenashi' : 'Sincere Omotenashi Care',
+              desc: lang === 'pt' 
+                ? 'Antecipamos cada necessidade com discrição absoluta e respeito total ao silêncio que o alívio das tensões exige.'
+                : 'We anticipate every bodily need with absolute silence, discretion, and profound individual focus.',
+              icon: Sparkles
+            },
+            {
+              title: lang === 'pt' ? 'Tratamentos personalizados' : 'Customized Treatments',
+              desc: lang === 'pt' 
+                ? 'Os óleos essenciais, as frequências de pressões e o banho termal são individualizados para as suas necessidades exatas.'
+                : 'Aromatic essential oils, warm compress pressures, and therapy marks are configured strictly for you.',
+              icon: ShieldCheck
+            },
+            {
+              title: lang === 'pt' ? 'Equipa especializada' : 'Specialist Certified Team',
+              desc: lang === 'pt' 
+                ? 'Terapeutas altamente dedicados com conhecimento de anatomia e profundo respeito pela cura integrada.'
+                : 'Directly supported by licensed professionals with rigorous training in full-body restoration.',
+              icon: Users
+            },
+            {
+              title: lang === 'pt' ? 'Ambiente tranquilo' : 'Tranquil Soundproofed Space',
+              desc: lang === 'pt' 
+                ? 'Nenhum ruído urbano da cidade de Lisboa ultrapassa as nossas acusticamente isoladas paredes de relaxamento.'
+                : 'No Lisbon street noise can bypass our thick custom-built acoustic buffers, ensuring uninterrupted calm.',
+              icon: Coffee
+            }
+          ].map((v, index) => {
+            const IconComponent = v.icon;
+            return (
+              <div key={index} className="bg-brand-charcoal/65 border border-brand-border/60 rounded-2xl p-6 space-y-3 hover:border-brand-red/30 transition duration-300 text-left">
+                <div className="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/35 flex items-center justify-center text-brand-red">
+                  <IconComponent className="w-5 h-5" />
+                </div>
+                <h4 className="font-heading font-extrabold text-white text-base">
+                  {v.title}
+                </h4>
+                <p className="text-xs text-gray-400 leading-relaxed font-sans font-light">
+                  {v.desc}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+    </div>
+  );
+}
 
 export default function App() {
   // Local states
@@ -403,37 +771,61 @@ export default function App() {
     }
   }, [activeTab]);
 
-  // Synchronize URL path with state-driven tabs for /reservar and standard tabs
+  // Synchronize URL path & hash with state-driven tabs for robust direct access
   useEffect(() => {
-    const handlePopState = () => {
+    const handleUrlSync = () => {
       const path = window.location.pathname;
-      if (path === '/reservar') {
+      const hash = window.location.hash;
+      
+      const isReservar = path === '/reservar' || hash === '#/reservar' || hash === '#reservar';
+      
+      if (isReservar) {
         setActiveTab('reservar');
       } else {
-        const tabName = path.slice(1);
-        if (['home', 'about', 'therapies', 'blog', 'staff-portal', 'bookings'].includes(tabName)) {
-          setActiveTab(tabName);
+        // Fallback checks for both path segment and hash segment
+        const possibleTabFromPath = path.slice(1);
+        const possibleTabFromHash = hash.replace(/^#\/?/, '');
+        
+        const validTabs = ['home', 'about', 'therapies', 'blog', 'staff-portal', 'bookings', 'reservar'];
+        
+        if (validTabs.includes(possibleTabFromHash)) {
+          setActiveTab(possibleTabFromHash);
+        } else if (validTabs.includes(possibleTabFromPath)) {
+          setActiveTab(possibleTabFromPath);
         } else {
           setActiveTab('home');
         }
       }
     };
 
-    const initialPath = window.location.pathname;
-    if (initialPath === '/reservar') {
-      setActiveTab('reservar');
-    }
+    // Initial parsing on mount
+    handleUrlSync();
 
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', handleUrlSync);
+    window.addEventListener('hashchange', handleUrlSync);
+    return () => {
+      window.removeEventListener('popstate', handleUrlSync);
+      window.removeEventListener('hashchange', handleUrlSync);
+    };
   }, []);
 
-  // Synchronize activeTab state to the browser URL pathname for direct addressability
+  // Synchronize activeTab state to the browser URL pathname (and hash fallback) for direct addressability
   useEffect(() => {
     const currentPath = window.location.pathname;
+    const currentHash = window.location.hash;
     const targetPath = activeTab === 'reservar' ? '/reservar' : (activeTab === 'home' ? '/' : `/${activeTab}`);
+    
+    // Smooth state push
     if (currentPath !== targetPath) {
-      window.history.pushState(null, '', targetPath);
+      try {
+        window.history.pushState(null, '', targetPath);
+      } catch (e) {
+        // Fallback to hash routing if history pushState fails or is disallowed in sandboxes
+        const targetHash = `#/${activeTab}`;
+        if (currentHash !== targetHash) {
+          window.location.hash = targetHash;
+        }
+      }
     }
   }, [activeTab]);
 
@@ -886,9 +1278,9 @@ export default function App() {
               </div>
 
               <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center w-full">
-                {/* Centered Headline with the correct cursive red font-serif styled Japonês */}
+                {/* Centered Headline with elegant typography hierarchy */}
                 <motion.h1 
-                  className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] text-white max-w-5xl mx-auto mb-6 select-none cursor-default"
+                  className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-[1.15] text-white max-w-5xl mx-auto mb-6 select-none cursor-default"
                   whileHover="hover"
                   initial="initial"
                   onMouseEnter={startZenSound}
@@ -896,91 +1288,45 @@ export default function App() {
                 >
                   {lang === 'pt' ? (
                     <>
-                      <motion.span 
-                        className="inline-block transition-all duration-1000"
+                      Bem-estar <motion.span 
+                        className="text-[#cc0000] italic font-serif font-semibold lowercase tracking-normal inline-block"
                         variants={{
-                          initial: { letterSpacing: "-0.02em" },
-                          hover: { letterSpacing: "0.02em" }
+                          initial: { scale: 1 },
+                          hover: { scale: 1.05, filter: "drop-shadow(0 0 15px rgba(204,0,0,0.5))" }
                         }}
-                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                      >
-                        {t.heroHeadline1}
-                      </motion.span> 
-                      <br />
-                      <motion.span 
-                        className="inline-block transition-all duration-1000"
-                        variants={{
-                          initial: { letterSpacing: "-0.02em" },
-                          hover: { letterSpacing: "0.01em" }
-                        }}
-                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                      >
-                        Do Cuidado{" "}
-                      </motion.span>
-                      <motion.span 
-                        className="text-[#cc0000] italic font-serif font-semibold text-5xl sm:text-7xl lg:text-8xl inline-block origin-center"
-                        variants={{
-                          initial: { scale: 1, y: 0, filter: "drop-shadow(0 0 0px rgba(204,0,0,0))" },
-                          hover: { 
-                            scale: 1.05, 
-                            y: -4, 
-                            filter: "drop-shadow(0 0 25px rgba(204,0,0,0.65))" 
-                          }
-                        }}
-                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                      >
-                        Japonês
-                      </motion.span>
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                      >japonês</motion.span> no coração de Lisboa
                     </>
                   ) : (
                     <>
-                      <motion.span 
-                        className="inline-block transition-all duration-1000"
+                      Japanese <motion.span 
+                        className="text-[#cc0000] italic font-serif font-semibold lowercase tracking-normal inline-block"
                         variants={{
-                          initial: { letterSpacing: "-0.02em" },
-                          hover: { letterSpacing: "0.02em" }
+                          initial: { scale: 1 },
+                          hover: { scale: 1.05, filter: "drop-shadow(0 0 15px rgba(204,0,0,0.5))" }
                         }}
-                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                      >
-                        {t.heroHeadline1}
-                      </motion.span> 
-                      <br />
-                      <motion.span 
-                        className="inline-block transition-all duration-1000"
-                        variants={{
-                          initial: { letterSpacing: "-0.02em" },
-                          hover: { letterSpacing: "0.01em" }
-                        }}
-                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                      >
-                        Of Japanese{" "}
-                      </motion.span>
-                      <motion.span 
-                        className="text-[#cc0000] italic font-serif font-semibold text-5xl sm:text-7xl lg:text-8xl inline-block origin-center"
-                        variants={{
-                          initial: { scale: 1, y: 0, filter: "drop-shadow(0 0 0px rgba(204,0,0,0))" },
-                          hover: { 
-                            scale: 1.05, 
-                            y: -4, 
-                            filter: "drop-shadow(0 0 25px rgba(204,0,0,0.65))" 
-                          }
-                        }}
-                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                      >
-                        Care
-                      </motion.span>
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                      >wellness</motion.span> in the heart of Lisbon
                     </>
                   )}
                 </motion.h1>
 
-                {/* Centered Sub-headline phrase with Japanese text from screenshot */}
-                <p className="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">
+                {/* Centered Sub-headline phrase with Japanese Zen text */}
+                <p className="text-[10px] sm:text-[11px] font-bold text-brand-gold uppercase tracking-[0.22em] mb-5">
                   一期一会 <span className="mx-2 text-[#cc0000]">•</span> {lang === 'pt' ? 'O Caminho da Paz Interior Japonesa' : 'The Way of Inner Japanese Peace'}
                 </p>
 
-                {/* Centered high quality description */}
-                <p className="text-xs sm:text-sm text-gray-300 font-sans max-w-2xl mx-auto leading-relaxed mb-10">
-                  {t.heroDescription}
+                {/* Centered high quality description styled as a premium highly-readable subtitle */}
+                <p className="text-sm sm:text-base text-gray-300 font-sans max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
+                  {lang === 'pt' ? (
+                    <>
+                      Há mais de 22 anos, o <strong className="text-white font-semibold">Nipon Spa</strong> une tradição japonesa, atendimento <em className="font-serif italic text-brand-gold font-normal">Omotenashi</em> e protocolos personalizados para proporcionar uma experiência única de relaxamento e cuidado.
+                    </>
+                  ) : (
+                    <>
+                      For over 22 years, <strong className="text-white font-semibold">Nipon Spa</strong> has combined Japanese tradition, <em className="font-serif italic text-brand-gold font-normal">Omotenashi</em> hospitality, and personalized protocols to provide a unique relaxation and care experience.
+                    </>
+                  )}
                 </p>
 
                 {/* Centered CTAs with sharp borders matching the styling of Nipon Spa exactly */}
@@ -1049,123 +1395,190 @@ export default function App() {
 
 
 
-            {/* Section 3: Premium Promotional split board */}
-            <section className="bg-brand-charcoal border-y border-brand-border relative overflow-hidden py-20">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+
+            {/* EXCLUSIVE SECTION: BLOCO OMOTENASHI & ARISSA MATSUMOTO */}
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="bg-gradient-to-br from-brand-charcoal via-brand-charcoal/90 to-brand-black border border-brand-border rounded-3xl p-6 sm:p-8 md:p-12 overflow-hidden relative">
+                {/* Background decorative Japanese Kanji */}
+                <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none select-none">
+                  <span className="text-[120px] font-extrabold font-serif text-white tracking-widest leading-none">持て成し</span>
+                </div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center relative z-10">
                   
-                  {/* Left Column (Image mockup) */}
-                  <div className="relative group">
-                    <div className="relative rounded-lg overflow-hidden border border-brand-border z-10 transition-shadow hover:shadow-xl duration-500">
-                      <img 
-                        src={therapyHeroImg} 
-                        alt="Ritual Terapêutico Japonês de Pedras Basálticas" 
-                        className="w-full h-[450px] object-cover transition-transform duration-700 group-hover:scale-102"
-                        referrerPolicy="no-referrer"
-                      />
-                      {/* Premium Text Label overlay */}
-                      <div className="absolute bottom-6 left-6 right-6 bg-brand-black/90 backdrop-blur-md p-5 rounded border border-brand-border flex items-center justify-between">
-                        <div>
-                          <span className="text-[10px] uppercase font-mono tracking-widest text-[#cc0000] block mb-1">
-                            {lang === 'pt' ? 'Pedras Vulcânicas' : 'Volcanic Hot Stones'}
-                          </span>
-                          <span className="text-white font-medium text-sm">Monte Fuji Hot Stone Therapy</span>
+                  {/* Left side: Arissa Matsumoto & Philosophy content */}
+                  <div className="lg:col-span-7 space-y-6 text-left">
+                    <div className="space-y-2">
+                      <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
+                        {lang === 'pt' ? 'Exclusividade • Omotenashi' : 'Exclusive • Omotenashi Philosophy'}
+                      </span>
+                      <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-white font-heading">
+                        Arissa Matsumoto
+                      </h2>
+                      <p className="text-xs font-mono text-brand-gold uppercase tracking-widest">
+                        {lang === 'pt' ? 'Diretora de Omotenashi & Tradição' : 'Director of Omotenashi & Tradition'}
+                      </p>
+                    </div>
+
+                    <div className="relative border-l-2 border-brand-red/40 pl-6 py-1 space-y-4">
+                      <p className="text-lg sm:text-xl font-serif italic text-gray-200 leading-relaxed font-normal">
+                        {lang === 'pt' 
+                          ? '“No Japão, cuidar de alguém significa antecipar as suas necessidades antes mesmo que ele precise pedir.”'
+                          : '“In Japan, caring for someone means anticipating their needs even before they have to ask.”'}
+                      </p>
+                      <p className="text-sm text-gray-400 font-sans leading-relaxed font-light">
+                        {lang === 'pt'
+                          ? 'Este é o espírito Omotenashi que inspira cada atendimento no Nipon Spa. Sob a orientação de Arissa Matsumoto, nossa equipa cultiva a arte japonesa da atenção invisível, onde cada toque, o silêncio respeitoso, o aroma de madeira hinoki e o chá de boas-vindas formam um ritual completo de renovação espiritual e corporal.'
+                          : 'This is the Omotenashi spirit that inspires every moment of care at Nipon Spa. Under the careful guidance of Arissa Matsumoto, our team cultivates the Japanese art of invisible thoughtfulness, where every touch, respectful silence, and authentic tea service form a deep, restoring ritual.'}
+                      </p>
+                    </div>
+
+                    {/* Aesthetic signature or highlight line */}
+                    <div className="pt-2 flex items-center space-x-3 text-gray-500 font-mono text-[10px] uppercase tracking-wider">
+                      <Flower2 className="w-4 h-4 text-brand-red" />
+                      <span>NIPON SPA • LISBOA OMOTENASHI LINEAGE</span>
+                    </div>
+                  </div>
+
+                  {/* Right side: Cinematic Video Placeholder (Ainda não temos o vídeo) */}
+                  <div className="lg:col-span-5 w-full">
+                    <div className="relative group rounded-2xl overflow-hidden border border-brand-border/80 bg-brand-black aspect-video flex flex-col items-center justify-center p-6 text-center shadow-2xl transition duration-500 hover:border-brand-red/35">
+                      {/* Dark ambient background graphic simulating a premium tatami room */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent z-0"></div>
+                      
+                      {/* Delicate background circles representing Japanese flags or zen stone ripple */}
+                      <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-[#cc0000]/5 filter blur-xl group-hover:bg-[#cc0000]/10 transition duration-500"></div>
+                      <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-brand-gold/5 filter blur-xl"></div>
+                      
+                      {/* Center icons & play-like aesthetics */}
+                      <div className="relative z-10 flex flex-col items-center space-y-4">
+                        {/* Play Button Simulation */}
+                        <div className="w-16 h-16 rounded-full bg-brand-charcoal border border-brand-border flex items-center justify-center text-brand-gold shadow-lg group-hover:scale-105 group-hover:border-brand-red/50 transition duration-300">
+                          <Play className="w-6 h-6 text-brand-gold ml-1 animate-pulse" />
                         </div>
-                        <span className="text-white font-mono font-bold text-base">95€ <span className="text-[10px] text-gray-400 font-normal">/ 80 min</span></span>
+                        
+                        {/* Placeholder labels */}
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-brand-gold tracking-[0.25em] uppercase block font-bold">
+                            {lang === 'pt' ? 'EXPERIÊNCIA CINEMÁTICA' : 'CINEMATIC EXPERIENCE'}
+                          </span>
+                          <h4 className="text-white font-heading font-medium text-sm">
+                            {lang === 'pt' ? 'A Alma do Omotenashi' : 'The Soul of Omotenashi'}
+                          </h4>
+                          <p className="text-[10px] text-gray-500 font-mono italic max-w-xs mx-auto">
+                            {lang === 'pt' 
+                              ? 'O vídeo oficial está em fase de produção. Em breve estará disponível.'
+                              : 'Omotenashi feature video is in production. Streaming is commencing soon.'}
+                          </p>
+                        </div>
+
+                        {/* Floating tag */}
+                        <span className="absolute top-2 right-2 bg-brand-red/10 border border-brand-red/30 px-2.5 py-1 rounded-full text-[9px] font-mono uppercase text-brand-red tracking-wider font-extrabold">
+                          {lang === 'pt' ? 'Em Breve' : 'Coming Soon'}
+                        </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Right Column (Text details) */}
-                  <div className="space-y-6">
-                    <span className="text-[#cc0000] font-bold text-xs uppercase tracking-[0.25em] block">
-                      {lang === 'pt' ? 'Tradição & Hospitalidade' : 'Tradition & Hospitality'}
-                    </span>
-                    <h2 className="text-2xl sm:text-3xl font-light text-white tracking-tight font-heading leading-tight">
-                      {lang === 'pt' ? (
-                        <>
-                          Em Lisboa existem muitos spas. <br />
-                          <span className="text-[#cc0000] italic font-serif font-semibold block mt-1">Mas apenas um oferece a verdadeira experiência japonesa.</span>
-                        </>
-                      ) : (
-                        <>
-                          There are many spas in Lisbon. <br />
-                          <span className="text-[#cc0000] italic font-serif font-semibold block mt-1">But only one offers the authentic Japanese experience.</span>
-                        </>
-                      )}
-                    </h2>
-                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                      {lang === 'pt' ? (
-                        <>
-                          No Japão antigo, <strong>Omotenashi</strong> é a arte de acolher e servir de alma inteira, antecipando cada necessidade do convidado com discrição extrema. No Nipon Spa, não oferecemos apenas uma massagem rápida, mas sim um santuário de descanso completo onde cada detalhe é sagrado.
-                        </>
-                      ) : (
-                        <>
-                          In ancient Japan, <strong>Omotenashi</strong> is the art of welcoming and serving with one's whole soul, anticipating every need of the guest with extreme discretion. At Nipon Spa, we don't just offer a quick massage, but rather a sanctuary of complete rest where every single detail is sacred.
-                        </>
-                      )}
-                    </p>
+                </div>
+              </div>
+            </section>
 
-                    <ul className="space-y-4 pt-2">
-                      <li className="flex items-start space-x-3">
-                        <span className="text-[#cc0000] text-xs shrink-0 mt-0.5 font-bold">✓</span>
-                        <p className="text-xs text-gray-400">
-                          {lang === 'pt' ? (
-                            <>
-                              <strong className="text-gray-200 font-medium">Acolhimento Sensorial:</strong> Aromaterapia com óleos importados de Hinoki (cedro japonês), Yuzu (citrinos premium) e Matcha.
-                            </>
-                          ) : (
-                            <>
-                              <strong className="text-gray-200 font-medium">Sensory Welcome:</strong> Aromatherapy with premium imported oils of Hinoki (Japanese cedar), Yuzu (medicinal citrus), and premium Matcha.
-                            </>
-                          )}
-                        </p>
-                      </li>
-                      <li className="flex items-start space-x-3">
-                        <span className="text-[#cc0000] text-xs shrink-0 mt-0.5 font-bold">✓</span>
-                        <p className="text-xs text-gray-400">
-                          {lang === 'pt' ? (
-                            <>
-                              <strong className="text-gray-200 font-medium">Tratamento Personalizado:</strong> Ajuste milimétrico de pressão com o terapeuta e aplicação de marquesas térmicas.
-                            </>
-                          ) : (
-                            <>
-                              <strong className="text-gray-200 font-medium">Tailored Treatment:</strong> Deeply fine-tuned pressure alignment with your certified practitioner and high-grade heated therapy tables.
-                            </>
-                          )}
-                        </p>
-                      </li>
-                      <li className="flex items-start space-x-3">
-                        <span className="text-[#cc0000] text-xs shrink-0 mt-0.5 font-bold">✓</span>
-                        <p className="text-xs text-gray-400">
-                          {lang === 'pt' ? (
-                            <>
-                              <strong className="text-gray-200 font-medium">Chá de Quioto:</strong> Oferecemos uma infusão bio de chá Matcha ou Sencha fumegante preparado num bule tradicional de ferro fundido de forma ritualística no encerramento de todas as visitas.
-                            </>
-                          ) : (
-                            <>
-                              <strong className="text-gray-200 font-medium">Kyoto Tea:</strong> We offer a steaming cup of organic Matcha or Sencha tea prepared ritualistically in a cast-iron kettle at the close of every session.
-                            </>
-                          )}
-                        </p>
-                      </li>
-                    </ul>
+            {/* Signature Treatments Section */}
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+              <div className="text-center max-w-2xl mx-auto space-y-3">
+                <span className="text-[#cc0000] font-mono font-bold text-xs uppercase tracking-[0.25em] block">
+                  {lang === 'pt' ? 'Rituais de Assinatura' : 'Signature Rituals'}
+                </span>
+                <h2 className="text-3xl md:text-4xl font-light text-white font-heading tracking-tight leading-tight">
+                  {lang === 'pt' ? 'Protocolos Personalizados' : 'Personalized Protocols'}
+                </h2>
+                <div className="w-12 h-[1px] bg-brand-red/50 mx-auto"></div>
+                <p className="text-xs sm:text-sm text-gray-400 font-sans leading-relaxed">
+                  {lang === 'pt' 
+                    ? 'Terapias manuais profundas e rituais tradicionais rigorosamente sintonizados com o seu corpo e mente. Escolha a sua duração ideal:'
+                    : 'Deep manual therapies and traditional rituals rigorously tuned to your body and mind. Choose your ideal duration:'}
+                </p>
+              </div>
 
-                    <div className="pt-4">
-                      <button 
-                        onClick={() => {
-                          setSelectedCategory('all');
-                          setActiveTab('therapies');
-                        }}
-                        className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-6 py-3 rounded-full font-bold uppercase tracking-widest text-[10px] transition duration-200 inline-flex items-center space-x-2"
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
+                {THERAPIES.map(therapy => (
+                  <div 
+                    key={therapy.id}
+                    className="bg-white/[0.04] p-6 border border-brand-border rounded-3xl hover:border-[#cc0000] transition-all duration-300 relative group overflow-hidden flex flex-col justify-between text-left"
+                  >
+                    {/* Backdrop subtle Kanji style stamp behind each therapy card */}
+                    <div className="absolute right-4 top-4 opacity-[0.02] group-hover:opacity-[0.05] duration-500 pointer-events-none select-none font-medium text-4xl text-white font-mono">
+                      {therapy.japaneseName}
+                    </div>
+
+                    <div className="space-y-4">
+                      {/* Title and Japanese Badge */}
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <span className="text-[9px] font-mono tracking-widest text-brand-gold uppercase block">{therapy.japaneseName}</span>
+                          <h3 className="font-heading font-light text-lg text-white mt-1 group-hover:text-brand-red transition duration-200">
+                            {getTherapyName(therapy)}
+                          </h3>
+                        </div>
+                        
+                        <span className="bg-white/5 border border-brand-border text-brand-red text-[10px] px-2.5 py-0.5 rounded-full font-mono tracking-wide">
+                          {therapy.duration}min
+                        </span>
+                      </div>
+
+                      <p className="text-xs text-gray-400 leading-relaxed min-h-[72px]">
+                        {getTherapyDesc(therapy)}
+                      </p>
+
+                      {/* Results list - SELLING THE RESULT */}
+                      {therapy.results && (
+                        <div className="space-y-1.5 pt-3 border-t border-brand-border/40">
+                          <p className="text-[9px] font-bold text-[#cc0000] uppercase tracking-widest">
+                            {lang === 'pt' ? 'Resultados Esperados' : 'Expected Outcomes'}
+                          </p>
+                          {(lang === 'pt' ? therapy.results : (therapy.resultsEn || therapy.results)).map((result, i) => (
+                            <div key={i} className="flex items-center space-x-2">
+                              <span className="text-[#cc0000] text-xs font-bold">✓</span>
+                              <span className="text-[11px] text-gray-300 font-sans">{result}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Benefit list */}
+                      <div className="space-y-1.5 pt-3 border-t border-brand-border/40">
+                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                          {lang === 'pt' ? 'Benefícios Terapêuticos' : 'Therapeutic Benefits'}
+                        </p>
+                        {getTherapyBenefits(therapy).map((benefit, i) => (
+                          <div key={i} className="flex items-center space-x-2">
+                            <span className="text-gray-500 text-xs">—</span>
+                            <span className="text-[11px] text-gray-400 font-sans">{benefit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Pricing and Agendar CTA */}
+                    <div className="pt-6 mt-6 border-t border-brand-border/40 flex items-center justify-between">
+                      <div>
+                        <span className="text-[9px] uppercase text-gray-500 block font-mono">{lang === 'pt' ? 'Investimento' : 'Investment'}</span>
+                        <span className="text-lg font-bold text-white font-sans">{therapy.price}€</span>
+                      </div>
+
+                      <button
+                        onClick={() => handleOpenBooking(therapy)}
+                        className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 flex items-center space-x-1.5 cursor-pointer"
                       >
-                        <span>{lang === 'pt' ? 'Explorar Catálogo de Tratamentos' : 'Explore Treatment Catalog'}</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
+                        <CalendarIcon className="w-3.5 h-3.5" />
+                        <span>{lang === 'pt' ? 'Agendar' : 'Book'}</span>
                       </button>
                     </div>
                   </div>
-
-                </div>
+                ))}
               </div>
             </section>
 
@@ -2666,105 +3079,9 @@ export default function App() {
         {activeTab === 'about' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16 animate-fade-in" id="about-page">
             
-            {/* HERO SECTION DESIGN */}
-            <div className="relative overflow-hidden rounded-3xl border border-brand-border bg-gradient-to-br from-brand-charcoal to-brand-black p-8 md:p-12 text-center md:text-left">
-              <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-                <span className="text-8xl font-black font-mono select-none tracking-widest text-white">日本</span>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                <div className="md:col-span-8 space-y-4">
-                  <span className="text-brand-red font-semibold text-xs uppercase tracking-widest block font-mono">
-                    一期一会 • Ichi-go Ichi-e
-                  </span>
-                  <h1 className="text-3xl md:text-5xl font-light text-white font-heading tracking-tight animate-fade-in">
-                    {lang === 'pt' ? 'Nipon Spa: O Nosso Templo' : 'Nipon Spa: Our Temple'}
-                  </h1>
-                  <p className="text-xs md:text-sm text-gray-400 leading-relaxed font-sans max-w-2xl animate-fade-in">
-                    {lang === 'pt' 
-                      ? 'Fundado sob a promessa de trazer a pureza absoluta dos templos mais sagrados de Quioto para Lisboa, o Nipon Spa é o resultado da fusão entre a antiga sabedoria de mestres terapeutas do Oriente e o acolhimento sincero Omotenashi. Aqui, cada detalhe é desenhado para reequilibrar o seu Ki.'
-                      : 'Founded on the promise of bringing the absolute purity of Kyoto’s most sacred temples to Lisbon, Nipon Spa represents the fusion of ancient Eastern therapeutic wisdom and genuine Omotenashi hospitality. Here, every single detail is meticulously crafted to restore and align your vital Ki.'}
-                  </p>
-                  
-                  <div className="pt-2 flex flex-wrap gap-4 justify-center md:justify-start">
-                    <button 
-                      onClick={() => { setActiveTab('reservar'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                      className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center space-x-2 cursor-pointer"
-                    >
-                      <span>{lang === 'pt' ? 'Marcar Sessão' : 'Book a Session'}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                    <button 
-                      onClick={() => { setActiveTab('therapies'); setSelectedCategory('all'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                      className="border border-brand-border bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
-                    >
-                      {lang === 'pt' ? 'Ver Tratamentos' : 'View Core Treatments'}
-                    </button>
-                  </div>
-                </div>
 
-                {/* Right side calligraphy circle stamp */}
-                <div className="md:col-span-4 flex justify-center">
-                  <div className="w-36 h-36 rounded-full border border-brand-border flex flex-col items-center justify-center p-4 bg-brand-black/60 relative">
-                    <Flower2 className="w-8 h-8 text-brand-red mb-2" />
-                    <span className="font-mono text-xs text-brand-gold uppercase tracking-widest font-extrabold">OMOTENASHI</span>
-                    <span className="text-[10px] text-gray-500 font-mono tracking-tighter mt-1">{lang === 'pt' ? 'Acolhimento' : 'Welcoming'}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* THREE PHILOSOPHY PILLARS GRID */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              {/* Card 1 */}
-              <div className="bg-brand-charcoal border border-brand-border p-6 rounded-3xl md:p-8 space-y-4 hover:border-brand-border transition duration-300">
-                <span className="text-xl font-mono text-brand-red tracking-widest font-extrabold block">01</span>
-                <div className="space-y-1">
-                  <span className="text-xs font-mono font-bold text-brand-gold uppercase tracking-wider block">御持て成し</span>
-                  <h3 className="text-lg font-bold text-white font-heading">
-                    {lang === 'pt' ? 'Omotenashi Puro' : 'Pure Omotenashi'}
-                  </h3>
-                </div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  {lang === 'pt' 
-                    ? 'A hospitalidade suprema japonesa: antecipar cada necessidade do hóspede com absoluta modéstia, silêncio reconfortante e discrição, criando uma ligação espiritual insubstituível.'
-                    : 'The ultimate form of Japanese hospitality: anticipating your every need with complete humility, soothing silence, and absolute discretion, forming a unique bond.'}
-                </p>
-              </div>
-
-              {/* Card 2 */}
-              <div className="bg-brand-charcoal border border-brand-border p-6 rounded-3xl md:p-8 space-y-4 hover:border-brand-border transition duration-300">
-                <span className="text-xl font-mono text-brand-red tracking-widest font-extrabold block">02</span>
-                <div className="space-y-1">
-                  <span className="text-xs font-mono font-bold text-brand-gold uppercase tracking-wider block">伝統的な健康</span>
-                  <h3 className="text-lg font-bold text-white font-heading">
-                    {lang === 'pt' ? 'Linhagem e Mestria' : 'Lineage & Mastery'}
-                  </h3>
-                </div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  {lang === 'pt' 
-                    ? 'Todas as nossas massagens e rituais derivam de antigas escolas tradicionais de Quioto. Os nossos especialistas aplicam pressões tencionais e alongamentos na dose clinicamente ideal.'
-                    : 'Every massage and bathing ritual derives from historic schools in Kyoto. Our licensed therapists apply therapeutic acupressure with surgical precision to ensure total stress relief.'}
-                </p>
-              </div>
-
-              {/* Card 3 */}
-              <div className="bg-brand-charcoal border border-brand-border p-6 rounded-3xl md:p-8 space-y-4 hover:border-brand-border transition duration-300">
-                <span className="text-xl font-mono text-brand-red tracking-widest font-extrabold block">03</span>
-                <div className="space-y-1">
-                  <span className="text-xs font-mono font-bold text-brand-gold uppercase tracking-wider block">五感の調和</span>
-                  <h3 className="text-lg font-bold text-white font-heading">
-                    {lang === 'pt' ? 'Ressonância dos Sentidos' : 'Resonance of Senses'}
-                  </h3>
-                </div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  {lang === 'pt' 
-                    ? 'Desde o vapor de chá matcha biológico ao aroma natural da madeira Hinoki, as salas são isoladas acusticamente para garantir um detox sensorial completo e memorável.'
-                    : 'From organic matcha steam to the pure aroma of traditional Hinoki design, our private relaxation rooms are fully soundproofed for an immersive screen-free sensory detox.'}
-                </p>
-              </div>
-
-            </div>
+            {/* TIMELINE, LEGACY AND NEW GENERATION COMPONENT EXPANSION */}
+            <LegacyTimelineAndNewGen lang={lang} />
 
             {/* INTERACTIVE COMPONENT: THE 4 STAGES OF OMOTENASHI EXPERIENCE */}
             <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-8 md:p-12 space-y-8 animate-fade-in">
