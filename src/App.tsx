@@ -136,7 +136,7 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
     <div className="space-y-16 animate-fade-in text-left">
       
       {/* 1. O Nosso Legado - 22 Anos de Dedicação ao Bem-estar */}
-      <div className="bg-gradient-to-br from-brand-charcoal to-brand-black border border-brand-border rounded-3xl p-6 sm:p-10 relative overflow-hidden">
+      <div className="relative overflow-hidden py-4">
         {/* Background watermark */}
         <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none select-none">
           <span className="text-8xl font-black font-serif text-white uppercase tracking-widest">伝承</span>
@@ -170,22 +170,22 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
 
           {/* Stat Cards Column */}
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4 w-full">
-            <div className="bg-brand-black/60 border border-brand-border/60 p-4 rounded-2xl text-center space-y-1 hover:border-brand-red/30 transition duration-300">
-              <span className="text-3xl font-heading font-extrabold text-brand-red block tracking-tight">22+</span>
+            <div className="p-4 text-center space-y-1">
+              <span className="text-4xl font-heading font-extrabold text-brand-red block tracking-tight">22+</span>
               <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest block">
                 {lang === 'pt' ? 'Anos em Lisboa' : 'Years in Lisbon'}
               </span>
             </div>
 
-            <div className="bg-brand-black/60 border border-brand-border/60 p-4 rounded-2xl text-center space-y-1 hover:border-brand-red/30 transition duration-300">
-              <span className="text-3xl font-heading font-extrabold text-[#cc0000] block tracking-tight">60.000+</span>
+            <div className="p-4 text-center space-y-1">
+              <span className="text-4xl font-heading font-extrabold text-[#cc0000] block tracking-tight">60.000+</span>
               <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest block">
                 {lang === 'pt' ? 'Atendimentos Realizados' : 'Treatments Performed'}
               </span>
             </div>
 
-            <div className="bg-brand-black/60 border border-brand-border/60 p-4 rounded-2xl text-center space-y-1 hover:border-brand-red/30 transition duration-300">
-              <span className="text-3xl font-heading font-extrabold text-brand-gold block tracking-tight">100%</span>
+            <div className="p-4 text-center space-y-1">
+              <span className="text-4xl font-heading font-extrabold text-brand-gold block tracking-tight">100%</span>
               <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest block">
                 {lang === 'pt' ? 'Protocolos Personalizados' : 'Tailored Treatment Plans'}
               </span>
@@ -218,9 +218,13 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
               <button
                 key={idx}
                 onClick={() => setTimelineStep(idx)}
-                className={`flex items-center px-4 py-2.5 rounded-full border text-xs font-mono transition duration-300 cursor-pointer ${isActive ? 'bg-brand-red/10 border-[#cc0000] text-white font-extrabold' : 'bg-brand-black/75 border-brand-border text-gray-400 hover:text-white hover:border-gray-500'}`}
+                className={`px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition duration-200 border cursor-pointer ${
+                  isActive
+                    ? 'bg-[#cc0000] text-white border-[#cc0000]'
+                    : 'bg-brand-charcoal text-gray-400 hover:text-white border-brand-border hover:bg-brand-gray/40'
+                }`}
               >
-                <span className="font-bold">{s.year}</span>
+                <span>{s.year}</span>
               </button>
             );
           })}
@@ -363,7 +367,7 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
 
 
       {/* 4. PORQUE ESCOLHER O NIPON SPA */}
-      <div className="bg-gradient-to-br from-brand-charcoal/30 to-brand-black border border-brand-border rounded-3xl p-6 sm:p-10 space-y-8">
+      <div className="space-y-8 py-4">
         <div className="text-center max-w-xl mx-auto space-y-2">
           <span className="text-brand-gold font-mono font-bold text-[10px] uppercase tracking-widest block">
             {lang === 'pt' ? 'Diferenciais do Nosso Templo' : 'Why Choose Nipon Spa'}
@@ -423,12 +427,8 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
               icon: Coffee
             }
           ].map((v, index) => {
-            const IconComponent = v.icon;
             return (
               <div key={index} className="bg-brand-charcoal/65 border border-brand-border/60 rounded-2xl p-6 space-y-3 hover:border-brand-red/30 transition duration-300 text-left">
-                <div className="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/35 flex items-center justify-center text-brand-red">
-                  <IconComponent className="w-5 h-5" />
-                </div>
                 <h4 className="font-heading font-extrabold text-white text-base">
                   {v.title}
                 </h4>
@@ -1736,161 +1736,6 @@ export default function App() {
               </p>
             </div>
 
-            {/* Interactive Needs-Based Consultant Widget */}
-            <div className="bg-brand-charcoal border border-brand-border p-6 md:p-8 rounded-3xl transition duration-300 relative overflow-hidden backdrop-blur-sm">
-              <div className="max-w-3xl mx-auto text-center space-y-3">
-                <span className="inline-flex items-center space-x-1.5 border border-brand-border px-3 py-1.5 rounded-full text-[9px] font-mono tracking-widest text-[#cc0000] uppercase bg-white/5">
-                  <Sparkles className="w-3 h-3 text-[#cc0000] shrink-0" />
-                  <span>{lang === 'pt' ? 'Consulta de Necessidade Omotenashi' : 'Omotenashi Need Diagnosis'}</span>
-                </span>
-                <h2 className="text-xl md:text-2xl font-light text-white font-heading">
-                  {lang === 'pt' ? 'Diga-nos o que sente • Encontre o seu Resultado' : 'Tell us what you feel • Discover your Outcome'}
-                </h2>
-                <p className="text-[11px] text-gray-400 max-w-xl mx-auto leading-relaxed">
-                  {lang === 'pt' 
-                    ? 'Selecione abaixo o seu principal foco ou desconforto físico. Prescrevemos os rituais japoneses com maior índice de eficácia biológica e muscular.' 
-                    : 'Select your primary area of physical concern or focus below. We will prescribe the Japanese rituals with the highest rate of biological efficacy.'}
-                </p>
-
-                {/* Quick Needs Selection Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3">
-                  {[
-                    {
-                      id: 'tension',
-                      labelPt: 'Tensões & Dores',
-                      labelEn: 'Muscle Pain & Tension'
-                    },
-                    {
-                      id: 'anxiety',
-                      labelPt: 'Stress & Ansiedade',
-                      labelEn: 'Stress & Insomnia'
-                    },
-                    {
-                      id: 'swelling',
-                      labelPt: 'Retenção & Inchaço',
-                      labelEn: 'Fluid Retention & Bloating'
-                    },
-                    {
-                      id: 'facial',
-                      labelPt: 'Firmeza & Rugas',
-                      labelEn: 'Facial Lift & Glowing'
-                    }
-                  ].map(need => (
-                    <button
-                      key={need.id}
-                      onClick={() => {
-                        setActiveConsultantNeed(activeConsultantNeed === need.id ? null : need.id);
-                      }}
-                      className={`py-4 px-3 border text-center transition-all duration-300 flex flex-col items-center justify-center group relative rounded-2xl ${
-                        activeConsultantNeed === need.id 
-                          ? 'bg-[#cc0000]/10 border-[#cc0000]' 
-                          : 'bg-brand-black/20 border-brand-border/40 hover:border-brand-border'
-                      }`}
-                    >
-                      <span className="text-[10px] font-medium tracking-wider text-gray-300 group-hover:text-white uppercase leading-snug">
-                        {lang === 'pt' ? need.labelPt : need.labelEn}
-                      </span>
-                      {activeConsultantNeed === need.id && (
-                        <span className="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-[#cc0000]"></span>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Display Prescribed Treatment */}
-              <AnimatePresence mode="wait">
-                {activeConsultantNeed && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    className="mt-8 p-6 bg-brand-black/80 border-t-2 border-brand-red max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-stretch gap-6"
-                  >
-                    {/* Diagnostic side heading */}
-                    <div className="shrink-0 flex flex-col justify-between items-center md:items-start text-center md:text-left md:border-r border-brand-border/60 md:pr-6 md:w-56">
-                      <div>
-                        <span className="text-[9px] font-mono font-bold tracking-widest text-brand-red uppercase block">
-                          {lang === 'pt' ? 'MÉTODO JAPONÊS PRESCREVE' : 'JAPANESE PRESCRIBES'}
-                        </span>
-                        <h4 className="text-base font-light text-white font-heading mt-1">
-                          {activeConsultantNeed === 'tension' && (lang === 'pt' ? 'Descompressão Espinhal' : 'Spinal Decompression')}
-                          {activeConsultantNeed === 'anxiety' && (lang === 'pt' ? 'Realinhamento do Ki' : 'Ki Re-alignment')}
-                          {activeConsultantNeed === 'swelling' && (lang === 'pt' ? 'Estímulo Fáscia-Linfático' : 'Fascia-Lymphatic Flow')}
-                          {activeConsultantNeed === 'facial' && (lang === 'pt' ? 'Renovação Epidérmica' : 'Tegumentary Renewal')}
-                        </h4>
-                      </div>
-
-                      <div className="mt-4 md:mt-0 pt-4 md:pt-0 border-t border-brand-border/40 w-full text-center md:text-left">
-                        <span className="text-[10px] text-gray-400 block uppercase tracking-wider">
-                          {lang === 'pt' ? 'Eficácia de Alívio' : 'Relief Rate'}
-                        </span>
-                        <span className="text-xl font-bold font-serif text-brand-gold block">
-                          99.4%
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Prescribed Recommendations */}
-                    <div className="flex-1 space-y-4 w-full">
-                      <span className="text-[10px] font-bold text-brand-gold uppercase tracking-[0.15em] block">
-                        {lang === 'pt' ? '✦ RECOMENDAÇÃO EM LISBOA:' : '✦ STRONGLY RECOMMENDED:'}
-                      </span>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {THERAPIES.filter(t => {
-                          if (activeConsultantNeed === 'tension') return t.id === 'protocol-30' || t.id === 'protocol-60';
-                          if (activeConsultantNeed === 'anxiety') return t.id === 'protocol-60' || t.id === 'protocol-90';
-                          if (activeConsultantNeed === 'swelling') return t.id === 'protocol-60';
-                          if (activeConsultantNeed === 'facial') return t.id === 'protocol-90';
-                          return false;
-                        }).map(rec => (
-                          <div 
-                            key={rec.id}
-                            className="bg-brand-charcoal p-4 border border-brand-border hover:border-brand-gold/40 transition duration-300 flex flex-col justify-between"
-                          >
-                            <div>
-                              <div className="flex justify-between items-start">
-                                <h5 className="font-heading font-light text-white text-sm hover:text-brand-red duration-200">
-                                  {getTherapyName(rec)}
-                                </h5>
-                                <span className="text-[10px] text-brand-red font-mono font-semibold shrink-0">
-                                  {rec.duration}m
-                                </span>
-                              </div>
-                              <p className="text-[11px] text-gray-400 mt-2 line-clamp-2">
-                                {getTherapyDesc(rec)}
-                              </p>
-
-                              {/* Guaranteed outcomes list */}
-                              <div className="mt-2.5 space-y-1">
-                                <span className="text-[9px] font-bold text-brand-gold uppercase tracking-widest block">
-                                  {lang === 'pt' ? 'Resultado Vendedor:' : 'Key Result:'}
-                                </span>
-                                {(lang === 'pt' ? (rec.results || []) : (rec.resultsEn || rec.results || [])).slice(0, 1).map((res, i) => (
-                                  <div key={i} className="flex items-center space-x-1.5">
-                                    <span className="text-brand-red text-xs">✓</span>
-                                    <span className="text-[10px] text-gray-300 italic">{res}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-
-                            <button
-                              onClick={() => handleOpenBooking(rec)}
-                              className="mt-4 w-full bg-brand-red/90 hover:bg-brand-red text-white transition py-1.5 text-[9px] font-bold uppercase tracking-widest flex items-center justify-center space-x-1"
-                            >
-                              <CalendarIcon className="w-3 h-3" />
-                              <span>{lang === 'pt' ? 'Garantir Vaga' : 'Secure Booking'}</span>
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
 
             {/* Category Filter Pills (Aligned with the Flyer) */}
             <div className="flex flex-wrap items-center justify-center gap-2 max-w-3xl mx-auto border-b border-brand-border pb-6">
@@ -2970,8 +2815,8 @@ export default function App() {
               </div>
 
               {/* Small Lisboa map reference */}
-              <div className="bg-brand-charcoal border border-brand-border rounded-2xl p-6 space-y-2 lg:col-span-1 text-xs">
-                <div className="flex items-center space-x-2 text-brand-gold font-bold uppercase tracking-wider">
+              <div className="bg-brand-charcoal border border-brand-border rounded-2xl p-6 flex flex-col items-center justify-center text-center space-y-2 lg:col-span-1 text-xs">
+                <div className="flex items-center justify-center space-x-2 text-brand-gold font-bold uppercase tracking-wider">
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
                   <span>{t.revLisbonClinic}</span>
                 </div>
@@ -5142,7 +4987,14 @@ export default function App() {
               <span>•</span>
               <span className="hover:text-gray-300 cursor-pointer">{lang === 'pt' ? 'Termos de Reserva' : 'Booking Terms'}</span>
               <span>•</span>
-              <span className="hover:text-gray-300 cursor-pointer">{lang === 'pt' ? 'Livro de Reclamações' : 'Complaints Book'}</span>
+              <a 
+                href="https://www.livroreclamacoes.pt/Inicio/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-gray-300 cursor-pointer"
+              >
+                {lang === 'pt' ? 'Livro de Reclamações' : 'Complaints Book'}
+              </a>
               <span>•</span>
               <span onClick={() => { setActiveTab('staff-portal'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-brand-red font-bold cursor-pointer text-brand-gold">{lang === 'pt' ? 'Área do Staff' : 'Staff Portal'}</span>
             </div>

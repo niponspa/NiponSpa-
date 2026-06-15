@@ -141,7 +141,7 @@ export default function GalleryView({ lang }: GalleryViewProps) {
       </div>
 
       {/* Filter Category Tabs */}
-      <div className="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto px-4">
+      <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 max-w-4xl mx-auto px-4 border-b border-brand-border/40 pb-0">
         {(Object.keys(filterLabels) as Array<'all' | 'zen' | 'water' | 'therapy' | 'omotenashi'>).map((categoryKey) => {
           const isActive = activeFilter === categoryKey;
           return (
@@ -151,13 +151,20 @@ export default function GalleryView({ lang }: GalleryViewProps) {
                 setActiveFilter(categoryKey);
                 setSelectedPhotoIndex(null);
               }}
-              className={`px-4 py-2 rounded-full text-xs font-mono font-bold tracking-wider uppercase border transition duration-300 cursor-pointer ${
+              className={`relative py-3 text-xs sm:text-[13px] font-medium tracking-wide transition duration-200 cursor-pointer ${
                 isActive
-                  ? 'bg-brand-red/10 border-[#cc0000] text-white font-extrabold shadow-sm'
-                  : 'bg-brand-charcoal border-brand-border text-gray-400 hover:text-white hover:border-gray-500'
+                  ? 'text-[#cc0000] font-bold'
+                  : 'text-gray-400 hover:text-white'
               }`}
             >
-              {filterLabels[categoryKey]}
+              <span>{filterLabels[categoryKey]}</span>
+              {isActive && (
+                <motion.span 
+                  layoutId="activeGalleryFilter"
+                  className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#cc0000]"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
             </button>
           );
         })}
