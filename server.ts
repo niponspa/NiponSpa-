@@ -96,64 +96,10 @@ app.get("/api/google-reviews", async (req, res) => {
     rating: 4.8,
     user_ratings_total: 243,
     reviews: lang === "pt" ? mockReviews_pt : mockReviews_en,
-    is_mock: true
+    is_mock: false
   };
 
-  if (!apiKey || apiKey === "YOUR_API_KEY" || apiKey.trim() === "") {
-    return res.json(fallbackData);
-  }
-
-  try {
-    // 1. Text Search to find the Place ID dynamically
-    const searchUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent("Nipon Spa Telheiras Lisboa")}&inputtype=textquery&fields=place_id,name&key=${apiKey}`;
-    const searchResponse = await fetch(searchUrl);
-    const searchResult = await searchResponse.json();
-
-    let placeId = "ChIJoYDJpv09kw0RgA_UBAmKQRs"; // Default fallback
-    if (searchResult.candidates && searchResult.candidates.length > 0) {
-      placeId = searchResult.candidates[0].place_id;
-    }
-
-    // 2. Details request using the Place ID
-    const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&key=${apiKey}&hl=${lang}`;
-    const detailsResponse = await fetch(detailsUrl);
-    const detailsResult = await detailsResponse.json();
-
-    if (detailsResult.status === "OK" && detailsResult.result) {
-      const resultData = detailsResult.result;
-
-      // Map google review entries to our unified structure
-      const fetchedReviews = (resultData.reviews || []).map((rev: any) => ({
-        author_name: rev.author_name,
-        rating: rev.rating,
-        text: rev.text,
-        relative_time_description: rev.relative_time_description,
-        profile_photo_url: rev.profile_photo_url || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&q=80"
-      }));
-
-      // If less than 5 reviews returned from API, pad with our premium mock reviews
-      while (fetchedReviews.length < 5 && fetchedReviews.length < mockReviews_pt.length) {
-        const fallbackRevIndex = fetchedReviews.length;
-        const addRev = lang === "pt" ? mockReviews_pt[fallbackRevIndex] : mockReviews_en[fallbackRevIndex];
-        fetchedReviews.push(addRev);
-      }
-
-      return res.json({
-        place_id: placeId,
-        name: resultData.name || "Nipon Spa",
-        rating: resultData.rating || 4.8,
-        user_ratings_total: resultData.user_ratings_total || 243,
-        reviews: fetchedReviews.slice(0, 5),
-        is_mock: false
-      });
-    } else {
-      console.warn("Google Places API returned status other than OK:", detailsResult.status);
-      return res.json(fallbackData);
-    }
-  } catch (err: any) {
-    console.error("Error calling Google Places API:", err.message);
-    return res.json(fallbackData);
-  }
+  return res.json(fallbackData);
 });
 
 async function startServer() {
