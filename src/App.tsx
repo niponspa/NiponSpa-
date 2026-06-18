@@ -2813,8 +2813,8 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16">
             
             {/* Reviews Introduction */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center border-b border-brand-border/60 pb-12">
-              <div className="lg:col-span-1 text-center lg:text-left space-y-3 p-4 bg-brand-charcoal/20 rounded-2xl border border-brand-border/10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-b border-brand-border/60 pb-12">
+              <div className="lg:col-span-8 text-center lg:text-left space-y-3 p-6 bg-brand-charcoal/20 rounded-2xl border border-brand-border/10">
                 <span className="text-brand-red font-bold text-xs uppercase tracking-widest block">
                   {lang === 'pt' ? 'Testemunhos' : 'Testimonials'}
                 </span>
@@ -2831,7 +2831,7 @@ export default function App() {
               </div>
 
               {/* Centered Rating Overview */}
-              <div className="relative overflow-hidden bg-gradient-to-b from-brand-charcoal/90 to-brand-charcoal border border-brand-border/80 hover:border-brand-gold/30 rounded-2xl p-6 flex flex-col items-center justify-center lg:col-span-1 shadow-2xl transition duration-300 group">
+              <div className="relative overflow-hidden bg-gradient-to-b from-brand-charcoal/90 to-brand-charcoal border border-brand-border/80 hover:border-brand-gold/30 rounded-2xl p-6 flex flex-col items-center justify-center lg:col-span-4 shadow-2xl transition duration-300 group">
                 <div className="absolute top-2 right-2 opacity-10 font-bold text-xs select-none pointer-events-none text-brand-gold tracking-widest uppercase">
                   信頼
                 </div>
@@ -2861,60 +2861,6 @@ export default function App() {
                   <p className="text-[11px] text-gray-400 mt-0.5">
                     {lang === 'pt' ? '100% de avaliações com pontuação máxima' : '100% of reviews with exceptional rating'}
                   </p>
-                </div>
-              </div>
-
-              {/* Small Lisboa map reference */}
-              <div className="relative overflow-hidden bg-gradient-to-b from-brand-charcoal/90 to-brand-charcoal border border-brand-border/80 hover:border-brand-red/30 rounded-2xl p-6 flex flex-col items-center justify-center text-center space-y-3 lg:col-span-1 text-xs shadow-2xl transition duration-300 group">
-                <div className="absolute top-2 right-2 opacity-10 font-bold text-xs select-none pointer-events-none text-brand-red tracking-widest uppercase">
-                  東京
-                </div>
-                
-                <div className="flex items-center justify-center space-x-2 text-brand-gold font-bold uppercase tracking-widest text-[10px]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse shadow-sm shadow-green-400"></span>
-                  <span>{t.revLisbonClinic}</span>
-                </div>
-
-                <div className="space-y-1">
-                  <p className="text-white font-semibold text-13px tracking-wide">
-                    Rua Prista Monteiro, 20 Loja B
-                  </p>
-                  <p className="text-gray-400 text-[11px] font-sans">
-                    1600-253 Lisboa, Portugal
-                  </p>
-                </div>
-
-                <a 
-                  href="tel:+351217157010" 
-                  className="inline-flex items-center space-x-1.5 bg-brand-black/50 border border-brand-border/80 hover:border-brand-gold/40 px-3.5 py-1 rounded-full text-gray-300 hover:text-white transition duration-200"
-                >
-                  <Phone className="w-3.5 h-3.5 text-brand-gold" />
-                  <span className="font-mono text-xs font-bold">21 715 7010</span>
-                </a>
-
-                <div className="flex items-center space-x-2 w-full pt-1">
-                  <a 
-                    href="https://maps.google.com/?q=Rua+Prista+Monteiro+20+Lisboa" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex-1 bg-brand-black/50 hover:bg-brand-black border border-brand-border hover:border-gray-500 text-gray-300 hover:text-white py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition duration-200 text-center"
-                  >
-                    {lang === 'pt' ? 'Como Chegar' : 'Directions'}
-                  </a>
-                  
-                  <a 
-                    href="#new-review-form" 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const element = document.getElementById('new-review-form');
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                    className="flex-1 bg-brand-red hover:bg-brand-red-hover text-white py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition duration-200 text-center"
-                  >
-                    {lang === 'pt' ? 'Avaliar' : 'Review'}
-                  </a>
                 </div>
               </div>
             </div>
