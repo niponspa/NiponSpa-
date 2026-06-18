@@ -211,20 +211,27 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
         </div>
 
         {/* Timeline Horizon Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto border-b border-brand-border/40 pb-6">
+        <div className="flex flex-nowrap overflow-x-auto md:overflow-visible items-center justify-start md:justify-center gap-x-8 max-w-4xl mx-auto border-b border-brand-border/40 pb-0 scrollbar-none w-full px-2">
           {steps.map((s, idx) => {
             const isActive = timelineStep === idx;
             return (
               <button
                 key={idx}
                 onClick={() => setTimelineStep(idx)}
-                className={`px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition duration-200 border cursor-pointer ${
+                className={`relative py-3 text-xs sm:text-[13px] font-medium tracking-wide transition duration-200 cursor-pointer shrink-0 ${
                   isActive
-                    ? 'bg-[#cc0000] text-white border-[#cc0000]'
-                    : 'bg-brand-charcoal text-gray-400 hover:text-white border-brand-border hover:bg-brand-gray/40'
+                    ? 'text-[#cc0000] font-bold'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 <span>{s.year}</span>
+                {isActive && (
+                  <motion.span 
+                    layoutId="activeTimelineStep"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#cc0000]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </button>
             );
           })}
@@ -3066,126 +3073,8 @@ export default function App() {
         {activeTab === 'about' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16 animate-fade-in" id="about-page">
             
-
             {/* TIMELINE, LEGACY AND NEW GENERATION COMPONENT EXPANSION */}
             <LegacyTimelineAndNewGen lang={lang} />
-
-            {/* INTERACTIVE COMPONENT: THE 4 STAGES OF OMOTENASHI EXPERIENCE */}
-            <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-8 md:p-12 space-y-8 animate-fade-in">
-              <div className="text-center max-w-xl mx-auto space-y-2">
-                <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-widest block">
-                  {lang === 'pt' ? 'Interativo • O Caminho da Calma' : 'Interactive • The Pathway of Calm'}
-                </span>
-                <h2 className="text-2xl md:text-3xl font-bold font-heading text-white">
-                  {lang === 'pt' ? 'O Fluxo do Seu Ritual Sagrado' : 'The Flow of Your Sacred Ritual'}
-                </h2>
-                <p className="text-xs text-gray-400 font-sans">
-                  {lang === 'pt' 
-                    ? 'Clique nas diferentes etapas abaixo para visualizar como preparamos o seu ser para alcançar o relaxamento puro e tradicional.'
-                    : 'Click through the therapeutic stages below to discover how we coordinate your body and mind for absolute tranquility.'}
-                </p>
-              </div>
-
-              {/* Stage Stepper Tabs */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {[
-                  { step: 0, title: lang === 'pt' ? '1. Genkan & Purificação' : '1. Genkan & Purification' },
-                  { step: 1, title: lang === 'pt' ? '2. Ashiyu (Pés)' : '2. Ashiyu (Foot Bath)' },
-                  { step: 2, title: lang === 'pt' ? '3. O Ritual Core' : '3. Core Healing Ritual' },
-                  { step: 3, title: lang === 'pt' ? '4. Chasen Matcha' : '4. Chasen Matcha Drink' }
-                ].map((item) => {
-                  return (
-                    <button
-                      key={item.step}
-                      type="button"
-                      onClick={() => setAboutActiveStep(item.step)}
-                      className={`p-4 rounded-2xl border text-center transition focus:outline-none cursor-pointer ${aboutActiveStep === item.step ? 'bg-brand-red/10 border-[#cc0000] text-white' : 'bg-brand-black border-brand-border text-gray-400 hover:border-gray-500'}`}
-                    >
-                      <span className="text-[10px] font-bold uppercase tracking-wider block font-mono">{item.title}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Animated Detail Stage Render */}
-              <div className="bg-brand-black/50 border border-brand-border/60 rounded-2xl p-6 sm:p-8 duration-300">
-                {aboutActiveStep === 0 && (
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                    <div className="md:col-span-8 space-y-3">
-                      <span className="text-brand-gold text-[10px] font-bold uppercase tracking-widest block font-mono">Etapa I • Genkan (玄関)</span>
-                      <h4 className="text-lg font-bold text-white font-heading">{lang === 'pt' ? 'Desconexão do Mundo Exterior' : 'Detaching from the Outside World'}</h4>
-                      <p className="text-xs text-gray-400 leading-relaxed font-sans">
-                        {lang === 'pt'
-                          ? 'Ao entrar no Nipon, é convidado a trocar o calçado quotidiano por chinelos tradicionais japoneses (Uwabaki). Este ato físico simboliza a remoção de energias mundanas e impurezas da rua, deixando as preocupações fora do templo.'
-                          : 'Upon entering Nipon, you are guided to exchange your outdoor shoes for authentic lightweight Uwabaki slippers. This physical boundary represents removing worldly worries and street stress, leaving negative energy outside.'}
-                      </p>
-                    </div>
-                    <div className="md:col-span-4 bg-brand-charcoal/30 border border-brand-border/40 p-4 rounded-xl text-center space-y-1">
-                      <span className="text-xs font-mono font-semibold text-gray-400 block">{lang === 'pt' ? 'RECOMENDADO' : 'RECOMMENDED'}</span>
-                      <span className="text-xl font-bold text-white font-mono">10 min</span>
-                      <span className="text-[9px] text-brand-red uppercase tracking-widest block font-bold">{lang === 'pt' ? 'Aclimatação' : 'Acclimatization'}</span>
-                    </div>
-                  </div>
-                )}
-
-                {aboutActiveStep === 1 && (
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                    <div className="md:col-span-8 space-y-3">
-                      <span className="text-brand-gold text-[10px] font-bold uppercase tracking-widest block font-mono">Etapa II • Ashiyu (足湯)</span>
-                      <h4 className="text-lg font-bold text-white font-heading">{lang === 'pt' ? 'O Ritual de Banho de Pés Sagrado' : 'The Sacred Foot Bath Purification'}</h4>
-                      <p className="text-xs text-gray-400 leading-relaxed font-sans">
-                        {lang === 'pt'
-                          ? 'A cura começa pela terra. Iniciamos a aclimação com um banho de pés em tinas de cobre, utilizando flores frescas de cerejeira, sais purificadores de Epson e óleos naturais do fruto cítrico Yuzu. O calor flui para regular o fluxo do sangue.'
-                          : 'True healing initiates at the foundation. We begin by bathing your feet in premium warm copper vessels, filled with handpicked cherry blossoms, purifying Epson salts, and therapeutic citrus Yuzu essential oils. Warmth slowly radiates upward.'}
-                      </p>
-                    </div>
-                    <div className="md:col-span-4 bg-brand-charcoal/30 border border-brand-border/40 p-4 rounded-xl text-center space-y-1">
-                      <span className="text-xs font-mono font-semibold text-gray-400 block">{lang === 'pt' ? 'RECOMENDADO' : 'RECOMMENDED'}</span>
-                      <span className="text-xl font-bold text-white font-mono">15 min</span>
-                      <span className="text-[9px] text-brand-red uppercase tracking-widest block font-bold">{lang === 'pt' ? 'Purificação' : 'Purification'}</span>
-                    </div>
-                  </div>
-                )}
-
-                {aboutActiveStep === 2 && (
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                    <div className="md:col-span-8 space-y-3">
-                      <span className="text-brand-gold text-[10px] font-bold uppercase tracking-widest block font-mono">Etapa III • Shinrin-yoku & Shiatsu (森林浴 • 指圧)</span>
-                      <h4 className="text-lg font-bold text-white font-heading">{lang === 'pt' ? 'Alinhamento de Ki e Pontos de Tensão' : 'Ki Alignment & Absolute Release'}</h4>
-                      <p className="text-xs text-gray-400 leading-relaxed font-sans">
-                        {lang === 'pt'
-                          ? 'O núcleo central do tratamento. Conforme o ritual que selecionou, deitamos o hóspede em marquesas confortáveis e realizamos massagens de pressão acupuntural profunda, libertando bloqueios musculares crónicos e revitalizando vias de circulação.'
-                          : 'The core of your healing journey. Based on your tailored treatment choice, you are situated on highly supportive heated beds. Master therapists execute targeted pressure point massage (Shiatsu) and stretch methods to relieve stress.'}
-                      </p>
-                    </div>
-                    <div className="md:col-span-4 bg-brand-charcoal/30 border border-brand-border/40 p-4 rounded-xl text-center space-y-1">
-                      <span className="text-xs font-mono font-semibold text-gray-400 block">{lang === 'pt' ? 'DURAÇÃO DEPENDENTE' : 'Core Duration'}</span>
-                      <span className="text-xl font-bold text-white font-mono">50 - 90 min</span>
-                      <span className="text-[9px] text-brand-red uppercase tracking-widest block font-bold">{lang === 'pt' ? 'Alinhamento Vital' : 'Vital realigning'}</span>
-                    </div>
-                  </div>
-                )}
-
-                {aboutActiveStep === 3 && (
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                    <div className="md:col-span-8 space-y-3">
-                      <span className="text-brand-gold text-[10px] font-bold uppercase tracking-widest block font-mono">Etapa IV • Sado & Matcha (茶道 • 抹茶)</span>
-                      <h4 className="text-lg font-bold text-white font-heading">{lang === 'pt' ? 'A Despedida do Chá Chasen Tradicional' : 'The Traditional Chasen Matcha Tea Ceremony'}</h4>
-                      <p className="text-xs text-gray-400 leading-relaxed font-sans">
-                        {lang === 'pt'
-                          ? 'Antes de regressar à sua rotina fidedigna, preparamos um chá matcha japonês biológico utilizando o batedor ancestral de bambu Chasen. A clorofila abundante e L-teanina estimulam um estado de clareza mental e foco calmo residual.'
-                          : 'Before departing our sanctuary, we serve you organic, stone-ground Japanese matcha whisked with a hand-carved Chasen bamboo instrument. Rich L-theanine stimulates clean persistent alpha brain waves, securing your calm mind.'}
-                      </p>
-                    </div>
-                    <div className="md:col-span-4 bg-brand-charcoal/30 border border-brand-border/40 p-4 rounded-xl text-center space-y-1">
-                      <span className="text-xs font-mono font-semibold text-gray-400 block">{lang === 'pt' ? 'COLAÇÃO DE FECHO' : 'CLOSING REPAST'}</span>
-                      <span className="text-xl font-bold text-white font-mono">15 min</span>
-                      <span className="text-[9px] text-brand-red uppercase tracking-widest block font-bold">{lang === 'pt' ? 'Despertar Calmo' : 'Calm Awakening'}</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
 
             {/* BRAND FAQS & SECURITY TRUST STATEMENT */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -3294,8 +3183,8 @@ export default function App() {
             {!selectedBlogPost ? (
               // BLOG INDEX / POSTS LIST VIEW
               <div className="space-y-12">
-                {/* HERO SECTION */}
-                <div className="relative overflow-hidden rounded-3xl border border-brand-border bg-gradient-to-br from-brand-charcoal to-brand-black p-8 md:p-12 text-center md:text-left animate-fade-in">
+                {/* HERO SECTION - SEM CARD */}
+                <div className="relative overflow-hidden pb-10 border-b border-brand-border/40 text-center md:text-left animate-fade-in">
                   <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                     <span className="text-8xl font-black font-mono select-none tracking-widest text-white">読書</span>
                   </div>
@@ -3313,9 +3202,9 @@ export default function App() {
                           : 'Explore our weekly chronicles of Eastern aesthetics, Ki fostering, traditional matcha tea rituals, and ancestral Japanese philosophies of wellness configured for Lisbon life.'}
                       </p>
                     </div>
-
+ 
                     <div className="md:col-span-4 flex justify-center">
-                      <div className="w-36 h-36 rounded-full border border-brand-border flex flex-col items-center justify-center p-4 bg-brand-black/60 relative">
+                      <div className="w-36 h-36 rounded-full border border-brand-border/30 flex flex-col items-center justify-center p-4 bg-transparent relative">
                         <BookOpen className="w-8 h-8 text-brand-red mb-2 animate-pulse" />
                         <span className="font-mono text-xs text-brand-gold uppercase tracking-widest font-extrabold">DOKUSHO</span>
                         <span className="text-[10px] text-gray-500 font-mono tracking-tighter mt-1">{lang === 'pt' ? 'Leitura Sagrada' : 'Sacred Reading'}</span>
