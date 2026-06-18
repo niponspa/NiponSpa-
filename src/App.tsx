@@ -1738,7 +1738,7 @@ export default function App() {
 
 
             {/* Category Filter Tabs (Same visual style as the active underlined tabs in the image) */}
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 max-w-3xl mx-auto border-b border-brand-border/40 pb-0">
+            <div className="flex flex-nowrap overflow-x-auto md:overflow-visible items-center justify-start md:justify-center gap-x-8 max-w-4xl mx-auto border-b border-brand-border/40 pb-0 scrollbar-none w-full px-2">
               {[
                 { id: 'all', label: lang === 'pt' ? 'Todos os Tratamentos' : 'All Treatment Options' },
                 { id: 'personalized', label: lang === 'pt' ? 'Protocolos Personalizados' : 'Personalized Protocols' },
@@ -1751,7 +1751,7 @@ export default function App() {
                   <button
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`relative py-3 text-xs sm:text-[13px] font-medium tracking-wide transition duration-200 cursor-pointer ${
+                    className={`relative py-3 text-xs sm:text-[13px] font-medium tracking-wide transition duration-200 cursor-pointer shrink-0 ${
                       isActive
                         ? 'text-[#cc0000] font-bold'
                         : 'text-gray-400 hover:text-white'
@@ -2807,42 +2807,106 @@ export default function App() {
             
             {/* Reviews Introduction */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center border-b border-brand-border/60 pb-12">
-              <div className="lg:col-span-1 text-center lg:text-left space-y-3">
-                <span className="text-brand-red font-bold text-xs uppercase tracking-widest block">{t.revBadge}</span>
-                <h1 className="text-3xl sm:text-4xl font-black text-white font-heading">{t.revTitle}</h1>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  {t.revDesc}
+              <div className="lg:col-span-1 text-center lg:text-left space-y-3 p-4 bg-brand-charcoal/20 rounded-2xl border border-brand-border/10">
+                <span className="text-brand-red font-bold text-xs uppercase tracking-widest block">
+                  {lang === 'pt' ? 'Testemunhos' : 'Testimonials'}
+                </span>
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-heading leading-tight">
+                  {lang === 'pt' 
+                    ? 'Descubra porque milhares de clientes confiam no Nipon Spa há mais de duas décadas.' 
+                    : 'Discover why thousands of clients have trusted Nipon Spa for over two decades.'}
+                </h1>
+                <p className="text-xs text-gray-400 leading-relaxed font-sans">
+                  {lang === 'pt'
+                    ? 'A opinião sincera de quem já vivenciou o autêntico reequilíbrio físico, mental e espiritual Omotenashi.'
+                    : 'Honest opinions from those who have experienced our authentic physical, mental, and spiritual Omotenashi realignment.'}
                 </p>
               </div>
 
               {/* Centered Rating Overview */}
-              <div className="bg-brand-charcoal border border-brand-border rounded-2xl p-6 flex flex-col items-center justify-center lg:col-span-1">
-                <span className="text-4xl font-extrabold text-white">5.0</span>
-                <div className="flex space-x-1 my-1.5">
+              <div className="relative overflow-hidden bg-gradient-to-b from-brand-charcoal/90 to-brand-charcoal border border-brand-border/80 hover:border-brand-gold/30 rounded-2xl p-6 flex flex-col items-center justify-center lg:col-span-1 shadow-2xl transition duration-300 group">
+                <div className="absolute top-2 right-2 opacity-10 font-bold text-xs select-none pointer-events-none text-brand-gold tracking-widest uppercase">
+                  信頼
+                </div>
+                <span className="text-[10px] font-mono font-bold text-brand-gold uppercase tracking-widest mb-1">
+                  {lang === 'pt' ? 'EXCELÊNCIA' : 'EXCELLENCE'}
+                </span>
+                
+                <div className="flex items-baseline space-x-1">
+                  <span className="text-5xl font-black font-heading text-white tracking-tighter">5.0</span>
+                  <span className="text-brand-gold font-bold text-sm">/ 5.0</span>
+                </div>
+
+                <div className="flex space-x-1 my-2">
                   {[1, 2, 3, 4, 5].map(s => (
-                    <Star key={s} className="w-5 h-5 text-brand-gold fill-brand-gold" />
+                    <Star key={s} className="w-5 h-5 text-brand-gold fill-brand-gold transition-transform duration-300 group-hover:scale-110" style={{ transitionDelay: `${s * 50}ms` }} />
                   ))}
                 </div>
-                <span className="text-xs text-gray-400">
+
+                <span className="text-xs text-gray-300 font-sans font-medium text-center">
                   {lang === 'pt' ? `Classificação verídica baseada em ${reviews.length} testemunhos` : `Verified rating based on ${reviews.length} testimonials`}
                 </span>
+
+                <div className="border-t border-brand-border/40 w-full mt-4 pt-3 text-center">
+                  <span className="text-[9px] font-mono font-bold text-gray-500 uppercase tracking-widest block">
+                    {lang === 'pt' ? 'SATISFAÇÃO GARANTIDA' : 'GUARANTEED SATISFACTION'}
+                  </span>
+                  <p className="text-[11px] text-gray-400 mt-0.5">
+                    {lang === 'pt' ? '100% de avaliações com pontuação máxima' : '100% of reviews with exceptional rating'}
+                  </p>
+                </div>
               </div>
 
               {/* Small Lisboa map reference */}
-              <div className="bg-brand-charcoal border border-brand-border rounded-2xl p-6 flex flex-col items-center justify-center text-center space-y-2 lg:col-span-1 text-xs">
-                <div className="flex items-center justify-center space-x-2 text-brand-gold font-bold uppercase tracking-wider">
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+              <div className="relative overflow-hidden bg-gradient-to-b from-brand-charcoal/90 to-brand-charcoal border border-brand-border/80 hover:border-brand-red/30 rounded-2xl p-6 flex flex-col items-center justify-center text-center space-y-3 lg:col-span-1 text-xs shadow-2xl transition duration-300 group">
+                <div className="absolute top-2 right-2 opacity-10 font-bold text-xs select-none pointer-events-none text-brand-red tracking-widest uppercase">
+                  東京
+                </div>
+                
+                <div className="flex items-center justify-center space-x-2 text-brand-gold font-bold uppercase tracking-widest text-[10px]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse shadow-sm shadow-green-400"></span>
                   <span>{t.revLisbonClinic}</span>
                 </div>
-                <p className="text-gray-300">Rua Prista Monteiro, 20 Loja B (Lisboa 1600-253)</p>
-                <p className="text-gray-400">{t.revPhone} <strong className="text-white">21 715 7010</strong></p>
-                <div className="pt-2">
+
+                <div className="space-y-1">
+                  <p className="text-white font-semibold text-13px tracking-wide">
+                    Rua Prista Monteiro, 20 Loja B
+                  </p>
+                  <p className="text-gray-400 text-[11px] font-sans">
+                    1600-253 Lisboa, Portugal
+                  </p>
+                </div>
+
+                <a 
+                  href="tel:+351217157010" 
+                  className="inline-flex items-center space-x-1.5 bg-brand-black/50 border border-brand-border/80 hover:border-brand-gold/40 px-3.5 py-1 rounded-full text-gray-300 hover:text-white transition duration-200"
+                >
+                  <Phone className="w-3.5 h-3.5 text-brand-gold" />
+                  <span className="font-mono text-xs font-bold">21 715 7010</span>
+                </a>
+
+                <div className="flex items-center space-x-2 w-full pt-1">
+                  <a 
+                    href="https://maps.google.com/?q=Rua+Prista+Monteiro+20+Lisboa" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex-1 bg-brand-black/50 hover:bg-brand-black border border-brand-border hover:border-gray-500 text-gray-300 hover:text-white py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition duration-200 text-center"
+                  >
+                    {lang === 'pt' ? 'Como Chegar' : 'Directions'}
+                  </a>
+                  
                   <a 
                     href="#new-review-form" 
-                    className="text-brand-red hover:text-brand-red-hover font-bold uppercase tracking-widest text-[10px] inline-flex items-center space-x-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const element = document.getElementById('new-review-form');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className="flex-1 bg-brand-red hover:bg-brand-red-hover text-white py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition duration-200 text-center"
                   >
-                    <span>{t.revWriteBtn}</span>
-                    <span>→</span>
+                    {lang === 'pt' ? 'Avaliar' : 'Review'}
                   </a>
                 </div>
               </div>
