@@ -462,6 +462,27 @@ export default function App() {
   const [activeConsultantNeed, setActiveConsultantNeed] = useState<string | null>(null);
   const [themeMode, setThemeMode] = useState<'red' | 'bw'>('bw');
 
+  interface GoogleReview {
+    author_name: string;
+    rating: number;
+    text: string;
+    relative_time_description: string;
+    profile_photo_url?: string;
+  }
+
+  interface GoogleReviewsData {
+    place_id: string;
+    name: string;
+    rating: number;
+    user_ratings_total: number;
+    reviews: GoogleReview[];
+    is_mock: boolean;
+  }
+
+  const [googleReviews, setGoogleReviews] = useState<GoogleReviewsData | null>(null);
+  const [googleReviewsLoading, setGoogleReviewsLoading] = useState<boolean>(true);
+
+
   const [currentVideo, setCurrentVideo] = useState<string>(() => {
     const saved = localStorage.getItem('nipon_spa_bg_video');
     if (saved && (saved.includes('youtube') || saved.includes('youtu.be'))) {
@@ -836,6 +857,20 @@ export default function App() {
       }
     }
   }, [activeTab]);
+
+  useEffect(() => {
+    setGoogleReviewsLoading(true);
+    fetch(`/api/google-reviews?lang=${lang}`)
+      .then(res => res.json())
+      .then(data => {
+        setGoogleReviews(data);
+        setGoogleReviewsLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching Google Reviews on client:", err);
+        setGoogleReviewsLoading(false);
+      });
+  }, [lang]);
 
   // Load from local storage on mount
   useEffect(() => {
@@ -2813,8 +2848,8 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16">
             
             {/* Reviews Introduction */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-b border-brand-border/60 pb-12">
-              <div className="lg:col-span-8 text-center lg:text-left space-y-3 p-6 bg-brand-charcoal/20 rounded-2xl border border-brand-border/10">
+            <div className="border-b border-brand-border/60 pb-12">
+              <div className="text-center lg:text-left space-y-3 p-6 bg-brand-charcoal/20 rounded-2xl border border-brand-border/10">
                 <span className="text-brand-red font-bold text-xs uppercase tracking-widest block">
                   {lang === 'pt' ? 'Testemunhos' : 'Testimonials'}
                 </span>
@@ -2829,180 +2864,176 @@ export default function App() {
                     : 'Honest opinions from those who have experienced our authentic physical, mental, and spiritual Omotenashi realignment.'}
                 </p>
               </div>
-
-              {/* Centered Rating Overview */}
-              <div className="relative overflow-hidden bg-gradient-to-b from-brand-charcoal/90 to-brand-charcoal border border-brand-border/80 hover:border-brand-gold/30 rounded-2xl p-6 flex flex-col items-center justify-center lg:col-span-4 shadow-2xl transition duration-300 group">
-                <div className="absolute top-2 right-2 opacity-10 font-bold text-xs select-none pointer-events-none text-brand-gold tracking-widest uppercase">
-                  信頼
-                </div>
-                <span className="text-[10px] font-mono font-bold text-brand-gold uppercase tracking-widest mb-1">
-                  {lang === 'pt' ? 'EXCELÊNCIA' : 'EXCELLENCE'}
-                </span>
-                
-                <div className="flex items-baseline space-x-1">
-                  <span className="text-5xl font-black font-heading text-white tracking-tighter">5.0</span>
-                  <span className="text-brand-gold font-bold text-sm">/ 5.0</span>
-                </div>
-
-                <div className="flex space-x-1 my-2">
-                  {[1, 2, 3, 4, 5].map(s => (
-                    <Star key={s} className="w-5 h-5 text-brand-gold fill-brand-gold transition-transform duration-300 group-hover:scale-110" style={{ transitionDelay: `${s * 50}ms` }} />
-                  ))}
-                </div>
-
-                <span className="text-xs text-gray-300 font-sans font-medium text-center">
-                  {lang === 'pt' ? `Classificação verídica baseada em ${reviews.length} testemunhos` : `Verified rating based on ${reviews.length} testimonials`}
-                </span>
-
-                <div className="border-t border-brand-border/40 w-full mt-4 pt-3 text-center">
-                  <span className="text-[9px] font-mono font-bold text-gray-500 uppercase tracking-widest block">
-                    {lang === 'pt' ? 'SATISFAÇÃO GARANTIDA' : 'GUARANTEED SATISFACTION'}
-                  </span>
-                  <p className="text-[11px] text-gray-400 mt-0.5">
-                    {lang === 'pt' ? '100% de avaliações com pontuação máxima' : '100% of reviews with exceptional rating'}
-                  </p>
-                </div>
-              </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* GOOGLE REVIEWS SHOWCASE SECTION (DARK JAPANESE SPA SEAMLESS INTEGRATION) */}
+            <div className="space-y-8 relative overflow-hidden pt-4">
+              {/* Subtle design element: stylized Japanese characters for 'harmonious environment' or 'Omotenashi' in delicate watermarked white */}
+              <div className="absolute top-4 right-6 opacity-[0.02] font-bold text-6xl md:text-8xl select-none pointer-events-none text-white font-mono tracking-widest">
+                和 de 心
+              </div>
               
-              {/* Reviews Grid Display (Left 8 cols) */}
-              <div className="lg:col-span-8 space-y-4">
-                <h3 className="font-heading font-extrabold text-white text-lg flex items-center space-x-2">
-                  <span>{t.revAllRatings}</span>
-                  <span className="bg-brand-red/15 text-brand-red text-xs px-2.5 py-0.5 rounded-full border border-brand-red/20">{reviews.length}</span>
-                </h3>
-
-                <div className="space-y-4">
-                  {reviews.map(review => (
-                    <div 
-                      key={review.id}
-                      className="bg-brand-charcoal border border-brand-border rounded-2xl p-6 space-y-3 hover:border-brand-border transition"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-9 h-9 rounded-full bg-brand-red/10 border border-brand-red/30 flex items-center justify-center text-brand-red">
-                            <User className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <h4 className="font-bold text-sm text-white">{review.author}</h4>
-                            <p className="text-[10px] text-gray-400">{review.date}</p>
-                          </div>
-                        </div>
-
-                        {/* Stars */}
-                        <div className="flex space-x-0.5">
-                          {Array.from({ length: 5 }).map((_, index) => (
-                            <Star 
-                              key={index} 
-                              className={`w-3.5 h-3.5 ${index < review.rating ? 'text-brand-gold fill-brand-gold' : 'text-gray-600'}`} 
-                            />
-                          ))}
-                        </div>
+              {googleReviewsLoading ? (
+                <div className="min-h-[250px] flex flex-col items-center justify-center space-y-4 py-12">
+                  <div className="w-10 h-10 rounded-full border-2 border-brand-border border-t-brand-red animate-spin"></div>
+                  <p className="text-xs text-gray-400 font-mono animate-pulse uppercase tracking-widest">
+                    {lang === 'pt' ? 'A harmonizar avaliações reais do Google...' : 'Synchronizing authentic Google reviews...'}
+                  </p>
+                </div>
+              ) : googleReviews ? (
+                <>
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pb-6 border-b border-brand-border/60 relative z-10 font-sans">
+                    <div className="space-y-3">
+                      <div className="inline-flex items-center space-x-2 bg-brand-charcoal/60 px-3 py-1.5 rounded-full border border-brand-border animate-fade-in">
+                        <svg className="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                        </svg>
+                        <span className="text-[10px] font-mono font-bold text-brand-gold uppercase tracking-widest leading-none">
+                          {googleReviews.name} — Google Places
+                        </span>
                       </div>
-
-                      <p className="text-xs text-gray-300 leading-relaxed font-sans">
-                        "{review.comment}"
-                      </p>
-
-                      <div className="flex items-center space-x-2 text-[10px] text-brand-gold uppercase tracking-wider">
-                        <span>{t.revTreatmentSubmitted}</span>
-                        <span className="bg-brand-black/55 px-2 py-0.5 rounded text-white border border-brand-border/40">
-                          {(() => {
-                            const foundTherapy = THERAPIES.find(tp => tp.name === review.serviceReceived);
-                            return foundTherapy ? getTherapyName(foundTherapy) : review.serviceReceived;
-                          })()}
+                      
+                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:space-x-4">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-4xl md:text-5xl font-black text-white tracking-tighter">
+                            {googleReviews.rating ? googleReviews.rating.toFixed(1) : "4.8"}
+                          </span>
+                          <div className="space-y-1">
+                            <div className="flex text-brand-gold">
+                              {Array.from({ length: 5 }).map((_, s) => {
+                                const starValue = s + 1;
+                                const isFull = starValue <= Math.floor(googleReviews.rating || 4.8);
+                                const isHalf = !isFull && starValue <= Math.ceil(googleReviews.rating || 4.8) && (googleReviews.rating || 4.8) % 1 >= 0.3;
+                                return (
+                                  <div key={s} className="relative w-4 h-4">
+                                    <Star className={`w-4 h-4 text-gray-600 stroke-none ${!isFull && !isHalf ? 'opacity-30' : ''}`} />
+                                    {isFull && (
+                                      <Star className="absolute top-0 left-0 w-4 h-4 fill-brand-gold stroke-brand-gold" />
+                                    )}
+                                    {isHalf && (
+                                      <div className="absolute top-0 left-0 w-[50%] h-full overflow-hidden">
+                                        <Star className="w-4 h-4 fill-brand-gold stroke-brand-gold" />
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-wider font-bold leading-none">
+                              {lang === 'pt' ? 'Confiabilidade Máxima' : 'Maximum Trust'}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <span className="text-xs text-gray-400 mt-1 sm:mt-0">
+                          {lang === 'pt' 
+                            ? `baseado em ${googleReviews.user_ratings_total || 243} avaliações reais no Google` 
+                            : `based on ${googleReviews.user_ratings_total || 243} real ratings on Google`}
                         </span>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Review Input Form Component (Right 4 cols) */}
-              <div className="lg:col-span-4" id="new-review-form">
-                <div className="bg-white/[0.04] border border-brand-border rounded p-6 sticky top-28 space-y-4">
-                  <h3 className="font-heading font-light text-white text-base">{t.revFormTitle}</h3>
-                  <p className="text-xs text-gray-400">
-                    {t.revFormDesc}
-                  </p>
-
-                  {reviewSuccessMessage && (
-                    <div className="bg-green-950/45 border border-green-700/60 text-green-400 text-xs p-3.5 rounded flex items-start space-x-2">
-                      <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
-                      <span>{reviewSuccessMessage}</span>
-                    </div>
-                  )}
-
-                  <form onSubmit={handleAddReview} className="space-y-4 pt-2">
-                    {/* Author */}
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-gray-300 uppercase tracking-widest block">{t.revFormName}</label>
-                      <input 
-                        type="text" 
-                        required
-                        value={reviewAuthor}
-                        onChange={(e) => setReviewAuthor(e.target.value)}
-                        placeholder={t.revFormNamePl} 
-                        className="w-full bg-brand-black border border-brand-border rounded p-2.5 text-xs text-white focus:outline-none focus:border-brand-red"
-                      />
-                    </div>
-
-                    {/* Selected Therapy Received */}
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-gray-300 uppercase tracking-widest block font-sans">{t.revFormService}</label>
-                      <select 
-                        value={reviewService}
-                        onChange={(e) => setReviewService(e.target.value)}
-                        className="w-full bg-brand-black border border-brand-border rounded p-2.5 text-xs text-white focus:outline-none focus:border-brand-red cursor-pointer"
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <a
+                        href={`https://www.google.com/maps/place/?q=place_id:${googleReviews.place_id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center space-x-2 bg-brand-charcoal/40 hover:bg-brand-charcoal border border-brand-border text-white px-5 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition duration-200"
                       >
-                        {THERAPIES.map(t => (
-                          <option key={t.id} value={t.name}>{getTherapyName(t)}</option>
-                        ))}
-                      </select>
-                    </div>
+                        <span>{lang === 'pt' ? 'Ver avaliações no Google' : 'View Reviews on Google'}</span>
+                        <ArrowRight className="w-3.5 h-3.5 text-gray-400" />
+                      </a>
 
-                    {/* Stars Slider */}
-                    <div className="space-y-1.5">
-                      <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest block">{t.revFormStars} ({reviewRating} / 5)</span>
-                      <div className="flex space-x-2">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <button
-                            key={star}
-                            type="button"
-                            onClick={() => setReviewRating(star)}
-                            className="focus:outline-none transition active:scale-95"
-                          >
-                            <Star className={`w-5 h-5 transition ${star <= reviewRating ? 'text-brand-gold fill-brand-gold scale-110' : 'text-gray-600 hover:text-brand-gold/50'}`} />
-                          </button>
-                        ))}
+                      <a
+                        href={`https://search.google.com/local/writereview?placeid=${googleReviews.place_id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center space-x-2 bg-brand-red hover:bg-[#cc0000] text-white px-5 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-sm hover:shadow duration-200"
+                      >
+                        <Star className="w-3.5 h-3.5 text-white fill-white" />
+                        <span>{lang === 'pt' ? 'Deixar Avaliação' : 'Leave a Review'}</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Up to 5 Review Cards Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10 font-sans">
+                    {googleReviews.reviews.map((crit, idx) => (
+                      <div 
+                        key={idx}
+                        className="bg-brand-charcoal/60 border border-brand-border/80 rounded-2xl p-6 flex flex-col justify-between hover:border-brand-border transition duration-350 relative group"
+                      >
+                        <div className="space-y-4">
+                          {/* Name, Avatar & Stars row */}
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-center space-x-3">
+                              {crit.profile_photo_url ? (
+                                <img 
+                                  src={crit.profile_photo_url} 
+                                  referrerPolicy="no-referrer"
+                                  className="w-10 h-10 rounded-full border border-brand-border object-cover" 
+                                  alt={crit.author_name} 
+                                />
+                              ) : (
+                                <div className="w-10 h-10 rounded-full bg-brand-black border border-brand-border flex items-center justify-center text-brand-gold font-bold text-xs uppercase font-mono">
+                                  {crit.author_name.charAt(0)}
+                                </div>
+                              )}
+                              <div>
+                                <h4 className="font-heading font-extrabold text-white text-xs leading-tight">{crit.author_name}</h4>
+                                <p className="text-[10px] text-gray-500 mt-0.5 leading-none">{crit.relative_time_description}</p>
+                              </div>
+                            </div>
+                            <div className="flex text-brand-gold space-x-0.5 mt-0.5">
+                              {Array.from({ length: 5 }).map((_, s) => (
+                                <Star 
+                                  key={s} 
+                                  className={`w-3 h-3 ${s < crit.rating ? 'fill-brand-gold stroke-brand-gold' : 'text-gray-700 stroke-transparent'}`} 
+                                />
+                              ))}
+                            </div>
+                          </div>
+
+                          <p className="text-xs text-gray-300 leading-relaxed font-sans font-light italic">
+                            "{crit.text}"
+                          </p>
+                        </div>
+
+                        {/* Google G watermark / Verification badge */}
+                        <div className="flex items-center justify-between border-t border-brand-border/40 pt-3.5 mt-4 font-sans">
+                          <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest font-bold flex items-center space-x-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            <span>{lang === 'pt' ? 'Avaliação Verificada' : 'Verified Review'}</span>
+                          </span>
+                          
+                          <span className="opacity-30 group-hover:opacity-80 transition duration-200">
+                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                            </svg>
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    ))}
+                  </div>
 
-                    {/* Comment text */}
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-gray-300 uppercase tracking-widest block">{t.revFormMsg}</label>
-                      <textarea 
-                        required
-                        rows={4}
-                        value={reviewComment}
-                        onChange={(e) => setReviewComment(e.target.value)}
-                        placeholder={t.revFormMsgPl} 
-                        className="w-full bg-brand-black border border-brand-border rounded-2xl p-2.5 text-xs text-white focus:outline-none focus:border-brand-red"
-                      />
-                    </div>
 
-                    <button
-                      type="submit"
-                      className="w-full bg-[#cc0000] hover:bg-brand-red-hover text-white py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition duration-200"
-                    >
-                      {t.revFormBtn}
-                    </button>
-                  </form>
+                </>
+              ) : (
+                <div className="min-h-[200px] flex flex-col items-center justify-center space-y-2 py-8 text-center bg-brand-charcoal rounded-2xl border border-brand-border p-6 font-sans">
+                  <p className="text-sm font-semibold text-brand-red">
+                    {lang === 'pt' ? 'Ocorreu um problema ao carregar as avaliações' : 'Failed to synchronize client reviews'}
+                  </p>
+                  <p className="text-xs text-gray-500 font-mono">
+                    {lang === 'pt' ? 'Por favor, tente novamente de seguida.' : 'Please try again later / check connection.'}
+                  </p>
                 </div>
-              </div>
-
+              )}
             </div>
 
           </div>

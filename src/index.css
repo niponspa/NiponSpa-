@@ -81,10 +81,10 @@ body {
    BLACK & WHITE (B&W) THEME OVERRIDES (WHITE BACKGROUND)
    ========================================== */
 .theme-bw {
-  /* Re-bind Tailwind CSS custom properties for light theme style */
-  --color-brand-black: #ffffff; /* Page Background becomes pure White */
-  --color-brand-charcoal: #f9f9fb; /* Section and Container Background become clean off-white */
-  --color-brand-gray: #f3f3f5; /* Subtle element backgrounds / inputs */
+  /* Re-bind Tailwind CSS custom properties for light theme style to match logo's #f7f7f7 background */
+  --color-brand-black: #f7f7f7; /* Page Background matches the Logo's authentic #f7f7f7 white background */
+  --color-brand-charcoal: #f0f0f2; /* Section and Container Background become clean off-white */
+  --color-brand-gray: #eaeaee; /* Subtle element backgrounds / inputs */
   --color-brand-border: rgba(0, 0, 0, 0.08); /* Sophisticated dark border line */
   
   --color-brand-red: #bc2626; /* Soft premium Japanese Urushi Red */
@@ -94,19 +94,19 @@ body {
   --color-brand-gold-pale: #c7a760;
 
   /* Global body text and background overrides for light presentation */
-  background-color: #ffffff !important;
+  background-color: #f7f7f7 !important;
   color: #1c1c1e !important;
 }
 
 /* Page backdrop adjustments */
 html:has(.theme-bw) {
-  background-color: #ffffff !important;
+  background-color: #f7f7f7 !important;
 }
 
 /* Ensure the scrollbar matches light theme aesthetics */
 .theme-bw::-webkit-scrollbar-track,
 html:has(.theme-bw)::-webkit-scrollbar-track {
-  background: #ffffff !important;
+  background: #f7f7f7 !important;
 }
 .theme-bw::-webkit-scrollbar-thumb,
 html:has(.theme-bw)::-webkit-scrollbar-thumb {
