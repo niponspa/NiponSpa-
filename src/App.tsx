@@ -1480,11 +1480,6 @@ export default function App() {
                   )}
                 </motion.h1>
 
-                {/* Centered Sub-headline phrase with Japanese Zen text */}
-                <p className="text-[10px] sm:text-[11px] font-bold text-brand-gold uppercase tracking-[0.22em] mb-5">
-                  一期一会 <span className="mx-2 text-[#cc0000]">•</span> {lang === 'pt' ? 'O Caminho da Paz Interior Japonesa' : 'The Way of Inner Japanese Peace'}
-                </p>
-
                 {/* Centered high quality description styled as a premium highly-readable subtitle */}
                 <p className="text-sm sm:text-base text-gray-300 font-sans max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
                   {lang === 'pt' ? (
