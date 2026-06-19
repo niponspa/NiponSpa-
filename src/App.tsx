@@ -1484,11 +1484,11 @@ export default function App() {
                 <p className="text-sm sm:text-base text-gray-300 font-sans max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
                   {lang === 'pt' ? (
                     <>
-                      Há mais de 22 anos, o <strong className="text-white font-semibold">Nipon Spa</strong> une tradição japonesa, atendimento <em className="font-serif italic text-brand-gold font-normal">Omotenashi</em> e protocolos personalizados para proporcionar uma experiência única de relaxamento e cuidado.
+                      Há mais de 22 anos ajudamos os nossos clientes a sentirem-se melhor através de terapias japonesas, tratamentos corporais e cuidados faciais personalizados.
                     </>
                   ) : (
                     <>
-                      For over 22 years, <strong className="text-white font-semibold">Nipon Spa</strong> has combined Japanese tradition, <em className="font-serif italic text-brand-gold font-normal">Omotenashi</em> hospitality, and personalized protocols to provide a unique relaxation and care experience.
+                      For over 22 years we have helped our clients feel better through Japanese therapies, body treatments, and personalized facial care.
                     </>
                   )}
                 </p>
