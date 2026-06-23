@@ -1457,25 +1457,25 @@ export default function App() {
                 >
                   {lang === 'pt' ? (
                     <>
-                      Bem-estar <motion.span 
+                      Há 22 anos a ajudar Lisboa a viver <motion.span 
                         className="text-[#cc0000] italic font-serif font-semibold lowercase tracking-normal inline-block"
                         variants={{
                           initial: { scale: 1 },
                           hover: { scale: 1.05, filter: "drop-shadow(0 0 15px rgba(204,0,0,0.5))" }
                         }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                      >japonês</motion.span> no coração de Lisboa
+                      >sem dores</motion.span> e sem tensão.
                     </>
                   ) : (
                     <>
-                      Japanese <motion.span 
+                      Helping Lisbon live <motion.span 
                         className="text-[#cc0000] italic font-serif font-semibold lowercase tracking-normal inline-block"
                         variants={{
                           initial: { scale: 1 },
                           hover: { scale: 1.05, filter: "drop-shadow(0 0 15px rgba(204,0,0,0.5))" }
                         }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                      >wellness</motion.span> in the heart of Lisbon
+                      >without pain</motion.span> and tension for 22 years.
                     </>
                   )}
                 </motion.h1>
@@ -1484,11 +1484,11 @@ export default function App() {
                 <p className="text-sm sm:text-base text-gray-300 font-sans max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
                   {lang === 'pt' ? (
                     <>
-                      Há mais de 22 anos ajudamos os nossos clientes a sentirem-se melhor através de terapias japonesas, tratamentos corporais e cuidados faciais personalizados.
+                      Terapias japonesas personalizadas para dores nas costas, tensão cervical, ombros rígidos, stress e cansaço acumulado.
                     </>
                   ) : (
                     <>
-                      For over 22 years we have helped our clients feel better through Japanese therapies, body treatments, and personalized facial care.
+                      Personalized Japanese therapies for back pain, neck tension, stiff shoulders, stress, and accumulated fatigue.
                     </>
                   )}
                 </p>
@@ -1697,18 +1697,7 @@ export default function App() {
                         {getTherapyDesc(therapy)}
                       </p>
 
-                      {therapy.id === 'facial-japones' && (
-                        <div className="bg-brand-red/5 border border-brand-red/25 rounded-2xl p-3 text-left my-2 space-y-1">
-                          <span className="text-[9px] text-[#cc0000] font-bold uppercase tracking-wider block">
-                            {lang === 'pt' ? '✕ Abordagem Suave & Natural' : '✕ Pure & Natural Approach'}
-                          </span>
-                          <p className="text-[10px] text-gray-300 font-sans leading-normal">
-                            {lang === 'pt'
-                              ? 'Não realizamos peelings químicos nem extração de cravos, privilegiando uma experiência purificante suave e não invasiva.'
-                              : 'We do not perform chemical peels or blackhead extractions, opting for a gentle, natural and non-invasive experience.'}
-                          </p>
-                        </div>
-                      )}
+
 
                       {/* Results list - SELLING THE RESULT */}
                       {therapy.results && (
@@ -1870,41 +1859,8 @@ export default function App() {
             </div>
 
 
-            {/* Category Filter Tabs (Same visual style as the active underlined tabs in the image) */}
-            <div className="flex flex-nowrap overflow-x-auto md:overflow-visible items-center justify-start md:justify-center gap-x-8 max-w-4xl mx-auto border-b border-brand-border/40 pb-0 scrollbar-none w-full px-2">
-              {[
-                { id: 'all', label: lang === 'pt' ? 'Todos os Tratamentos' : 'All Treatment Options' },
-                { id: 'personalized', label: lang === 'pt' ? 'Protocolos Personalizados' : 'Personalized Protocols' },
-                { id: 'relax-muscular', label: lang === 'pt' ? 'Dores & Músculos' : 'Muscle Pain & Relax' },
-                { id: 'body-aesthetic', label: lang === 'pt' ? 'Estética Corporal' : 'Body Aesthetics' },
-                { id: 'facial-aesthetic', label: lang === 'pt' ? 'Estética Facial' : 'Facial Aesthetics' },
-              ].map(cat => {
-                const isActive = selectedCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setSelectedCategory(cat.id)}
-                    className={`relative py-3 text-xs sm:text-[13px] font-medium tracking-wide transition duration-200 cursor-pointer shrink-0 ${
-                      isActive
-                        ? 'text-[#cc0000] font-bold'
-                        : 'text-gray-400 hover:text-white'
-                    }`}
-                  >
-                    <span>{cat.label}</span>
-                    {isActive && (
-                      <motion.span 
-                        layoutId="activeTreatmentCategory"
-                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#cc0000]"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
             {/* Grid display of therapies */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-10">
               {filteredTherapies.map(therapy => (
                 <div 
                   key={therapy.id}
@@ -1934,18 +1890,7 @@ export default function App() {
                       {getTherapyDesc(therapy)}
                     </p>
 
-                    {therapy.id === 'facial-japones' && (
-                      <div className="bg-brand-red/5 border border-brand-red/25 rounded-2xl p-3 text-left my-2 space-y-1">
-                        <span className="text-[9px] text-[#cc0000] font-bold uppercase tracking-wider block">
-                          {lang === 'pt' ? '✕ Abordagem Suave & Natural' : '✕ Pure & Natural Approach'}
-                        </span>
-                        <p className="text-[10px] text-gray-300 font-sans leading-normal">
-                          {lang === 'pt'
-                            ? 'Não realizamos peelings químicos nem extração de cravos, privilegiando uma experiência purificante suave e não invasiva.'
-                            : 'We do not perform chemical peels or blackhead extractions, opting for a gentle, natural and non-invasive experience.'}
-                        </p>
-                      </div>
-                    )}
+
 
                     {/* Results list - SELLING THE RESULT */}
                     {therapy.results && (
