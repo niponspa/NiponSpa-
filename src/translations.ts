@@ -196,7 +196,7 @@ export const TRANSLATIONS: Record<'pt' | 'en', TranslationSet> = {
     btnReschedule: "Reagendar",
     btnCancel: "Cancelar Sessão",
     cancelConfirmation: "Tem a certeza que deseja cancelar a marcação de forma permanente?",
-    rescheduleAlert: "Para reagendar a sua sessão com segurança, por favor contacte a nossa recepção de Lisboa diretamente através do número 21 715 7010.",
+    rescheduleAlert: "Para reagendar a sua sessão com segurança, por favor contacte a nossa recepção de Lisboa diretamente através do número 917 448 484.",
     paymentDetails: "Detalhes de Pagamento",
     minLabel: "min",
 
@@ -311,7 +311,7 @@ export const TRANSLATIONS: Record<'pt' | 'en', TranslationSet> = {
     btnReschedule: "Reschedule",
     btnCancel: "Cancel Session",
     cancelConfirmation: "Are you sure you want to permanently cancel this appointment?",
-    rescheduleAlert: "To securely reschedule your session, please contact our Lisbon reception directly at (+351) 21 715 7010.",
+    rescheduleAlert: "To securely reschedule your session, please contact our Lisbon reception directly at (+351) 917 448 484.",
     paymentDetails: "Payment Details",
     minLabel: "min",
 

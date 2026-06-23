@@ -1763,11 +1763,11 @@ export default function App() {
                     <p className="text-xs text-gray-400 leading-relaxed">
                       {lang === 'pt' ? (
                         <>
-                          Localizado numa das zonas mais tranquilas e de prestígio, com fácil parqueamento público ao redor, o Nipon Spa foi desenhado de raiz para isolar todo o som urbano.
+                          Localizado numa das zonas mais tranquilas e de prestígio, com fácil parqueamento público ao redor.
                         </>
                       ) : (
                         <>
-                          Located in one of the most peaceful and prestigious areas with convenient nearby parking, Nipon Spa was built from the ground up to completely isolate urban sound.
+                          Located in one of the most peaceful and prestigious areas with convenient nearby parking.
                         </>
                       )}
                     </p>
@@ -1794,7 +1794,7 @@ export default function App() {
                       </div>
                       <p className="flex items-center justify-center lg:justify-start space-x-2">
                         <Phone className="w-4 h-4 text-brand-red shrink-0" />
-                        <span>21 715 7010</span>
+                        <span>917 448 484</span>
                       </p>
                     </div>
                   </div>
@@ -3158,7 +3158,7 @@ export default function App() {
                     <Phone className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-white block font-heading mb-0.5">{lang === 'pt' ? 'Contacto Telefónico:' : 'Direct Telephone:'}</strong>
-                      <span className="text-gray-400 font-mono">+351 21 715 7010</span>
+                      <span className="text-gray-400 font-mono">+351 917 448 484</span>
                     </div>
                   </div>
 
@@ -4911,7 +4911,7 @@ export default function App() {
               <ul className="space-y-2.5 text-xs">
                 <li className="flex items-center space-x-2">
                   <Phone className="w-4 h-4 text-brand-red shrink-0" />
-                  <a href="tel:+351217157010" className="hover:text-white font-mono">21 715 7010</a>
+                  <a href="tel:+351917448484" className="hover:text-white font-mono">917 448 484</a>
                 </li>
                 <li className="flex items-center space-x-2">
                   <Mail className="w-4 h-4 text-brand-red shrink-0" />
