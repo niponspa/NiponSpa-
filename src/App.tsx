@@ -1653,9 +1653,6 @@ export default function App() {
             {/* Signature Treatments Section */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
               <div className="text-center max-w-2xl mx-auto space-y-3">
-                <span className="text-[#cc0000] font-mono font-bold text-xs uppercase tracking-[0.25em] block">
-                  {lang === 'pt' ? 'Rituais de Assinatura' : 'Signature Rituals'}
-                </span>
                 <h2 className="text-3xl md:text-4xl font-light text-white font-heading tracking-tight leading-tight">
                   {lang === 'pt' ? 'Protocolos Personalizados' : 'Personalized Protocols'}
                 </h2>
