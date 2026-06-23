@@ -1,0 +1,21 @@
+{
+  "short_name": "Nipon Spa",
+  "name": "Nipon Spa",
+  "description": "Experiência premium de spa com temática cultural japonesa tradicional em Lisboa.",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "display": "standalone"
+}
