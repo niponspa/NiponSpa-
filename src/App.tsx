@@ -43,7 +43,9 @@ import {
   TrendingUp,
   Video,
   Facebook,
-  Youtube
+  Youtube,
+  Flame,
+  Waves
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { THERAPIES, INITIAL_REVIEWS, generateAvailableSlots, generateMockReference } from './data';
@@ -452,6 +454,288 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
   );
 }
 
+export const FOCUS_AREAS = [
+  {
+    id: 'pain-relief',
+    icon: 'Flame',
+    titlePt: 'Tratamento para dores e tensões',
+    titleEn: 'Treatment for Pain & Tension',
+    descPt: 'Focado no alívio de dor nas costas, tensão cervical, ombros rígidos e cansaço físico acumulado através de acupressão profunda adaptada.',
+    descEn: 'Focused on relieving back pain, neck tension, stiff shoulders, and accumulated physical fatigue through customized deep acupressure.',
+    badgePt: 'Alívio & Recuperação',
+    badgeEn: 'Relief & Recovery',
+    levels: [
+      {
+        id: 'protocol-30',
+        namePt: 'Alívio Rápido',
+        nameEn: 'Quick Relief',
+        duration: 30,
+        price: 40,
+        descPt: 'Sessão express focada na descompressão rápida da sua zona de principal dor (costas, pescoço ou ombros). Alívio imediato da rigidez e desativação de pontos de gatilho agudos.',
+        descEn: 'Express session focused on rapid decompression of your main area of pain (back, neck, or shoulders). Immediate stiffness relief and acute trigger point deactivation.',
+        resultsPt: ['Costas leves e sem peso acumulado', 'Alívio instantâneo da rigidez no pescoço', 'Aumento imediato de vitalidade física'],
+        resultsEn: ['Light back free of heavy stiffness', 'Instant relief of neck tension', 'Immediate boost in physical vitality'],
+        benefitsPt: ['Atuação ultra-focada na zona de maior queixa', 'Desativação de pontos de gatilho de stress agudo'],
+        benefitsEn: ['Ultra-focused relief on your primary area of concern', 'Deactivation of acute stress trigger points']
+      },
+      {
+        id: 'protocol-60',
+        namePt: 'Equilíbrio Profundo',
+        nameEn: 'Deep Balance',
+        duration: 60,
+        price: 70,
+        descPt: 'Uma massagem completa adaptada às suas necessidades de alívio e bem-estar corporal. Combina acupressão oriental e fluidez muscular profunda para descompressão geral.',
+        descEn: 'A full massage tailored to your needs for relief and physical well-being. Blends Eastern acupressure and deep muscular flow for overall decompression.',
+        resultsPt: ['Relaxamento muscular e mental profundo', 'Descompressão de tensões generalizadas', 'Qualidade de sono incrivelmente restaurada'],
+        resultsEn: ['Deep physical and mental relaxation', 'Decompression of generalized body tension', 'Incredibly restored sleep quality'],
+        benefitsPt: ['Harmonia profunda entre o corpo e a mente', 'Realinhamento do fluxo de energia vital (Ki)'],
+        benefitsEn: ['Deep harmony between body and mind', 'Realigns the flow of vital energy (Ki)']
+      },
+      {
+        id: 'protocol-90',
+        namePt: 'Experiência Completa',
+        nameEn: 'Complete Experience',
+        duration: 90,
+        price: 90,
+        descPt: 'O auge do alívio terapêutico. Um ritual completo com massagem dos pés à cabeça e alongamento terapêutico profundo para uma renovação física total.',
+        descEn: 'The absolute pinnacle of therapeutic relief. A complete ritual with head-to-toe massage and deep therapeutic stretching for a total physical renewal.',
+        resultsPt: ['Sensação de renascer físico e espiritual absoluto', 'Alívio profundo e relaxamento muscular de tecidos moles', 'Desconexão total do stress quotidiano'],
+        resultsEn: ['Absolute physical and spiritual rebirth', 'Deep muscle relief and soft tissue relaxation', 'Complete disconnection from daily stress'],
+        benefitsPt: ['Massagem integrada de corpo inteiro, dos pés à cabeça', 'Tratamento premium focado no alívio geral e alongamento'],
+        benefitsEn: ['Integrated full-body massage from head to toe', 'Premium treatment focused on overall relief and stretching']
+      }
+    ]
+  },
+  {
+    id: 'body-reshaping',
+    icon: 'Waves',
+    titlePt: 'Tratamento para redução de medidas e inchaços',
+    titleEn: 'Treatment for Measurements & Swelling Reduction',
+    descPt: 'Protocolos de modelagem e drenagem manual suave para eliminar líquidos em excesso, diminuir o inchaço e redefinir contornos.',
+    descEn: 'Gentle manual drainage and contouring protocols to eliminate excess fluids, reduce bloating, and redefine contours.',
+    badgePt: 'Drenagem & Definição',
+    badgeEn: 'Drainage & Definition',
+    levels: [
+      {
+        id: 'protocol-30',
+        namePt: 'Alívio Rápido',
+        nameEn: 'Quick Relief',
+        duration: 30,
+        price: 40,
+        descPt: 'Drenagem express focada em desinchar e ativar a circulação na zona de maior retenção (ex: pernas ou abdómen). Perfeito para um alívio leve e imediato.',
+        descEn: 'Express drainage focused on reducing swelling and activating circulation in the area of greatest retention (e.g., legs or abdomen). Perfect for light, immediate relief.',
+        resultsPt: ['Desinchaço instantâneo de pernas ou abdómen', 'Sensação imediata de leveza e bem-estar', 'Ativação da microcirculação sanguínea'],
+        resultsEn: ['Instant reduction in leg or abdominal bloating', 'Immediate feeling of lightness and well-being', 'Activation of blood microcirculation'],
+        benefitsPt: ['Foco na área de maior retenção hídrica', 'Massagem de alta eficácia com toque express'],
+        benefitsEn: ['Focus on the area with the highest water retention', 'Highly effective express touch massage']
+      },
+      {
+        id: 'protocol-60',
+        namePt: 'Equilíbrio Profundo',
+        nameEn: 'Deep Balance',
+        duration: 60,
+        price: 70,
+        descPt: 'Protocolo completo de drenagem manual suave e modelagem corporal. Atua profundamente para eliminar líquidos acumulados, combater o inchaço e redefinir contornos.',
+        descEn: 'Full protocol of gentle manual drainage and body sculpting. Acts deeply to eliminate retained fluids, combat bloating, and redefine body contours.',
+        resultsPt: ['Redução visível de medidas, inchaço e gordura localizada', 'Melhoria no aspeto de casca de laranja e firmeza da pele', 'Eliminação acelerada de toxinas corporais'],
+        resultsEn: ['Visible reduction in measurements, bloating, and localized fat', 'Improvement in orange-peel skin appearance and firmness', 'Accelerated elimination of body toxins'],
+        benefitsPt: ['Drenagem linfática manual baseada em técnicas orientais', 'Remodelação corporal e combate à gordura localizada e celulite'],
+        benefitsEn: ['Manual lymphatic drainage based on Eastern techniques', 'Body contouring targeting localized fat and cellulite']
+      },
+      {
+        id: 'protocol-90',
+        namePt: 'Experiência Completa',
+        nameEn: 'Complete Experience',
+        duration: 90,
+        price: 90,
+        descPt: 'Tratamento de drenagem profunda e modelagem corporal integrada de 90 minutos. Atuação prolongada para máxima redução de inchaço e definição dos contornos corporais.',
+        descEn: '90-minute integrated deep drainage and body shaping treatment. Extended session for maximum reduction of bloating and body contour definition.',
+        resultsPt: ['Renovação corporal total com redução extrema do inchaço e medidas', 'Diminuição da gordura localizada e suavização do aspeto de casca de laranja', 'Luminosidade, desintoxicação dos tecidos e relaxamento profundo'],
+        resultsEn: ['Total body renewal with extreme bloating and measurement reduction', 'Reduction in localized fat and smoothing of the orange-peel appearance', 'Radiance, tissue detoxification, and deep relaxation'],
+        benefitsPt: ['Drenagem corporal profunda de alta definição', 'Atuação prolongada e intensiva no combate à gordura localizada e celulite'],
+        benefitsEn: ['Deep high-definition body drainage', 'Extended and intensive targeting of localized fat and cellulite reduction']
+      }
+    ]
+  },
+  {
+    id: 'facial-rejuvenation',
+    icon: 'Flower2',
+    titlePt: 'Tratamento Facial para Rejuvenescimento e hidratação profunda',
+    titleEn: 'Facial Treatment for Rejuvenation & Deep Hydration',
+    descPt: 'Rituais de massagem e nutrição celular baseados em segredos japoneses para devolver a luminosidade, firmeza e hidratação profunda à sua pele.',
+    descEn: 'Massage and cellular nourishment rituals based on Japanese secrets to restore radiance, firmness, and deep hydration to your skin.',
+    badgePt: 'Beleza & Revitalização',
+    badgeEn: 'Beauty & Revitalization',
+    levels: [
+      {
+        id: 'protocol-30',
+        namePt: 'Alívio Rápido',
+        nameEn: 'Quick Relief',
+        duration: 30,
+        price: 40,
+        descPt: 'Ritual facial expresso com massagem Kobido e nutrição celular rápida. Devolve o brilho natural e frescura à pele em apenas 30 minutos.',
+        descEn: 'Express facial ritual with Kobido massage and quick cellular nourishment. Restores natural glow and freshness to the skin in just 30 minutes.',
+        resultsPt: ['Luminosidade instantânea e aspeto descansado', 'Tonificação expressa dos músculos faciais', 'Hidratação rápida de camadas superficiais'],
+        resultsEn: ['Instant radiance and rested look', 'Express toning of facial muscles', 'Quick hydration of surface skin layers'],
+        benefitsPt: ['Massagem lifting Kobido simplificada', 'Nutrição rápida com extratos naturais orientais'],
+        benefitsEn: ['Simplified Kobido lifting massage', 'Quick nourishment with natural Eastern extracts']
+      },
+      {
+        id: 'protocol-60',
+        namePt: 'Equilíbrio Profundo',
+        nameEn: 'Deep Balance',
+        duration: 60,
+        price: 70,
+        descPt: 'Limpeza de pele Japonesa com ultra som, sem extração, sem peeling químico e sem agredir a pele.',
+        descEn: 'Japanese facial cleansing with ultrasound, without extraction, without chemical peeling, and without harming the skin.',
+        resultsPt: ['Pele profundamente limpa, desintoxicada e revigorada', 'Textura incrivelmente suave e aspeto purificado', 'Estímulo natural de renovação celular e firmeza'],
+        resultsEn: ['Deeply clean, detoxified, and refreshed skin', 'Incredibly smooth texture and purified appearance', 'Natural stimulation of cell renewal and firmness'],
+        benefitsPt: ['Limpeza ultrassónica e hidratação profunda da pele', 'Efeito de clareamento suave e um maravilhoso glow na pele'],
+        benefitsEn: ['Ultrasonic cleansing and deep skin hydration', 'Gentle brightening effect and a wonderful natural skin glow']
+      },
+      {
+        id: 'protocol-90',
+        namePt: 'Experiência Completa',
+        nameEn: 'Complete Experience',
+        duration: 90,
+        price: 90,
+        descPt: 'Limpeza de pele Japonesa com ultra som, máscara especial com ativos especiais e head massagem para um tratamento completo.',
+        descEn: 'Japanese facial cleansing with ultrasound, special active mask, and integrated head massage for a complete treatment.',
+        resultsPt: ['Limpeza ultrassónica profunda aliada a ativos de alta performance', 'Pele incrivelmente rejuvenescida, firme e super hidratada'],
+        resultsEn: ['Deep ultrasonic cleansing combined with high-performance active ingredients', 'Incredibly rejuvenated, firm, and deeply hydrated skin'],
+        benefitsPt: ['Tratamento ultrassónico completo com ativos especiais e regeneradores', 'Massagem de cabeça (Head Massage) relaxante e estimulante inclusa'],
+        benefitsEn: ['Complete ultrasonic treatment with special and regenerating active ingredients', 'Relaxing and stimulating head massage included']
+      }
+    ]
+  }
+];
+
+const STATIC_GOOGLE_REVIEWS = {
+  rating: 4.8,
+  totalReviews: 243,
+  link: "https://www.google.com/search?kgmid=/g/1tdq_z_w&hl=pt-PT&q=Nippon+Spa+em+Telheiras&shem=epsd1,ltae,rimspwouoe&shndl=30&source=sh/x/loc/osrp/m5/1&kgs=37813a7ec0896364&utm_source=epsd1,ltae,rimspwouoe,sh/x/loc/osrp/m5/1",
+  reviewsPt: [
+    {
+      author_name: "Margarete Lazaretti",
+      rating: 5,
+      text: "Uma grata experiência! Gostei muito das técnicas usadas. Saí mais leve e com menos rigidez na lombar! Obrigada!",
+      relative_time_description: "Há 3 meses",
+      profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80",
+      reply: {
+        author_name: "Nippon Spa em Telheiras (proprietário)",
+        text: "Agradecemos o relato que nos encheu de alegria 🙏✨",
+        relative_time_description: "Há 3 meses"
+      }
+    },
+    {
+      author_name: "Filipe Carvalho",
+      rating: 5,
+      text: "Uma experiência simplesmente incrível. Desde o primeiro momento senti um ambiente acolhedor e profissional. A massagem foi realizada com muita técnica, sensibilidade e atenção aos detalhes, conseguindo aliviar completamente a tensão do corpo e da mente. Saí renovado, leve e com uma sensação de bem-estar. Recomendo sem qualquer dúvida",
+      relative_time_description: "Há 5 meses",
+      profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80",
+      reply: {
+        author_name: "Nippon Spa em Telheiras (proprietário)",
+        text: "Muito obrigado pelas tuas palavras tão completas e generosas! É um enorme prazer saber que sentiste o ambiente acolhedor e profissional que tanto valorizamos no Nipon Spa Japonês Telheiras.\n\nCada massagem é feita com dedicação, técnica e atenção ao detalhe, por isso ficamos felizes por teres saído renovado e em equilíbrio. Esperamos voltar a cuidar de ti em breve. Recomendações como a tua significam muito para nós! 🙏✨",
+        relative_time_description: "Há 5 meses"
+      }
+    },
+    {
+      author_name: "Maria Rezende",
+      rating: 5,
+      text: "Foi a 1ª vez e fiquei fã. Entrei com imensas contraturas e dores, acabo de sair leve e sem dores. A Lourdes foi a minha terapeuta, parabéns, excelente trabalho 👏",
+      relative_time_description: "Há 5 meses",
+      reply: {
+        author_name: "Nippon Spa em Telheiras (proprietário)",
+        text: "Muito obrigado por partilhares a tua primeira experiência connosco! Saber que saíste do Nipon Spa Japonês Telheiras leve e sem dores deixa-nos mesmo felizes. A Lourdes vai adorar saber que fez a diferença no teu bem-estar. Parabéns a ti também por dares esse passo por ti. Até breve para mais momentos de alívio e relaxamento! 👏✨",
+        relative_time_description: "Há 5 meses"
+      }
+    },
+    {
+      author_name: "Lourenço De Castro",
+      rating: 5,
+      text: "Foi uma experiência muito positiva. Depois de ter experimentado já várias técnicas, foi bom saber que tenho uma alternativa nas minhas crises de coluna.",
+      relative_time_description: "Há 8 meses",
+      profile_photo_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80",
+      reply: {
+        author_name: "Nippon Spa em Telheiras (proprietário)",
+        text: "Obrigado pela tua partilha! Ficamos muito felizes por saber que encontraste no Nipon Spa Japonês Telheiras uma alternativa eficaz para aliviar as tuas crises de coluna. A nossa equipa dedica-se a oferecer terapias personalizadas com atenção e cuidado. Esperamos voltar a ajudar-te sempre que precisares! 🙏✨",
+        relative_time_description: "Há 8 meses"
+      }
+    },
+    {
+      author_name: "Ricardo Afonso",
+      rating: 5,
+      text: "Atendimento 5 estrelas, adorei! Cheguei com fortes dores no joelho esquerdo, estava com dificuldades de caminhar desde o natal e com muito inchaço. Saio do Nipon Terapias Japonesas sem dores e a caminhar normalmente. Recomendo a todos e agradeço a terapeuta Lourdes Souza. Tratamento excelente",
+      relative_time_description: "Há 4 meses",
+      reply: {
+        author_name: "Nippon Spa em Telheiras (proprietário)",
+        text: "Muito obrigado por partilhares a tua experiência. Saber que saíste do Nipon Spa Japonês Telheiras sem dores e a caminhar normalmente depois de tanto desconforto deixa-nos profundamente felizes.\n\nA Lourdes Souza agradece de coração o teu reconhecimento. Tratamentos como este mostram o poder das terapias japonesas quando são feitas com dedicação e conhecimento. Ficamos à tua espera sempre que precisares de cuidar de ti! 🙏✨",
+        relative_time_description: "Há 4 meses"
+      }
+    }
+  ],
+  reviewsEn: [
+    {
+      author_name: "Margarete Lazaretti",
+      rating: 5,
+      text: "A very pleasant experience! I really liked the techniques used. I left feeling lighter and with less stiffness in my lower back! Thank you!",
+      relative_time_description: "3 months ago",
+      profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80",
+      reply: {
+        author_name: "Nippon Spa em Telheiras (owner)",
+        text: "We thank you for the feedback that filled us with joy 🙏✨",
+        relative_time_description: "3 months ago"
+      }
+    },
+    {
+      author_name: "Filipe Carvalho",
+      rating: 5,
+      text: "A simply incredible experience. From the very first moment I felt a welcoming and professional atmosphere. The massage was performed with great technique, sensitivity, and attention to detail, managing to completely relieve the tension of body and mind. I left renewed, light, and with a sense of well-being. I recommend it without any doubt.",
+      relative_time_description: "5 months ago",
+      profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80",
+      reply: {
+        author_name: "Nippon Spa em Telheiras (owner)",
+        text: "Thank you very much for your complete and generous words! It is a huge pleasure to know that you felt the welcoming and professional environment we value so much at Nipon Spa Japonês Telheiras.\n\nEach massage is done with dedication, technique, and attention to detail, so we are happy you left feeling renewed and in balance. We hope to take care of you again soon. Recommendations like yours mean a lot to us! 🙏✨",
+        relative_time_description: "5 months ago"
+      }
+    },
+    {
+      author_name: "Maria Rezende",
+      rating: 5,
+      text: "It was my first time and I became a fan. I entered with a lot of contractures and pain, and I just left feeling light and pain-free. Lourdes was my therapist, congratulations, excellent work 👏",
+      relative_time_description: "5 months ago",
+      reply: {
+        author_name: "Nippon Spa em Telheiras (owner)",
+        text: "Thank you so much for sharing your first experience with us! Knowing that you left Nipon Spa Japonês Telheiras light and pain-free makes us truly happy. Lourdes will love to know she made a difference in your well-being. Congratulations to you as well for taking this step for yourself. See you soon for more moments of relief and relaxation! 👏✨",
+        relative_time_description: "5 months ago"
+      }
+    },
+    {
+      author_name: "Lourenço De Castro",
+      rating: 5,
+      text: "It was a very positive experience. After having tried several techniques, it was good to know that I have an alternative for my back pain crises.",
+      relative_time_description: "8 months ago",
+      profile_photo_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80",
+      reply: {
+        author_name: "Nippon Spa em Telheiras (owner)",
+        text: "Thank you for sharing! We are very happy to know that you found at Nipon Spa Japonês Telheiras an effective alternative to relieve your back pain crises. Our team is dedicated to offering personalized therapies with care and attention. We hope to help you again whenever you need! 🙏✨",
+        relative_time_description: "8 months ago"
+      }
+    },
+    {
+      author_name: "Ricardo Afonso",
+      rating: 5,
+      text: "5-star service, loved it! I arrived with severe pain in my left knee, had difficulties walking since Christmas and a lot of swelling. I leave Nipon Terapias Japonesas without pain and walking normally. I recommend it to everyone and thank therapist Lourdes Souza. Excellent treatment.",
+      relative_time_description: "4 months ago",
+      reply: {
+        author_name: "Nippon Spa em Telheiras (owner)",
+        text: "Thank you so much for sharing your experience. Knowing that you left Nipon Spa Japonês Telheiras without pain and walking normally after so much discomfort makes us deeply happy.\n\nLourdes Souza from the bottom of her heart thanks you for your recognition. Treatments like this show the power of Japanese therapies when done with dedication and knowledge. We look forward to seeing you whenever you need to take care of yourself! 🙏✨",
+        relative_time_description: "4 months ago"
+      }
+    }
+  ]
+};
+
 export default function App() {
   // Local states
   const [lang, setLang] = useState<'pt' | 'en'>('pt');
@@ -468,6 +752,11 @@ export default function App() {
     text: string;
     relative_time_description: string;
     profile_photo_url?: string;
+    reply?: {
+      author_name: string;
+      text: string;
+      relative_time_description: string;
+    };
   }
 
   interface GoogleReviewsData {
@@ -533,6 +822,17 @@ export default function App() {
   const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null);
   const [blogEmail, setBlogEmail] = useState<string>('');
   const [blogSubscribed, setBlogSubscribed] = useState<boolean>(false);
+
+  // Focus selection state for showing the 3 tailored levels with explanation and price
+  const [selectedFocusArea, setSelectedFocusArea] = useState<{
+    id: string;
+    titlePt: string;
+    titleEn: string;
+    descPt: string;
+    descEn: string;
+    badgePt: string;
+    badgeEn: string;
+  } | null>(null);
 
   // Notification notification bar
   const [isCopied, setIsCopied] = useState<boolean>(false);
@@ -863,77 +1163,123 @@ export default function App() {
     
     const fallbackReviews_pt = [
       {
-        author_name: "Mariana Silva",
+        author_name: "Margarete Lazaretti",
         rating: 5,
-        text: "Uma experiência absolutamente divina. Senti uma paz inexplicável e o atendimento Omotenashi é real e reconfortante.",
-        relative_time_description: "Há uma semana",
-        profile_photo_url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&q=80"
-      },
-      {
-        author_name: "João Pereira",
-        rating: 5,
-        text: "Massagem Shiatsu impecável. O terapeuta foi extremamente cuidadoso com as minhas dores nas costas e senti alívio imediato no final.",
-        relative_time_description: "Há 2 semanas",
-        profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80"
-      },
-      {
-        author_name: "Sofia Santos",
-        rating: 5,
-        text: "O ritual do chá matcha de encerramento é sublime e a sala aquecida com cheiro a yuzu transportou-me para Quioto.",
-        relative_time_description: "Há um mês",
-        profile_photo_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&q=80"
-      },
-      {
-        author_name: "Beatriz Costa",
-        rating: 5,
-        text: "O Zen Head Spa é simplesmente viciante! O tratamento com vapor, óleos quentes no cabelo e a reflexologia facial fizeram-me dormir a meio do serviço. Excelente oferta e o chá verde no final de porcelana é maravilhoso.",
-        relative_time_description: "Há 2 meses",
-        profile_photo_url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&q=80"
-      },
-      {
-        author_name: "Cláudia Vasconcelos",
-        rating: 5,
-        text: "Uma autêntica viagem ao Japão sem sair de Lisboa! O Ritual Sakura&Chá de Matcha deixou a minha pele divinal. O espaço cheira a madeira de Hinoki quente e a massagem foi divinal, com muita dedicação. Vou voltar no próximo mês.",
+        text: "Uma grata experiência! Gostei muito das técnicas usadas. Saí mais leve e com menos rigidez na lombar! Obrigada!",
         relative_time_description: "Há 3 meses",
-        profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80"
+        profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80",
+        reply: {
+          author_name: "Nippon Spa em Telheiras (proprietário)",
+          text: "Agradecemos o relato que nos encheu de alegria 🙏✨",
+          relative_time_description: "Há 3 meses"
+        }
+      },
+      {
+        author_name: "Filipe Carvalho",
+        rating: 5,
+        text: "Uma experiência simplesmente incrível. Desde o primeiro momento senti um ambiente acolhedor e profissional. A massagem foi realizada com muita técnica, sensibilidade e atenção aos detalhes, conseguindo aliviar completamente a tension de corpo e mente. Saí renovado, leve e com uma sensação de bem-estar. Recomendo sem qualquer dúvida",
+        relative_time_description: "Há 5 meses",
+        profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80",
+        reply: {
+          author_name: "Nippon Spa em Telheiras (proprietário)",
+          text: "Muito obrigado pelas tuas palavras tão completas e generosas! É um enorme prazer saber que sentiste o ambiente acolhedor e profissional que tanto valorizamos no Nipon Spa Japonês Telheiras.\n\nCada massagem é feita com dedicação, técnica e atenção ao detalhe, por isso ficamos felizes por teres saído renovado e em equilíbrio. Esperamos voltar a cuidar de ti em breve. Recomendações como a tua significam muito para nós! 🙏✨",
+          relative_time_description: "Há 5 meses"
+        }
+      },
+      {
+        author_name: "Maria Rezende",
+        rating: 5,
+        text: "Foi a 1ª vez e fiquei fã. Entrei com imensas contraturas e dores, acabo de sair leve e sem dores. A Lourdes foi a minha terapeuta, parabéns, excelente trabalho 👏",
+        relative_time_description: "Há 5 meses",
+        reply: {
+          author_name: "Nippon Spa em Telheiras (proprietário)",
+          text: "Muito obrigado por partilhares a tua primeira experiência connosco! Saber que saíste do Nipon Spa Japonês Telheiras leve e sem dores deixa-nos mesmo felizes. A Lourdes vai adorar saber que fez a diferença no teu bem-estar. Parabéns a ti também por dares esse passo por ti. Até breve para mais momentos de alívio e relaxamento! 👏✨",
+          relative_time_description: "Há 5 meses"
+        }
+      },
+      {
+        author_name: "Lourenço De Castro",
+        rating: 5,
+        text: "Foi uma experiência muito positiva. Depois de ter experimentado já várias técnicas, foi bom saber que tenho uma alternativa nas minhas crises de coluna.",
+        relative_time_description: "Há 8 meses",
+        profile_photo_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80",
+        reply: {
+          author_name: "Nippon Spa em Telheiras (proprietário)",
+          text: "Obrigado pela tua partilha! Ficamos muito felizes por saber que encontraste no Nipon Spa Japonês Telheiras uma alternativa eficaz para aliviar as tuas crises de coluna. A nossa equipa dedica-se a oferecer terapias personalizadas com atenção e cuidado. Esperamos voltar a ajudar-te sempre que precisares! 🙏✨",
+          relative_time_description: "Há 8 meses"
+        }
+      },
+      {
+        author_name: "Ricardo Afonso",
+        rating: 5,
+        text: "Atendimento 5 estrelas, adorei! Cheguei com fortes dores no joelho esquerdo, estava com dificuldades de caminhar desde o natal e com muito inchaço. Saio do Nipon Terapias Japonesas sem dores e a caminhar normalmente. Recomendo a todos e agradeço a terapeuta Lourdes Souza. Tratamento excelente",
+        relative_time_description: "Há 4 meses",
+        reply: {
+          author_name: "Nippon Spa em Telheiras (proprietário)",
+          text: "Muito obrigado por partilhares a tua experiência. Saber que saíste do Nipon Spa Japonês Telheiras sem dores e a caminhar normalmente depois de tanto desconforto deixa-nos profundamente felizes.\n\nA Lourdes Souza agradece de coração o teu reconhecimento. Tratamentos como este mostram o poder das terapias japonesas quando são feitas com dedicação e conhecimento. Ficamos à tua espera sempre que precisares de cuidar de ti! 🙏✨",
+          relative_time_description: "Há 4 meses"
+        }
       }
     ];
 
     const fallbackReviews_en = [
       {
-        author_name: "Mariana Silva",
+        author_name: "Margarete Lazaretti",
         rating: 5,
-        text: "An absolutely divine experience. I felt an inexplicable peace, and the Omotenashi service is real and comforting.",
-        relative_time_description: "A week ago",
-        profile_photo_url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&q=80"
-      },
-      {
-        author_name: "João Pereira",
-        rating: 5,
-        text: "Impeccable Shiatsu massage. The therapist was extremely careful with my back pain, and I felt immediate relief in the end.",
-        relative_time_description: "2 weeks ago",
-        profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80"
-      },
-      {
-        author_name: "Sofia Santos",
-        rating: 5,
-        text: "The closing matcha tea ritual is sublime, and the heated room smelling of yuzu transported me straight to Kyoto.",
-        relative_time_description: "A month ago",
-        profile_photo_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&q=80"
-      },
-      {
-        author_name: "Beatriz Costa",
-        rating: 5,
-        text: "The Zen Head Spa is simply addictive! The steam treatment, hot oils on hair and the facial reflexology made me fall asleep mid-service. Excellent service and the green tea at the end in porcelain is wonderful.",
-        relative_time_description: "2 months ago",
-        profile_photo_url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&q=80"
-      },
-      {
-        author_name: "Cláudia Vasconcelos",
-        rating: 5,
-        text: "An authentic journey to Japan without leaving Lisbon! The Ritual Sakura & Chá de Matcha left my skin divine. The space smells of warm Hinoki wood and the massage was divine, with a lot of dedication. I will return next month.",
+        text: "A very pleasant experience! I really liked the techniques used. I left feeling lighter and with less stiffness in my lower back! Thank you!",
         relative_time_description: "3 months ago",
-        profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80"
+        profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80",
+        reply: {
+          author_name: "Nippon Spa em Telheiras (owner)",
+          text: "We thank you for the feedback that filled us with joy 🙏✨",
+          relative_time_description: "3 months ago"
+        }
+      },
+      {
+        author_name: "Filipe Carvalho",
+        rating: 5,
+        text: "A simply incredible experience. From the very first moment I felt a welcoming and professional atmosphere. The massage was performed with great technique, sensitivity, and attention to detail, managing to completely relieve the tension of body and mind. I left renewed, light, and with a sense of well-being. I recommend it without any doubt.",
+        relative_time_description: "5 months ago",
+        profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80",
+        reply: {
+          author_name: "Nippon Spa em Telheiras (owner)",
+          text: "Thank you very much for your complete and generous words! It is a huge pleasure to know that you felt the welcoming and professional environment we value so much at Nipon Spa Japonês Telheiras.\n\nEach massage is done with dedication, technique, and attention to detail, so we are happy you left feeling renewed and in balance. We hope to take care of you again soon. Recommendations like yours mean a lot to us! 🙏✨",
+          relative_time_description: "5 months ago"
+        }
+      },
+      {
+        author_name: "Maria Rezende",
+        rating: 5,
+        text: "It was my first time and I became a fan. I entered with a lot of contractures and pain, and I just left feeling light and pain-free. Lourdes was my therapist, congratulations, excellent work 👏",
+        relative_time_description: "5 months ago",
+        reply: {
+          author_name: "Nippon Spa em Telheiras (owner)",
+          text: "Thank you so much for sharing your first experience with us! Knowing that you left Nipon Spa Japonês Telheiras light and pain-free makes us truly happy. Lourdes will love to know she made a difference in your well-being. Congratulations to you as well for taking this step for yourself. See you soon for more moments of relief and relaxation! 👏✨",
+          relative_time_description: "5 months ago"
+        }
+      },
+      {
+        author_name: "Lourenço De Castro",
+        rating: 5,
+        text: "It was a very positive experience. After having tried several techniques, it was good to know that I have an alternative for my back pain crises.",
+        relative_time_description: "8 months ago",
+        profile_photo_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80",
+        reply: {
+          author_name: "Nippon Spa em Telheiras (owner)",
+          text: "Thank you for sharing! We are very happy to know that you found at Nipon Spa Japonês Telheiras an effective alternative to relieve your back pain crises. Our team is dedicated to offering personalized therapies with care and attention. We hope to help you again whenever you need! 🙏✨",
+          relative_time_description: "8 months ago"
+        }
+      },
+      {
+        author_name: "Ricardo Afonso",
+        rating: 5,
+        text: "5-star service, loved it! I arrived with severe pain in my left knee, had difficulties walking since Christmas and a lot of swelling. I leave Nipon Terapias Japonesas without pain and walking normally. I recommend it to everyone and thank therapist Lourdes Souza. Excellent treatment.",
+        relative_time_description: "4 months ago",
+        reply: {
+          author_name: "Nippon Spa em Telheiras (owner)",
+          text: "Thank you so much for sharing your experience. Knowing that you left Nipon Spa Japonês Telheiras without pain and walking normally after so much discomfort makes us deeply happy.\n\nLourdes Souza from the bottom of her heart thanks you for your recognition. Treatments like this show the power of Japanese therapies when done with dedication and knowledge. We look forward to seeing you whenever you need to take care of yourself! 🙏✨",
+          relative_time_description: "4 months ago"
+        }
       }
     ];
 
@@ -1650,98 +1996,65 @@ export default function App() {
               </div>
             </section>
 
-            {/* Signature Treatments Section */}
+            {/* Focus of Treatment Section (Main Highlight) */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-              <div className="text-center max-w-2xl mx-auto space-y-3">
-                <h2 className="text-3xl md:text-4xl font-light text-white font-heading tracking-tight leading-tight">
-                  {lang === 'pt' ? 'Protocolos Personalizados' : 'Personalized Protocols'}
-                </h2>
-                <div className="w-12 h-[1px] bg-brand-red/50 mx-auto"></div>
-                <p className="text-xs sm:text-sm text-gray-400 font-sans leading-relaxed">
+              <div className="text-center max-w-xl mx-auto space-y-3">
+                <span className="text-[#cc0000] font-mono font-bold text-[10px] uppercase tracking-widest block">
+                  {lang === 'pt' ? 'Programas Focados em Resultados' : 'Result-Focused Programs'}
+                </span>
+                <h3 className="text-3xl md:text-4xl font-light text-white font-heading tracking-tight leading-tight">
+                  {lang === 'pt' ? 'Selecione o Seu Foco de Tratamento' : 'Select Your Treatment Focus'}
+                </h3>
+                <div className="w-12 h-[1px] bg-[#cc0000]/50 mx-auto"></div>
+                <p className="text-xs text-gray-400 font-sans leading-relaxed">
                   {lang === 'pt' 
-                    ? 'Terapias manuais profundas e rituais tradicionais rigorosamente sintonizados com o seu corpo e mente. Escolha a sua duração ideal:'
-                    : 'Deep manual therapies and traditional rituals rigorously tuned to your body and mind. Choose your ideal duration:'}
+                    ? 'Cada sessão é totalmente personalizada para o seu objetivo principal de hoje. Escolha uma das opções abaixo para ver as durações, explicações e valores:'
+                    : 'Each session is fully customized to your primary objective of the day. Choose one of the options below to see durations, explanations, and prices:'}
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
-                {THERAPIES.map(therapy => (
-                  <div 
-                    key={therapy.id}
-                    className="bg-white/[0.04] p-6 border border-brand-border rounded-3xl hover:border-[#cc0000] transition-all duration-300 relative group overflow-hidden flex flex-col justify-between text-left"
-                  >
-                    {/* Backdrop subtle Kanji style stamp behind each therapy card */}
-                    <div className="absolute right-4 top-4 opacity-[0.02] group-hover:opacity-[0.05] duration-500 pointer-events-none select-none font-medium text-4xl text-white font-mono">
-                      {therapy.japaneseName}
-                    </div>
-
-                    <div className="space-y-4">
-                      {/* Title and Japanese Badge */}
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <span className="text-[9px] font-mono tracking-widest text-brand-gold uppercase block">{therapy.japaneseName}</span>
-                          <h3 className="font-heading font-light text-lg text-white mt-1 group-hover:text-brand-red transition duration-200">
-                            {getTherapyName(therapy)}
-                          </h3>
-                        </div>
-                        
-                        <span className="bg-white/5 border border-brand-border text-brand-red text-[10px] px-2.5 py-0.5 rounded-full font-mono tracking-wide">
-                          {therapy.duration}min
-                        </span>
-                      </div>
-
-                      <p className="text-xs text-gray-400 leading-relaxed min-h-[72px]">
-                        {getTherapyDesc(therapy)}
-                      </p>
-
-
-
-                      {/* Results list - SELLING THE RESULT */}
-                      {therapy.results && (
-                        <div className="space-y-1.5 pt-3 border-t border-brand-border/40">
-                          <p className="text-[9px] font-bold text-[#cc0000] uppercase tracking-widest">
-                            {lang === 'pt' ? 'Resultados Esperados' : 'Expected Outcomes'}
-                          </p>
-                          {(lang === 'pt' ? therapy.results : (therapy.resultsEn || therapy.results)).map((result, i) => (
-                            <div key={i} className="flex items-center space-x-2">
-                              <span className="text-[#cc0000] text-xs font-bold">✓</span>
-                              <span className="text-[11px] text-gray-300 font-sans">{result}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Benefit list */}
-                      <div className="space-y-1.5 pt-3 border-t border-brand-border/40">
-                        <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
-                          {lang === 'pt' ? 'Benefícios Terapêuticos' : 'Therapeutic Benefits'}
-                        </p>
-                        {getTherapyBenefits(therapy).map((benefit, i) => (
-                          <div key={i} className="flex items-center space-x-2">
-                            <span className="text-gray-500 text-xs">—</span>
-                            <span className="text-[11px] text-gray-400 font-sans">{benefit}</span>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pt-4">
+                {FOCUS_AREAS.map(opt => {
+                  const IconComponent = opt.icon === 'Flame' ? Flame : opt.icon === 'Waves' ? Waves : Flower2;
+                  return (
+                    <div 
+                      key={opt.id}
+                      className="bg-white/[0.02] border border-brand-border/60 hover:border-[#cc0000]/60 p-6 rounded-3xl hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between group text-left relative"
+                    >
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                          <div className="p-2.5 bg-white/[0.04] border border-brand-border/40 rounded-2xl group-hover:scale-110 transition duration-300">
+                            <IconComponent className={`w-5 h-5 ${opt.icon === 'Waves' ? 'text-brand-gold' : 'text-[#cc0000]'}`} />
                           </div>
-                        ))}
+                          <span className="text-[9px] font-mono tracking-wider text-gray-400 bg-white/5 px-2.5 py-1 rounded-full">
+                            {lang === 'pt' ? opt.badgePt : opt.badgeEn}
+                          </span>
+                        </div>
+
+                        <div className="space-y-2">
+                          <h4 className="text-sm font-semibold text-white group-hover:text-[#cc0000] transition duration-200 leading-snug">
+                            {lang === 'pt' ? opt.titlePt : opt.titleEn}
+                          </h4>
+                          <p className="text-[11px] text-gray-400 leading-relaxed">
+                            {lang === 'pt' ? opt.descPt : opt.descEn}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="pt-6 mt-6 border-t border-brand-border/30 flex justify-end">
+                        <button
+                          onClick={() => {
+                            setSelectedFocusArea(opt);
+                          }}
+                          className="text-[10px] text-brand-red font-bold uppercase tracking-widest flex items-center space-x-1.5 hover:text-white transition duration-200 cursor-pointer"
+                        >
+                          <span>{lang === 'pt' ? 'Selecionar' : 'Select'}</span>
+                          <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition duration-200" />
+                        </button>
                       </div>
                     </div>
-
-                    {/* Pricing and Agendar CTA */}
-                    <div className="pt-6 mt-6 border-t border-brand-border/40 flex items-center justify-between">
-                      <div>
-                        <span className="text-[9px] uppercase text-gray-500 block font-mono">{lang === 'pt' ? 'Investimento' : 'Investment'}</span>
-                        <span className="text-lg font-bold text-white font-sans">{therapy.price}€</span>
-                      </div>
-
-                      <button
-                        onClick={() => handleOpenBooking(therapy)}
-                        className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 flex items-center space-x-1.5 cursor-pointer"
-                      >
-                        <CalendarIcon className="w-3.5 h-3.5" />
-                        <span>{lang === 'pt' ? 'Agendar' : 'Book'}</span>
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </section>
 
@@ -1841,108 +2154,63 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-12" id="catalog-element">
             
             {/* Catalog Introduction */}
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#cc0000] mb-2 block">
+            <div className="text-center max-w-2xl mx-auto space-y-3">
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#cc0000] mb-2 block font-mono">
                 {lang === 'pt' ? 'O Cuidado de Excelência em Lisboa' : 'Excellence of Traditional Care in Lisbon'}
               </span>
-              <h1 className="text-3xl sm:text-4xl font-light text-white font-heading">
-                {lang === 'pt' ? 'Tratamentos & Protocolos de Resultados' : 'Result-Driven Japanese Treatments'}
+              <h1 className="text-3xl sm:text-4xl font-light text-white font-heading tracking-tight leading-tight">
+                {lang === 'pt' ? 'Tratamentos & Programas de Resultados' : 'Result-Driven Japanese Treatments'}
               </h1>
-              <p className="text-xs text-gray-400 mt-3 max-w-lg mx-auto leading-relaxed">
+              <p className="text-xs text-gray-400 max-w-lg mx-auto leading-relaxed">
                 {lang === 'pt' 
-                  ? 'No Nipon Spa, cada ritual é desenhado para reequilibrar o seu corpo e mente, vendendo resultados tangíveis para a sua saúde e beleza ancestral.' 
-                  : 'At Nipon Spa, each ritual is crafted to realign body and mind, delivering outstanding traditional care in Lisbon.'}
+                  ? 'No Nipon Spa, cada ritual é desenhado para reequilibrar o seu corpo e mente. Selecione o seu foco principal abaixo para conhecer as opções disponíveis:' 
+                  : 'At Nipon Spa, each ritual is crafted to realign body and mind. Select your primary focus below to learn about available options:'}
               </p>
             </div>
 
-
-            {/* Grid display of therapies */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-10">
-              {filteredTherapies.map(therapy => (
-                <div 
-                  key={therapy.id}
-                  className="bg-white/[0.04] p-6 border border-brand-border rounded-3xl hover:border-[#cc0000] transition-all duration-300 relative group overflow-hidden flex flex-col justify-between"
-                >
-                  {/* Backdrop subtle Kanji style stamp behind each therapy card */}
-                  <div className="absolute right-4 top-4 opacity-[0.02] group-hover:opacity-[0.05] duration-500 pointer-events-none select-none font-medium text-4xl text-white font-mono">
-                    {therapy.japaneseName}
-                  </div>
-
-                  <div className="space-y-4">
-                    {/* Title and Japanese Badge */}
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <span className="text-[9px] font-mono tracking-widest text-brand-gold uppercase block">{therapy.japaneseName}</span>
-                        <h3 className="font-heading font-light text-lg text-white mt-1 group-hover:text-brand-red transition duration-200">
-                          {getTherapyName(therapy)}
-                        </h3>
-                      </div>
-                      
-                      <span className="bg-white/5 border border-brand-border text-brand-red text-[10px] px-2.5 py-0.5 rounded-full font-mono tracking-wide">
-                        {therapy.duration}min
-                      </span>
-                    </div>
-
-                    <p className="text-xs text-gray-400 leading-relaxed min-h-[72px]">
-                      {getTherapyDesc(therapy)}
-                    </p>
-
-
-
-                    {/* Results list - SELLING THE RESULT */}
-                    {therapy.results && (
-                      <div className="space-y-1.5 pt-3 border-t border-brand-border/40">
-                        <p className="text-[9px] font-bold text-[#cc0000] uppercase tracking-widest">
-                          {lang === 'pt' ? 'Resultados Esperados' : 'Expected Outcomes'}
-                        </p>
-                        {(lang === 'pt' ? therapy.results : (therapy.resultsEn || therapy.results)).map((result, i) => (
-                          <div key={i} className="flex items-center space-x-2">
-                            <span className="text-[#cc0000] text-xs font-bold">✓</span>
-                            <span className="text-[11px] text-gray-300 font-sans">{result}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Benefit list */}
-                    <div className="space-y-1.5 pt-3 border-t border-brand-border/40">
-                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
-                        {lang === 'pt' ? 'Benefícios Terapêuticos' : 'Therapeutic Benefits'}
-                      </p>
-                      {getTherapyBenefits(therapy).map((benefit, i) => (
-                        <div key={i} className="flex items-center space-x-2">
-                          <span className="text-gray-500 text-xs">—</span>
-                          <span className="text-[11px] text-gray-400 font-sans">{benefit}</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pt-4 pb-12">
+              {FOCUS_AREAS.map(opt => {
+                const IconComponent = opt.icon === 'Flame' ? Flame : opt.icon === 'Waves' ? Waves : Flower2;
+                return (
+                  <div 
+                    key={opt.id}
+                    className="bg-white/[0.02] border border-brand-border/60 hover:border-[#cc0000]/60 p-6 rounded-3xl hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between group text-left relative"
+                  >
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <div className="p-2.5 bg-white/[0.04] border border-brand-border/40 rounded-2xl group-hover:scale-110 transition duration-300">
+                          <IconComponent className={`w-5 h-5 ${opt.icon === 'Waves' ? 'text-brand-gold' : 'text-[#cc0000]'}`} />
                         </div>
-                      ))}
+                        <span className="text-[9px] font-mono tracking-wider text-gray-400 bg-white/5 px-2.5 py-1 rounded-full">
+                          {lang === 'pt' ? opt.badgePt : opt.badgeEn}
+                        </span>
+                      </div>
+
+                      <div className="space-y-2">
+                        <h4 className="text-sm font-semibold text-white group-hover:text-[#cc0000] transition duration-200 leading-snug">
+                          {lang === 'pt' ? opt.titlePt : opt.titleEn}
+                        </h4>
+                        <p className="text-[11px] text-gray-400 leading-relaxed">
+                          {lang === 'pt' ? opt.descPt : opt.descEn}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="pt-6 mt-6 border-t border-brand-border/30 flex justify-end">
+                      <button
+                        onClick={() => {
+                          setSelectedFocusArea(opt);
+                        }}
+                        className="text-[10px] text-brand-red font-bold uppercase tracking-widest flex items-center space-x-1.5 hover:text-white transition duration-200 cursor-pointer"
+                      >
+                        <span>{lang === 'pt' ? 'Selecionar' : 'Select'}</span>
+                        <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition duration-200" />
+                      </button>
                     </div>
                   </div>
-
-                  {/* Pricing and Agendar CTA */}
-                  <div className="pt-6 mt-6 border-t border-brand-border/40 flex items-center justify-between">
-                    <div>
-                      <span className="text-[9px] uppercase text-gray-500 block font-mono">{lang === 'pt' ? 'Investimento' : 'Investment'}</span>
-                      <span className="text-lg font-bold text-white font-sans">{therapy.price}€</span>
-                    </div>
-
-                    <button
-                      onClick={() => handleOpenBooking(therapy)}
-                      className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 flex items-center space-x-1.5"
-                    >
-                      <CalendarIcon className="w-3.5 h-3.5" />
-                      <span>{lang === 'pt' ? 'Agendar' : 'Book'}</span>
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
-
-            {/* Quick custom alert badge if empty */}
-            {filteredTherapies.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-gray-400">{lang === 'pt' ? 'Nenhum tratamento tradicional encontrado nesta categoria.' : 'No traditional treatments found in this category.'}</p>
-              </div>
-            )}
           </div>
         )}
 
@@ -2887,9 +3155,7 @@ export default function App() {
                   {lang === 'pt' ? 'Testemunhos' : 'Testimonials'}
                 </span>
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-heading leading-tight">
-                  {lang === 'pt' 
-                    ? 'Descubra porque milhares de clientes confiam no Nipon Spa há mais de duas décadas.' 
-                    : 'Discover why thousands of clients have trusted Nipon Spa for over two decades.'}
+                  {lang === 'pt' ? 'O que dizem os nossos clientes' : 'What our clients say'}
                 </h1>
                 <p className="text-xs text-gray-400 leading-relaxed font-sans">
                   {lang === 'pt'
@@ -2906,167 +3172,150 @@ export default function App() {
                 和 de 心
               </div>
               
-              {googleReviewsLoading ? (
-                <div className="min-h-[250px] flex flex-col items-center justify-center space-y-4 py-12">
-                  <div className="w-10 h-10 rounded-full border-2 border-brand-border border-t-brand-red animate-spin"></div>
-                  <p className="text-xs text-gray-400 font-mono animate-pulse uppercase tracking-widest">
-                    {lang === 'pt' ? 'A harmonizar avaliações reais do Google...' : 'Synchronizing authentic Google reviews...'}
-                  </p>
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pb-6 border-b border-brand-border/60 relative z-10 font-sans">
+                <div className="space-y-3">
+                  <div className="inline-flex items-center space-x-2 bg-brand-charcoal/60 px-3 py-1.5 rounded-full border border-brand-border">
+                    <svg className="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                    </svg>
+                    <span className="text-[10px] font-mono font-bold text-brand-gold uppercase tracking-widest leading-none">
+                      Nipon Spa Telheiras — Google Places
+                    </span>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:space-x-4">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-4xl md:text-5xl font-black text-white tracking-tighter">
+                        4,8
+                      </span>
+                      <div className="space-y-1">
+                        <div className="flex text-brand-gold">
+                          {Array.from({ length: 5 }).map((_, s) => {
+                            const starValue = s + 1;
+                            const isFull = starValue <= 4;
+                            const isHalf = starValue === 5;
+                            return (
+                              <div key={s} className="relative w-4 h-4">
+                                <Star className="w-4 h-4 text-gray-600 stroke-none opacity-30" />
+                                {isFull && (
+                                  <Star className="absolute top-0 left-0 w-4 h-4 fill-brand-gold stroke-brand-gold" />
+                                )}
+                                {isHalf && (
+                                  <div className="absolute top-0 left-0 w-[80%] h-full overflow-hidden">
+                                    <Star className="w-4 h-4 fill-brand-gold stroke-brand-gold" />
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <p className="text-[10px] font-mono text-gray-500 uppercase tracking-wider font-bold leading-none">
+                          {lang === 'pt' ? '4,8/5 no Google' : '4.8/5 on Google'}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <span className="text-xs text-gray-400 mt-1 sm:mt-0 font-light">
+                      {lang === 'pt' ? 'Com base em 243 opiniões' : 'Based on 243 reviews'}
+                    </span>
+                  </div>
                 </div>
-              ) : googleReviews ? (
-                <>
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pb-6 border-b border-brand-border/60 relative z-10 font-sans">
-                    <div className="space-y-3">
-                      <div className="inline-flex items-center space-x-2 bg-brand-charcoal/60 px-3 py-1.5 rounded-full border border-brand-border animate-fade-in">
-                        <svg className="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href={STATIC_GOOGLE_REVIEWS.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center space-x-2 bg-brand-charcoal/40 hover:bg-brand-charcoal border border-brand-border text-white px-5 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition duration-200"
+                  >
+                    <span>{lang === 'pt' ? 'Ver avaliações no Google' : 'View Reviews on Google'}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-gray-400" />
+                  </a>
+
+                  <a
+                    href={STATIC_GOOGLE_REVIEWS.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center space-x-2 bg-brand-red hover:bg-[#cc0000] text-white px-5 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-sm hover:shadow duration-200"
+                  >
+                    <Star className="w-3.5 h-3.5 text-white fill-white" />
+                    <span>{lang === 'pt' ? 'Deixar Avaliação' : 'Leave a Review'}</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Up to 5 Review Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10 font-sans">
+                {(lang === 'pt' ? STATIC_GOOGLE_REVIEWS.reviewsPt : STATIC_GOOGLE_REVIEWS.reviewsEn).map((crit, idx) => (
+                  <div 
+                    key={idx}
+                    className="bg-brand-charcoal/60 border border-brand-border/80 rounded-2xl p-6 flex flex-col justify-between hover:border-brand-border transition duration-350 relative group"
+                  >
+                    <div className="space-y-4">
+                      {/* Name, Avatar & Stars row */}
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 rounded-full bg-brand-black border border-brand-border flex items-center justify-center text-brand-gold font-bold text-xs uppercase font-mono shadow-inner shrink-0">
+                            {crit.author_name.charAt(0)}
+                          </div>
+                          <div>
+                            <h4 className="font-heading font-extrabold text-white text-xs leading-tight">{crit.author_name}</h4>
+                            <p className="text-[10px] text-gray-500 mt-0.5 leading-none">{crit.relative_time_description}</p>
+                          </div>
+                        </div>
+                        <div className="flex text-brand-gold space-x-0.5 mt-0.5">
+                          {Array.from({ length: 5 }).map((_, s) => (
+                            <Star 
+                              key={s} 
+                              className={`w-3 h-3 ${s < crit.rating ? 'fill-brand-gold stroke-brand-gold' : 'text-gray-700 stroke-transparent'}`} 
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      <p className="text-xs text-gray-300 leading-relaxed font-sans font-light italic">
+                        "{crit.text}"
+                      </p>
+
+                      {crit.reply && (
+                        <div className="mt-4 p-3.5 bg-brand-black/40 rounded-xl border-l-2 border-brand-gold/70 space-y-1.5 text-left font-sans">
+                          <div className="flex items-baseline justify-between gap-2">
+                            <span className="text-[10px] font-bold text-brand-gold uppercase tracking-wider">
+                              {crit.reply.author_name}
+                            </span>
+                            <span className="text-[9px] text-gray-500 font-mono shrink-0">
+                              {crit.reply.relative_time_description}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-gray-400 leading-relaxed italic font-light whitespace-pre-line">
+                            "{crit.reply.text}"
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Google G watermark / Verification badge */}
+                    <div className="flex items-center justify-between border-t border-brand-border/40 pt-3.5 mt-4 font-sans">
+                      <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest font-bold flex items-center space-x-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                        <span>{lang === 'pt' ? 'Avaliação Verificada' : 'Verified Review'}</span>
+                      </span>
+                      
+                      <span className="opacity-30 group-hover:opacity-80 transition duration-200">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                           <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
                           <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
                           <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
                         </svg>
-                        <span className="text-[10px] font-mono font-bold text-brand-gold uppercase tracking-widest leading-none">
-                          {googleReviews.name} — Google Places
-                        </span>
-                      </div>
-                      
-                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:space-x-4">
-                        <div className="flex items-center space-x-2">
-                          <span className="text-4xl md:text-5xl font-black text-white tracking-tighter">
-                            {googleReviews.rating ? googleReviews.rating.toFixed(1) : "4.8"}
-                          </span>
-                          <div className="space-y-1">
-                            <div className="flex text-brand-gold">
-                              {Array.from({ length: 5 }).map((_, s) => {
-                                const starValue = s + 1;
-                                const isFull = starValue <= Math.floor(googleReviews.rating || 4.8);
-                                const isHalf = !isFull && starValue <= Math.ceil(googleReviews.rating || 4.8) && (googleReviews.rating || 4.8) % 1 >= 0.3;
-                                return (
-                                  <div key={s} className="relative w-4 h-4">
-                                    <Star className={`w-4 h-4 text-gray-600 stroke-none ${!isFull && !isHalf ? 'opacity-30' : ''}`} />
-                                    {isFull && (
-                                      <Star className="absolute top-0 left-0 w-4 h-4 fill-brand-gold stroke-brand-gold" />
-                                    )}
-                                    {isHalf && (
-                                      <div className="absolute top-0 left-0 w-[50%] h-full overflow-hidden">
-                                        <Star className="w-4 h-4 fill-brand-gold stroke-brand-gold" />
-                                      </div>
-                                    )}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                            <p className="text-[10px] font-mono text-gray-500 uppercase tracking-wider font-bold leading-none">
-                              {lang === 'pt' ? 'Confiabilidade Máxima' : 'Maximum Trust'}
-                            </p>
-                          </div>
-                        </div>
-                        
-                        <span className="text-xs text-gray-400 mt-1 sm:mt-0">
-                          {lang === 'pt' 
-                            ? `baseado em ${googleReviews.user_ratings_total || 243} avaliações reais no Google` 
-                            : `based on ${googleReviews.user_ratings_total || 243} real ratings on Google`}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <a
-                        href="https://share.google/bERKRU7YGy4XgjDSo"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center space-x-2 bg-brand-charcoal/40 hover:bg-brand-charcoal border border-brand-border text-white px-5 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition duration-200"
-                      >
-                        <span>{lang === 'pt' ? 'Ver avaliações no Google' : 'View Reviews on Google'}</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-gray-400" />
-                      </a>
-
-                      <a
-                        href="https://share.google/bERKRU7YGy4XgjDSo"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center space-x-2 bg-brand-red hover:bg-[#cc0000] text-white px-5 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-sm hover:shadow duration-200"
-                      >
-                        <Star className="w-3.5 h-3.5 text-white fill-white" />
-                        <span>{lang === 'pt' ? 'Deixar Avaliação' : 'Leave a Review'}</span>
-                      </a>
+                      </span>
                     </div>
                   </div>
-
-                  {/* Up to 5 Review Cards Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10 font-sans">
-                    {googleReviews.reviews.map((crit, idx) => (
-                      <div 
-                        key={idx}
-                        className="bg-brand-charcoal/60 border border-brand-border/80 rounded-2xl p-6 flex flex-col justify-between hover:border-brand-border transition duration-350 relative group"
-                      >
-                        <div className="space-y-4">
-                          {/* Name, Avatar & Stars row */}
-                          <div className="flex items-start justify-between">
-                            <div className="flex items-center space-x-3">
-                              {crit.profile_photo_url ? (
-                                <img 
-                                  src={crit.profile_photo_url} 
-                                  referrerPolicy="no-referrer"
-                                  className="w-10 h-10 rounded-full border border-brand-border object-cover" 
-                                  alt={crit.author_name} 
-                                />
-                              ) : (
-                                <div className="w-10 h-10 rounded-full bg-brand-black border border-brand-border flex items-center justify-center text-brand-gold font-bold text-xs uppercase font-mono">
-                                  {crit.author_name.charAt(0)}
-                                </div>
-                              )}
-                              <div>
-                                <h4 className="font-heading font-extrabold text-white text-xs leading-tight">{crit.author_name}</h4>
-                                <p className="text-[10px] text-gray-500 mt-0.5 leading-none">{crit.relative_time_description}</p>
-                              </div>
-                            </div>
-                            <div className="flex text-brand-gold space-x-0.5 mt-0.5">
-                              {Array.from({ length: 5 }).map((_, s) => (
-                                <Star 
-                                  key={s} 
-                                  className={`w-3 h-3 ${s < crit.rating ? 'fill-brand-gold stroke-brand-gold' : 'text-gray-700 stroke-transparent'}`} 
-                                />
-                              ))}
-                            </div>
-                          </div>
-
-                          <p className="text-xs text-gray-300 leading-relaxed font-sans font-light italic">
-                            "{crit.text}"
-                          </p>
-                        </div>
-
-                        {/* Google G watermark / Verification badge */}
-                        <div className="flex items-center justify-between border-t border-brand-border/40 pt-3.5 mt-4 font-sans">
-                          <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest font-bold flex items-center space-x-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                            <span>{lang === 'pt' ? 'Avaliação Verificada' : 'Verified Review'}</span>
-                          </span>
-                          
-                          <span className="opacity-30 group-hover:opacity-80 transition duration-200">
-                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
-                              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
-                            </svg>
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-
-                </>
-              ) : (
-                <div className="min-h-[200px] flex flex-col items-center justify-center space-y-2 py-8 text-center bg-brand-charcoal rounded-2xl border border-brand-border p-6 font-sans">
-                  <p className="text-sm font-semibold text-brand-red">
-                    {lang === 'pt' ? 'Ocorreu um problema ao carregar as avaliações' : 'Failed to synchronize client reviews'}
-                  </p>
-                  <p className="text-xs text-gray-500 font-mono">
-                    {lang === 'pt' ? 'Por favor, tente novamente de seguida.' : 'Please try again later / check connection.'}
-                  </p>
-                </div>
-              )}
+                ))}
+              </div>
             </div>
 
           </div>
@@ -4204,6 +4453,140 @@ export default function App() {
         )}
 
       </main>
+
+      {/* Focus Treatment Detail Selector Modal */}
+      <AnimatePresence>
+        {selectedFocusArea && (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="bg-white border border-gray-200 rounded-3xl max-w-4xl w-full my-8 overflow-hidden flex flex-col shadow-2xl relative text-gray-900"
+            >
+              {/* Modal Header */}
+              <div className="bg-gray-50 p-6 md:p-8 border-b border-gray-200 flex items-center justify-between">
+                <div>
+                  <div className="flex items-center space-x-2 text-[10px] text-[#cc0000] font-mono uppercase tracking-[0.25em] mb-1 font-bold">
+                    <span>{lang === 'pt' ? 'Foco do Tratamento' : 'Treatment Focus'}</span>
+                    <span>•</span>
+                    <span>{lang === 'pt' ? selectedFocusArea.badgePt : selectedFocusArea.badgeEn}</span>
+                  </div>
+                  <h2 className="text-xl md:text-2xl font-light text-gray-900 font-heading tracking-tight">
+                    {lang === 'pt' ? selectedFocusArea.titlePt : selectedFocusArea.titleEn}
+                  </h2>
+                </div>
+                
+                <button 
+                  onClick={() => setSelectedFocusArea(null)}
+                  className="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:text-gray-900 hover:bg-gray-200 flex items-center justify-center transition border border-gray-200 hover:border-brand-red cursor-pointer"
+                  aria-label="Close"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Modal Body: Levels Options */}
+              <div className="p-6 md:p-8 space-y-8 overflow-y-auto max-h-[70vh]">
+                <p className="text-xs text-gray-600 leading-relaxed max-w-2xl font-sans">
+                  {lang === 'pt' ? selectedFocusArea.descPt : selectedFocusArea.descEn}
+                </p>
+
+                <div className="space-y-6">
+                  <h3 className="text-[10px] font-bold text-[#cc0000] uppercase tracking-[0.2em] block font-mono border-b border-gray-200 pb-2">
+                    {lang === 'pt' ? 'Selecione a Duração & Intensidade Ideal' : 'Select Your Ideal Duration & Intensity'}
+                  </h3>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {selectedFocusArea.levels.map((level) => {
+                      return (
+                        <div 
+                          key={level.id}
+                          className="bg-gray-50 border border-gray-200 rounded-2xl p-5 hover:bg-gray-100/50 transition-all duration-300 flex flex-col justify-between text-left group hover:border-[#cc0000]/40 hover:shadow-sm"
+                        >
+                          <div className="space-y-4">
+                            {/* Duration badge and Price */}
+                            <div className="flex justify-between items-center">
+                              <span className="bg-brand-red/10 border border-brand-red/30 text-brand-red text-[10px] px-2.5 py-0.5 rounded-full font-mono tracking-wider font-extrabold">
+                                {level.duration} min
+                              </span>
+                              <span className="text-lg font-bold text-gray-950 font-sans">
+                                {level.price}€
+                              </span>
+                            </div>
+
+                            {/* Level Name & Description */}
+                            <div className="space-y-1.5">
+                              <h4 className="text-sm font-semibold text-gray-900 group-hover:text-[#cc0000] transition duration-200">
+                                {lang === 'pt' ? level.namePt : level.nameEn}
+                              </h4>
+                              <p className="text-[11px] text-gray-600 leading-relaxed min-h-[60px]">
+                                {lang === 'pt' ? level.descPt : level.descEn}
+                              </p>
+                            </div>
+
+                            {/* Expected Outcomes */}
+                            <div className="space-y-1.5 pt-3 border-t border-gray-200">
+                              <span className="text-[8px] font-bold text-[#cc0000] uppercase tracking-widest block font-mono">
+                                {lang === 'pt' ? 'Resultados' : 'Outcomes'}
+                              </span>
+                              {(lang === 'pt' ? level.resultsPt : level.resultsEn).map((res, idx) => (
+                                <div key={idx} className="flex items-start space-x-2">
+                                  <span className="text-[#cc0000] text-xs font-bold leading-none mt-0.5">✓</span>
+                                  <span className="text-[10px] text-gray-700 font-sans leading-tight">{res}</span>
+                                </div>
+                              ))}
+                            </div>
+
+                            {/* Therapeutic Benefits */}
+                            <div className="space-y-1.5 pt-3 border-t border-gray-200">
+                              <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest block font-mono">
+                                {lang === 'pt' ? 'Benefícios' : 'Benefits'}
+                              </span>
+                              {(lang === 'pt' ? level.benefitsPt : level.benefitsEn).map((ben, idx) => (
+                                <div key={idx} className="flex items-start space-x-2">
+                                  <span className="text-gray-400 text-xs leading-none">—</span>
+                                  <span className="text-[10px] text-gray-600 font-sans leading-tight">{ben}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* CTA Button */}
+                          <div className="pt-5 mt-5 border-t border-gray-200">
+                            <button
+                              onClick={() => {
+                                // Find corresponding global therapy from static database matching duration/id
+                                const mappedTherapy = THERAPIES.find(t => t.id === level.id) || THERAPIES[0];
+                                
+                                // Set the state so DOC.pt iframe loads pre-selections
+                                setBookingTherapy(mappedTherapy);
+                                setSelectedFocusArea(null);
+                                setActiveTab('reservar');
+                                
+                                // Scroll to reserving element
+                                setTimeout(() => {
+                                  const el = document.getElementById('reservar-page');
+                                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                }, 150);
+                              }}
+                              className="w-full bg-[#cc0000] hover:bg-brand-red-hover text-white py-2 rounded-xl text-[9px] font-bold uppercase tracking-widest transition duration-300 flex items-center justify-center space-x-1 cursor-pointer"
+                            >
+                              <CalendarIcon className="w-3 h-3" />
+                              <span>{lang === 'pt' ? 'Agendar' : 'Book Now'}</span>
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Old Booking Interactive Modal (Disabled in favor of Dedicated Page) */}
       <AnimatePresence>
