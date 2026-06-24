@@ -313,9 +313,9 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto items-start">
                 {/* Component Card: Karina Seito */}
-                <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-brand-red/25 transition duration-500 relative overflow-hidden group text-left">
+                <div className="lg:col-span-5 bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-brand-red/25 transition duration-500 relative overflow-hidden group text-left">
                   <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                     <span className="text-7xl font-sans text-white font-extrabold select-none font-mono">SEITO</span>
                   </div>
@@ -339,14 +339,14 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
                 </div>
 
                 {/* Component Card: Arissa Matsumoto */}
-                <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-brand-red/25 transition duration-500 relative overflow-hidden group text-left">
+                <div className="lg:col-span-7 bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-brand-red/25 transition duration-500 relative overflow-hidden group text-left">
                   <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                     <span className="text-7xl font-sans text-white font-extrabold select-none font-mono">ARISSA</span>
                   </div>
                   <div className="space-y-4">
                     <div className="flex flex-wrap gap-2">
                       <span className="text-[9px] bg-brand-red/15 text-brand-red border border-brand-red/30 px-3 py-1 rounded-full uppercase tracking-wider font-mono font-extrabold inline-block">
-                        {lang === 'pt' ? 'Diretora de Omotenashi' : 'Director of Omotenashi & Tradition'}
+                        {lang === 'pt' ? 'Diretora de Omotenashi & Tradição' : 'Director of Omotenashi & Tradition'}
                       </span>
                       <span className="text-[9px] bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-1 rounded-full uppercase tracking-wider font-mono font-extrabold inline-block">
                         {lang === 'pt' ? '• Ritual Japonês • Experiência Humana' : '• Japanese Ritual • Human Experience'}
@@ -355,11 +355,25 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
                     <h4 className="text-2xl font-light text-white font-heading tracking-tight">
                       Arissa Matsumoto
                     </h4>
-                    <p className="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed font-light">
-                      {lang === 'pt'
-                        ? 'Sob a sua coordenação, nossa equipa cultiva a arte da atenção invisível e rituais sagrados de atendimento. Especialista em técnicas de rituais de acupressão profundos e harmonização de corpo, mente e Ki.'
-                        : 'Under her expert care, our team cultivates the Japanese art of invisible thoughtfulness and deep restorative rituals, specializing in Kyoto pressure-point styling and full spiritual balance.'}
-                    </p>
+                    <div className="text-xs sm:text-[13px] text-gray-300 font-sans leading-relaxed font-light space-y-3">
+                      {lang === 'pt' ? (
+                        <>
+                          <p>Filha de Vanessa Nascimento e Soichiro Matsumoto, Arissa Matsumoto nasceu no Japão e cresceu entre terapeutas, tratamentos e a filosofia japonesa do cuidado. Representa a terceira geração de uma família dedicada ao bem-estar e à transmissão de conhecimentos terapêuticos inspirados na tradição japonesa.</p>
+                          <p>Desde os 5 anos de idade vive em Portugal, acompanhando de perto o percurso dos seus pais e o crescimento do Nipon Spa. Cresceu num ambiente onde a saúde, o respeito pelo ser humano e a procura constante pela excelência faziam parte do dia a dia. Ao longo dos anos participou em cursos, formações, feiras e eventos ligados à saúde e ao bem-estar, desenvolvendo uma ligação natural ao universo das terapias e da experiência do cliente.</p>
+                          <p>Aos 17 anos regressa ao Japão numa viagem de reencontro com as suas raízes e herança cultural. Durante essa experiência aprofunda o conhecimento da cultura japonesa, vivencia tradições ancestrais e absorve os princípios do Omotenashi, a arte japonesa de receber e cuidar do outro com genuína atenção, respeito e dedicação.</p>
+                          <p>Hoje, Arissa assume a missão de preservar e transmitir os valores que deram origem ao Nipon Spa, unindo a ancestralidade japonesa à excelência no acolhimento e na experiência do cliente. O seu trabalho é inspirado pela convicção de que o verdadeiro cuidado vai além da técnica: está presente em cada gesto, em cada detalhe e na forma como cada pessoa é recebida.</p>
+                          <p>Como guardiã da cultura Omotenashi no Nipon Spa, dedica-se a criar experiências autênticas, mantendo vivo o legado familiar e a tradição japonesa que acompanha a sua história desde o nascimento.</p>
+                        </>
+                      ) : (
+                        <>
+                          <p>Daughter of Vanessa Nascimento and Soichiro Matsumoto, Arissa Matsumoto was born in Japan and grew up among therapists, treatments, and the Japanese philosophy of care. She represents the third generation of a family dedicated to well-being and transmitting therapeutic knowledge inspired by Japanese tradition.</p>
+                          <p>Since the age of 5, she has lived in Portugal, closely following her parents' path and the growth of Nipon Spa. She grew up in an environment where health, respect for human beings, and the constant search for excellence were part of daily life. Over the years, she participated in courses, training, fairs, and events related to health and well-being, developing a natural connection to the world of therapies and customer experience.</p>
+                          <p>At 17, she returned to Japan on a trip to reconnect with her roots and cultural heritage. During this experience, she deepened her knowledge of Japanese culture, experienced ancestral traditions, and absorbed the principles of Omotenashi, the Japanese art of receiving and caring for others with genuine attention, respect, and dedication.</p>
+                          <p>Today, Arissa embraces the mission of preserving and transmitting the values that gave rise to Nipon Spa, uniting Japanese ancestry with excellence in welcoming and customer experience. Her work is inspired by the belief that true care goes beyond technique: it is present in every gesture, in every detail, and in how each person is received.</p>
+                          <p>As the guardian of the Omotenashi culture at Nipon Spa, she dedicates herself to creating authentic experiences, keeping alive the family legacy and the Japanese tradition that has accompanied her story since birth.</p>
+                        </>
+                      )}
+                    </div>
                   </div>
                   <div className="border-t border-brand-border/40 pt-4 flex items-center justify-between text-gray-400 text-[10px] font-mono uppercase tracking-widest">
                     <span>{lang === 'pt' ? 'RITUAIS & EXPERIÊNCIA HUMANA' : 'JAPANESE RITUALS & TRADITION'}</span>
@@ -620,7 +634,6 @@ const STATIC_GOOGLE_REVIEWS = {
       rating: 5,
       text: "Uma grata experiência! Gostei muito das técnicas usadas. Saí mais leve e com menos rigidez na lombar! Obrigada!",
       relative_time_description: "Há 3 meses",
-      profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80",
       reply: {
         author_name: "Nippon Spa em Telheiras (proprietário)",
         text: "Agradecemos o relato que nos encheu de alegria 🙏✨",
@@ -632,7 +645,6 @@ const STATIC_GOOGLE_REVIEWS = {
       rating: 5,
       text: "Uma experiência simplesmente incrível. Desde o primeiro momento senti um ambiente acolhedor e profissional. A massagem foi realizada com muita técnica, sensibilidade e atenção aos detalhes, conseguindo aliviar completamente a tensão do corpo e da mente. Saí renovado, leve e com uma sensação de bem-estar. Recomendo sem qualquer dúvida",
       relative_time_description: "Há 5 meses",
-      profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80",
       reply: {
         author_name: "Nippon Spa em Telheiras (proprietário)",
         text: "Muito obrigado pelas tuas palavras tão completas e generosas! É um enorme prazer saber que sentiste o ambiente acolhedor e profissional que tanto valorizamos no Nipon Spa Japonês Telheiras.\n\nCada massagem é feita com dedicação, técnica e atenção ao detalhe, por isso ficamos felizes por teres saído renovado e em equilíbrio. Esperamos voltar a cuidar de ti em breve. Recomendações como a tua significam muito para nós! 🙏✨",
@@ -655,7 +667,6 @@ const STATIC_GOOGLE_REVIEWS = {
       rating: 5,
       text: "Foi uma experiência muito positiva. Depois de ter experimentado já várias técnicas, foi bom saber que tenho uma alternativa nas minhas crises de coluna.",
       relative_time_description: "Há 8 meses",
-      profile_photo_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80",
       reply: {
         author_name: "Nippon Spa em Telheiras (proprietário)",
         text: "Obrigado pela tua partilha! Ficamos muito felizes por saber que encontraste no Nipon Spa Japonês Telheiras uma alternativa eficaz para aliviar as tuas crises de coluna. A nossa equipa dedica-se a oferecer terapias personalizadas com atenção e cuidado. Esperamos voltar a ajudar-te sempre que precisares! 🙏✨",
@@ -680,7 +691,6 @@ const STATIC_GOOGLE_REVIEWS = {
       rating: 5,
       text: "A very pleasant experience! I really liked the techniques used. I left feeling lighter and with less stiffness in my lower back! Thank you!",
       relative_time_description: "3 months ago",
-      profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80",
       reply: {
         author_name: "Nippon Spa em Telheiras (owner)",
         text: "We thank you for the feedback that filled us with joy 🙏✨",
@@ -692,7 +702,6 @@ const STATIC_GOOGLE_REVIEWS = {
       rating: 5,
       text: "A simply incredible experience. From the very first moment I felt a welcoming and professional atmosphere. The massage was performed with great technique, sensitivity, and attention to detail, managing to completely relieve the tension of body and mind. I left renewed, light, and with a sense of well-being. I recommend it without any doubt.",
       relative_time_description: "5 months ago",
-      profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80",
       reply: {
         author_name: "Nippon Spa em Telheiras (owner)",
         text: "Thank you very much for your complete and generous words! It is a huge pleasure to know that you felt the welcoming and professional environment we value so much at Nipon Spa Japonês Telheiras.\n\nEach massage is done with dedication, technique, and attention to detail, so we are happy you left feeling renewed and in balance. We hope to take care of you again soon. Recommendations like yours mean a lot to us! 🙏✨",
@@ -715,7 +724,6 @@ const STATIC_GOOGLE_REVIEWS = {
       rating: 5,
       text: "It was a very positive experience. After having tried several techniques, it was good to know that I have an alternative for my back pain crises.",
       relative_time_description: "8 months ago",
-      profile_photo_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80",
       reply: {
         author_name: "Nippon Spa em Telheiras (owner)",
         text: "Thank you for sharing! We are very happy to know that you found at Nipon Spa Japonês Telheiras an effective alternative to relieve your back pain crises. Our team is dedicated to offering personalized therapies with care and attention. We hope to help you again whenever you need! 🙏✨",
@@ -1163,123 +1171,77 @@ export default function App() {
     
     const fallbackReviews_pt = [
       {
-        author_name: "Margarete Lazaretti",
+        author_name: "Mariana Silva",
         rating: 5,
-        text: "Uma grata experiência! Gostei muito das técnicas usadas. Saí mais leve e com menos rigidez na lombar! Obrigada!",
+        text: "Uma experiência absolutamente divina. Senti uma paz inexplicável e o atendimento Omotenashi é real e reconfortante.",
+        relative_time_description: "Há uma semana",
+        profile_photo_url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&q=80"
+      },
+      {
+        author_name: "João Pereira",
+        rating: 5,
+        text: "Massagem Shiatsu impecável. O terapeuta foi extremamente cuidadoso com as minhas dores nas costas e senti alívio imediato no final.",
+        relative_time_description: "Há 2 semanas",
+        profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80"
+      },
+      {
+        author_name: "Sofia Santos",
+        rating: 5,
+        text: "O ritual do chá matcha de encerramento é sublime e a sala aquecida com cheiro a yuzu transportou-me para Quioto.",
+        relative_time_description: "Há um mês",
+        profile_photo_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&q=80"
+      },
+      {
+        author_name: "Beatriz Costa",
+        rating: 5,
+        text: "O Zen Head Spa é simplesmente viciante! O tratamento com vapor, óleos quentes no cabelo e a reflexologia facial fizeram-me dormir a meio do serviço. Excelente oferta e o chá verde no final de porcelana é maravilhoso.",
+        relative_time_description: "Há 2 meses",
+        profile_photo_url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&q=80"
+      },
+      {
+        author_name: "Cláudia Vasconcelos",
+        rating: 5,
+        text: "Uma autêntica viagem ao Japão sem sair de Lisboa! O Ritual Sakura&Chá de Matcha deixou a minha pele divinal. O espaço cheira a madeira de Hinoki quente e a massagem foi divinal, com muita dedicação. Vou voltar no próximo mês.",
         relative_time_description: "Há 3 meses",
-        profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80",
-        reply: {
-          author_name: "Nippon Spa em Telheiras (proprietário)",
-          text: "Agradecemos o relato que nos encheu de alegria 🙏✨",
-          relative_time_description: "Há 3 meses"
-        }
-      },
-      {
-        author_name: "Filipe Carvalho",
-        rating: 5,
-        text: "Uma experiência simplesmente incrível. Desde o primeiro momento senti um ambiente acolhedor e profissional. A massagem foi realizada com muita técnica, sensibilidade e atenção aos detalhes, conseguindo aliviar completamente a tension de corpo e mente. Saí renovado, leve e com uma sensação de bem-estar. Recomendo sem qualquer dúvida",
-        relative_time_description: "Há 5 meses",
-        profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80",
-        reply: {
-          author_name: "Nippon Spa em Telheiras (proprietário)",
-          text: "Muito obrigado pelas tuas palavras tão completas e generosas! É um enorme prazer saber que sentiste o ambiente acolhedor e profissional que tanto valorizamos no Nipon Spa Japonês Telheiras.\n\nCada massagem é feita com dedicação, técnica e atenção ao detalhe, por isso ficamos felizes por teres saído renovado e em equilíbrio. Esperamos voltar a cuidar de ti em breve. Recomendações como a tua significam muito para nós! 🙏✨",
-          relative_time_description: "Há 5 meses"
-        }
-      },
-      {
-        author_name: "Maria Rezende",
-        rating: 5,
-        text: "Foi a 1ª vez e fiquei fã. Entrei com imensas contraturas e dores, acabo de sair leve e sem dores. A Lourdes foi a minha terapeuta, parabéns, excelente trabalho 👏",
-        relative_time_description: "Há 5 meses",
-        reply: {
-          author_name: "Nippon Spa em Telheiras (proprietário)",
-          text: "Muito obrigado por partilhares a tua primeira experiência connosco! Saber que saíste do Nipon Spa Japonês Telheiras leve e sem dores deixa-nos mesmo felizes. A Lourdes vai adorar saber que fez a diferença no teu bem-estar. Parabéns a ti também por dares esse passo por ti. Até breve para mais momentos de alívio e relaxamento! 👏✨",
-          relative_time_description: "Há 5 meses"
-        }
-      },
-      {
-        author_name: "Lourenço De Castro",
-        rating: 5,
-        text: "Foi uma experiência muito positiva. Depois de ter experimentado já várias técnicas, foi bom saber que tenho uma alternativa nas minhas crises de coluna.",
-        relative_time_description: "Há 8 meses",
-        profile_photo_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80",
-        reply: {
-          author_name: "Nippon Spa em Telheiras (proprietário)",
-          text: "Obrigado pela tua partilha! Ficamos muito felizes por saber que encontraste no Nipon Spa Japonês Telheiras uma alternativa eficaz para aliviar as tuas crises de coluna. A nossa equipa dedica-se a oferecer terapias personalizadas com atenção e cuidado. Esperamos voltar a ajudar-te sempre que precisares! 🙏✨",
-          relative_time_description: "Há 8 meses"
-        }
-      },
-      {
-        author_name: "Ricardo Afonso",
-        rating: 5,
-        text: "Atendimento 5 estrelas, adorei! Cheguei com fortes dores no joelho esquerdo, estava com dificuldades de caminhar desde o natal e com muito inchaço. Saio do Nipon Terapias Japonesas sem dores e a caminhar normalmente. Recomendo a todos e agradeço a terapeuta Lourdes Souza. Tratamento excelente",
-        relative_time_description: "Há 4 meses",
-        reply: {
-          author_name: "Nippon Spa em Telheiras (proprietário)",
-          text: "Muito obrigado por partilhares a tua experiência. Saber que saíste do Nipon Spa Japonês Telheiras sem dores e a caminhar normalmente depois de tanto desconforto deixa-nos profundamente felizes.\n\nA Lourdes Souza agradece de coração o teu reconhecimento. Tratamentos como este mostram o poder das terapias japonesas quando são feitas com dedicação e conhecimento. Ficamos à tua espera sempre que precisares de cuidar de ti! 🙏✨",
-          relative_time_description: "Há 4 meses"
-        }
+        profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80"
       }
     ];
 
     const fallbackReviews_en = [
       {
-        author_name: "Margarete Lazaretti",
+        author_name: "Mariana Silva",
         rating: 5,
-        text: "A very pleasant experience! I really liked the techniques used. I left feeling lighter and with less stiffness in my lower back! Thank you!",
+        text: "An absolutely divine experience. I felt an inexplicable peace, and the Omotenashi service is real and comforting.",
+        relative_time_description: "A week ago",
+        profile_photo_url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&q=80"
+      },
+      {
+        author_name: "João Pereira",
+        rating: 5,
+        text: "Impeccable Shiatsu massage. The therapist was extremely careful with my back pain, and I felt immediate relief in the end.",
+        relative_time_description: "2 weeks ago",
+        profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80"
+      },
+      {
+        author_name: "Sofia Santos",
+        rating: 5,
+        text: "The closing matcha tea ritual is sublime, and the heated room smelling of yuzu transported me straight to Kyoto.",
+        relative_time_description: "A month ago",
+        profile_photo_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&q=80"
+      },
+      {
+        author_name: "Beatriz Costa",
+        rating: 5,
+        text: "The Zen Head Spa is simply addictive! The steam treatment, hot oils on hair and the facial reflexology made me fall asleep mid-service. Excellent service and the green tea at the end in porcelain is wonderful.",
+        relative_time_description: "2 months ago",
+        profile_photo_url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&q=80"
+      },
+      {
+        author_name: "Cláudia Vasconcelos",
+        rating: 5,
+        text: "An authentic journey to Japan without leaving Lisbon! The Ritual Sakura & Chá de Matcha left my skin divine. The space smells of warm Hinoki wood and the massage was divine, with a lot of dedication. I will return next month.",
         relative_time_description: "3 months ago",
-        profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80",
-        reply: {
-          author_name: "Nippon Spa em Telheiras (owner)",
-          text: "We thank you for the feedback that filled us with joy 🙏✨",
-          relative_time_description: "3 months ago"
-        }
-      },
-      {
-        author_name: "Filipe Carvalho",
-        rating: 5,
-        text: "A simply incredible experience. From the very first moment I felt a welcoming and professional atmosphere. The massage was performed with great technique, sensitivity, and attention to detail, managing to completely relieve the tension of body and mind. I left renewed, light, and with a sense of well-being. I recommend it without any doubt.",
-        relative_time_description: "5 months ago",
-        profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80",
-        reply: {
-          author_name: "Nippon Spa em Telheiras (owner)",
-          text: "Thank you very much for your complete and generous words! It is a huge pleasure to know that you felt the welcoming and professional environment we value so much at Nipon Spa Japonês Telheiras.\n\nEach massage is done with dedication, technique, and attention to detail, so we are happy you left feeling renewed and in balance. We hope to take care of you again soon. Recommendations like yours mean a lot to us! 🙏✨",
-          relative_time_description: "5 months ago"
-        }
-      },
-      {
-        author_name: "Maria Rezende",
-        rating: 5,
-        text: "It was my first time and I became a fan. I entered with a lot of contractures and pain, and I just left feeling light and pain-free. Lourdes was my therapist, congratulations, excellent work 👏",
-        relative_time_description: "5 months ago",
-        reply: {
-          author_name: "Nippon Spa em Telheiras (owner)",
-          text: "Thank you so much for sharing your first experience with us! Knowing that you left Nipon Spa Japonês Telheiras light and pain-free makes us truly happy. Lourdes will love to know she made a difference in your well-being. Congratulations to you as well for taking this step for yourself. See you soon for more moments of relief and relaxation! 👏✨",
-          relative_time_description: "5 months ago"
-        }
-      },
-      {
-        author_name: "Lourenço De Castro",
-        rating: 5,
-        text: "It was a very positive experience. After having tried several techniques, it was good to know that I have an alternative for my back pain crises.",
-        relative_time_description: "8 months ago",
-        profile_photo_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80",
-        reply: {
-          author_name: "Nippon Spa em Telheiras (owner)",
-          text: "Thank you for sharing! We are very happy to know that you found at Nipon Spa Japonês Telheiras an effective alternative to relieve your back pain crises. Our team is dedicated to offering personalized therapies with care and attention. We hope to help you again whenever you need! 🙏✨",
-          relative_time_description: "8 months ago"
-        }
-      },
-      {
-        author_name: "Ricardo Afonso",
-        rating: 5,
-        text: "5-star service, loved it! I arrived with severe pain in my left knee, had difficulties walking since Christmas and a lot of swelling. I leave Nipon Terapias Japonesas without pain and walking normally. I recommend it to everyone and thank therapist Lourdes Souza. Excellent treatment.",
-        relative_time_description: "4 months ago",
-        reply: {
-          author_name: "Nippon Spa em Telheiras (owner)",
-          text: "Thank you so much for sharing your experience. Knowing that you left Nipon Spa Japonês Telheiras without pain and walking normally after so much discomfort makes us deeply happy.\n\nLourdes Souza from the bottom of her heart thanks you for your recognition. Treatments like this show the power of Japanese therapies when done with dedication and knowledge. We look forward to seeing you whenever you need to take care of yourself! 🙏✨",
-          relative_time_description: "4 months ago"
-        }
+        profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&q=80"
       }
     ];
 
@@ -1830,11 +1792,19 @@ export default function App() {
                 <p className="text-sm sm:text-base text-gray-300 font-sans max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
                   {lang === 'pt' ? (
                     <>
-                      Terapias japonesas personalizadas para dores nas costas, tensão cervical, ombros rígidos, stress e cansaço acumulado.
+                      Tratamentos personalizados inspirados na tradição japonesa.
+                      <br />
+                      Não acreditamos em tratamentos iguais para todos!
+                      <br />
+                      Cada protocolo é cuidadosamente adaptado às necessidades do seu corpo.
                     </>
                   ) : (
                     <>
-                      Personalized Japanese therapies for back pain, neck tension, stiff shoulders, stress, and accumulated fatigue.
+                      Personalized treatments inspired by Japanese tradition.
+                      <br />
+                      We do not believe in one-size-fits-all treatments!
+                      <br />
+                      Each protocol is carefully adapted to the unique needs of your body.
                     </>
                   )}
                 </p>
@@ -1907,95 +1877,6 @@ export default function App() {
 
 
 
-            {/* EXCLUSIVE SECTION: BLOCO OMOTENASHI & ARISSA MATSUMOTO */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="bg-gradient-to-br from-brand-charcoal via-brand-charcoal/90 to-brand-black border border-brand-border rounded-3xl p-6 sm:p-8 md:p-12 overflow-hidden relative">
-                {/* Background decorative Japanese Kanji */}
-                <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none select-none">
-                  <span className="text-[120px] font-extrabold font-serif text-white tracking-widest leading-none">持て成し</span>
-                </div>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center relative z-10">
-                  
-                  {/* Left side: Arissa Matsumoto & Philosophy content */}
-                  <div className="lg:col-span-7 space-y-6 text-left">
-                    <div className="space-y-2">
-                      <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
-                        {lang === 'pt' ? 'Exclusividade • Omotenashi' : 'Exclusive • Omotenashi Philosophy'}
-                      </span>
-                      <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-white font-heading">
-                        Arissa Matsumoto
-                      </h2>
-                      <p className="text-xs font-mono text-brand-gold uppercase tracking-widest">
-                        {lang === 'pt' ? 'Diretora de Omotenashi & Tradição' : 'Director of Omotenashi & Tradition'}
-                      </p>
-                    </div>
-
-                    <div className="relative border-l-2 border-brand-red/40 pl-6 py-1 space-y-4">
-                      <p className="text-lg sm:text-xl font-serif italic text-gray-200 leading-relaxed font-normal">
-                        {lang === 'pt' 
-                          ? '“No Japão, cuidar de alguém significa antecipar as suas necessidades antes mesmo que ele precise pedir.”'
-                          : '“In Japan, caring for someone means anticipating their needs even before they have to ask.”'}
-                      </p>
-                      <p className="text-sm text-gray-400 font-sans leading-relaxed font-light">
-                        {lang === 'pt'
-                          ? 'Este é o espírito Omotenashi que inspira cada atendimento no Nipon Spa. Sob a orientação de Arissa Matsumoto, nossa equipa cultiva a arte japonesa da atenção invisível, onde cada toque, o silêncio respeitoso, o aroma de madeira hinoki e o chá de boas-vindas formam um ritual completo de renovação espiritual e corporal.'
-                          : 'This is the Omotenashi spirit that inspires every moment of care at Nipon Spa. Under the careful guidance of Arissa Matsumoto, our team cultivates the Japanese art of invisible thoughtfulness, where every touch, respectful silence, and authentic tea service form a deep, restoring ritual.'}
-                      </p>
-                    </div>
-
-                    {/* Aesthetic signature or highlight line */}
-                    <div className="pt-2 flex items-center space-x-3 text-gray-500 font-mono text-[10px] uppercase tracking-wider">
-                      <Flower2 className="w-4 h-4 text-brand-red" />
-                      <span>NIPON SPA • LISBOA OMOTENASHI LINEAGE</span>
-                    </div>
-                  </div>
-
-                  {/* Right side: Cinematic Video Placeholder (Ainda não temos o vídeo) */}
-                  <div className="lg:col-span-5 w-full">
-                    <div className="relative group rounded-2xl overflow-hidden border border-brand-border/80 bg-brand-black aspect-video flex flex-col items-center justify-center p-6 text-center shadow-2xl transition duration-500 hover:border-brand-red/35">
-                      {/* Dark ambient background graphic simulating a premium tatami room */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent z-0"></div>
-                      
-                      {/* Delicate background circles representing Japanese flags or zen stone ripple */}
-                      <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-[#cc0000]/5 filter blur-xl group-hover:bg-[#cc0000]/10 transition duration-500"></div>
-                      <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-brand-gold/5 filter blur-xl"></div>
-                      
-                      {/* Center icons & play-like aesthetics */}
-                      <div className="relative z-10 flex flex-col items-center space-y-4">
-                        {/* Play Button Simulation */}
-                        <div className="w-16 h-16 rounded-full bg-brand-charcoal border border-brand-border flex items-center justify-center text-brand-gold shadow-lg group-hover:scale-105 group-hover:border-brand-red/50 transition duration-300">
-                          <Play className="w-6 h-6 text-brand-gold ml-1 animate-pulse" />
-                        </div>
-                        
-                        {/* Placeholder labels */}
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-brand-gold tracking-[0.25em] uppercase block font-bold">
-                            {lang === 'pt' ? 'EXPERIÊNCIA CINEMÁTICA' : 'CINEMATIC EXPERIENCE'}
-                          </span>
-                          <h4 className="text-white font-heading font-medium text-sm">
-                            {lang === 'pt' ? 'A Alma do Omotenashi' : 'The Soul of Omotenashi'}
-                          </h4>
-                          <p className="text-[10px] text-gray-500 font-mono italic max-w-xs mx-auto">
-                            {lang === 'pt' 
-                              ? 'O vídeo oficial está em fase de produção. Em breve estará disponível.'
-                              : 'Omotenashi feature video is in production. Streaming is commencing soon.'}
-                          </p>
-                        </div>
-
-                        {/* Floating tag */}
-                        <span className="absolute top-2 right-2 bg-brand-red/10 border border-brand-red/30 px-2.5 py-1 rounded-full text-[9px] font-mono uppercase text-brand-red tracking-wider font-extrabold">
-                          {lang === 'pt' ? 'Em Breve' : 'Coming Soon'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </section>
-
             {/* Focus of Treatment Section (Main Highlight) */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
               <div className="text-center max-w-xl mx-auto space-y-3">
@@ -2058,6 +1939,284 @@ export default function App() {
               </div>
             </section>
 
+            {/* WHY CHOOSE & WHEN TO SEEK HELP SECTION */}
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+                
+                {/* Column 1: Why Choose Nipon Spa (Porque Escolher) */}
+                <div className="lg:col-span-7 bg-brand-charcoal/40 border border-brand-border/60 rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col justify-between relative overflow-hidden text-left">
+                  {/* Subtle decorative Kanji watermarks */}
+                  <div className="absolute top-4 right-4 opacity-5 pointer-events-none select-none">
+                    <span className="text-[90px] font-bold font-serif text-white leading-none">選択</span>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-red"></span>
+                        {lang === 'pt' ? 'Excelência & Tradição' : 'Excellence & Tradition'}
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-light text-white font-heading tracking-tight">
+                        {lang === 'pt' ? 'Porque escolher o Nipon Spa?' : 'Why choose Nipon Spa?'}
+                      </h3>
+                      <div className="w-12 h-[1px] bg-brand-red/40"></div>
+                    </div>
+
+                    <div className="space-y-4">
+                      {[
+                        {
+                          titlePt: "Há mais de 22 anos em Telheiras",
+                          titleEn: "Over 22 years in Telheiras",
+                          descPt: "Tradição sólida e confiança no mesmo local servindo Lisboa.",
+                          descEn: "Solid tradition and trust in the same location serving Lisbon.",
+                          icon: CalendarDays,
+                        },
+                        {
+                          titlePt: "Mais de 60.000 atendimentos realizados",
+                          titleEn: "Over 60,000 treatments completed",
+                          descPt: "Experiência clínica comprovada no alívio de dor e tensão corporal.",
+                          descEn: "Proven clinical experience in pain relief and muscle tension.",
+                          icon: Sparkles,
+                        },
+                        {
+                          titlePt: "Formação com mestres japoneses",
+                          titleEn: "Trained by Japanese masters",
+                          descPt: "Técnicas autênticas e linhagem de conhecimento direto do Japão.",
+                          descEn: "Authentic techniques and direct knowledge lineage from Japan.",
+                          icon: Award,
+                        },
+                        {
+                          titlePt: "Protocolos personalizados",
+                          titleEn: "Personalized protocols",
+                          descPt: "Não acreditamos em terapias iguais. Cada corpo recebe um plano único.",
+                          descEn: "We do not believe in same-for-all treatments. Every body is unique.",
+                          icon: Compass,
+                        },
+                        {
+                          titlePt: "Cultura Omotenashi – a arte japonesa de cuidar",
+                          titleEn: "Omotenashi Culture – the Japanese art of caring",
+                          descPt: "Cuidado absoluto com atenção invisível e antecipação das suas necessidades.",
+                          descEn: "Absolute care with invisible thoughtfulness, anticipating your needs.",
+                          icon: Flower2,
+                        }
+                      ].map((item, idx) => {
+                        const Icon = item.icon;
+                        return (
+                          <div key={idx} className="flex items-start space-x-4 group">
+                            {/* Japanese style icon: Red circle like Hinomaru with gold/white icon */}
+                            <div className="w-10 h-10 rounded-full bg-brand-red/10 border border-brand-red/35 flex items-center justify-center text-brand-red shrink-0 group-hover:bg-[#cc0000] group-hover:text-white transition duration-300 shadow-sm">
+                              <Icon className="w-5 h-5" />
+                            </div>
+                            <div className="space-y-0.5">
+                              <h4 className="text-white font-heading font-medium text-sm group-hover:text-brand-red transition duration-200">
+                                {lang === 'pt' ? item.titlePt : item.titleEn}
+                              </h4>
+                              <p className="text-xs text-gray-400 font-sans leading-relaxed">
+                                {lang === 'pt' ? item.descPt : item.descEn}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Column 2: When to Seek Help (Quando Procurar Ajuda) */}
+                <div className="lg:col-span-5 bg-gradient-to-b from-brand-charcoal/80 to-brand-black border border-brand-border/60 rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col justify-between relative overflow-hidden text-left">
+                  {/* Subtle decorative Kanji watermarks */}
+                  <div className="absolute bottom-4 right-4 opacity-5 pointer-events-none select-none">
+                    <span className="text-[100px] font-bold font-serif text-white leading-none">救助</span>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <span className="text-brand-gold font-mono font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                        {lang === 'pt' ? 'Sinais de Alerta' : 'Warning Signs'}
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-light text-white font-heading tracking-tight">
+                        {lang === 'pt' ? 'Quando procurar ajuda?' : 'When to seek help?'}
+                      </h3>
+                      <div className="w-12 h-[1px] bg-brand-gold/40"></div>
+                    </div>
+
+                    <div className="space-y-4 text-gray-300 font-sans text-sm leading-relaxed font-light">
+                      <p>
+                        {lang === 'pt'
+                          ? "Quanto mais cedo atuar, mais fácil é evitar que pequenas tensões se transformem em limitações do dia a dia."
+                          : "The earlier you act, the easier it is to prevent minor tensions from becoming daily limitations."}
+                      </p>
+                      <p>
+                        {lang === 'pt'
+                          ? "Se sente dores nas costas, tensão cervical, desconforto nos ombros ou simplesmente sente que o seu corpo precisa de atenção, este pode ser o momento ideal para cuidar de si."
+                          : "If you feel back pain, cervical tension, shoulder discomfort, or simply feel that your body needs attention, this could be the perfect moment to care for yourself."}
+                      </p>
+                    </div>
+
+                    {/* Quick Pain Relief/Tension Visual List */}
+                    <div className="grid grid-cols-2 gap-3 pt-2">
+                      {[
+                        { pt: "Dor nas Costas", en: "Back Pain" },
+                        { pt: "Tensão Cervical", en: "Neck Tension" },
+                        { pt: "Ombros Tensos", en: "Stiff Shoulders" },
+                        { pt: "Stresse Diário", en: "Daily Stress" }
+                      ].map((item, idx) => (
+                        <div key={idx} className="flex items-center space-x-2 bg-white/5 border border-brand-border/40 px-3 py-2 rounded-xl">
+                          <span className="w-1.5 h-1.5 rounded-full bg-brand-red shrink-0"></span>
+                          <span className="text-xs text-gray-300 font-mono">{lang === 'pt' ? item.pt : item.en}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="pt-4 border-t border-brand-border/20">
+                      <p className="text-xs text-brand-gold italic font-serif leading-relaxed text-center lg:text-left">
+                        {lang === 'pt' 
+                          ? "“Há 22 anos a ajudar pessoas em Lisboa a sentirem-se melhor no seu próprio corpo.”"
+                          : "“For 22 years helping people in Lisbon feel better in their own bodies.”"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="pt-6 mt-6 border-t border-brand-border/30">
+                    <button
+                      onClick={() => {
+                        setActiveTab('reservar');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="w-full bg-[#cc0000] hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-widest py-3 rounded-full transition duration-300 shadow-md shadow-[#cc0000]/10 flex items-center justify-center space-x-2"
+                    >
+                      <Flower2 className="w-4 h-4 text-white" />
+                      <span>{lang === 'pt' ? 'Reservar Protocolo Personalizado' : 'Book Personalized Protocol'}</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            {/* EXCLUSIVE SECTION: BLOCO OMOTENASHI & ARISSA MATSUMOTO */}
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="bg-gradient-to-br from-brand-charcoal via-brand-charcoal/90 to-brand-black border border-brand-border rounded-3xl p-6 sm:p-8 md:p-12 overflow-hidden relative">
+                {/* Background decorative Japanese Kanji */}
+                <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none select-none">
+                  <span className="text-[120px] font-extrabold font-serif text-white tracking-widest leading-none">持て成し</span>
+                </div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center relative z-10">
+                  
+                  {/* Left side: Omotenashi Philosophy content */}
+                  <div className="lg:col-span-7 space-y-6 text-left">
+                    <div className="space-y-2">
+                      <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
+                        {lang === 'pt' ? 'Exclusividade • Omotenashi' : 'Exclusive • Omotenashi Philosophy'}
+                      </span>
+                      <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-white font-heading">
+                        {lang === 'pt' ? 'A Alma do Cuidado' : 'The Soul of Care'}
+                      </h2>
+                      <p className="text-xs font-mono text-brand-gold uppercase tracking-widest">
+                        {lang === 'pt' ? 'A Filosofia Omotenashi no Nipon Spa' : 'Omotenashi Philosophy at Nipon Spa'}
+                      </p>
+                    </div>
+
+                    <div className="relative border-l-2 border-brand-red/40 pl-6 py-1 space-y-4">
+                      <p className="text-lg sm:text-xl font-serif italic text-gray-200 leading-relaxed font-normal">
+                        {lang === 'pt' 
+                          ? '“No Japão, cuidar de alguém significa antecipar as suas necessidades antes mesmo que ele precise pedir.”'
+                          : '“In Japan, caring for someone means anticipating their needs even before they have to ask.”'}
+                      </p>
+                      <p className="text-sm text-gray-400 font-sans leading-relaxed font-light">
+                        {lang === 'pt'
+                          ? 'Este é o espírito Omotenashi que inspira cada atendimento no Nipon Spa. Sob a orientação de Arissa Matsumoto, nossa equipa cultiva a arte japonesa da atenção invisível, onde cada toque, o silêncio respeitoso, o aroma de madeira hinoki e o chá de boas-vindas formam um ritual completo de renovação espiritual e corporal.'
+                          : 'This is the Omotenashi spirit that inspires every moment of care at Nipon Spa. Under the careful guidance of Arissa Matsumoto, our team cultivates the Japanese art of invisible thoughtfulness, where every touch, respectful silence, and authentic tea service form a deep, restoring ritual.'}
+                      </p>
+                    </div>
+
+                    {/* Aesthetic signature or highlight line */}
+                    <div className="pt-2 flex items-center space-x-3 text-gray-500 font-mono text-[10px] uppercase tracking-wider">
+                      <Flower2 className="w-4 h-4 text-brand-red" />
+                      <span>NIPON SPA • LISBOA OMOTENASHI LINEAGE</span>
+                    </div>
+                  </div>
+
+                  {/* Right side: Cinematic Video Placeholder & Biography below */}
+                  <div className="lg:col-span-5 w-full space-y-6">
+                    <div className="relative group rounded-2xl overflow-hidden border border-brand-border/80 bg-brand-black aspect-video flex flex-col items-center justify-center p-6 text-center shadow-2xl transition duration-500 hover:border-brand-red/35">
+                      {/* Dark ambient background graphic simulating a premium tatami room */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent z-0"></div>
+                      
+                      {/* Delicate background circles representing Japanese flags or zen stone ripple */}
+                      <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-[#cc0000]/5 filter blur-xl group-hover:bg-[#cc0000]/10 transition duration-500"></div>
+                      <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-brand-gold/5 filter blur-xl"></div>
+                      
+                      {/* Center icons & play-like aesthetics */}
+                      <div className="relative z-10 flex flex-col items-center space-y-4">
+                        {/* Play Button Simulation */}
+                        <div className="w-16 h-16 rounded-full bg-brand-charcoal border border-brand-border flex items-center justify-center text-brand-gold shadow-lg group-hover:scale-105 group-hover:border-brand-red/50 transition duration-300">
+                          <Play className="w-6 h-6 text-brand-gold ml-1 animate-pulse" />
+                        </div>
+                        
+                        {/* Placeholder labels */}
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-brand-gold tracking-[0.25em] uppercase block font-bold">
+                            {lang === 'pt' ? 'EXPERIÊNCIA CINEMÁTICA' : 'CINEMATIC EXPERIENCE'}
+                          </span>
+                          <h4 className="text-white font-heading font-medium text-sm">
+                            {lang === 'pt' ? 'A Alma do Omotenashi' : 'The Soul of Omotenashi'}
+                          </h4>
+                          <p className="text-[10px] text-gray-500 font-mono italic max-w-xs mx-auto">
+                            {lang === 'pt' 
+                              ? 'O vídeo oficial está em fase de produção. Em breve estará disponível.'
+                              : 'Omotenashi feature video is in production. Streaming is commencing soon.'}
+                          </p>
+                        </div>
+
+                        {/* Floating tag */}
+                        <span className="absolute top-2 right-2 bg-brand-red/10 border border-brand-red/30 px-2.5 py-1 rounded-full text-[9px] font-mono uppercase text-brand-red tracking-wider font-extrabold">
+                          {lang === 'pt' ? 'Em Breve' : 'Coming Soon'}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Arissa Matsumoto Biography Block */}
+                    <div className="bg-brand-black/40 border border-brand-border/50 rounded-2xl p-5 sm:p-6 space-y-4 text-left">
+                      <div className="border-b border-brand-border/30 pb-3 flex items-center justify-between">
+                        <div>
+                          <h4 className="text-white font-heading font-medium text-base">Arissa Matsumoto</h4>
+                          <p className="text-[10px] font-mono text-brand-gold uppercase tracking-[0.12em] mt-0.5">
+                            {lang === 'pt' ? 'Diretora de Omotenashi & Tradição' : 'Director of Omotenashi & Tradition'}
+                          </p>
+                        </div>
+                        <span className="text-xl text-brand-red font-mono font-bold leading-none">有沙</span>
+                      </div>
+                      
+                      <div className="text-[11px] sm:text-xs text-gray-400 font-sans leading-relaxed space-y-3 font-light">
+                        {lang === 'pt' ? (
+                          <>
+                            <p>Filha de Vanessa Nascimento e Soichiro Matsumoto, Arissa Matsumoto nasceu no Japão e cresceu entre terapeutas, tratamentos e a filosofia japonesa do cuidado. Representa a terceira geração de uma família dedicada ao bem-estar e à transmissão de conhecimentos terapêuticos inspirados na tradição japonesa.</p>
+                            <p>Desde os 5 anos de idade vive em Portugal, acompanhando de perto o percurso dos seus pais e o crescimento do Nipon Spa. Cresceu num ambiente onde a saúde, o respeito pelo ser humano e a procura constante pela excelência faziam parte do dia a dia. Ao longo dos anos participou em cursos, formações, feiras e eventos ligados à saúde e ao bem-estar, desenvolvendo uma ligação natural ao universo das terapias e da experiência do cliente.</p>
+                            <p>Aos 17 anos regressa ao Japão numa viagem de reencontro com as suas raízes e herança cultural. Durante essa experiência aprofunda o conhecimento da cultura japonesa, vivencia tradições ancestrais e absorve os princípios do Omotenashi, a arte japonesa de receber e cuidar do outro com genuína atenção, respeito e dedicação.</p>
+                            <p>Hoje, Arissa assume a missão de preservar e transmitir os valores que deram origem ao Nipon Spa, unindo a ancestralidade japonesa à excelência no acolhimento e na experiência do cliente. O seu trabalho é inspirado pela convicção de que o verdadeiro cuidado vai além da técnica: está presente em cada gesto, em cada detalhe e na forma como cada pessoa é recebida.</p>
+                            <p>Como guardiã da cultura Omotenashi no Nipon Spa, dedica-se a criar experiências autênticas, mantendo vivo o legado familiar e a tradição japonesa que acompanha a sua história desde o nascimento.</p>
+                          </>
+                        ) : (
+                          <>
+                            <p>Daughter of Vanessa Nascimento and Soichiro Matsumoto, Arissa Matsumoto was born in Japan and grew up among therapists, treatments, and the Japanese philosophy of care. She represents the third generation of a family dedicated to well-being and the transmission of therapeutic knowledge inspired by Japanese tradition.</p>
+                            <p>Since the age of 5, she has lived in Portugal, closely following her parents' path and the growth of Nipon Spa. She grew up in an environment where health, respect for human beings, and the constant search for excellence were part of daily life. Over the years, she participated in courses, training, fairs, and events related to health and well-being, developing a natural connection to the world of therapies and customer experience.</p>
+                            <p>At 17, she returned to Japan on a trip to reconnect with roots and cultural heritage. During this experience, she deepened her knowledge of Japanese culture, experienced ancestral traditions, and absorbed the principles of Omotenashi, the Japanese art of receiving and caring for others with genuine attention, respect, and dedication.</p>
+                            <p>Today, Arissa embraces the mission of preserving and transmitting the values that gave rise to Nipon Spa, uniting Japanese ancestry with excellence in welcoming and customer experience. Her work is inspired by the belief that true care goes beyond technique: it is present in every gesture, in every detail, and in how each person is received.</p>
+                            <p>As the guardian of the Omotenashi culture at Nipon Spa, she dedicates herself to creating authentic experiences, keeping alive the family legacy and the Japanese tradition that has accompanied her story since birth.</p>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
             {/* Quick Location Spot */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-8 sm:p-12">
@@ -2077,7 +2236,7 @@ export default function App() {
                         </>
                       ) : (
                         <>
-                          Located in one of the most peaceful and prestigious areas with convenient nearby parking.
+                          Located in one of the most prestigious and peaceful areas with convenient nearby parking.
                         </>
                       )}
                     </p>
@@ -3281,17 +3440,22 @@ export default function App() {
                       </p>
 
                       {crit.reply && (
-                        <div className="mt-4 p-3.5 bg-brand-black/40 rounded-xl border-l-2 border-brand-gold/70 space-y-1.5 text-left font-sans">
-                          <div className="flex items-baseline justify-between gap-2">
-                            <span className="text-[10px] font-bold text-brand-gold uppercase tracking-wider">
-                              {crit.reply.author_name}
-                            </span>
-                            <span className="text-[9px] text-gray-500 font-mono shrink-0">
-                              {crit.reply.relative_time_description}
-                            </span>
+                        <div className="mt-4 pl-3.5 border-l-2 border-brand-gold/50 bg-brand-black/40 p-3 rounded-r-xl rounded-bl-xl border border-brand-border/30 space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-white text-[9px] font-bold font-mono">
+                              N
+                            </div>
+                            <div className="flex items-baseline space-x-2">
+                              <span className="text-[10px] font-bold text-white leading-none">
+                                {crit.reply.author_name}
+                              </span>
+                              <span className="text-[8px] text-gray-500 leading-none">
+                                {crit.reply.relative_time_description}
+                              </span>
+                            </div>
                           </div>
-                          <p className="text-[11px] text-gray-400 leading-relaxed italic font-light whitespace-pre-line">
-                            "{crit.reply.text}"
+                          <p className="text-[10px] text-gray-400 leading-relaxed font-sans whitespace-pre-line">
+                            {crit.reply.text}
                           </p>
                         </div>
                       )}
@@ -3412,7 +3576,7 @@ export default function App() {
                     <Mail className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-white block font-heading mb-0.5">{lang === 'pt' ? 'Correio Eletrónico:' : 'Direct Email:'}</strong>
-                      <span className="text-gray-400 font-mono">geral@nipon-spa.pt</span>
+                      <a href="mailto:nipon@nipon-terapias.com" className="text-gray-400 hover:text-brand-gold font-mono transition duration-150">nipon@nipon-terapias.com</a>
                     </div>
                   </div>
                 </div>
@@ -3450,16 +3614,26 @@ export default function App() {
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                     <div className="md:col-span-8 space-y-4">
                       <span className="text-brand-red font-semibold text-xs uppercase tracking-widest block font-mono">
-                        {lang === 'pt' ? 'O Caminho do Conhecimento • Dokusho' : 'The Path of Understanding • Dokusho'}
+                        {lang === 'pt' ? 'Artigos & Sabedoria • Dokusho' : 'Articles & Wisdom • Dokusho'}
                       </span>
-                      <h1 className="text-3xl md:text-5xl font-light text-white font-heading tracking-tight animate-fade-in">
-                        {lang === 'pt' ? 'Crónicas de Quioto & Lisboa' : 'Kyoto & Lisbon Chronicles'}
-                      </h1>
-                      <p className="text-xs md:text-sm text-gray-400 leading-relaxed font-sans max-w-2xl animate-fade-in">
+                      <h1 className="text-2xl md:text-4xl font-light text-white font-heading tracking-tight animate-fade-in leading-snug">
                         {lang === 'pt' 
-                          ? 'Acompanhe as nossas crónicas semanais de estética oriental, fomento do Ki, rituais do chá matcha tradicional, e as filosofias ancestrais de bem-estar japonês aplicadas ao quotidiano de Lisboa.'
-                          : 'Explore our weekly chronicles of Eastern aesthetics, Ki fostering, traditional matcha tea rituals, and ancestral Japanese philosophies of wellness configured for Lisbon life.'}
-                      </p>
+                          ? 'DOKUSHO • Sabedoria Japonesa para uma Vida com Mais Equilíbrio' 
+                          : 'DOKUSHO • Japanese Wisdom for a Balanced Life'}
+                      </h1>
+                      <div className="text-xs md:text-sm text-gray-400 leading-relaxed font-sans max-w-2xl animate-fade-in space-y-2">
+                        {lang === 'pt' ? (
+                          <>
+                            <p>Explore artigos exclusivos sobre terapias japonesas, cultura Omotenashi, rituais ancestrais, bem-estar e filosofia de vida japonesa.</p>
+                            <p>Um espaço criado para partilhar o conhecimento que inspira há gerações a missão do Nipon Spa.</p>
+                          </>
+                        ) : (
+                          <>
+                            <p>Explore exclusive articles on Japanese therapies, Omotenashi culture, ancestral rituals, wellness, and Japanese philosophy of life.</p>
+                            <p>A space created to share the knowledge that has inspired the mission of Nipon Spa for generations.</p>
+                          </>
+                        )}
+                      </div>
                     </div>
  
                     <div className="md:col-span-4 flex justify-center">
@@ -5318,7 +5492,7 @@ export default function App() {
                       <li>Sábados: <span className="text-white font-bold">10:00h às 17:00h</span></li>
                       <li>Domingos: <span className="text-brand-red font-bold">Encerrado</span></li>
                     </ul>
-                    <p className="pt-1 text-[11px]">Recomenda-se a chegada 10 minutos antes do início do tratamento para o escalda-pés e infusão de boas-vindas.</p>
+                    <p className="pt-1 text-[11px]">Recomenda-se a chegada 10 minutos antes do início do tratamento.</p>
                   </>
                 ) : (
                   <>
@@ -5327,8 +5501,8 @@ export default function App() {
                       <li>Mon to Fri: <span className="text-white font-bold">11:00 to 20:00</span></li>
                       <li>Saturdays: <span className="text-white font-bold">10:00 to 17:00</span></li>
                       <li>Sundays: <span className="text-brand-red font-bold">Closed</span></li>
-                    </ul>
-                    <p className="pt-1 text-[11px]">We highly recommend arriving 10 minutes prior to your booking for the ritual footbath and welcome herbal tea.</p>
+                      </ul>
+                    <p className="pt-1 text-[11px]">We highly recommend arriving 10 minutes prior to your booking.</p>
                   </>
                 )}
               </div>
