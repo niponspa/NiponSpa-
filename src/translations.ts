@@ -142,7 +142,7 @@ export const TRANSLATIONS: Record<'pt' | 'en', TranslationSet> = {
     navBlog: "Blog",
     navMyAccount: "As Minhas Reservas",
 
-    heroTag: "Estética do Cuidado & Banho em Lisboa",
+    heroTag: "Estética do Cuidado & Bem-estar em Lisboa",
     heroHeadline1: "Bem-estar japonês no coração de Lisboa",
     heroHeadline2: "",
     heroJapaneseSubtitle: "一期一会 • O Caminho da Paz Interior Japonesa",
@@ -154,7 +154,7 @@ export const TRANSLATIONS: Record<'pt' | 'en', TranslationSet> = {
 
     all: "Todos",
     massage: "Massagens",
-    ritual: "Rituais de Banho",
+    ritual: "Rituais de Relaxamento",
     wellness: "Saúde & Mente",
     special: "Rituais de Assinatura",
     treatmentTitle: "Rituais de Cura Japonesa",
@@ -257,7 +257,7 @@ export const TRANSLATIONS: Record<'pt' | 'en', TranslationSet> = {
     navBlog: "Blog",
     navMyAccount: "My Account",
 
-    heroTag: "Aesthetics of Wellness & Bath in Lisbon",
+    heroTag: "Aesthetics of Care & Wellness in Lisbon",
     heroHeadline1: "Japanese wellness in the heart of Lisbon",
     heroHeadline2: "",
     heroJapaneseSubtitle: "Ichi-go ichi-e • The Way of Inner Japanese Peace",
@@ -269,7 +269,7 @@ export const TRANSLATIONS: Record<'pt' | 'en', TranslationSet> = {
 
     all: "All",
     massage: "Massages",
-    ritual: "Bath Rituals",
+    ritual: "Relaxation Rituals",
     wellness: "Health & Mind",
     special: "Signature Rituals",
     treatmentTitle: "Japanese Healing Rituals",

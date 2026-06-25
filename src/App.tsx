@@ -53,6 +53,7 @@ import { Therapy, Booking, PaymentMethod, Review } from './types';
 import { TRANSLATIONS } from './translations';
 import NiponLogo from './components/NiponLogo';
 import GalleryView from './components/GalleryView';
+import TeamSection from './components/TeamSection';
 import { BLOG_POSTS, BlogPost } from './data/blog';
 
 // Import image assets statically for Vite production bundles
@@ -109,8 +110,8 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
       year: "22 Anos de Sucesso",
       title: lang === 'pt' ? "Crescimento & Adaptação" : "Growth & Mastery",
       desc: lang === 'pt'
-        ? "Duas décadas de crescimento sustentável em Lisboa, cultivando a excelência no atendimento personalizado e introduzindo rituais consagrados de banhos purificadores em banheiras de madeira tradicional."
-        : "Two decades of secure growth in Lisbon, polishing our tailor-made hospitality and introducing legendary purification baths in traditional wooden frames.",
+        ? "Duas décadas de crescimento sustentável em Lisboa, cultivando a excelência no atendimento personalizado e promovendo rituais consagrados de relaxamento e reequilíbrio inspirados na tradição japonesa."
+        : "Two decades of secure growth in Lisbon, polishing our tailor-made hospitality and promoting legendary relaxation and rebalancing rituals inspired by Japanese tradition.",
       badge: lang === 'pt' ? "Equilíbrio & Tradição" : "Balance & Heritage",
       icon: TrendingUp
     },
@@ -125,10 +126,10 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
     },
     {
       year: "Nova Geração",
-      title: lang === 'pt' ? "Karina Seito & Arissa Matsumoto" : "Karina Seito & Arissa Matsumoto",
+      title: lang === 'pt' ? "Uma Nova Liderança" : "A New Leadership",
       desc: lang === 'pt'
-        ? "A passagem do bastão de liderança. A essência do tratamento nipónico alia-se agora a uma nova gestão estratégica com os mesmos valores tradicionais."
-        : "The leadership handoff. The original spirit of Japanese restorative care joins a new strategic leadership while maintaining the core ancestral values.",
+        ? "A passagem do bastão de liderança. A essência do tratamento nipónico alia-se agora a uma nova gestão estratégica com os mesmos valores tradicionais, unindo a tradição japonesa à inovação."
+        : "The leadership handoff. The original spirit of Japanese restorative care joins a new strategic leadership, merging Japanese tradition with innovation while maintaining the core ancestral values.",
       badge: lang === 'pt' ? "Evolução & Sinergia" : "Evolution & Synergy",
       icon: Sparkles
     }
@@ -298,88 +299,24 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
 
           {/* STEP 3: Nova Geração (Directors Information) */}
           {timelineStep === 3 && (
-            <div className="space-y-8 pt-6 border-t border-brand-border/30 animate-fade-in">
-              <div className="text-center max-w-xl mx-auto space-y-2">
-                <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-widest block">
-                  {lang === 'pt' ? 'Tradição & Liderança' : 'Heritage & Directors'}
+            <div className="space-y-6 pt-6 border-t border-brand-border/30 animate-fade-in text-center max-w-2xl mx-auto">
+              <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-widest block">
+                {lang === 'pt' ? 'Evolução & Rebranding' : 'Evolution & Rebranding'}
+              </span>
+              <h3 className="text-xl md:text-2xl font-bold font-heading text-white">
+                {lang === 'pt' ? 'Preservando o Legado, Inspirando o Futuro' : 'Preserving the Legacy, Inspiring the Future'}
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed">
+                {lang === 'pt' 
+                  ? 'A transição para uma nova geração marca o início de uma nova era estratégica para o Nipon Spa. Unimos a excelência de rituais tradicionais com mais de 22 anos à inovação e dinamismo de uma equipa apaixonada.'
+                  : 'The transition to a new generation marks the beginning of a new strategic era for Nipon Spa. We unite over 22 years of excellent traditional rituals with the innovation and dynamism of a passionate team.'}
+              </p>
+              <div className="pt-2">
+                <span className="inline-flex items-center gap-2 text-xs font-mono text-brand-gold uppercase tracking-wider bg-brand-gold/10 border border-brand-gold/25 px-4 py-2 rounded-full font-bold">
+                  <span>✦</span>
+                  {lang === 'pt' ? 'Conheça a nossa equipa de especialistas abaixo' : 'Meet our team of specialists below'}
+                  <span>✦</span>
                 </span>
-                <h3 className="text-xl md:text-2xl font-bold font-heading text-white">
-                  {lang === 'pt' ? 'Uma Nova Geração, a Mesma Essência' : 'A New Generation, the Same Essence'}
-                </h3>
-                <p className="text-xs text-gray-400 font-sans">
-                  {lang === 'pt' 
-                    ? 'Conheça as responsáveis por conduzir o Nipon Spa com o mesmo compromisso incondicional e respeito ao ritual de acolhimento sagrado.'
-                    : 'Meet the dedicated directors carrying forward our ancestral legacy with pure values of detail, quality, and respect.'}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto items-start">
-                {/* Component Card: Karina Seito */}
-                <div className="lg:col-span-5 bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-brand-red/25 transition duration-500 relative overflow-hidden group text-left">
-                  <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-                    <span className="text-7xl font-sans text-white font-extrabold select-none font-mono">SEITO</span>
-                  </div>
-                  <div className="space-y-4">
-                    <span className="text-[9px] bg-brand-gold/15 text-brand-gold border border-brand-gold/30 px-3 py-1 rounded-full uppercase tracking-wider font-mono font-extrabold inline-block">
-                      {lang === 'pt' ? 'Diretora Estratégica' : 'Strategic Executive Director'}
-                    </span>
-                    <h4 className="text-2xl font-light text-white font-heading tracking-tight">
-                      Karina Seito
-                    </h4>
-                    <p className="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed font-light">
-                      {lang === 'pt'
-                        ? 'Responsável pela gestão estratégica e desenvolvimento do Nipon Spa, assegurando que a qualidade, a inovação e a excelência continuam a fazer parte da experiência de cada cliente.'
-                        : 'Responsible for strategic management and corporate development of Nipon Spa, ensuring that quality, safety, digital accessibility, and absolute excellence continue to form the cornerstone of every customer journey.'}
-                    </p>
-                  </div>
-                  <div className="border-t border-brand-border/40 pt-4 flex items-center justify-between text-gray-400 text-[10px] font-mono uppercase tracking-widest">
-                    <span>{lang === 'pt' ? 'GESTÃO & DESENVOLVIMENTO' : 'STRATEGIC MANAGEMENT'}</span>
-                    <span className="text-brand-red">✦ ✦ ✦</span>
-                  </div>
-                </div>
-
-                {/* Component Card: Arissa Matsumoto */}
-                <div className="lg:col-span-7 bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between hover:border-brand-red/25 transition duration-500 relative overflow-hidden group text-left">
-                  <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-                    <span className="text-7xl font-sans text-white font-extrabold select-none font-mono">ARISSA</span>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex flex-wrap gap-2">
-                      <span className="text-[9px] bg-brand-red/15 text-brand-red border border-brand-red/30 px-3 py-1 rounded-full uppercase tracking-wider font-mono font-extrabold inline-block">
-                        {lang === 'pt' ? 'Diretora de Omotenashi & Tradição' : 'Director of Omotenashi & Tradition'}
-                      </span>
-                      <span className="text-[9px] bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-1 rounded-full uppercase tracking-wider font-mono font-extrabold inline-block">
-                        {lang === 'pt' ? '• Ritual Japonês • Experiência Humana' : '• Japanese Ritual • Human Experience'}
-                      </span>
-                    </div>
-                    <h4 className="text-2xl font-light text-white font-heading tracking-tight">
-                      Arissa Matsumoto
-                    </h4>
-                    <div className="text-xs sm:text-[13px] text-gray-300 font-sans leading-relaxed font-light space-y-3">
-                      {lang === 'pt' ? (
-                        <>
-                          <p>Filha de Vanessa Nascimento e Soichiro Matsumoto, Arissa Matsumoto nasceu no Japão e cresceu entre terapeutas, tratamentos e a filosofia japonesa do cuidado. Representa a terceira geração de uma família dedicada ao bem-estar e à transmissão de conhecimentos terapêuticos inspirados na tradição japonesa.</p>
-                          <p>Desde os 5 anos de idade vive em Portugal, acompanhando de perto o percurso dos seus pais e o crescimento do Nipon Spa. Cresceu num ambiente onde a saúde, o respeito pelo ser humano e a procura constante pela excelência faziam parte do dia a dia. Ao longo dos anos participou em cursos, formações, feiras e eventos ligados à saúde e ao bem-estar, desenvolvendo uma ligação natural ao universo das terapias e da experiência do cliente.</p>
-                          <p>Aos 17 anos regressa ao Japão numa viagem de reencontro com as suas raízes e herança cultural. Durante essa experiência aprofunda o conhecimento da cultura japonesa, vivencia tradições ancestrais e absorve os princípios do Omotenashi, a arte japonesa de receber e cuidar do outro com genuína atenção, respeito e dedicação.</p>
-                          <p>Hoje, Arissa assume a missão de preservar e transmitir os valores que deram origem ao Nipon Spa, unindo a ancestralidade japonesa à excelência no acolhimento e na experiência do cliente. O seu trabalho é inspirado pela convicção de que o verdadeiro cuidado vai além da técnica: está presente em cada gesto, em cada detalhe e na forma como cada pessoa é recebida.</p>
-                          <p>Como guardiã da cultura Omotenashi no Nipon Spa, dedica-se a criar experiências autênticas, mantendo vivo o legado familiar e a tradição japonesa que acompanha a sua história desde o nascimento.</p>
-                        </>
-                      ) : (
-                        <>
-                          <p>Daughter of Vanessa Nascimento and Soichiro Matsumoto, Arissa Matsumoto was born in Japan and grew up among therapists, treatments, and the Japanese philosophy of care. She represents the third generation of a family dedicated to well-being and transmitting therapeutic knowledge inspired by Japanese tradition.</p>
-                          <p>Since the age of 5, she has lived in Portugal, closely following her parents' path and the growth of Nipon Spa. She grew up in an environment where health, respect for human beings, and the constant search for excellence were part of daily life. Over the years, she participated in courses, training, fairs, and events related to health and well-being, developing a natural connection to the world of therapies and customer experience.</p>
-                          <p>At 17, she returned to Japan on a trip to reconnect with her roots and cultural heritage. During this experience, she deepened her knowledge of Japanese culture, experienced ancestral traditions, and absorbed the principles of Omotenashi, the Japanese art of receiving and caring for others with genuine attention, respect, and dedication.</p>
-                          <p>Today, Arissa embraces the mission of preserving and transmitting the values that gave rise to Nipon Spa, uniting Japanese ancestry with excellence in welcoming and customer experience. Her work is inspired by the belief that true care goes beyond technique: it is present in every gesture, in every detail, and in how each person is received.</p>
-                          <p>As the guardian of the Omotenashi culture at Nipon Spa, she dedicates herself to creating authentic experiences, keeping alive the family legacy and the Japanese tradition that has accompanied her story since birth.</p>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  <div className="border-t border-brand-border/40 pt-4 flex items-center justify-between text-gray-400 text-[10px] font-mono uppercase tracking-widest">
-                    <span>{lang === 'pt' ? 'RITUAIS & EXPERIÊNCIA HUMANA' : 'JAPANESE RITUALS & TRADITION'}</span>
-                    <span className="text-brand-red">✦ ✦ ✦</span>
-                  </div>
-                </div>
               </div>
             </div>
           )}
@@ -410,8 +347,8 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
             {
               title: lang === 'pt' ? 'Cultura japonesa autêntica' : 'Authentic Japanese Culture',
               desc: lang === 'pt' 
-                ? 'Nossos banhos purificadores em madeira hinoki, infusão de chá matcha biológico e rituais transportam-no verdadeiramente para Quioto.'
-                : 'Our custom Hinoki hot tubs, botanical scent profile, and organic matcha teas convey Kyoto’s true zen.',
+                ? 'Os nossos rituais tradicionais, o aroma acolhedor a madeira hinoki e a infusão de chá matcha biológico transportam-no verdadeiramente para Quioto.'
+                : 'Our traditional rituals, welcoming Hinoki scent profile, and organic matcha teas convey Kyoto’s true zen.',
               icon: Flower2
             },
             {
@@ -431,8 +368,8 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
             {
               title: lang === 'pt' ? 'Tratamentos personalizados' : 'Customized Treatments',
               desc: lang === 'pt' 
-                ? 'Os óleos essenciais, as frequências de pressões e o banho termal são individualizados para as suas necessidades exatas.'
-                : 'Aromatic essential oils, warm compress pressures, and therapy marks are configured strictly for you.',
+                ? 'Os óleos biológicos essenciais, as técnicas e as frequências de pressões são individualizados para as suas necessidades exatas.'
+                : 'Organic essential oils, specialized techniques, and pressure frequencies are configured strictly for your exact needs.',
               icon: ShieldCheck
             },
             {
@@ -2103,10 +2040,10 @@ export default function App() {
                   <span className="text-[120px] font-extrabold font-serif text-white tracking-widest leading-none">持て成し</span>
                 </div>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start relative z-10">
+                <div className="max-w-4xl mx-auto space-y-8 relative z-10 text-left">
                   
-                  {/* Left side: Omotenashi Philosophy content */}
-                  <div className="lg:col-span-7 space-y-6 text-left">
+                  {/* Omotenashi Philosophy content */}
+                  <div className="space-y-6">
                     <div className="space-y-2">
                       <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
@@ -2140,7 +2077,7 @@ export default function App() {
                     </div>
 
                     {/* Cinematic Video Placeholder */}
-                    <div className="relative group rounded-2xl overflow-hidden border border-brand-border/80 bg-brand-black aspect-video flex flex-col items-center justify-center p-6 text-center shadow-2xl transition duration-500 hover:border-brand-red/35">
+                    <div className="relative group rounded-2xl overflow-hidden border border-brand-border/80 bg-brand-black aspect-video flex flex-col items-center justify-center p-6 text-center shadow-2xl transition duration-500 hover:border-brand-red/35 max-w-3xl">
                       {/* Dark ambient background graphic simulating a premium tatami room */}
                       <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent z-0"></div>
                       
@@ -2174,42 +2111,6 @@ export default function App() {
                         <span className="absolute top-2 right-2 bg-brand-red/10 border border-brand-red/30 px-2.5 py-1 rounded-full text-[9px] font-mono uppercase text-brand-red tracking-wider font-extrabold">
                           {lang === 'pt' ? 'Em Breve' : 'Coming Soon'}
                         </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right side: Biography only, taking full space of the right column */}
-                  <div className="lg:col-span-5 w-full">
-                    {/* Arissa Matsumoto Biography Block */}
-                    <div className="bg-brand-black/40 border border-brand-border/50 rounded-2xl p-5 sm:p-6 space-y-4 text-left">
-                      <div className="border-b border-brand-border/30 pb-3 flex items-center justify-between">
-                        <div>
-                          <h4 className="text-white font-heading font-medium text-base">Arissa Matsumoto</h4>
-                          <p className="text-[10px] font-mono text-brand-gold uppercase tracking-[0.12em] mt-0.5">
-                            {lang === 'pt' ? 'Diretora de Omotenashi & Tradição' : 'Director of Omotenashi & Tradition'}
-                          </p>
-                        </div>
-                        <span className="text-xl text-brand-red font-mono font-bold leading-none">有沙</span>
-                      </div>
-                      
-                      <div className="text-[11px] sm:text-xs text-gray-400 font-sans leading-relaxed space-y-3 font-light">
-                        {lang === 'pt' ? (
-                          <>
-                            <p>Filha de Vanessa Nascimento e Soichiro Matsumoto, Arissa Matsumoto nasceu no Japão e cresceu entre terapeutas, tratamentos e a filosofia japonesa do cuidado. Representa a terceira geração de uma família dedicada ao bem-estar e à transmissão de conhecimentos terapêuticos inspirados na tradição japonesa.</p>
-                            <p>Desde os 5 anos de idade vive em Portugal, acompanhando de perto o percurso dos seus pais e o crescimento do Nipon Spa. Cresceu num ambiente onde a saúde, o respeito pelo ser humano e a procura constante pela excelência faziam parte do dia a dia. Ao longo dos anos participou em cursos, formações, feiras e eventos ligados à saúde e ao bem-estar, desenvolvendo uma ligação natural ao universo das terapias e da experiência do cliente.</p>
-                            <p>Aos 17 anos regressa ao Japão numa viagem de reencontro com as suas raízes e herança cultural. Durante essa experiência aprofunda o conhecimento da cultura japonesa, vivencia tradições ancestrais e absorve os princípios do Omotenashi, a arte japonesa de receber e cuidar do outro com genuína atenção, respeito e dedicação.</p>
-                            <p>Hoje, Arissa assume a missão de preservar e transmitir os values que deram origem ao Nipon Spa, unindo a ancestralidade japonesa à excelência no acolhimento e na experiência do cliente. O seu trabalho é inspirado pela convicção de que o verdadeiro cuidado vai além da técnica: está presente em cada gesto, em cada detalhe e na forma como cada pessoa é recebida.</p>
-                            <p>Como guardiã da cultura Omotenashi no Nipon Spa, dedica-se a criar experiências autênticas, mantendo vivo o legado familiar e a tradição japonesa que acompanha a sua história desde o nascimento.</p>
-                          </>
-                        ) : (
-                          <>
-                            <p>Daughter of Vanessa Nascimento and Soichiro Matsumoto, Arissa Matsumoto was born in Japan and grew up among therapists, treatments, and the Japanese philosophy of care. She represents the third generation of a family dedicated to well-being and the transmission of therapeutic knowledge inspired by Japanese tradition.</p>
-                            <p>Since the age of 5, she has lived in Portugal, closely following her parents' path and the growth of Nipon Spa. She grew up in an environment where health, respect for human beings, and the constant search for excellence were part of daily life. Over the years, she participated in courses, training, fairs, and events related to health and well-being, developing a natural connection to the world of therapies and customer experience.</p>
-                            <p>At 17, she returned to Japan on a trip to reconnect with roots and cultural heritage. During this experience, she deepened her knowledge of Japanese culture, experienced ancestral traditions, and absorbed the principles of Omotenashi, the Japanese art of receiving and caring for others with genuine attention, respect, and dedication.</p>
-                            <p>Today, Arissa embraces the mission of preserving and transmitting the values that gave rise to Nipon Spa, uniting Japanese ancestry with excellence in welcoming and customer experience. Her work is inspired by the belief that true care goes beyond technique: it is present in every gesture, in every detail, and in how each person is received.</p>
-                            <p>As the guardian of the Omotenashi culture at Nipon Spa, she dedicates herself to creating authentic experiences, keeping alive the family legacy and the Japanese tradition that has accompanied her story since birth.</p>
-                          </>
-                        )}
                       </div>
                     </div>
                   </div>
@@ -3500,6 +3401,9 @@ export default function App() {
             {/* TIMELINE, LEGACY AND NEW GENERATION COMPONENT EXPANSION */}
             <LegacyTimelineAndNewGen lang={lang} />
 
+            {/* OUR TEAM OF SPECIALISTS SECTION */}
+            <TeamSection lang={lang} />
+
             {/* BRAND FAQS & SECURITY TRUST STATEMENT */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
@@ -3580,19 +3484,6 @@ export default function App() {
                       <a href="mailto:nipon@nipon-terapias.com" className="text-gray-400 hover:text-brand-gold font-mono transition duration-150">nipon@nipon-terapias.com</a>
                     </div>
                   </div>
-                </div>
-
-                {/* Shinto commitment text */}
-                <div className="bg-brand-black/40 border border-brand-border/40 p-4 rounded-xl space-y-2.5">
-                  <div className="flex items-center space-x-2 text-brand-gold">
-                    <ShieldCheck className="w-4 h-4" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest font-mono">{lang === 'pt' ? 'COMPROMISSO OMOTENASHI' : 'OMOTENASHI GUARANTEE'}</span>
-                  </div>
-                  <p className="text-[11px] text-gray-400 leading-relaxed font-sans">
-                    {lang === 'pt' 
-                      ? 'Comprometemo-nos a manter a água sempre à temperatura milimetricamente exata, óleos biológicos importados, e salas limpas segundo os mais rigorosos padrões imperiais japoneses.'
-                      : 'We pledge to maintain the absolute exact therapeutic temperature in our waters, pure imported botanical oils, and sterile sanctuaries strictly echoing Japanese imperial standards.'}
-                  </p>
                 </div>
               </div>
 
@@ -5418,7 +5309,7 @@ export default function App() {
       <footer className="bg-brand-charcoal border-t border-brand-border/95 text-gray-400 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             
             {/* Column 1: Editorial Description */}
             <div className="space-y-4">
@@ -5435,30 +5326,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Column 2: Quick Links */}
-            <div>
-              <h5 className="text-white font-bold font-heading uppercase tracking-widest text-xs mb-4">
-                {lang === 'pt' ? 'Tratamentos Rápidos' : 'Quick Rituals'}
-              </h5>
-              <ul className="space-y-2.5 text-xs text-gray-400">
-                {THERAPIES.slice(0, 4).map(t => (
-                  <li key={t.id}>
-                    <button 
-                      onClick={() => {
-                        setSelectedCategory('all');
-                        setActiveTab('therapies');
-                        setTimeout(() => handleOpenBooking(t), 200);
-                      }} 
-                      className="hover:text-brand-red transition duration-150 text-left"
-                    >
-                      {getTherapyName(t)} ({t.japaneseName})
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 3: Contacts */}
+            {/* Column 2: Contacts */}
             <div>
               <h5 className="text-white font-bold font-heading uppercase tracking-widest text-xs mb-4">
                 {lang === 'pt' ? 'Central de Reservas' : 'Booking Center'}

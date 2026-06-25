@@ -4,7 +4,7 @@ import { X, ChevronLeft, ChevronRight, Filter, Eye, Sparkles } from 'lucide-reac
 
 interface GalleryItem {
   id: number;
-  category: 'zen' | 'water' | 'therapy' | 'omotenashi';
+  category: 'zen' | 'relaxation' | 'therapy' | 'omotenashi';
   titlePt: string;
   titleEn: string;
   descPt: string;
@@ -16,10 +16,10 @@ const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 1,
     category: 'zen',
-    titlePt: 'Ofuro Traditional de Madeira',
-    titleEn: 'Traditional Wooden Ofuro Bath',
-    descPt: 'Banheira artesanal de imersão feita para relaxamento profundo com infusões aromáticas e óleos essenciais de cedro.',
-    descEn: 'Artisanal soaking tub designed for deep relaxation with aromatic cedar infusions and essential oils.',
+    titlePt: 'Refúgio de Paz Tradicional',
+    titleEn: 'Traditional Sanctuary of Peace',
+    descPt: 'Sala acolhedora feita para relaxamento profundo com infusões aromáticas e óleos essenciais selecionados.',
+    descEn: 'Cozy room designed for deep relaxation with selected aromatic infusions and essential oils.',
     imgUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80'
   },
   {
@@ -42,11 +42,11 @@ const GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     id: 4,
-    category: 'water',
-    titlePt: 'Templo de Banho & Cristais de Sal',
-    titleEn: 'Bath Temple & Salt Crystals',
-    descPt: 'Alinhamento térmico com sais sagrados de banho e vapor de lavanda para desintoxicação física e mental.',
-    descEn: 'Thermal alignment with sacred bath salts and lavender steam for physical and mental detoxification.',
+    category: 'relaxation',
+    titlePt: 'Aromaterapia & Cristais de Sal',
+    titleEn: 'Aromatherapy & Salt Crystals',
+    descPt: 'Alinhamento com sais sagrados aromáticos e vapor de lavanda para desintoxicação física e mental.',
+    descEn: 'Alignment with sacred aromatic salts and lavender steam for physical and mental detoxification.',
     imgUrl: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80'
   },
   {
@@ -78,11 +78,11 @@ const GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     id: 8,
-    category: 'water',
-    titlePt: 'Ritual de Imersão em Furo de Pedra',
-    titleEn: 'Stone Bath Immersion Ritual',
-    descPt: 'Imersão purificadora em pedra natural basáltica esculpida, mantida em temperatura terapêutica constante de 39°C.',
-    descEn: 'Purifying immersion in carved natural basaltic stone, maintained at a therapeutic temperature of 39°C.',
+    category: 'relaxation',
+    titlePt: 'Ritual de Pedras Quentes',
+    titleEn: 'Hot Stones Ritual',
+    descPt: 'Terapia relaxante com pedras vulcânicas naturais aquecidas a uma temperatura terapêutica constante e ideal.',
+    descEn: 'Relaxing therapy with heated natural volcanic stones at a constant and ideal therapeutic temperature.',
     imgUrl: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=1200&q=80'
   }
 ];
@@ -92,7 +92,7 @@ interface GalleryViewProps {
 }
 
 export default function GalleryView({ lang }: GalleryViewProps) {
-  const [activeFilter, setActiveFilter] = useState<'all' | 'zen' | 'water' | 'therapy' | 'omotenashi'>('all');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'zen' | 'relaxation' | 'therapy' | 'omotenashi'>('all');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
 
   const filteredItems = GALLERY_ITEMS.filter(item => {
@@ -103,7 +103,7 @@ export default function GalleryView({ lang }: GalleryViewProps) {
   const filterLabels = {
     all: lang === 'pt' ? 'Todos os Espaços' : 'All Spaces',
     zen: lang === 'pt' ? 'Espaço Zen & Conforto' : 'Zen & Comfort',
-    water: lang === 'pt' ? 'Rituais de Água' : 'Water Rituals',
+    relaxation: lang === 'pt' ? 'Relaxamento & Aromas' : 'Relaxation & Aromas',
     therapy: lang === 'pt' ? 'Terapias & Shiatsu' : 'Therapies & Shiatsu',
     omotenashi: lang === 'pt' ? 'Detalhes Omotenashi' : 'Omotenashi Details'
   };
@@ -132,8 +132,8 @@ export default function GalleryView({ lang }: GalleryViewProps) {
         </h1>
         <p className="text-xs sm:text-sm text-gray-400 font-sans leading-relaxed">
           {lang === 'pt'
-            ? 'Faça uma viagem visual antes de agendar a sua imersão. Descubra as texturas orgânicas de madeira Hinoki, as bacias de pedra natural e os rituais purificadores dedicados ao relaxamento puro.'
-            : 'Take an atmospheric preview journey before reserving your physical alignment. Discover cedarwood organic textures, original stone basins, and sacred silent spaces dedicated to pure restoration.'}
+            ? 'Faça uma viagem visual antes de agendar o seu ritual. Descubra as texturas orgânicas, os aromas acolhedores e as terapias consagradas dedicadas ao relaxamento puro.'
+            : 'Take an atmospheric preview journey before reserving your ritual. Discover organic textures, welcoming aromas, and legendary therapies dedicated to pure restoration.'}
         </p>
         <div className="flex justify-center pt-2">
           <span className="h-[2px] w-12 bg-brand-red inline-block"></span>
@@ -142,7 +142,7 @@ export default function GalleryView({ lang }: GalleryViewProps) {
 
       {/* Filter Category Tabs */}
       <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 max-w-4xl mx-auto px-4 border-b border-brand-border/40 pb-0">
-        {(Object.keys(filterLabels) as Array<'all' | 'zen' | 'water' | 'therapy' | 'omotenashi'>).map((categoryKey) => {
+        {(Object.keys(filterLabels) as Array<'all' | 'zen' | 'relaxation' | 'therapy' | 'omotenashi'>).map((categoryKey) => {
           const isActive = activeFilter === categoryKey;
           return (
             <button
@@ -207,7 +207,7 @@ export default function GalleryView({ lang }: GalleryViewProps) {
                   </div>
 
                   <span className="absolute top-3 left-3 bg-brand-black/70 backdrop-blur-md text-[9px] font-mono font-bold uppercase tracking-widest text-[#d4af37] px-2.5 py-1 rounded-sm border border-brand-border duration-300">
-                    {item.category === 'zen' ? 'Zen Space' : item.category === 'water' ? 'Hydrology' : item.category === 'therapy' ? 'Shiatsu' : 'Omotenashi'}
+                    {item.category === 'zen' ? 'Zen Space' : item.category === 'relaxation' ? 'Relaxation' : item.category === 'therapy' ? 'Shiatsu' : 'Omotenashi'}
                   </span>
                 </div>
 
