@@ -11,7 +11,6 @@ const PORT = 3000;
 // Dynamic Google Reviews API
 app.get("/api/google-reviews", async (req, res) => {
   const lang = (req.query.lang as string) || "pt";
-  const apiKey = process.env.GOOGLE_MAPS_PLATFORM_KEY;
 
   // Real-looking mock reviews based on actual Nippon Spa Telheiras customer reviews
   const mockReviews_pt = [

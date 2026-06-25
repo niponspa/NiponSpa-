@@ -2103,7 +2103,7 @@ export default function App() {
                   <span className="text-[120px] font-extrabold font-serif text-white tracking-widest leading-none">持て成し</span>
                 </div>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start relative z-10">
                   
                   {/* Left side: Omotenashi Philosophy content */}
                   <div className="lg:col-span-7 space-y-6 text-left">
@@ -2138,10 +2138,8 @@ export default function App() {
                       <Flower2 className="w-4 h-4 text-brand-red" />
                       <span>NIPON SPA • LISBOA OMOTENASHI LINEAGE</span>
                     </div>
-                  </div>
 
-                  {/* Right side: Cinematic Video Placeholder & Biography below */}
-                  <div className="lg:col-span-5 w-full space-y-6">
+                    {/* Cinematic Video Placeholder */}
                     <div className="relative group rounded-2xl overflow-hidden border border-brand-border/80 bg-brand-black aspect-video flex flex-col items-center justify-center p-6 text-center shadow-2xl transition duration-500 hover:border-brand-red/35">
                       {/* Dark ambient background graphic simulating a premium tatami room */}
                       <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent z-0"></div>
@@ -2178,7 +2176,10 @@ export default function App() {
                         </span>
                       </div>
                     </div>
+                  </div>
 
+                  {/* Right side: Biography only, taking full space of the right column */}
+                  <div className="lg:col-span-5 w-full">
                     {/* Arissa Matsumoto Biography Block */}
                     <div className="bg-brand-black/40 border border-brand-border/50 rounded-2xl p-5 sm:p-6 space-y-4 text-left">
                       <div className="border-b border-brand-border/30 pb-3 flex items-center justify-between">
@@ -2197,7 +2198,7 @@ export default function App() {
                             <p>Filha de Vanessa Nascimento e Soichiro Matsumoto, Arissa Matsumoto nasceu no Japão e cresceu entre terapeutas, tratamentos e a filosofia japonesa do cuidado. Representa a terceira geração de uma família dedicada ao bem-estar e à transmissão de conhecimentos terapêuticos inspirados na tradição japonesa.</p>
                             <p>Desde os 5 anos de idade vive em Portugal, acompanhando de perto o percurso dos seus pais e o crescimento do Nipon Spa. Cresceu num ambiente onde a saúde, o respeito pelo ser humano e a procura constante pela excelência faziam parte do dia a dia. Ao longo dos anos participou em cursos, formações, feiras e eventos ligados à saúde e ao bem-estar, desenvolvendo uma ligação natural ao universo das terapias e da experiência do cliente.</p>
                             <p>Aos 17 anos regressa ao Japão numa viagem de reencontro com as suas raízes e herança cultural. Durante essa experiência aprofunda o conhecimento da cultura japonesa, vivencia tradições ancestrais e absorve os princípios do Omotenashi, a arte japonesa de receber e cuidar do outro com genuína atenção, respeito e dedicação.</p>
-                            <p>Hoje, Arissa assume a missão de preservar e transmitir os valores que deram origem ao Nipon Spa, unindo a ancestralidade japonesa à excelência no acolhimento e na experiência do cliente. O seu trabalho é inspirado pela convicção de que o verdadeiro cuidado vai além da técnica: está presente em cada gesto, em cada detalhe e na forma como cada pessoa é recebida.</p>
+                            <p>Hoje, Arissa assume a missão de preservar e transmitir os values que deram origem ao Nipon Spa, unindo a ancestralidade japonesa à excelência no acolhimento e na experiência do cliente. O seu trabalho é inspirado pela convicção de que o verdadeiro cuidado vai além da técnica: está presente em cada gesto, em cada detalhe e na forma como cada pessoa é recebida.</p>
                             <p>Como guardiã da cultura Omotenashi no Nipon Spa, dedica-se a criar experiências autênticas, mantendo vivo o legado familiar e a tradição japonesa que acompanha a sua história desde o nascimento.</p>
                           </>
                         ) : (
@@ -3518,8 +3519,8 @@ export default function App() {
                     {
                       qPt: 'Com quanta antecedência devo chegar?',
                       qEn: 'How early should I arrive?',
-                      aPt: 'Recomendamos que chegue exatamente 10 a 15 minutos antes do horário marcado para que possamos trocar de calçado com calma e iniciar a cerimónia de boas-vindas purificadora.',
-                      aEn: 'We suggest arriving exactly 10 to 15 minutes before your scheduled slot. This allows you to comfortably settle in, change into slippers, and ground your spirit.'
+                      aPt: 'Recomendamos que chegue 10 minutos antes do horário marcado para que possamos conversar e entender melhor a necessidade de cada um.',
+                      aEn: 'We suggest arriving 10 minutes before your scheduled slot so we can speak and better understand each individual\'s needs.'
                     },
                     {
                       qPt: 'As massagens são indicadas para grávidas ou pessoas com lesões?',
