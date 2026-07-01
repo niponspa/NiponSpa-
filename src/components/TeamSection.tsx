@@ -10,12 +10,12 @@ export default function TeamSection({ lang }: TeamSectionProps) {
   const team = [
     {
       name: "Karina Seito",
-      rolePt: "CEO",
-      roleEn: "CEO",
+      rolePt: "Gestão",
+      roleEn: "Management",
       descPt: "Em abril de 2026, veio do Japão para assumir a liderança do Nipon Spa e dar início ao rebranding da marca, terapeuta formada no Japão. Irmã da fundadora Vanessa Nascimento, tem como missão preservar o legado construído ao longo de mais de 22 anos, unindo a tradição japonesa à inovação. Lidera a estratégia e o desenvolvimento do Nipon Spa, preparando a marca para uma nova geração, sem perder a autenticidade e a essência que a tornaram uma referência em Lisboa.",
       descEn: "In April 2026, she arrived from Japan to take over the leadership of Nipon Spa and initiate the brand's rebranding, as a Japanese-trained therapist. Sister of the founder Vanessa Nascimento, her mission is to preserve the legacy built over 22 years, merging Japanese tradition with innovation. She leads the strategy and development of Nipon Spa, preparing the brand for a new generation while preserving the authenticity and essence that made it a reference in Lisbon.",
-      badgePt: "Liderança & Estratégia",
-      badgeEn: "Leadership & Strategy",
+      badgePt: "Gestão & Estratégia",
+      badgeEn: "Management & Strategy",
       kanji: "経営",
       icon: Award,
       borderColor: "border-brand-gold/30"
@@ -57,18 +57,6 @@ export default function TeamSection({ lang }: TeamSectionProps) {
       borderColor: "border-brand-border"
     },
     {
-      name: "Berenice Carola",
-      rolePt: "Terapeuta",
-      roleEn: "Therapist",
-      descPt: "Com mais de cinco anos de experiência na área do bem-estar, é especializada em Linfoterapia, tratamentos de estética corporal e massoterapias. Desenvolve protocolos personalizados, aliando conhecimento técnico e dedicação para proporcionar tratamentos eficazes e uma experiência de excelência.",
-      descEn: "With over five years of experience in the well-being industry, she specializes in Lymphotherapy, body aesthetics, and massage therapies. She designs customized protocols, combining technical expertise with dedication to deliver effective treatments and an exceptional experience.",
-      badgePt: "Terapias Manuais",
-      badgeEn: "Manual Therapies",
-      kanji: "癒し",
-      icon: Sparkles,
-      borderColor: "border-brand-border"
-    },
-    {
       name: "Carlos Manuel Henriques Barata",
       rolePt: "Secretariado Clínico",
       roleEn: "Clinical Secretary",
@@ -78,6 +66,18 @@ export default function TeamSection({ lang }: TeamSectionProps) {
       badgeEn: "Organization & Support",
       kanji: "秩序",
       icon: ShieldCheck,
+      borderColor: "border-brand-border"
+    },
+    {
+      name: "Berenice Carola",
+      rolePt: "Terapeuta",
+      roleEn: "Therapist",
+      descPt: "Com mais de cinco anos de experiência na área do bem-estar, é especializada em Linfoterapia, tratamentos de estética corporal e massoterapias. Desenvolve protocolos personalizados, aliando conhecimento técnico e dedicação para proporcionar tratamentos eficazes e uma experiência de excelência.",
+      descEn: "With over five years of experience in the well-being industry, she specializes in Lymphotherapy, body aesthetics, and massage therapies. She designs customized protocols, combining technical expertise with dedication to deliver effective treatments and an exceptional experience.",
+      badgePt: "Terapias Manuais",
+      badgeEn: "Manual Therapies",
+      kanji: "癒し",
+      icon: Sparkles,
       borderColor: "border-brand-border"
     }
   ];

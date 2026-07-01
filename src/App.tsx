@@ -52,7 +52,6 @@ import { THERAPIES, INITIAL_REVIEWS, generateAvailableSlots, generateMockReferen
 import { Therapy, Booking, PaymentMethod, Review } from './types';
 import { TRANSLATIONS } from './translations';
 import NiponLogo from './components/NiponLogo';
-import GalleryView from './components/GalleryView';
 import TeamSection from './components/TeamSection';
 import { BLOG_POSTS, BlogPost } from './data/blog';
 
@@ -123,15 +122,6 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
         : "Over 50,000 patrons have surrendered their stress and fatigue to our master therapists, cementing Nipon Spa as the ultimate oasis in the Portuguese capital.",
       badge: lang === 'pt' ? "Comunidade Alinhada" : "Aligned Community",
       icon: Users
-    },
-    {
-      year: "Nova Geração",
-      title: lang === 'pt' ? "Uma Nova Liderança" : "A New Leadership",
-      desc: lang === 'pt'
-        ? "A passagem do bastão de liderança. A essência do tratamento nipónico alia-se agora a uma nova gestão estratégica com os mesmos valores tradicionais, unindo a tradição japonesa à inovação."
-        : "The leadership handoff. The original spirit of Japanese restorative care joins a new strategic leadership, merging Japanese tradition with innovation while maintaining the core ancestral values.",
-      badge: lang === 'pt' ? "Evolução & Sinergia" : "Evolution & Synergy",
-      icon: Sparkles
     }
   ];
 
@@ -197,7 +187,9 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
         </div>
       </div>
 
-      {/* 2. LINHA DO TEMPO INTERATIVA */}
+
+
+      {/* 3. LINHA DO TEMPO INTERATIVA */}
       <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-10 space-y-8 relative">
         <div className="space-y-2 text-center max-w-xl mx-auto">
           <span className="text-brand-gold font-mono font-bold text-[10px] uppercase tracking-widest block">
@@ -260,63 +252,88 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
             {steps[timelineStep].desc}
           </p>
 
-          {/* STEP 0: 2004 (Fundação - Vanessa's Testimonial Video) */}
+          {/* STEP 0: 2004 (Fundação - Historical Note) */}
           {timelineStep === 0 && (
             <div className="space-y-4 pt-4 border-t border-brand-border/30">
               <div className="space-y-1">
                 <span className="text-[10px] font-mono text-brand-gold font-bold uppercase tracking-[0.2em] block">
-                  {lang === 'pt' ? 'TESTEMUNHO HISTÓRICO: VANESSA NASCIMENTO' : 'HISTORICAL TESTIMONIAL: VANESSA NASCIMENTO'}
+                  {lang === 'pt' ? 'HISTÓRIA DA FUNDAÇÃO' : 'FOUNDATION HISTORY'}
                 </span>
                 <p className="text-[10px] text-gray-500 font-mono italic">
-                  {lang === 'pt' ? 'O testemunho sincero sobre o nascimento do Nipon Spa:' : 'The heartfelt story about the inception of Nipon Spa:'}
+                  {lang === 'pt' ? 'O início da nossa jornada de cura em Lisboa' : 'The beginning of our healing journey in Lisbon'}
                 </p>
               </div>
-
-              {/* Vanessa's testimony simulated video container */}
-              <div className="relative overflow-hidden border border-brand-border bg-brand-black max-w-2xl mx-auto rounded-xl p-6 text-center space-y-4 shadow-xl">
-                <div className="absolute inset-0 opacity-15 bg-gradient-to-t from-brand-gold to-transparent pointer-events-none"></div>
-                
-                <div className="w-14 h-14 rounded-full bg-brand-charcoal border border-brand-gold flex items-center justify-center text-brand-gold mx-auto shadow animate-pulse">
-                  <Play className="w-5 h-5 text-brand-gold ml-0.5" />
-                </div>
-
-                <div className="space-y-1 relative z-10">
-                  <h5 className="text-white text-sm font-heading font-medium">
-                    {lang === 'pt' ? 'O Meu Testemunho • Por Vanessa Nascimento' : 'My Testimony • By Vanessa Nascimento'}
-                  </h5>
-                  <p className="text-xs text-gray-400 leading-relaxed font-sans max-w-md mx-auto">
-                    {lang === 'pt'
-                      ? 'Vanessa Nascimento partilha em primeira pessoa as suas inspirações, a busca pela excelência na arte de cuidar japonesa e como transformou uma visão num templo de paz no coração de Lisboa.'
-                      : 'Vanessa Nascimento shares first-hand her inspirations, the search for absolute excellence in the Japanese art of care, and how she crafted an urban sanctuary of peace in Lisbon.'}
-                  </p>
-                  <span className="text-[10px] text-brand-gold font-mono uppercase bg-brand-gold/10 border border-brand-gold/30 px-3 py-1 rounded-full inline-block mt-2 font-bold select-none">
-                    {lang === 'pt' ? '⏳ Vídeo Brevemente • Testemunho de Vanessa' : '⏳ Video Coming Soon • Vanessa’s Testimonial'}
-                  </span>
-                </div>
-              </div>
+              <p className="text-xs text-gray-400 font-sans leading-relaxed">
+                {lang === 'pt' 
+                  ? 'Vanessa Nascimento estabeleceu as bases do que viria a ser o espaço de referência em terapias japonesas de Lisboa. Desde o primeiro dia, o foco esteve na excelência técnica e no verdadeiro espírito Omotenashi.'
+                  : 'Vanessa Nascimento laid down the foundations of what would become Lisbon\'s premier destination for Japanese therapies. From day one, our focus has been on technical mastery and genuine Omotenashi spirit.'}
+              </p>
             </div>
           )}
 
-          {/* STEP 3: Nova Geração (Directors Information) */}
-          {timelineStep === 3 && (
-            <div className="space-y-6 pt-6 border-t border-brand-border/30 animate-fade-in text-center max-w-2xl mx-auto">
-              <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-widest block">
-                {lang === 'pt' ? 'Evolução & Rebranding' : 'Evolution & Rebranding'}
-              </span>
-              <h3 className="text-xl md:text-2xl font-bold font-heading text-white">
-                {lang === 'pt' ? 'Preservando o Legado, Inspirando o Futuro' : 'Preserving the Legacy, Inspiring the Future'}
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed">
-                {lang === 'pt' 
-                  ? 'A transição para uma nova geração marca o início de uma nova era estratégica para o Nipon Spa. Unimos a excelência de rituais tradicionais com mais de 22 anos à inovação e dinamismo de uma equipa apaixonada.'
-                  : 'The transition to a new generation marks the beginning of a new strategic era for Nipon Spa. We unite over 22 years of excellent traditional rituals with the innovation and dynamism of a passionate team.'}
-              </p>
-              <div className="pt-2">
-                <span className="inline-flex items-center gap-2 text-xs font-mono text-brand-gold uppercase tracking-wider bg-brand-gold/10 border border-brand-gold/25 px-4 py-2 rounded-full font-bold">
-                  <span>✦</span>
-                  {lang === 'pt' ? 'Conheça a nossa equipa de especialistas abaixo' : 'Meet our team of specialists below'}
-                  <span>✦</span>
-                </span>
+          {/* STEP 1: 22 Anos de Sucesso (Vanessa's Testimonial Video and Nova Geração Specialists) */}
+          {timelineStep === 1 && (
+            <div className="space-y-8 pt-4 border-t border-brand-border/30">
+              <div className="space-y-4">
+                <div className="space-y-1 text-center">
+                  <span className="text-[10px] font-mono text-brand-gold font-bold uppercase tracking-[0.2em] block">
+                    {lang === 'pt' ? 'TESTEMUNHO HISTÓRICO: VANESSA NASCIMENTO' : 'HISTORICAL TESTIMONIAL: VANESSA NASCIMENTO'}
+                  </span>
+                  <p className="text-[10px] text-gray-500 font-mono italic">
+                    {lang === 'pt' ? 'O testemunho sincero sobre o nascimento do Nipon Spa:' : 'The heartfelt story about the inception of Nipon Spa:'}
+                  </p>
+                </div>
+
+                {/* Vanessa's testimony simulated video container */}
+                <div className="relative overflow-hidden border border-brand-border bg-brand-black max-w-2xl mx-auto rounded-xl p-6 sm:p-8 text-center space-y-4 shadow-xl">
+                  <div className="absolute inset-0 opacity-15 bg-gradient-to-t from-brand-gold to-transparent pointer-events-none"></div>
+                  
+                  <div className="w-14 h-14 rounded-full bg-brand-charcoal border border-brand-gold flex items-center justify-center text-brand-gold mx-auto shadow animate-pulse">
+                    <Play className="w-5 h-5 text-brand-gold ml-0.5" />
+                  </div>
+
+                  <div className="space-y-1 relative z-10">
+                    <h5 className="text-white text-sm font-heading font-medium">
+                      {lang === 'pt' ? 'O Meu Testemunho • Por Vanessa Nascimento' : 'My Testimony • By Vanessa Nascimento'}
+                    </h5>
+                    <p className="text-xs text-gray-400 leading-relaxed font-sans max-w-md mx-auto">
+                      {lang === 'pt'
+                        ? 'Vanessa Nascimento partilha em primeira pessoa as suas inspirações, a busca pela excelência na arte de cuidar japonesa e como transformou uma visão num templo de paz no coração de Lisboa.'
+                        : 'Vanessa Nascimento shares first-hand her inspirations, the search for absolute excellence in the Japanese art of care, and how she crafted an urban sanctuary of peace in Lisbon.'}
+                    </p>
+                    <span className="text-[10px] text-brand-gold font-mono uppercase bg-brand-gold/10 border border-brand-gold/30 px-3 py-1 rounded-full inline-block mt-2 font-bold select-none">
+                      {lang === 'pt' ? '⏳ Vídeo Brevemente • Testemunho de Vanessa' : '⏳ Video Coming Soon • Vanessa’s Testimonial'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* NOVA GERAÇÃO / EQUIPA DE ESPECIALISTAS */}
+              <div className="border-t border-brand-border/30 pt-8 space-y-8 animate-fade-in">
+                <div className="space-y-6 text-center max-w-2xl mx-auto">
+                  <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-widest block">
+                    {lang === 'pt' ? 'Evolução & Rebranding' : 'Evolution & Rebranding'}
+                  </span>
+                  <h3 className="text-xl md:text-2xl font-bold font-heading text-white">
+                    {lang === 'pt' ? 'Preservando o Legado, Inspirando o Futuro' : 'Preserving the Legacy, Inspiring the Future'}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed">
+                    {lang === 'pt' 
+                      ? 'A transição para uma nova geração marca o início de uma nova era estratégica para o Nipon Spa. Unimos a excelência de rituais tradicionais com mais de 22 anos à inovação e dinamismo de uma equipa apaixonada.'
+                      : 'The transition to a new generation marks the beginning of a new strategic era for Nipon Spa. We unite over 22 years of excellent traditional rituals with the innovation and dynamism of a passionate team.'}
+                  </p>
+                  <div className="pt-2">
+                    <span className="inline-flex items-center gap-2 text-xs font-mono text-brand-gold uppercase tracking-wider bg-brand-gold/10 border border-brand-gold/25 px-4 py-2 rounded-full font-bold">
+                      <span>✦</span>
+                      {lang === 'pt' ? 'Conheça a nossa equipa de especialistas abaixo' : 'Meet our team of specialists below'}
+                      <span>✦</span>
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-6">
+                  <TeamSection lang={lang} />
+                </div>
               </div>
             </div>
           )}
@@ -1060,7 +1077,7 @@ export default function App() {
         const possibleTabFromPath = path.slice(1);
         const possibleTabFromHash = hash.replace(/^#\/?/, '');
         
-        const validTabs = ['home', 'about', 'therapies', 'blog', 'staff-portal', 'bookings', 'reservar', 'reviews', 'gallery'];
+        const validTabs = ['home', 'about', 'therapies', 'blog', 'staff-portal', 'bookings', 'reservar', 'reviews'];
         
         if (validTabs.includes(possibleTabFromHash)) {
           setActiveTab(possibleTabFromHash);
@@ -1475,15 +1492,6 @@ export default function App() {
                 )}
               </button>
               <button 
-                onClick={() => { setActiveTab('gallery'); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'gallery' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
-              >
-                {t.navGallery}
-                {activeTab === 'gallery' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
-                )}
-              </button>
-              <button 
                 onClick={() => { setActiveTab('reviews'); }}
                 className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'reviews' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
               >
@@ -1596,12 +1604,6 @@ export default function App() {
                 className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'therapies' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navTreatments}
-              </button>
-              <button 
-                onClick={() => { setActiveTab('gallery'); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'gallery' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
-              >
-                {t.navGallery}
               </button>
               <button 
                 onClick={() => { setActiveTab('reviews'); setIsMobileMenuOpen(false); }}
@@ -3387,22 +3389,12 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB: GALLERY VIEW */}
-        {activeTab === 'gallery' && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16 animate-fade-in" id="gallery-page">
-            <GalleryView lang={lang} />
-          </div>
-        )}
-
         {/* TAB 5: ABOUT NIPON SPA (ABOUT US PAGE) */}
         {activeTab === 'about' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16 animate-fade-in" id="about-page">
             
             {/* TIMELINE, LEGACY AND NEW GENERATION COMPONENT EXPANSION */}
             <LegacyTimelineAndNewGen lang={lang} />
-
-            {/* OUR TEAM OF SPECIALISTS SECTION */}
-            <TeamSection lang={lang} />
 
             {/* BRAND FAQS & SECURITY TRUST STATEMENT */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
