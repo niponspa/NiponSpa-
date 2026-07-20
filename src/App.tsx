@@ -1475,38 +1475,38 @@ export default function App() {
             <nav className="hidden md:flex space-x-6 text-xs font-semibold tracking-widest uppercase h-full items-center relative">
               <button 
                 onClick={() => { setActiveTab('about'); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'about' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
+                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'about' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navAbout}
                 {activeTab === 'about' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#ff3333] rounded-full animate-fade-in"></span>
                 )}
               </button>
               <button 
                 onClick={() => { setActiveTab('therapies'); setSelectedCategory('all'); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'therapies' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
+                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'therapies' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navTreatments}
                 {activeTab === 'therapies' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#ff3333] rounded-full animate-fade-in"></span>
                 )}
               </button>
               <button 
                 onClick={() => { setActiveTab('reviews'); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'reviews' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
+                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'reviews' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navReviews}
                 {activeTab === 'reviews' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#ff3333] rounded-full animate-fade-in"></span>
                 )}
               </button>
               <button 
                 onClick={() => { setActiveTab('blog'); setSelectedBlogPost(null); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'blog' ? 'text-brand-red font-bold' : 'text-gray-400 hover:text-white'}`}
+                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'blog' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navBlog}
                 {activeTab === 'blog' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-red rounded-full animate-fade-in"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#ff3333] rounded-full animate-fade-in"></span>
                 )}
               </button>
             </nav>
@@ -1595,25 +1595,25 @@ export default function App() {
             <div className="flex-1 flex flex-col justify-center space-y-6 py-6 text-center">
               <button 
                 onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'about' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'about' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navAbout}
               </button>
               <button 
                 onClick={() => { setActiveTab('therapies'); setSelectedCategory('all'); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'therapies' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'therapies' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navTreatments}
               </button>
               <button 
                 onClick={() => { setActiveTab('reviews'); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'reviews' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'reviews' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navReviews}
               </button>
               <button 
                 onClick={() => { setActiveTab('blog'); setSelectedBlogPost(null); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'blog' ? 'text-brand-red font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'blog' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navBlog}
               </button>
