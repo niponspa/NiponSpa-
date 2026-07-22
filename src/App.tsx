@@ -2314,16 +2314,30 @@ export default function App() {
                   </div>
                 </div>
 
-                <a 
-                  href="https://nipon-spa-japones.doc.pt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center space-x-2 shrink-0 select-none"
-                  id="fallback-button"
-                >
-                  <BookOpen className="w-4 h-4" />
-                  <span>{lang === 'pt' ? 'Abrir marcação numa nova janela' : 'Open booking in new window'}</span>
-                </a>
+                <div className="flex flex-col sm:flex-row gap-3 shrink-0 w-full sm:w-auto">
+                  <a 
+                    href="https://nipon-spa-japones.doc.pt"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-2 shrink-0 select-none"
+                    id="fallback-button"
+                  >
+                    <BookOpen className="w-4 h-4" />
+                    <span>{lang === 'pt' ? 'Abrir marcação numa nova janela' : 'Open booking in new window'}</span>
+                  </a>
+                  <a 
+                    href="https://wa.me/351917448484"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#25D366] hover:bg-[#20ba5a] text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-2 shrink-0 select-none shadow-md shadow-[#25D366]/15"
+                    id="whatsapp-booking-button"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.413 9.863-9.83.001-2.624-1.017-5.091-2.868-6.944-1.851-1.852-4.312-2.871-6.932-2.872-5.412 0-9.82 4.414-9.824 9.831-.001 1.772.486 3.498 1.411 5.011l-.995 3.634 3.72-.975zm11.367-3.41c-.293-.146-1.736-.857-2.004-.954-.268-.099-.463-.147-.658.146-.195.293-.755.954-.926 1.148-.171.195-.341.219-.634.073-1.8-.9-2.92-1.545-4.077-3.528-.305-.524.305-.487.873-1.619.098-.195.049-.366-.024-.513-.074-.146-.659-1.586-.903-2.172-.237-.57-.479-.492-.659-.501-.17-.008-.365-.01-.56-.01-.195 0-.512.073-.78.366-.269.293-1.025 1.001-1.025 2.441 0 1.439 1.049 2.83 1.195 3.025.147.195 2.064 3.151 5.001 4.419.699.302 1.244.482 1.67.618.703.223 1.343.191 1.85.116.564-.084 1.736-.708 1.98-.1.146.244.11.455.074-.146-.037-.293-.146-.439-.293z" />
+                    </svg>
+                    <span>{lang === 'pt' ? 'Reservar pelo WhatsApp' : 'Book via WhatsApp'}</span>
+                  </a>
+                </div>
               </div>
 
               {/* Booking block with responsive iframe and rounded corners - Now with taller dimensions for premium visibility */}
@@ -2389,17 +2403,37 @@ export default function App() {
                 {bookingStep === 1 && (
                   <div className="space-y-6">
                     {/* Construction warning banner in the wizard */}
-                    <div className="bg-brand-red/10 border border-brand-red/30 p-4 rounded-xl flex items-start space-x-3 text-xs text-gray-300 animate-fade-in">
-                      <Lock className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
-                      <div className="space-y-1">
-                        <p className="font-bold text-white text-sm">
-                          {lang === 'pt' ? '🔒 Plataforma em Construção' : '🔒 Platform Under Construction'}
-                        </p>
-                        <p className="leading-relaxed">
+                    <div className="bg-brand-red/10 border border-brand-red/30 p-4 rounded-xl flex flex-col space-y-3 text-xs text-gray-300 animate-fade-in">
+                      <div className="flex items-start space-x-3">
+                        <Lock className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
+                        <div className="space-y-1">
+                          <p className="font-bold text-white text-sm">
+                            {lang === 'pt' ? '🔒 Plataforma em Construção' : '🔒 Platform Under Construction'}
+                          </p>
+                          <p className="leading-relaxed">
+                            {lang === 'pt' 
+                              ? 'Este website encontra-se atualmente em fase de desenvolvimento e testes. Os agendamentos e os pagamentos online correspondentes estão desativados temporariamente e bloqueados para uso público.'
+                              : 'This website is currently in testing and setup. Online scheduling and live payments are temporarily disabled and blocked for public use.'}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="pt-2 border-t border-brand-red/25 flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <p className="text-gray-300">
                           {lang === 'pt' 
-                            ? 'Este website encontra-se atualmente em fase de desenvolvimento e testes. Os agendamentos e os pagamentos online correspondentes estão desativados temporariamente e bloqueados para uso público.'
-                            : 'This website is currently in testing and setup. Online scheduling and live payments are temporarily disabled and blocked for public use.'}
+                            ? 'Deseja agendar diretamente pelo WhatsApp?' 
+                            : 'Would you like to book directly via WhatsApp?'}
                         </p>
+                        <a 
+                          href="https://wa.me/351917448484"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-[#25D366] hover:bg-[#20ba5a] text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 flex items-center space-x-1.5 shrink-0 select-none shadow-md shadow-[#25D366]/10"
+                        >
+                          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.413 9.863-9.83.001-2.624-1.017-5.091-2.868-6.944-1.851-1.852-4.312-2.871-6.932-2.872-5.412 0-9.82 4.414-9.824 9.831-.001 1.772.486 3.498 1.411 5.011l-.995 3.634 3.72-.975zm11.367-3.41c-.293-.146-1.736-.857-2.004-.954-.268-.099-.463-.147-.658.146-.195.293-.755.954-.926 1.148-.171.195-.341.219-.634.073-1.8-.9-2.92-1.545-4.077-3.528-.305-.524.305-.487.873-1.619.098-.195.049-.366-.024-.513-.074-.146-.659-1.586-.903-2.172-.237-.57-.479-.492-.659-.501-.17-.008-.365-.01-.56-.01-.195 0-.512.073-.78.366-.269.293-1.025 1.001-1.025 2.441 0 1.439 1.049 2.83 1.195 3.025.147.195 2.064 3.151 5.001 4.419.699.302 1.244.482 1.67.618.703.223 1.343.191 1.85.116.564-.084 1.736-.708 1.98-.1.146.244.11.455.074-.146-.037-.293-.146-.439-.293z" />
+                          </svg>
+                          <span>{lang === 'pt' ? 'Falar no WhatsApp' : 'Chat on WhatsApp'}</span>
+                        </a>
                       </div>
                     </div>
 
@@ -5329,6 +5363,16 @@ export default function App() {
                   <a href="tel:+351917448484" className="hover:text-white font-mono">917 448 484</a>
                 </li>
                 <li className="flex items-center space-x-2">
+                  <span className="text-[#25D366] shrink-0 font-bold">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.413 9.863-9.83.001-2.624-1.017-5.091-2.868-6.944-1.851-1.852-4.312-2.871-6.932-2.872-5.412 0-9.82 4.414-9.824 9.831-.001 1.772.486 3.498 1.411 5.011l-.995 3.634 3.72-.975zm11.367-3.41c-.293-.146-1.736-.857-2.004-.954-.268-.099-.463-.147-.658.146-.195.293-.755.954-.926 1.148-.171.195-.341.219-.634.073-1.8-.9-2.92-1.545-4.077-3.528-.305-.524.305-.487.873-1.619.098-.195.049-.366-.024-.513-.074-.146-.659-1.586-.903-2.172-.237-.57-.479-.492-.659-.501-.17-.008-.365-.01-.56-.01-.195 0-.512.073-.78.366-.269.293-1.025 1.001-1.025 2.441 0 1.439 1.049 2.83 1.195 3.025.147.195 2.064 3.151 5.001 4.419.699.302 1.244.482 1.67.618.703.223 1.343.191 1.85.116.564-.084 1.736-.708 1.98-.1.146.244.11.455.074-.146-.037-.293-.146-.439-.293z" />
+                    </svg>
+                  </span>
+                  <a href="https://wa.me/351917448484" target="_blank" rel="noopener noreferrer" className="hover:text-white font-mono flex items-center gap-1.5">
+                    WhatsApp <span className="text-[10px] text-[#25D366] bg-[#25D366]/10 px-1.5 py-0.5 rounded border border-[#25D366]/25 font-sans">Online</span>
+                  </a>
+                </li>
+                <li className="flex items-center space-x-2">
                   <Mail className="w-4 h-4 text-brand-red shrink-0" />
                   <a href="mailto:nipon@nipon-terapias.com" className="hover:text-white font-mono underline truncate font-sans">nipon@nipon-terapias.com</a>
                 </li>
@@ -5401,6 +5445,28 @@ export default function App() {
 
         </div>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/351917448484"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 group border border-white/20"
+        title="WhatsApp"
+        aria-label="WhatsApp"
+      >
+        <span className="absolute right-full mr-3 bg-brand-charcoal border border-brand-border text-white text-xs font-semibold px-3 py-1.5 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300 shadow-md whitespace-nowrap">
+          {lang === 'pt' ? 'Fale Connosco no WhatsApp' : 'Chat with Us on WhatsApp'}
+        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="w-7 h-7"
+        >
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.413 9.863-9.83.001-2.624-1.017-5.091-2.868-6.944-1.851-1.852-4.312-2.871-6.932-2.872-5.412 0-9.82 4.414-9.824 9.831-.001 1.772.486 3.498 1.411 5.011l-.995 3.634 3.72-.975zm11.367-3.41c-.293-.146-1.736-.857-2.004-.954-.268-.099-.463-.147-.658.146-.195.293-.755.954-.926 1.148-.171.195-.341.219-.634.073-1.8-.9-2.92-1.545-4.077-3.528-.305-.524.305-.487.873-1.619.098-.195.049-.366-.024-.513-.074-.146-.659-1.586-.903-2.172-.237-.57-.479-.492-.659-.501-.17-.008-.365-.01-.56-.01-.195 0-.512.073-.78.366-.269.293-1.025 1.001-1.025 2.441 0 1.439 1.049 2.83 1.195 3.025.147.195 2.064 3.151 5.001 4.419.699.302 1.244.482 1.67.618.703.223 1.343.191 1.85.116.564-.084 1.736-.708 1.98-.1.146.244.11.455.074-.146-.037-.293-.146-.439-.293z" />
+        </svg>
+      </a>
 
     </div>
   );
