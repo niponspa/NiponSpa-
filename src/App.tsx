@@ -159,29 +159,43 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
                   : 'Over more than two decades, thousands of clients have trusted our care, turning Nipon Spa into an undisputed reference in Lisbon. Today, this legacy continues through a new generation sharing the exact same values of devotion, extreme professionalism, and micro-attention to detail.'}
               </p>
             </div>
+
+            {/* Premium horizontal stats display */}
+            <div className="pt-6 grid grid-cols-3 gap-6 border-t border-brand-border/30">
+              <div className="space-y-1 text-center sm:text-left">
+                <span className="text-2xl sm:text-3xl font-heading font-extrabold text-brand-red block tracking-tight">22+</span>
+                <span className="text-[9px] font-mono font-bold text-gray-400 uppercase tracking-widest block leading-tight">
+                  {lang === 'pt' ? 'Anos em Lisboa' : 'Years in Lisbon'}
+                </span>
+              </div>
+              <div className="space-y-1 text-center sm:text-left">
+                <span className="text-2xl sm:text-3xl font-heading font-extrabold text-[#cc0000] block tracking-tight">60.000+</span>
+                <span className="text-[9px] font-mono font-bold text-gray-400 uppercase tracking-widest block leading-tight">
+                  {lang === 'pt' ? 'Atendimentos' : 'Treatments'}
+                </span>
+              </div>
+              <div className="space-y-1 text-center sm:text-left">
+                <span className="text-2xl sm:text-3xl font-heading font-extrabold text-brand-gold block tracking-tight">100%</span>
+                <span className="text-[9px] font-mono font-bold text-gray-400 uppercase tracking-widest block leading-tight">
+                  {lang === 'pt' ? 'Personalizados' : 'Tailored Plans'}
+                </span>
+              </div>
+            </div>
           </div>
 
-          {/* Stat Cards Column */}
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4 w-full">
-            <div className="p-4 text-center space-y-1">
-              <span className="text-4xl font-heading font-extrabold text-brand-red block tracking-tight">22+</span>
-              <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest block">
-                {lang === 'pt' ? 'Anos em Lisboa' : 'Years in Lisbon'}
-              </span>
-            </div>
-
-            <div className="p-4 text-center space-y-1">
-              <span className="text-4xl font-heading font-extrabold text-[#cc0000] block tracking-tight">60.000+</span>
-              <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest block">
-                {lang === 'pt' ? 'Atendimentos Realizados' : 'Treatments Performed'}
-              </span>
-            </div>
-
-            <div className="p-4 text-center space-y-1">
-              <span className="text-4xl font-heading font-extrabold text-brand-gold block tracking-tight">100%</span>
-              <span className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-widest block">
-                {lang === 'pt' ? 'Protocolos Personalizados' : 'Tailored Treatment Plans'}
-              </span>
+          {/* Premium Image Column displaying the new temple legacy photo */}
+          <div className="lg:col-span-5 w-full flex items-center justify-center">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] rounded-2xl overflow-hidden border border-brand-border/40 shadow-2xl group">
+              <img 
+                src="/imagens/IMG_7547.jpeg" 
+                alt="Nipon Spa Legado" 
+                className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+              />
+              {/* Elegant vignette/gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+              {/* Subtle decorative border or corner lines */}
+              <div className="absolute inset-4 border border-white/10 pointer-events-none rounded-xl" />
             </div>
           </div>
         </div>
@@ -426,6 +440,7 @@ export const FOCUS_AREAS = [
   {
     id: 'pain-relief',
     icon: 'Flame',
+    imageUrl: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=600',
     titlePt: 'Tratamento para dores e tensões',
     titleEn: 'Treatment for Pain & Tension',
     descPt: 'Focado no alívio de dor nas costas, tensão cervical, ombros rígidos e cansaço físico acumulado através de acupressão profunda adaptada.',
@@ -477,6 +492,7 @@ export const FOCUS_AREAS = [
   {
     id: 'body-reshaping',
     icon: 'Waves',
+    imageUrl: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&q=80&w=600',
     titlePt: 'Tratamento para redução de medidas e inchaços',
     titleEn: 'Treatment for Measurements & Swelling Reduction',
     descPt: 'Protocolos de modelagem e drenagem manual suave para eliminar líquidos em excesso, diminuir o inchaço e redefinir contornos.',
@@ -528,6 +544,7 @@ export const FOCUS_AREAS = [
   {
     id: 'facial-rejuvenation',
     icon: 'Flower2',
+    imageUrl: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&q=80&w=600',
     titlePt: 'Tratamento Facial para Rejuvenescimento e hidratação profunda',
     titleEn: 'Facial Treatment for Rejuvenation & Deep Hydration',
     descPt: 'Rituais de massagem e nutrição celular baseados em segredos japoneses para devolver a luminosidade, firmeza e hidratação profunda à sua pele.',
@@ -1472,7 +1489,7 @@ export default function App() {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-6 text-xs font-semibold tracking-widest uppercase h-full items-center relative">
+            <nav className="hidden md:flex space-x-6 text-xs font-semibold tracking-widest uppercase h-full self-stretch items-stretch relative">
               <button 
                 onClick={() => { setActiveTab('about'); }}
                 className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'about' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
@@ -1592,34 +1609,46 @@ export default function App() {
             </div>
 
             {/* Navigation links inside drawer */}
-            <div className="flex-1 flex flex-col justify-center space-y-6 py-6 text-center">
+            <div className="flex-1 flex flex-col justify-center space-y-6 py-6 items-center">
               <button 
                 onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'about' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 flex flex-col items-center ${activeTab === 'about' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
-                {t.navAbout}
+                <span>{t.navAbout}</span>
+                {activeTab === 'about' && (
+                  <span className="w-12 h-[2px] bg-[#ff3333] rounded-full mt-1.5 animate-fade-in"></span>
+                )}
               </button>
               <button 
                 onClick={() => { setActiveTab('therapies'); setSelectedCategory('all'); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'therapies' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 flex flex-col items-center ${activeTab === 'therapies' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
-                {t.navTreatments}
+                <span>{t.navTreatments}</span>
+                {activeTab === 'therapies' && (
+                  <span className="w-12 h-[2px] bg-[#ff3333] rounded-full mt-1.5 animate-fade-in"></span>
+                )}
               </button>
               <button 
                 onClick={() => { setActiveTab('reviews'); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'reviews' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 flex flex-col items-center ${activeTab === 'reviews' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
-                {t.navReviews}
+                <span>{t.navReviews}</span>
+                {activeTab === 'reviews' && (
+                  <span className="w-12 h-[2px] bg-[#ff3333] rounded-full mt-1.5 animate-fade-in"></span>
+                )}
               </button>
               <button 
                 onClick={() => { setActiveTab('blog'); setSelectedBlogPost(null); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 ${activeTab === 'blog' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-lg font-bold tracking-widest uppercase transition duration-200 flex flex-col items-center ${activeTab === 'blog' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
               >
-                {t.navBlog}
+                <span>{t.navBlog}</span>
+                {activeTab === 'blog' && (
+                  <span className="w-12 h-[2px] bg-[#ff3333] rounded-full mt-1.5 animate-fade-in"></span>
+                )}
               </button>
               <button 
                 onClick={() => { setActiveTab('reservar'); setIsMobileMenuOpen(false); }}
-                className="text-lg font-extrabold tracking-widest uppercase py-2.5 px-6 rounded-full border border-brand-red bg-brand-red text-white hover:bg-[#cc0000] transition duration-200"
+                className="text-lg font-extrabold tracking-widest uppercase py-2.5 px-6 rounded-full border border-brand-red bg-brand-red text-white hover:bg-[#cc0000] transition duration-200 mt-2"
               >
                 {t.navBookRitual}
               </button>
@@ -1690,7 +1719,7 @@ export default function App() {
                   </video>
                 )}
                 {/* Master gradients overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-brand-black/40"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/55 to-brand-black/15"></div>
               </div>
 
               <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center w-full">
@@ -1755,7 +1784,7 @@ export default function App() {
                       setActiveTab('reservar');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="w-full sm:w-auto bg-[#cc0000] hover:bg-brand-red-hover text-white px-8 py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300"
+                    className="w-full sm:w-auto bg-[#cc0000] hover:bg-brand-red-hover text-white px-8 py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-[#cc0000]/20"
                   >
                     {t.btnBookNow}
                   </button>
@@ -1769,24 +1798,17 @@ export default function App() {
                         if (elem) elem.scrollIntoView({ behavior: 'smooth' });
                       }, 100);
                     }}
-                    className="w-full sm:w-auto hover:bg-white/5 hover:text-white text-gray-300 border border-white/10 px-8 py-3.5 rounded-full font-semibold uppercase tracking-widest text-xs transition duration-200 bg-brand-black/30"
+                    className={`w-full sm:w-auto px-8 py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105 active:scale-95 border
+                      ${themeMode === 'bw'
+                        ? 'border-[#cc0000] text-[#cc0000] hover:bg-[#cc0000] hover:text-white shadow-sm shadow-[#cc0000]/5'
+                        : 'border-white/30 text-white hover:bg-white hover:text-[#0a0a0a] shadow-sm shadow-white/5'
+                      }`}
                   >
                     {t.btnViewTreatments}
                   </button>
                 </div>
 
-                {/* Micro info badges below */}
-                <div className="mt-14 flex flex-wrap items-center justify-center gap-6 text-[10px] text-gray-500 uppercase tracking-widest font-mono">
-                  <span className="flex items-center space-x-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-brand-red" />
-                    <span>{t.heroBadgeLocation}</span>
-                  </span>
-                  <span className="text-brand-gold">•</span>
-                  <span className="flex items-center space-x-1.5">
-                    <Star className="w-3.5 h-3.5 text-brand-gold fill-brand-gold" />
-                    <span>{t.heroBadgeReviews}</span>
-                  </span>
-                </div>
+
               </div>
 
               {/* Minimalist animated Scroll Down Indicator */}
@@ -1842,6 +1864,18 @@ export default function App() {
                       className="bg-white/[0.02] border border-brand-border/60 hover:border-[#cc0000]/60 p-6 rounded-3xl hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between group text-left relative"
                     >
                       <div className="space-y-4">
+                        {opt.imageUrl && (
+                          <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-brand-border/30 bg-brand-charcoal/40">
+                            <img 
+                              src={opt.imageUrl} 
+                              alt={lang === 'pt' ? opt.titlePt : opt.titleEn}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out"
+                              referrerPolicy="no-referrer"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-[#0a0a0a]/10 to-transparent pointer-events-none" />
+                          </div>
+                        )}
+
                         <div className="flex justify-between items-center">
                           <div className="p-2.5 bg-white/[0.04] border border-brand-border/40 rounded-2xl group-hover:scale-110 transition duration-300">
                             <IconComponent className={`w-5 h-5 ${opt.icon === 'Waves' ? 'text-brand-gold' : 'text-[#cc0000]'}`} />
@@ -2214,22 +2248,67 @@ export default function App() {
 
         {/* TAB 2: TREATMENTS CATALOG */}
         {activeTab === 'therapies' && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-12" id="catalog-element">
-            
-            {/* Catalog Introduction */}
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#cc0000] mb-2 block font-mono">
-                {lang === 'pt' ? 'O Cuidado de Excelência em Lisboa' : 'Excellence of Traditional Care in Lisbon'}
-              </span>
-              <h1 className="text-3xl sm:text-4xl font-light text-white font-heading tracking-tight leading-tight">
-                {lang === 'pt' ? 'Tratamentos & Programas de Resultados' : 'Result-Driven Japanese Treatments'}
-              </h1>
-              <p className="text-xs text-gray-400 max-w-lg mx-auto leading-relaxed">
-                {lang === 'pt' 
-                  ? 'No Nipon Spa, cada ritual é desenhado para reequilibrar o seu corpo e mente. Selecione o seu foco principal abaixo para conhecer as opções disponíveis:' 
-                  : 'At Nipon Spa, each ritual is crafted to realign body and mind. Select your primary focus below to learn about available options:'}
-              </p>
+          <div className="w-full animate-fade-in" id="therapies-page">
+            {/* Full-screen Shiatsu Massage Hero Section but 30% shorter */}
+            <div className="relative w-full h-[calc(70vh-72px)] min-h-[420px] flex items-center justify-center overflow-hidden therapies-dark-hero">
+              {/* Background Image of Shiatsu Massage */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700 scale-105"
+                style={{
+                  backgroundImage: "url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=1920')"
+                }}
+              />
+              {/* Dark Transparent Layer (Exactly 25% opacity as requested) */}
+              <div className="absolute inset-0 bg-black/25 backdrop-blur-[1px]" />
+              {/* Soft dark vertical gradient to ensure high-end text legibility without blocking the gorgeous background photo */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-[#0a0a0a]/20" />
+
+              {/* Decorative elements reminiscent of Japanese Zen */}
+              <div className="absolute inset-0 japanese-grid-overlay opacity-15 pointer-events-none" />
+
+              {/* Text and Actions content */}
+              <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
+                <h1 className="text-3xl sm:text-5xl md:text-6xl font-light tracking-wide text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-3xl mx-auto">
+                  {lang === 'pt'
+                    ? 'Menos dor, mais bem-estar.'
+                    : 'Less pain, more well-being.'}
+                </h1>
+
+                {/* Arrow indicator to scroll down to content */}
+                <div className="pt-8 flex flex-col items-center space-y-3">
+                  <span className="text-[10px] font-mono tracking-[0.25em] text-gray-400 uppercase">
+                    {lang === 'pt' ? 'Explore os tratamentos' : 'Explore our treatments'}
+                  </span>
+                  <button 
+                    onClick={() => {
+                      const el = document.getElementById('catalog-element');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="w-8 h-12 rounded-full border border-white/20 flex items-start justify-center p-2 hover:border-[#cc0000] transition duration-300 group cursor-pointer"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#cc0000] animate-bounce" />
+                  </button>
+                </div>
+              </div>
             </div>
+
+            {/* Catalog Content below the hero */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-12" id="catalog-element">
+              
+              {/* Catalog Introduction */}
+              <div className="text-center max-w-2xl mx-auto space-y-3">
+                <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#cc0000] mb-2 block font-mono">
+                  {lang === 'pt' ? 'O Cuidado de Excelência em Lisboa' : 'Excellence of Traditional Care in Lisbon'}
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-light text-white font-heading tracking-tight leading-tight">
+                  {lang === 'pt' ? 'Tratamentos & Programas de Resultados' : 'Result-Driven Japanese Treatments'}
+                </h2>
+                <p className="text-xs text-gray-400 max-w-lg mx-auto leading-relaxed">
+                  {lang === 'pt' 
+                    ? 'No Nipon Spa, cada ritual é desenhado para reequilibrar o seu corpo e mente. Selecione o seu foco principal abaixo para conhecer as opções disponíveis:' 
+                    : 'At Nipon Spa, each ritual is crafted to realign body and mind. Select your primary focus below to learn about available options:'}
+                </p>
+              </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pt-4 pb-12">
               {FOCUS_AREAS.map(opt => {
@@ -2240,6 +2319,18 @@ export default function App() {
                     className="bg-white/[0.02] border border-brand-border/60 hover:border-[#cc0000]/60 p-6 rounded-3xl hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between group text-left relative"
                   >
                     <div className="space-y-4">
+                      {opt.imageUrl && (
+                        <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-brand-border/30 bg-brand-charcoal/40">
+                          <img 
+                            src={opt.imageUrl} 
+                            alt={lang === 'pt' ? opt.titlePt : opt.titleEn}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out"
+                            referrerPolicy="no-referrer"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-[#0a0a0a]/10 to-transparent pointer-events-none" />
+                        </div>
+                      )}
+
                       <div className="flex justify-between items-center">
                         <div className="p-2.5 bg-white/[0.04] border border-brand-border/40 rounded-2xl group-hover:scale-110 transition duration-300">
                           <IconComponent className={`w-5 h-5 ${opt.icon === 'Waves' ? 'text-brand-gold' : 'text-[#cc0000]'}`} />
@@ -2275,27 +2366,63 @@ export default function App() {
               })}
             </div>
           </div>
-        )}
+        </div>
+      )}
 
         {/* TAB: NEW DOC.PT RESERVAR PAGE */}
         {activeTab === 'reservar' && (
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-20 space-y-8 animate-fade-in" id="reservar-page">
-            {/* Page Title & Traditional Subtitle */}
-            <div className="text-center space-y-3">
-              <span className="text-brand-red font-bold text-xs uppercase tracking-widest block font-mono">
-                Omotenashi • {lang === 'pt' ? 'Reserva Segura Directa' : 'Secure Direct Booking'}
-              </span>
-              <h1 className="text-3xl md:text-5xl font-extrabold text-white font-heading tracking-tight" id="reservar-title">
-                {lang === 'pt' ? 'Reserve o seu momento' : 'Reserve your moment'}
-              </h1>
-              <p className="text-xs md:text-sm text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                {lang === 'pt' 
-                  ? 'Escolha as suas terapias de bem-estar preferidas e marque o seu horário ideal com facilidade na plataforma oficial DOC.pt. Aguardamos a sua honrosa visita para lhe proporcionar uma harmonia inigualável.' 
-                  : 'Select your preferred wellness therapies and secure your ideal time slot easily on our official DOC.pt platform. We look forward to welcoming you for an unparalleled state of harmony.'}
-              </p>
+          <div className="w-full animate-fade-in" id="reservar-page">
+            {/* Full-screen booking hero section but 30% shorter */}
+            <div className="relative w-full h-[calc(70vh-72px)] min-h-[420px] flex items-center justify-center overflow-hidden reservar-dark-hero">
+              {/* Background Image of premium Zen treatment room */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700 scale-105"
+                style={{
+                  backgroundImage: "url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=1920')"
+                }}
+              />
+              {/* Dark Transparent Layer (Exactly 25% opacity as requested) */}
+              <div className="absolute inset-0 bg-black/25 backdrop-blur-[1px]" />
+              {/* Soft dark vertical gradient to ensure high-end text legibility without blocking the gorgeous background photo */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-[#0a0a0a]/20" />
+
+              {/* Decorative elements reminiscent of Japanese Zen */}
+              <div className="absolute inset-0 japanese-grid-overlay opacity-15 pointer-events-none" />
+
+              {/* Text and Actions content */}
+              <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
+                
+                <h1 className="text-3xl sm:text-5xl md:text-6xl font-light tracking-wide text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-3xl mx-auto" id="reservar-title">
+                  {lang === 'pt' ? 'RESERVE O SEU MOMENTO' : 'RESERVE YOUR MOMENT'}
+                </h1>
+
+                <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto font-sans leading-relaxed font-light drop-shadow-md">
+                  {lang === 'pt'
+                    ? 'Escolha as suas terapias de bem-estar preferidas e marque o seu horário ideal com facilidade.'
+                    : 'Select your preferred wellness therapies and secure your ideal time slot easily.'}
+                </p>
+
+                {/* Arrow indicator to scroll down to content */}
+                <div className="pt-8 flex flex-col items-center space-y-3">
+                  <span className="text-[10px] font-mono tracking-[0.25em] text-gray-400 uppercase">
+                    {lang === 'pt' ? 'Ir para agendamento' : 'Go to scheduling'}
+                  </span>
+                  <button 
+                    onClick={() => {
+                      const el = document.getElementById('reservar-content');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="w-8 h-12 rounded-full border border-white/20 flex items-start justify-center p-2 hover:border-[#cc0000] transition duration-300 group cursor-pointer"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#cc0000] animate-bounce" />
+                  </button>
+                </div>
+              </div>
             </div>
 
-            {/* Premium Info Panel / Fallback Section */}
+            {/* Booking content below the hero */}
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-8" id="reservar-content">
+              {/* Premium Info Panel / Fallback Section */}
             <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 md:p-8 space-y-6 shadow-xl relative overflow-hidden">
               <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4 border-b border-brand-border/40 pb-6">
                 <div className="flex items-center space-x-3.5 text-center sm:text-left">
@@ -2350,6 +2477,7 @@ export default function App() {
                 />
               </div>
             </div>
+          </div>
           </div>
         )}
 
@@ -3243,24 +3371,57 @@ export default function App() {
 
         {/* TAB 4: REVIEWS & LEAVE REVIEW */}
         {activeTab === 'reviews' && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16">
-            
-            {/* Reviews Introduction */}
-            <div className="border-b border-brand-border/60 pb-12">
-              <div className="text-center lg:text-left space-y-3 p-6 bg-brand-charcoal/20 rounded-2xl border border-brand-border/10">
-                <span className="text-brand-red font-bold text-xs uppercase tracking-widest block">
-                  {lang === 'pt' ? 'Testemunhos' : 'Testimonials'}
-                </span>
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-heading leading-tight">
-                  {lang === 'pt' ? 'O que dizem os nossos clientes' : 'What our clients say'}
+          <div className="w-full animate-fade-in" id="reviews-page">
+            {/* Full-screen reviews hero section but 30% shorter */}
+            <div className="relative w-full h-[calc(70vh-72px)] min-h-[420px] flex items-center justify-center overflow-hidden reviews-dark-hero">
+              {/* Background Image of Zen massage stones & orchid */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700 scale-105"
+                style={{
+                  backgroundImage: "url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=1920')"
+                }}
+              />
+              {/* Dark Transparent Layer (Exactly 25% opacity as requested) */}
+              <div className="absolute inset-0 bg-black/25 backdrop-blur-[1px]" />
+              {/* Soft dark vertical gradient to ensure high-end text legibility without blocking the gorgeous background photo */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-[#0a0a0a]/20" />
+
+              {/* Decorative elements reminiscent of Japanese Zen */}
+              <div className="absolute inset-0 japanese-grid-overlay opacity-15 pointer-events-none" />
+
+              {/* Text and Actions content */}
+              <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
+                
+                <h1 className="text-3xl sm:text-5xl md:text-6xl font-light tracking-wide text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-3xl mx-auto">
+                  {lang === 'pt' ? 'AVALIAÇÕES & TESTEMUNHOS' : 'REVIEWS & TESTIMONIALS'}
                 </h1>
-                <p className="text-xs text-gray-400 leading-relaxed font-sans">
+
+                <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto font-sans leading-relaxed font-light drop-shadow-md">
                   {lang === 'pt'
                     ? 'A opinião sincera de quem já vivenciou o autêntico reequilíbrio físico, mental e espiritual Omotenashi.'
                     : 'Honest opinions from those who have experienced our authentic physical, mental, and spiritual Omotenashi realignment.'}
                 </p>
+
+                {/* Arrow indicator to scroll down to content */}
+                <div className="pt-8 flex flex-col items-center space-y-3">
+                  <span className="text-[10px] font-mono tracking-[0.25em] text-gray-400 uppercase">
+                    {lang === 'pt' ? 'Explore as avaliações' : 'Explore reviews'}
+                  </span>
+                  <button 
+                    onClick={() => {
+                      const el = document.getElementById('reviews-content');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="w-8 h-12 rounded-full border border-white/20 flex items-start justify-center p-2 hover:border-[#cc0000] transition duration-300 group cursor-pointer"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#cc0000] animate-bounce" />
+                  </button>
+                </div>
               </div>
             </div>
+
+            {/* Reviews content below the hero */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-16" id="reviews-content">
 
             {/* GOOGLE REVIEWS SHOWCASE SECTION (DARK JAPANESE SPA SEAMLESS INTEGRATION) */}
             <div className="space-y-8 relative overflow-hidden pt-4">
@@ -3421,14 +3582,67 @@ export default function App() {
             </div>
 
           </div>
+          </div>
         )}
 
         {/* TAB 5: ABOUT NIPON SPA (ABOUT US PAGE) */}
         {activeTab === 'about' && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16 animate-fade-in" id="about-page">
-            
-            {/* TIMELINE, LEGACY AND NEW GENERATION COMPONENT EXPANSION */}
-            <LegacyTimelineAndNewGen lang={lang} />
+          <div className="w-full animate-fade-in" id="about-page">
+            {/* Full-screen Massage Hero Section with custom dark-hero wrapper class to prevent theme-bw inversion of typography colors but 30% shorter */}
+            <div className="relative w-full h-[calc(70vh-72px)] min-h-[420px] flex items-center justify-center overflow-hidden about-dark-hero">
+              {/* Background Image of Traditional Japanese Temple Garden */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700 scale-105"
+                style={{
+                  backgroundImage: "url('https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&q=80&w=1920')"
+                }}
+              />
+              {/* Dark Transparent Layer to ensure high readability (opacity reduced by 25% for 25% more visibility) */}
+              <div className="absolute inset-0 bg-black/52 backdrop-blur-[1px]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/38" />
+
+              {/* Decorative elements reminiscent of Japanese Zen */}
+              <div className="absolute inset-0 japanese-grid-overlay opacity-15 pointer-events-none" />
+
+              {/* Text and Actions content */}
+              <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-light tracking-widest text-white font-heading uppercase leading-none drop-shadow-2xl">
+                  {lang === 'pt' ? 'O NOSSO TEMPLO' : 'OUR SANCTUARY'}
+                </h1>
+
+
+
+                {/* Arrow indicator to scroll down to content */}
+                <div className="pt-8 flex flex-col items-center space-y-3">
+                  <button 
+                    onClick={() => {
+                      const elem = document.getElementById('about-content-start');
+                      if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }}
+                    className="group flex flex-col items-center text-gray-400 hover:text-white transition duration-200 focus:outline-none"
+                  >
+                    <span className="text-[10px] font-mono tracking-widest uppercase mb-2">
+                      {lang === 'pt' ? 'Descubra a Nossa História' : 'Discover Our Story'}
+                    </span>
+                    <div className="w-8 h-12 rounded-full border border-white/25 flex justify-center p-2 relative group-hover:border-white/50 transition">
+                      <motion.div 
+                        animate={{ y: [0, 12, 0] }}
+                        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                        className="w-1.5 h-1.5 bg-brand-red rounded-full"
+                      />
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+
+            </div>
+
+            {/* Rest of the design, wrapped in the container with original style to preserve design */}
+            <div id="about-content-start" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+              
+              {/* TIMELINE, LEGACY AND NEW GENERATION COMPONENT EXPANSION */}
+              <LegacyTimelineAndNewGen lang={lang} />
 
             {/* BRAND FAQS & SECURITY TRUST STATEMENT */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -3514,55 +3728,68 @@ export default function App() {
               </div>
 
             </div>
+            {/* Closing about-content-start container */}
+            </div>
           </div>
         )}
 
         {/* TAB 6: BLOG TRADICIONAL (BLOG PAGE) */}
         {activeTab === 'blog' && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16 animate-fade-in" id="blog-page">
+          <div className={`${!selectedBlogPost ? 'w-full' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-20'} animate-fade-in`} id="blog-page">
             
             {!selectedBlogPost ? (
               // BLOG INDEX / POSTS LIST VIEW
-              <div className="space-y-12">
-                {/* HERO SECTION - SEM CARD */}
-                <div className="relative overflow-hidden pb-10 border-b border-brand-border/40 text-center md:text-left animate-fade-in">
-                  <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-                    <span className="text-8xl font-black font-mono select-none tracking-widest text-white">読書</span>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                    <div className="md:col-span-8 space-y-4">
-                      <span className="text-brand-red font-semibold text-xs uppercase tracking-widest block font-mono">
-                        {lang === 'pt' ? 'Artigos & Sabedoria • Dokusho' : 'Articles & Wisdom • Dokusho'}
+              <div className="space-y-0">
+                {/* Full-screen blog hero section but 30% shorter */}
+                <div className="relative w-full h-[calc(70vh-72px)] min-h-[420px] flex items-center justify-center overflow-hidden blog-dark-hero">
+                  {/* Background Image of Zen / Dokusho wisdom */}
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700 scale-105"
+                    style={{
+                      backgroundImage: "url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=1920')"
+                    }}
+                  />
+                  {/* Dark Transparent Layer (Exactly 25% opacity as requested) */}
+                  <div className="absolute inset-0 bg-black/25 backdrop-blur-[1px]" />
+                  {/* Soft dark vertical gradient to ensure high-end text legibility without blocking the gorgeous background photo */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-[#0a0a0a]/20" />
+
+                  {/* Decorative elements reminiscent of Japanese Zen */}
+                  <div className="absolute inset-0 japanese-grid-overlay opacity-15 pointer-events-none" />
+
+                  {/* Text and Actions content */}
+                  <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
+                    
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl font-light tracking-wide text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-3xl mx-auto">
+                      {lang === 'pt' ? 'SABEDORIA JAPONESA' : 'JAPANESE WISDOM'}
+                    </h1>
+
+                    <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto font-sans leading-relaxed font-light drop-shadow-md">
+                      {lang === 'pt'
+                        ? 'Explore segredos ancestrais sobre terapias, rituais e equilíbrio absoluto para a mente, corpo e alma.'
+                        : 'Explore ancient secrets about therapies, rituals, and absolute balance for mind, body, and soul.'}
+                    </p>
+
+                    {/* Arrow indicator to scroll down to content */}
+                    <div className="pt-8 flex flex-col items-center space-y-3">
+                      <span className="text-[10px] font-mono tracking-[0.25em] text-gray-400 uppercase">
+                        {lang === 'pt' ? 'Explore os artigos' : 'Explore articles'}
                       </span>
-                      <h1 className="text-2xl md:text-4xl font-light text-white font-heading tracking-tight animate-fade-in leading-snug">
-                        {lang === 'pt' 
-                          ? 'DOKUSHO • Sabedoria Japonesa para uma Vida com Mais Equilíbrio' 
-                          : 'DOKUSHO • Japanese Wisdom for a Balanced Life'}
-                      </h1>
-                      <div className="text-xs md:text-sm text-gray-400 leading-relaxed font-sans max-w-2xl animate-fade-in space-y-2">
-                        {lang === 'pt' ? (
-                          <>
-                            <p>Explore artigos exclusivos sobre terapias japonesas, cultura Omotenashi, rituais ancestrais, bem-estar e filosofia de vida japonesa.</p>
-                            <p>Um espaço criado para partilhar o conhecimento que inspira há gerações a missão do Nipon Spa.</p>
-                          </>
-                        ) : (
-                          <>
-                            <p>Explore exclusive articles on Japanese therapies, Omotenashi culture, ancestral rituals, wellness, and Japanese philosophy of life.</p>
-                            <p>A space created to share the knowledge that has inspired the mission of Nipon Spa for generations.</p>
-                          </>
-                        )}
-                      </div>
-                    </div>
- 
-                    <div className="md:col-span-4 flex justify-center">
-                      <div className="w-36 h-36 rounded-full border border-brand-border/30 flex flex-col items-center justify-center p-4 bg-transparent relative">
-                        <BookOpen className="w-8 h-8 text-brand-red mb-2 animate-pulse" />
-                        <span className="font-mono text-xs text-brand-gold uppercase tracking-widest font-extrabold">DOKUSHO</span>
-                        <span className="text-[10px] text-gray-500 font-mono tracking-tighter mt-1">{lang === 'pt' ? 'Leitura Sagrada' : 'Sacred Reading'}</span>
-                      </div>
+                      <button 
+                        onClick={() => {
+                          const el = document.getElementById('blog-content-start');
+                          if (el) el.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="w-8 h-12 rounded-full border border-white/20 flex items-start justify-center p-2 hover:border-[#cc0000] transition duration-300 group cursor-pointer"
+                      >
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#cc0000] animate-bounce" />
+                      </button>
                     </div>
                   </div>
                 </div>
+
+                {/* Blog content container below the hero */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-16" id="blog-content-start">
 
                 {/* BLOG GRID */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -3672,6 +3899,7 @@ export default function App() {
                     </form>
                   )}
                 </div>
+              </div>
               </div>
             ) : (
               // READ ONE BLOG POST DETAIL VIEW

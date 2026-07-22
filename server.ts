@@ -148,6 +148,9 @@ app.get("/api/google-reviews", async (req, res) => {
 });
 
 async function startServer() {
+  // Serve '/imagens' directory statically so it's always accessible
+  app.use('/imagens', express.static(path.join(process.cwd(), 'imagens')));
+
   if (process.env.NODE_ENV !== "production") {
     // Mount Vite middleware in development mode
     const vite = await createViteServer({

@@ -310,3 +310,189 @@ html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
   border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
+/* Ensure the about page, therapies page, and reviews page full-screen dark hero typography remains light, bold, and high-contrast in both B&W and normal modes */
+#about-page .about-dark-hero,
+.about-dark-hero,
+.theme-bw .about-dark-hero,
+#therapies-page .therapies-dark-hero,
+.therapies-dark-hero,
+.theme-bw .therapies-dark-hero,
+#reviews-page .reviews-dark-hero,
+.reviews-dark-hero,
+.theme-bw .reviews-dark-hero,
+#blog-page .blog-dark-hero,
+.blog-dark-hero,
+.theme-bw .blog-dark-hero,
+#reservar-page .reservar-dark-hero,
+.reservar-dark-hero,
+.theme-bw .reservar-dark-hero {
+  background-color: transparent !important;
+}
+
+#about-page .about-dark-hero h1,
+.about-dark-hero h1,
+.theme-bw .about-dark-hero h1,
+#therapies-page .therapies-dark-hero h1,
+.therapies-dark-hero h1,
+.theme-bw .therapies-dark-hero h1,
+#reviews-page .reviews-dark-hero h1,
+.reviews-dark-hero h1,
+.theme-bw .reviews-dark-hero h1,
+#blog-page .blog-dark-hero h1,
+.blog-dark-hero h1,
+.theme-bw .blog-dark-hero h1,
+#reservar-page .reservar-dark-hero h1,
+.reservar-dark-hero h1,
+.theme-bw .reservar-dark-hero h1 {
+  color: #ffffff !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.1em !important;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8) !important;
+}
+
+#about-page .about-dark-hero .text-white,
+.about-dark-hero .text-white,
+.theme-bw .about-dark-hero .text-white,
+#therapies-page .therapies-dark-hero .text-white,
+.therapies-dark-hero .text-white,
+.theme-bw .therapies-dark-hero .text-white,
+#reviews-page .reviews-dark-hero .text-white,
+.reviews-dark-hero .text-white,
+.theme-bw .reviews-dark-hero .text-white,
+#blog-page .blog-dark-hero .text-white,
+.blog-dark-hero .text-white,
+.theme-bw .blog-dark-hero .text-white,
+#reservar-page .reservar-dark-hero .text-white,
+.reservar-dark-hero .text-white,
+.theme-bw .reservar-dark-hero .text-white {
+  color: #ffffff !important;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8) !important;
+}
+
+#about-page .about-dark-hero h2,
+.about-dark-hero h2,
+.theme-bw .about-dark-hero h2,
+#therapies-page .therapies-dark-hero h2,
+.therapies-dark-hero h2,
+.theme-bw .therapies-dark-hero h2,
+#reviews-page .reviews-dark-hero h2,
+.reviews-dark-hero h2,
+.theme-bw .reviews-dark-hero h2,
+#blog-page .blog-dark-hero h2,
+.blog-dark-hero h2,
+.theme-bw .blog-dark-hero h2,
+#reservar-page .reservar-dark-hero h2,
+.reservar-dark-hero h2,
+.theme-bw .reservar-dark-hero h2 {
+  color: #ff3333 !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.2em !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important;
+}
+
+#about-page .about-dark-hero p,
+.about-dark-hero p,
+.theme-bw .about-dark-hero p,
+#therapies-page .therapies-dark-hero p,
+.therapies-dark-hero p,
+.theme-bw .therapies-dark-hero p,
+#reviews-page .reviews-dark-hero p,
+.reviews-dark-hero p,
+.theme-bw .reviews-dark-hero p,
+#blog-page .blog-dark-hero p,
+.blog-dark-hero p,
+.theme-bw .blog-dark-hero p,
+#reservar-page .reservar-dark-hero p,
+.reservar-dark-hero p,
+.theme-bw .reservar-dark-hero p {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7) !important;
+}
+
+#about-page .about-dark-hero span,
+.about-dark-hero span,
+.theme-bw .about-dark-hero span,
+#therapies-page .therapies-dark-hero span,
+.therapies-dark-hero span,
+.theme-bw .therapies-dark-hero span,
+#reviews-page .reviews-dark-hero span,
+.reviews-dark-hero span,
+.theme-bw .reviews-dark-hero span,
+#blog-page .blog-dark-hero span,
+.blog-dark-hero span,
+.theme-bw .blog-dark-hero span,
+#reservar-page .reservar-dark-hero span,
+.reservar-dark-hero span,
+.theme-bw .reservar-dark-hero span {
+  color: #ffffff !important;
+}
+
+#about-page .about-dark-hero .text-brand-gold,
+.about-dark-hero .text-brand-gold,
+.theme-bw .about-dark-hero .text-brand-gold,
+#therapies-page .therapies-dark-hero .text-brand-gold,
+.therapies-dark-hero .text-brand-gold,
+.theme-bw .therapies-dark-hero .text-brand-gold,
+#reviews-page .reviews-dark-hero .text-brand-gold,
+.reviews-dark-hero .text-brand-gold,
+.theme-bw .reviews-dark-hero .text-brand-gold,
+#blog-page .blog-dark-hero .text-brand-gold,
+.blog-dark-hero .text-brand-gold,
+.theme-bw .blog-dark-hero .text-brand-gold,
+#reservar-page .reservar-dark-hero .text-brand-gold,
+.reservar-dark-hero .text-brand-gold,
+.theme-bw .reservar-dark-hero .text-brand-gold {
+  color: #ff3333 !important;
+}
+
+#about-page .about-dark-hero .text-gray-400,
+.about-dark-hero .text-gray-400,
+.theme-bw .about-dark-hero .text-gray-400,
+#about-page .about-dark-hero .text-gray-500,
+.about-dark-hero .text-gray-500,
+.theme-bw .about-dark-hero .text-gray-500,
+#therapies-page .therapies-dark-hero .text-gray-400,
+.therapies-dark-hero .text-gray-400,
+.theme-bw .therapies-dark-hero .text-gray-400,
+#therapies-page .therapies-dark-hero .text-gray-500,
+.therapies-dark-hero .text-gray-500,
+.theme-bw .therapies-dark-hero .text-gray-500,
+#reviews-page .reviews-dark-hero .text-gray-400,
+.reviews-dark-hero .text-gray-400,
+.theme-bw .reviews-dark-hero .text-gray-400,
+#reviews-page .reviews-dark-hero .text-gray-500,
+.reviews-dark-hero .text-gray-500,
+.theme-bw .reviews-dark-hero .text-gray-500,
+#blog-page .blog-dark-hero .text-gray-400,
+.blog-dark-hero .text-gray-400,
+.theme-bw .blog-dark-hero .text-gray-400,
+#blog-page .blog-dark-hero .text-gray-500,
+.blog-dark-hero .text-gray-500,
+.theme-bw .blog-dark-hero .text-gray-500,
+#reservar-page .reservar-dark-hero .text-gray-400,
+.reservar-dark-hero .text-gray-400,
+.theme-bw .reservar-dark-hero .text-gray-400,
+#reservar-page .reservar-dark-hero .text-gray-500,
+.reservar-dark-hero .text-gray-500,
+.theme-bw .reservar-dark-hero .text-gray-500 {
+  color: #a1a1aa !important;
+}
+
+#about-page .about-dark-hero button:hover span,
+.about-dark-hero button:hover span,
+.theme-bw .about-dark-hero button:hover span,
+#therapies-page .therapies-dark-hero button:hover span,
+.therapies-dark-hero button:hover span,
+.theme-bw .therapies-dark-hero button:hover span,
+#reviews-page .reviews-dark-hero button:hover span,
+.reviews-dark-hero button:hover span,
+.theme-bw .reviews-dark-hero button:hover span,
+#blog-page .blog-dark-hero button:hover span,
+.blog-dark-hero button:hover span,
+.theme-bw .blog-dark-hero button:hover span,
+#reservar-page .reservar-dark-hero button:hover span,
+.reservar-dark-hero button:hover span,
+.theme-bw .reservar-dark-hero button:hover span {
+  color: #ffffff !important;
+}
+
