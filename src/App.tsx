@@ -1546,24 +1546,6 @@ export default function App() {
                 </button>
               </div>
 
-
-
-              {/* Staff Portal Lock Button */}
-              <button 
-                onClick={() => { setActiveTab('staff-portal'); }} 
-                className={`border text-[10px] font-bold uppercase tracking-widest transition-all duration-300 relative rounded-full p-2.5 cursor-pointer ${
-                  activeTab === 'staff-portal'
-                    ? 'border-[#cc0000] bg-[#cc0000]/10 text-brand-red'
-                    : 'border-white/10 hover:bg-white/10 text-gray-400 hover:text-white'
-                }`}
-                title={lang === 'pt' ? 'Área do Trabalhador' : 'Staff Workspace'}
-              >
-                <LogIn className="w-3.5 h-3.5" />
-                {isStaffLoggedIn && (
-                  <span className="absolute -top-1 -right-1 bg-green-500 w-2.5 h-2.5 rounded-full ring-2 ring-brand-black"></span>
-                )}
-              </button>
-
               {/* Primary Reservar Button */}
               <button 
                 onClick={() => { setActiveTab('reservar'); }} 
