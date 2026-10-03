@@ -1669,8 +1669,8 @@ export default function App() {
         {activeTab === 'home' && (
           <div className="space-y-24">
             
-            {/* Hero Banner Section */}
-            <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+            {/* Hero Banner Section - Minimalist Japanese Luxury aligned with Design System */}
+            <section id="hero-section" className="relative min-h-[90vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
               {/* Background cover video with image poster fallback */}
               <div className="absolute inset-0 z-0">
                 {currentVideo.includes('youtube.com') || currentVideo.includes('youtu.be') ? (
@@ -1681,7 +1681,7 @@ export default function App() {
                     <iframe
                       src={getYouTubeEmbedUrl(currentVideo)}
                       title="Japanese Nature Ambient"
-                      className="absolute top-1/2 left-1/2 w-[177.77777778vh] min-w-full h-[56.25vw] min-h-full -translate-x-1/2 -translate-y-1/2 opacity-35 scale-110 pointer-events-none"
+                      className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 opacity-65 scale-105 pointer-events-none transition-opacity duration-1000"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       frameBorder="0"
                     />
@@ -1695,80 +1695,91 @@ export default function App() {
                     muted 
                     playsInline 
                     poster={spaHeroImg}
-                    className="w-full h-full object-cover object-center opacity-40 transition-opacity duration-1000"
+                    className="w-full h-full object-cover object-center opacity-65 transition-opacity duration-1000"
                   >
                     <source src={currentVideo} type="video/mp4" />
                   </video>
                 )}
-                {/* Master gradients overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/55 to-brand-black/15"></div>
+                {/* Master gradients and vignette overlays for pristine readability and cinematic depth */}
+                <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/20 to-brand-black/50 pointer-events-none" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_35%,rgba(10,10,10,0.65)_100%)] pointer-events-none" />
               </div>
 
-              <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center w-full">
-                {/* Centered Headline with elegant typography hierarchy */}
-                <motion.h1 
-                  className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-[1.15] text-white max-w-5xl mx-auto mb-6 select-none cursor-default"
-                  whileHover="hover"
-                  initial="initial"
-                  onMouseEnter={startZenSound}
-                  onMouseLeave={stopZenSound}
+              <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center w-full">
+                {/* Top Delicate Subtitle (aligned with design system) */}
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.2, delay: 0.1 }}
+                  className="mb-3 sm:mb-5"
+                >
+                  <span className="font-heading text-xs sm:text-sm tracking-[0.25em] sm:tracking-[0.35em] text-white/90 font-light block uppercase">
+                    {lang === 'pt' ? 'Tradição Milenar & Harmonia dos Sentidos' : 'Ancient Heritage & Harmonious Wellness'}
+                  </span>
+                  <span className="text-[10px] font-mono tracking-[0.35em] text-brand-red uppercase block mt-1.5 opacity-90 font-bold">
+                    Lisboa · Desde 2004
+                  </span>
+                </motion.div>
+
+                {/* Central Brandpiece */}
+                <div className="relative my-6 sm:my-8 select-none">
+                  {/* Main Minimalist Title (using Outfit font-heading from Design System) */}
+                  <motion.h1 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.4, delay: 0.3 }}
+                    onMouseEnter={startZenSound}
+                    onMouseLeave={stopZenSound}
+                    className="relative z-10 text-4xl sm:text-6xl md:text-7xl font-extralight text-white font-heading tracking-[0.3em] sm:tracking-[0.45em] uppercase pl-[0.3em] sm:pl-[0.45em] cursor-default"
+                  >
+                    NIPON SPA
+                  </motion.h1>
+
+                  {/* Subtle traditional Japanese seal & dividing accents */}
+                  <div className="relative z-10 flex items-center justify-center gap-3 sm:gap-4 mt-3 opacity-80">
+                    <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent"></span>
+                    <span className="text-xs tracking-[0.3em] text-white/75 font-sans font-light">
+                      日本スパ · 静寂と調和
+                    </span>
+                    <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent"></span>
+                  </div>
+                </div>
+
+                {/* Soft, Soothing Description (using Inter font-sans from Design System) */}
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.4, delay: 0.5 }}
+                  className="text-sm sm:text-base md:text-lg text-white/85 font-sans font-light leading-relaxed max-w-2xl mx-auto mb-10 px-4"
                 >
                   {lang === 'pt' ? (
                     <>
-                      Há 22 anos a ajudar Lisboa a viver <motion.span 
-                        className="text-[#cc0000] italic font-serif font-semibold lowercase tracking-normal inline-block"
-                        variants={{
-                          initial: { scale: 1 },
-                          hover: { scale: 1.05, filter: "drop-shadow(0 0 15px rgba(204,0,0,0.5))" }
-                        }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                      >sem dores</motion.span> e sem tensão.
+                      “Onde o tempo desacelera e o corpo reencontra a sua serenidade natural através do cuidado atento e dos rituais milenares japoneses.”
                     </>
                   ) : (
                     <>
-                      Helping Lisbon live <motion.span 
-                        className="text-[#cc0000] italic font-serif font-semibold lowercase tracking-normal inline-block"
-                        variants={{
-                          initial: { scale: 1 },
-                          hover: { scale: 1.05, filter: "drop-shadow(0 0 15px rgba(204,0,0,0.5))" }
-                        }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                      >without pain</motion.span> and tension for 22 years.
+                      “Where time gently slows down and the body rediscovers its natural serenity through mindful care and ancient Japanese rituals.”
                     </>
                   )}
-                </motion.h1>
+                </motion.p>
 
-                {/* Centered high quality description styled as a premium highly-readable subtitle */}
-                <p className="text-sm sm:text-base text-gray-300 font-sans max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
-                  {lang === 'pt' ? (
-                    <>
-                      Tratamentos personalizados inspirados na tradição japonesa.
-                      <br />
-                      Não acreditamos em tratamentos iguais para todos!
-                      <br />
-                      Cada protocolo é cuidadosamente adaptado às necessidades do seu corpo.
-                    </>
-                  ) : (
-                    <>
-                      Personalized treatments inspired by Japanese tradition.
-                      <br />
-                      We do not believe in one-size-fits-all treatments!
-                      <br />
-                      Each protocol is carefully adapted to the unique needs of your body.
-                    </>
-                  )}
-                </p>
-
-                {/* Centered CTAs with sharp borders matching the styling of Nipon Spa exactly */}
-                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                {/* Actions aligned with Website Design System Buttons */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.4, delay: 0.7 }}
+                  className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-center justify-center"
+                >
                   <button 
                     onClick={() => {
                       setActiveTab('reservar');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="w-full sm:w-auto bg-[#cc0000] hover:bg-brand-red-hover text-white px-8 py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-[#cc0000]/20"
+                    className="w-full sm:w-auto bg-[#cc0000] hover:bg-brand-red-hover text-white px-8 py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-[#cc0000]/25 flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    {t.btnBookNow}
+                    <span>{t.btnBookNow}</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                   
                   <button 
@@ -1780,48 +1791,36 @@ export default function App() {
                         if (elem) elem.scrollIntoView({ behavior: 'smooth' });
                       }, 100);
                     }}
-                    className={`w-full sm:w-auto px-8 py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105 active:scale-95 border
-                      ${themeMode === 'bw'
-                        ? 'border-[#cc0000] text-[#cc0000] hover:bg-[#cc0000] hover:text-white shadow-sm shadow-[#cc0000]/5'
-                        : 'border-white/30 text-white hover:bg-white hover:text-[#0a0a0a] shadow-sm shadow-white/5'
-                      }`}
+                    className="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105 active:scale-95 border border-white/40 text-white hover:bg-white hover:text-black cursor-pointer backdrop-blur-sm shadow-sm"
                   >
                     {t.btnViewTreatments}
                   </button>
-                </div>
-
-
-              </div>
-
-              {/* Minimalist animated Scroll Down Indicator */}
-              <div 
-                onClick={() => {
-                  window.scrollTo({
-                    top: window.innerHeight * 0.82,
-                    behavior: 'smooth'
-                  });
-                }}
-                className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center cursor-pointer z-10 group"
-              >
-                <span className="text-[8px] font-mono tracking-[0.3em] uppercase text-gray-400 group-hover:text-brand-red transition duration-300 mb-1 select-none">
-                  {lang === 'pt' ? 'Rolar para baixo' : 'Scroll down'}
-                </span>
-                <motion.div
-                  animate={{ y: [0, 4, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-gray-400 group-hover:text-brand-red transition duration-300"
-                >
-                  <ChevronDown className="w-4 h-4" />
                 </motion.div>
               </div>
+
+              {/* Minimalist Japanese Vertical "S C R O L L" Indicator */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5, delay: 1 }}
+                onClick={() => {
+                  const nextElem = document.getElementById('programs-section');
+                  if (nextElem) nextElem.scrollIntoView({ behavior: 'smooth' });
+                  else window.scrollTo({ top: window.innerHeight * 0.9, behavior: 'smooth' });
+                }}
+                className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center cursor-pointer z-20 group"
+              >
+                <span className="text-[9px] font-mono tracking-[0.35em] uppercase text-white/70 group-hover:text-brand-red transition duration-300 mb-2.5 select-none pl-[0.35em]">
+                  SCROLL
+                </span>
+                <div className="w-[1px] h-10 sm:h-14 bg-white/20 relative overflow-hidden">
+                  <div className="w-full h-full bg-white/80 scroll-indicator-line" />
+                </div>
+              </motion.div>
             </section>
 
-
-
-
-
             {/* Focus of Treatment Section (Main Highlight) */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <section id="programs-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
               <div className="text-center max-w-xl mx-auto space-y-3">
                 <span className="text-[#cc0000] font-mono font-bold text-[10px] uppercase tracking-widest block">
                   {lang === 'pt' ? 'Programas Focados em Resultados' : 'Result-Focused Programs'}
@@ -2250,11 +2249,11 @@ export default function App() {
 
               {/* Text and Actions content */}
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
-                <h1 className="text-3xl sm:text-5xl md:text-6xl font-light tracking-wide text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-3xl mx-auto">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] sm:tracking-[0.3em] text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-2xl mx-auto">
                   {lang === 'pt'
                     ? 'Menos dor, mais bem-estar.'
                     : 'Less pain, more well-being.'}
-                </h1>
+                </h2>
 
                 {/* Arrow indicator to scroll down to content */}
                 <div className="pt-8 flex flex-col items-center space-y-3">
@@ -2374,9 +2373,9 @@ export default function App() {
               {/* Text and Actions content */}
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
                 
-                <h1 className="text-3xl sm:text-5xl md:text-6xl font-light tracking-wide text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-3xl mx-auto" id="reservar-title">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] sm:tracking-[0.3em] text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-2xl mx-auto" id="reservar-title">
                   {lang === 'pt' ? 'RESERVE O SEU MOMENTO' : 'RESERVE YOUR MOMENT'}
-                </h1>
+                </h2>
 
                 <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto font-sans leading-relaxed font-light drop-shadow-md">
                   {lang === 'pt'
@@ -3374,15 +3373,9 @@ export default function App() {
               {/* Text and Actions content */}
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
                 
-                <h1 className="text-3xl sm:text-5xl md:text-6xl font-light tracking-wide text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-3xl mx-auto">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] sm:tracking-[0.3em] text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-3xl mx-auto">
                   {lang === 'pt' ? 'AVALIAÇÕES & TESTEMUNHOS' : 'REVIEWS & TESTIMONIALS'}
-                </h1>
-
-                <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto font-sans leading-relaxed font-light drop-shadow-md">
-                  {lang === 'pt'
-                    ? 'A opinião sincera de quem já vivenciou o autêntico reequilíbrio físico, mental e espiritual Omotenashi.'
-                    : 'Honest opinions from those who have experienced our authentic physical, mental, and spiritual Omotenashi realignment.'}
-                </p>
+                </h2>
 
                 {/* Arrow indicator to scroll down to content */}
                 <div className="pt-8 flex flex-col items-center space-y-3">
@@ -3588,9 +3581,9 @@ export default function App() {
 
               {/* Text and Actions content */}
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-light tracking-widest text-white font-heading uppercase leading-none drop-shadow-2xl">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.25em] sm:tracking-[0.35em] text-white font-heading uppercase leading-tight drop-shadow-2xl">
                   {lang === 'pt' ? 'O NOSSO TEMPLO' : 'OUR SANCTUARY'}
-                </h1>
+                </h2>
 
 
 
@@ -3742,15 +3735,9 @@ export default function App() {
                   {/* Text and Actions content */}
                   <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
                     
-                    <h1 className="text-3xl sm:text-5xl md:text-6xl font-light tracking-wide text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-3xl mx-auto">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] sm:tracking-[0.3em] text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-2xl mx-auto">
                       {lang === 'pt' ? 'SABEDORIA JAPONESA' : 'JAPANESE WISDOM'}
-                    </h1>
-
-                    <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto font-sans leading-relaxed font-light drop-shadow-md">
-                      {lang === 'pt'
-                        ? 'Explore segredos ancestrais sobre terapias, rituais e equilíbrio absoluto para a mente, corpo e alma.'
-                        : 'Explore ancient secrets about therapies, rituals, and absolute balance for mind, body, and soul.'}
-                    </p>
+                    </h2>
 
                     {/* Arrow indicator to scroll down to content */}
                     <div className="pt-8 flex flex-col items-center space-y-3">

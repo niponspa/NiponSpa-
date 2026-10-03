@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,300;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -14,7 +14,6 @@
   
   --font-heading: 'Outfit', 'Inter', sans-serif;
   --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Playfair Display', 'Georgia', serif;
 }
 
 /* Custom styles for professional smooth scrolling and aesthetic oriental background patterns */
@@ -65,6 +64,28 @@ body {
 
 .breathing-glow-accent {
   animation: breathingGlow 8s ease-in-out infinite;
+}
+
+/* Minimalist Japanese vertical scroll down line animation */
+@keyframes scrollDownLine {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.scroll-indicator-line {
+  animation: scrollDownLine 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
 /* Keep logo in original colors as requested by the user */
@@ -156,8 +177,25 @@ html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
 .theme-bw h5,
 .theme-bw h6,
 .theme-bw [class*="font-heading"],
-.theme-bw .text-white:not(.bg-brand-red *):not(.bg-brand-red):not(.bg-brand-red-hover *):not(.bg-brand-red-hover):not(.bg-\[\#cc0000\] *):not(.bg-\[\#cc0000\]) {
+.theme-bw .text-white:not(.bg-brand-red *):not(.bg-brand-red):not(.bg-brand-red-hover *):not(.bg-brand-red-hover):not(.bg-\[\#cc0000\] *):not(.bg-\[\#cc0000\]):not(#hero-section *):not(#hero-section):not([class*="dark-hero"] *):not([class*="dark-hero"]) {
   color: #000000 !important;
+}
+
+/* Hero and dark-banner sections always maintain pristine white text over dark photo/video backgrounds */
+.theme-bw #hero-section h1,
+.theme-bw #hero-section h2,
+.theme-bw #hero-section h3,
+.theme-bw #hero-section p,
+.theme-bw #hero-section span:not(.text-brand-red):not(.text-\[\#cc0000\]),
+.theme-bw #hero-section a,
+.theme-bw [class*="dark-hero"] h1,
+.theme-bw [class*="dark-hero"] h2,
+.theme-bw [class*="dark-hero"] h3,
+.theme-bw [class*="dark-hero"] p,
+.theme-bw [class*="dark-hero"] span:not(.text-brand-red):not(.text-\[\#cc0000\]),
+.theme-bw [class*="dark-hero"] a,
+.theme-bw [class*="dark-hero"] button {
+  color: #ffffff !important;
 }
 
 .theme-bw .text-gray-400 {
