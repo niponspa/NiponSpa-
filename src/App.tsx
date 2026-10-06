@@ -53,6 +53,7 @@ import { Therapy, Booking, PaymentMethod, Review } from './types';
 import { TRANSLATIONS } from './translations';
 import NiponLogo from './components/NiponLogo';
 import TeamSection from './components/TeamSection';
+import CookieConsentBanner from './components/CookieConsentBanner';
 import { BLOG_POSTS, BlogPost } from './data/blog';
 
 // Import image assets statically for Vite production bundles
@@ -1134,6 +1135,15 @@ export default function App() {
           window.location.hash = targetHash;
         }
       }
+    }
+
+    // Google Ads tag (gtag.js) SPA client-side route tracking
+    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+      (window as any).gtag('config', 'AW-11073542078', {
+        page_path: targetPath,
+        page_location: window.location.href,
+        page_title: document.title
+      });
     }
   }, [activeTab]);
 
@@ -5618,10 +5628,24 @@ export default function App() {
 
           {/* Bottom border brand label */}
           <div className="border-t border-brand-border/40 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
+            <div className="flex flex-wrap gap-x-4 gap-y-2 items-center">
               <span className="hover:text-gray-300 cursor-pointer">{lang === 'pt' ? 'Política de Privacidade' : 'Privacy Policy'}</span>
               <span>•</span>
               <span className="hover:text-gray-300 cursor-pointer">{lang === 'pt' ? 'Termos de Reserva' : 'Booking Terms'}</span>
+              <span>•</span>
+              <button 
+                type="button"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).openCookiePreferences) {
+                    (window as any).openCookiePreferences();
+                  } else {
+                    window.dispatchEvent(new CustomEvent('open-cookie-preferences'));
+                  }
+                }} 
+                className="hover:text-white cursor-pointer text-gray-400 bg-transparent border-0 p-0 text-inherit font-inherit transition-colors underline decoration-white/20 underline-offset-4"
+              >
+                {lang === 'pt' ? 'Preferências de Cookies' : 'Cookie Preferences'}
+              </button>
               <span>•</span>
               <a 
                 href="https://www.livroreclamacoes.pt/Inicio/" 
@@ -5664,6 +5688,9 @@ export default function App() {
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.413 9.863-9.83.001-2.624-1.017-5.091-2.868-6.944-1.851-1.852-4.312-2.871-6.932-2.872-5.412 0-9.82 4.414-9.824 9.831-.001 1.772.486 3.498 1.411 5.011l-.995 3.634 3.72-.975zm11.367-3.41c-.293-.146-1.736-.857-2.004-.954-.268-.099-.463-.147-.658.146-.195.293-.755.954-.926 1.148-.171.195-.341.219-.634.073-1.8-.9-2.92-1.545-4.077-3.528-.305-.524.305-.487.873-1.619.098-.195.049-.366-.024-.513-.074-.146-.659-1.586-.903-2.172-.237-.57-.479-.492-.659-.501-.17-.008-.365-.01-.56-.01-.195 0-.512.073-.78.366-.269.293-1.025 1.001-1.025 2.441 0 1.439 1.049 2.83 1.195 3.025.147.195 2.064 3.151 5.001 4.419.699.302 1.244.482 1.67.618.703.223 1.343.191 1.85.116.564-.084 1.736-.708 1.98-.1.146.244.11.455.074-.146-.037-.293-.146-.439-.293z" />
         </svg>
       </a>
+
+      {/* Global GDPR Cookie Consent Banner & Preferences Modal with Google Consent Mode v2 */}
+      <CookieConsentBanner lang={lang} />
 
     </div>
   );
