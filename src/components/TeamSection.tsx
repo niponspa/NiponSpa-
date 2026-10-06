@@ -85,14 +85,14 @@ export default function TeamSection({ lang }: TeamSectionProps) {
   return (
     <div className="space-y-12 py-6">
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-[0.2em] block">
+        <span className="text-label text-brand-red block mb-2">
           {lang === 'pt' ? 'Mestria & Dedicação' : 'Mastery & Dedication'}
         </span>
-        <h2 className="text-3xl md:text-4xl font-light font-heading text-white tracking-tight">
+        <h2 className="text-h2 text-white">
           {lang === 'pt' ? 'A Nossa Equipa de Especialistas' : 'Our Team of Specialists'}
         </h2>
         <div className="w-12 h-0.5 bg-brand-red/60 mx-auto mt-2"></div>
-        <p className="text-xs sm:text-sm text-gray-400 font-sans max-w-xl mx-auto leading-relaxed">
+        <p className="text-body text-gray-400 max-w-xl mx-auto leading-relaxed">
           {lang === 'pt' 
             ? 'Conheça os profissionais dedicados a manter vivo o legado do Nipon Spa, aliando tradição secular japonesa à inovação e acolhimento de excelência.'
             : 'Meet the dedicated professionals keeping the legacy of Nipon Spa alive, merging secular Japanese tradition with innovation and premium care.'}
@@ -119,13 +119,13 @@ export default function TeamSection({ lang }: TeamSectionProps) {
               <div className="space-y-4 relative z-10">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
-                    <span className="text-[10px] bg-brand-black border border-brand-border/60 px-2.5 py-0.5 rounded-full text-brand-gold uppercase tracking-wider font-mono font-bold inline-block">
+                    <span className="text-label-sm bg-brand-black border border-brand-border/60 px-2.5 py-0.5 rounded-full text-brand-gold inline-block">
                       {lang === 'pt' ? member.badgePt : member.badgeEn}
                     </span>
-                    <h3 className="text-xl font-medium font-heading text-white tracking-tight mt-1">
+                    <h3 className="text-h3 text-white mt-1">
                       {member.name}
                     </h3>
-                    <p className="text-xs font-mono text-brand-gold uppercase tracking-[0.08em] font-medium">
+                    <p className="text-label-sm text-brand-gold mt-0.5">
                       {lang === 'pt' ? member.rolePt : member.roleEn}
                     </p>
                   </div>
@@ -134,12 +134,12 @@ export default function TeamSection({ lang }: TeamSectionProps) {
                   </div>
                 </div>
 
-                <p className="text-xs text-gray-400 font-sans leading-relaxed font-light text-justify">
+                <p className="text-body-sm text-gray-400 leading-relaxed font-light text-justify">
                   {lang === 'pt' ? member.descPt : member.descEn}
                 </p>
               </div>
 
-              <div className="border-t border-brand-border/40 pt-4 flex items-center justify-between text-gray-500 text-[9px] font-mono uppercase tracking-widest mt-4">
+              <div className="border-t border-brand-border/40 pt-4 flex items-center justify-between text-gray-500 text-label-sm mt-4">
                 <span>NIPON SPA TEAM</span>
                 <span className="text-brand-red/60 font-serif">✦</span>
               </div>

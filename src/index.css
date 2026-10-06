@@ -14,6 +14,7 @@
   
   --font-heading: 'Outfit', 'Inter', sans-serif;
   --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Outfit', 'Inter', sans-serif;
 }
 
 /* Custom styles for professional smooth scrolling and aesthetic oriental background patterns */
@@ -41,6 +42,155 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #cc0000;
+}
+
+/* ==========================================================================
+   NIPON SPA TYPOGRAPHY DESIGN SYSTEM (Consolidated Tokens & Hierarchy)
+   Brand Fonts:
+   - Headings & Titles: Outfit (--font-heading)
+   - Body & Reading: Inter (--font-sans)
+   - Labels, Badges & Micro-tags: Monospace (font-mono)
+   ========================================================================== */
+
+/* 1. Display / Hero (Main Hero Brandpiece) */
+.text-display {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+  font-weight: 200;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+/* 2. Heading 1 (Page Banners / Hero Headers) */
+.text-h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3.8vw, 2.5rem);
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+/* 3. Heading 2 (Major Section Titles) */
+.text-h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+/* 4. Heading 3 (Subsections & Treatment / Card Titles) */
+.text-h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+/* 5. Heading 4 (Small Card Titles, Accordions, Modal Subheadings) */
+.text-h4 {
+  font-family: var(--font-heading);
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+/* 6. Body Large (Lead paragraphs, hero quotes, intros) */
+.text-body-lg {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.25vw, 1.125rem);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* 7. Body Regular (Standard paragraphs, descriptions, modal text) */
+.text-body {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.625;
+}
+
+/* 8. Body Small (Fine notes, metadata, secondary card details) */
+.text-body-sm {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+/* 9. Labels & Overlines (Category tags, status badges, tracking headers) */
+.text-label {
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  line-height: 1.25;
+}
+
+.text-label-sm {
+  font-family: var(--font-heading);
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  line-height: 1.25;
+}
+
+/* 10. Buttons & CTAs (Standardized interactive actions) */
+.text-btn {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+.text-btn-sm {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  line-height: 1;
+}
+
+/* 11. Navigation Links (Header & Mobile Drawer) */
+.text-nav {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+.text-nav-mobile {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  line-height: 1.2;
+}
+
+/* 12. Captions / Micro-copy (Disclaimers, footer legal, tooltips) */
+.text-caption {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* Ensure all labels, badges, and technical elements use the brand's sans font */
+.font-mono {
+  font-family: var(--font-heading) !important;
 }
 
 /* Subtle traditional radial paper noise texture overlay (pure CSS) */
@@ -177,6 +327,8 @@ html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
 .theme-bw h5,
 .theme-bw h6,
 .theme-bw [class*="font-heading"],
+.theme-bw [class*="text-h"],
+.theme-bw .text-display,
 .theme-bw .text-white:not(.bg-brand-red *):not(.bg-brand-red):not(.bg-brand-red-hover *):not(.bg-brand-red-hover):not(.bg-\[\#cc0000\] *):not(.bg-\[\#cc0000\]):not(#hero-section *):not(#hero-section):not([class*="dark-hero"] *):not([class*="dark-hero"]) {
   color: #000000 !important;
 }
@@ -185,12 +337,18 @@ html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
 .theme-bw #hero-section h1,
 .theme-bw #hero-section h2,
 .theme-bw #hero-section h3,
+.theme-bw #hero-section .text-display,
+.theme-bw #hero-section .text-h1,
+.theme-bw #hero-section .text-h2,
 .theme-bw #hero-section p,
 .theme-bw #hero-section span:not(.text-brand-red):not(.text-\[\#cc0000\]),
 .theme-bw #hero-section a,
 .theme-bw [class*="dark-hero"] h1,
 .theme-bw [class*="dark-hero"] h2,
 .theme-bw [class*="dark-hero"] h3,
+.theme-bw [class*="dark-hero"] .text-h1,
+.theme-bw [class*="dark-hero"] .text-h2,
+.theme-bw [class*="dark-hero"] .text-h3,
 .theme-bw [class*="dark-hero"] p,
 .theme-bw [class*="dark-hero"] span:not(.text-brand-red):not(.text-\[\#cc0000\]),
 .theme-bw [class*="dark-hero"] a,
@@ -214,6 +372,39 @@ html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
 /* Selection aesthetics */
 .theme-bw *::selection {
   background-color: #bc2626 !important;
+  color: #ffffff !important;
+}
+
+/* -------------------------------------------------------------
+   COOKIE CONSENT BANNER & PREFERENCES MODAL (CLEAN WHITE & SHARP CONTRAST)
+   ------------------------------------------------------------- */
+#cookie-consent-banner .cookie-consent-card,
+.cookie-modal-card {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+
+#cookie-consent-banner .cookie-consent-card h3,
+#cookie-consent-banner .cookie-consent-card h4,
+.cookie-modal-card h3,
+.cookie-modal-card h4 {
+  color: #111827 !important;
+}
+
+#cookie-consent-banner .cookie-consent-card p,
+.cookie-modal-card p {
+  color: #4b5563 !important;
+}
+
+#cookie-consent-banner .cookie-consent-card button[class*="bg-brand-red"],
+.cookie-modal-card button[class*="bg-brand-red"] {
+  background-color: #cc0000 !important;
+  color: #ffffff !important;
+}
+
+#cookie-consent-banner .cookie-consent-card button[class*="bg-brand-red"]:hover,
+.cookie-modal-card button[class*="bg-brand-red"]:hover {
+  background-color: #aa0000 !important;
   color: #ffffff !important;
 }
 

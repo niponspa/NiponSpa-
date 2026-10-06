@@ -162,20 +162,23 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
           aria-live="polite"
           aria-label={lang === 'pt' ? 'Consentimento de Cookies' : 'Cookie Consent'}
           className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-xl z-50 animate-fade-in"
+          id="cookie-consent-banner"
         >
-          <div className="bg-[#0e0e0e]/95 backdrop-blur-md border border-white/15 rounded-2xl p-5 sm:p-6 shadow-2xl text-left text-white space-y-4">
+          <div className="cookie-consent-card bg-white border border-gray-200 rounded-2xl p-5 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.25)] text-left text-gray-900 space-y-4">
             <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-full bg-brand-red/10 border border-brand-red/30 flex items-center justify-center shrink-0 mt-0.5 text-brand-red">
-                <Cookie className="w-4 h-4" />
+              <div className="w-10 h-10 rounded-full bg-brand-red/10 border border-brand-red/25 flex items-center justify-center shrink-0 mt-0.5 text-brand-red">
+                <Cookie className="w-5 h-5 text-brand-red" />
               </div>
-              <div className="space-y-1">
-                <h3 className="text-sm font-semibold font-heading tracking-wide flex items-center gap-2">
-                  <span>{lang === 'pt' ? 'Respeito pela sua Privacidade' : 'Respect for Your Privacy'}</span>
-                  <span className="text-[9px] font-mono tracking-widest text-[#ff3333] uppercase bg-white/5 px-2 py-0.5 rounded-full border border-white/10">
+              <div className="space-y-1.5 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-h4 text-gray-900 font-bold m-0 p-0">
+                    {lang === 'pt' ? 'Respeito pela sua Privacidade' : 'Respect for Your Privacy'}
+                  </h3>
+                  <span className="text-label-sm text-brand-red bg-red-50 border border-red-200 px-2 py-0.5 rounded-full font-bold">
                     GDPR / RGPD
                   </span>
-                </h3>
-                <p className="text-xs text-gray-300 font-sans leading-relaxed">
+                </div>
+                <p className="text-body-sm text-gray-600 leading-relaxed font-normal">
                   {lang === 'pt' ? (
                     <>
                       Utilizamos cookies essenciais para o funcionamento do nosso templo digital, além de cookies analíticos e de publicidade (Google Ads) para compreender as suas preferências e medir campanhas. Você pode aceitar todos, rejeitar os não essenciais ou personalizar as suas escolhas.
@@ -194,7 +197,7 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
               <button
                 type="button"
                 onClick={() => setIsPreferencesOpen(true)}
-                className="px-3.5 py-2 rounded-full text-xs font-mono uppercase tracking-wider text-gray-400 hover:text-white hover:bg-white/5 border border-white/10 transition-colors text-center cursor-pointer"
+                className="px-3.5 py-2 rounded-full text-btn-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 border border-gray-300 transition-colors text-center cursor-pointer font-medium"
               >
                 {lang === 'pt' ? 'Gerir Preferências' : 'Manage Preferences'}
               </button>
@@ -202,7 +205,7 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
               <button
                 type="button"
                 onClick={handleRejectAll}
-                className="px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider text-white hover:bg-white/10 border border-white/25 transition-colors text-center cursor-pointer"
+                className="px-4 py-2 rounded-full text-btn-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 border border-gray-300 transition-colors text-center cursor-pointer font-medium"
               >
                 {lang === 'pt' ? 'Rejeitar Todos' : 'Reject All'}
               </button>
@@ -210,7 +213,8 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
               <button
                 type="button"
                 onClick={handleAcceptAll}
-                className="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-white bg-brand-red hover:bg-brand-red-hover transition-all duration-200 shadow-md shadow-brand-red/20 text-center cursor-pointer"
+                className="px-5 py-2 rounded-full text-btn !text-white bg-brand-red hover:bg-brand-red-hover transition-all duration-200 shadow-md shadow-brand-red/30 text-center cursor-pointer font-bold"
+                style={{ color: '#ffffff' }}
               >
                 {lang === 'pt' ? 'Aceitar Todos' : 'Accept All'}
               </button>
@@ -222,23 +226,23 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
       {/* 2. Detailed Cookie Preferences Modal */}
       {isPreferencesOpen && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in"
           role="dialog"
           aria-modal="true"
           aria-labelledby="cookie-preferences-title"
         >
-          <div className="bg-[#101010] border border-white/15 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 text-white space-y-6 shadow-2xl relative">
+          <div className="cookie-modal-card bg-white border border-gray-200 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 text-gray-900 space-y-6 shadow-2xl relative">
             
             {/* Modal Header */}
-            <div className="flex items-start justify-between border-b border-white/10 pb-4">
+            <div className="flex items-start justify-between border-b border-gray-200 pb-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-5 h-5 text-brand-red" />
-                  <h3 id="cookie-preferences-title" className="text-lg font-light font-heading tracking-tight">
+                  <h3 id="cookie-preferences-title" className="text-h3 text-gray-900 font-bold">
                     {lang === 'pt' ? 'Preferências de Privacidade e Cookies' : 'Privacy & Cookie Preferences'}
                   </h3>
                 </div>
-                <p className="text-xs text-gray-400 font-sans">
+                <p className="text-body-sm text-gray-600">
                   {lang === 'pt' 
                     ? 'Configure as categorias de cookies que autoriza durante a sua navegação no Nipon Spa Lisboa.'
                     : 'Configure the categories of cookies you permit while visiting Nipon Spa Lisbon.'}
@@ -257,7 +261,7 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
                     setIsPreferencesOpen(false);
                   }
                 }}
-                className="p-1.5 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition cursor-pointer"
+                className="p-1.5 rounded-full text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition cursor-pointer"
                 aria-label={lang === 'pt' ? 'Fechar' : 'Close'}
               >
                 <X className="w-5 h-5" />
@@ -268,21 +272,21 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
             <div className="space-y-4">
               
               {/* Category 1: Necessary Cookies */}
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2">
+              <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold font-heading">
+                    <span className="text-h4 text-gray-900 font-bold">
                       {lang === 'pt' ? 'Cookies Estritamente Necessários' : 'Strictly Necessary Cookies'}
                     </span>
-                    <span className="text-[9px] font-mono tracking-widest uppercase bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-0.5 rounded-full">
+                    <span className="text-label-sm bg-green-100 text-green-800 border border-green-200 px-2 py-0.5 rounded-full font-bold">
                       {lang === 'pt' ? 'Sempre Ativo' : 'Always Active'}
                     </span>
                   </div>
-                  <div className="w-11 h-6 bg-white/20 rounded-full flex items-center justify-end px-1 opacity-70 cursor-not-allowed">
-                    <div className="w-4 h-4 bg-white rounded-full"></div>
+                  <div className="w-11 h-6 bg-gray-300 rounded-full flex items-center justify-end px-1 opacity-80 cursor-not-allowed">
+                    <div className="w-4 h-4 bg-white rounded-full shadow-sm"></div>
                   </div>
                 </div>
-                <p className="text-xs text-gray-400 font-sans leading-relaxed">
+                <p className="text-body-sm text-gray-600 leading-relaxed font-normal">
                   {lang === 'pt'
                     ? 'Essenciais para a segurança, carregamento de páginas, navegação e funcionamento do sistema de agendamento do spa. Não podem ser desativados.'
                     : 'Essential for site security, page navigation, accessibility, and the spa reservation system. Cannot be disabled.'}
@@ -290,13 +294,13 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
               </div>
 
               {/* Category 2: Analytics Cookies */}
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2">
+              <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold font-heading">
+                    <span className="text-h4 text-gray-900 font-bold">
                       {lang === 'pt' ? 'Cookies Analíticos & Medição' : 'Analytics & Performance Cookies'}
                     </span>
-                    <span className="text-[9px] font-mono tracking-widest uppercase text-gray-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">
+                    <span className="text-label-sm text-gray-700 bg-gray-200 border border-gray-300 px-2 py-0.5 rounded-full font-semibold">
                       {analyticsEnabled ? (lang === 'pt' ? 'Ativado' : 'Enabled') : (lang === 'pt' ? 'Desativado' : 'Disabled')}
                     </span>
                   </div>
@@ -306,13 +310,13 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
                     aria-checked={analyticsEnabled}
                     onClick={() => setAnalyticsEnabled(!analyticsEnabled)}
                     className={`w-11 h-6 rounded-full transition-colors p-1 cursor-pointer flex items-center ${
-                      analyticsEnabled ? 'bg-brand-red justify-end' : 'bg-white/20 justify-start'
+                      analyticsEnabled ? 'bg-brand-red justify-end' : 'bg-gray-300 justify-start'
                     }`}
                   >
                     <div className="w-4 h-4 bg-white rounded-full shadow-md"></div>
                   </button>
                 </div>
-                <p className="text-xs text-gray-400 font-sans leading-relaxed">
+                <p className="text-body-sm text-gray-600 leading-relaxed font-normal">
                   {lang === 'pt'
                     ? 'Permitem analisar de forma anónima o tráfego, as páginas mais visitadas e o comportamento de navegação para melhorar continuamente a experiência.'
                     : 'Help us anonymously measure visits and traffic sources to optimize the user journey across treatments and sanctuary stories.'}
@@ -320,13 +324,13 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
               </div>
 
               {/* Category 3: Marketing & Advertising (Google Ads) */}
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2">
+              <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold font-heading">
+                    <span className="text-h4 text-gray-900 font-bold">
                       {lang === 'pt' ? 'Cookies de Publicidade & Google Ads' : 'Marketing & Advertising Cookies (Google Ads)'}
                     </span>
-                    <span className="text-[9px] font-mono tracking-widest uppercase text-gray-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">
+                    <span className="text-label-sm text-gray-700 bg-gray-200 border border-gray-300 px-2 py-0.5 rounded-full font-semibold">
                       {marketingEnabled ? (lang === 'pt' ? 'Ativado' : 'Enabled') : (lang === 'pt' ? 'Desativado' : 'Disabled')}
                     </span>
                   </div>
@@ -336,13 +340,13 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
                     aria-checked={marketingEnabled}
                     onClick={() => setMarketingEnabled(!marketingEnabled)}
                     className={`w-11 h-6 rounded-full transition-colors p-1 cursor-pointer flex items-center ${
-                      marketingEnabled ? 'bg-brand-red justify-end' : 'bg-white/20 justify-start'
+                      marketingEnabled ? 'bg-brand-red justify-end' : 'bg-gray-300 justify-start'
                     }`}
                   >
                     <div className="w-4 h-4 bg-white rounded-full shadow-md"></div>
                   </button>
                 </div>
-                <p className="text-xs text-gray-400 font-sans leading-relaxed">
+                <p className="text-body-sm text-gray-600 leading-relaxed font-normal">
                   {lang === 'pt'
                     ? 'Utilizados para medição de conversões de anúncios (Google Ads AW-11073542078) e personalização de campanhas. Se desativados, os anúncios não serão personalizados de acordo com os seus interesses.'
                     : 'Used to measure advertising conversions (Google Ads AW-11073542078) and deliver relevant campaign insights. If disabled, ads will not be personalized.'}
@@ -352,11 +356,11 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
             </div>
 
             {/* Modal Actions */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2 border-t border-white/10">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2 border-t border-gray-200">
               <button
                 type="button"
                 onClick={handleRejectAll}
-                className="px-4 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider text-gray-400 hover:text-white border border-white/15 hover:border-white/30 transition text-center cursor-pointer"
+                className="px-4 py-2.5 rounded-full text-btn-sm text-gray-700 hover:text-gray-900 border border-gray-300 hover:bg-gray-100 transition text-center cursor-pointer font-medium"
               >
                 {lang === 'pt' ? 'Rejeitar Opcionais' : 'Reject Non-Essential'}
               </button>
@@ -365,7 +369,7 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
                 <button
                   type="button"
                   onClick={handleSaveCustom}
-                  className="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-white/10 hover:bg-white/20 border border-white/20 transition text-center cursor-pointer"
+                  className="px-5 py-2.5 rounded-full text-btn-sm text-gray-800 bg-gray-100 hover:bg-gray-200 border border-gray-300 transition text-center cursor-pointer font-medium"
                 >
                   {lang === 'pt' ? 'Guardar Preferências' : 'Save Preferences'}
                 </button>
@@ -373,7 +377,8 @@ export default function CookieConsentBanner({ lang }: CookieConsentBannerProps) 
                 <button
                   type="button"
                   onClick={handleAcceptAll}
-                  className="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest text-white bg-brand-red hover:bg-brand-red-hover transition shadow-lg shadow-brand-red/25 text-center cursor-pointer"
+                  className="px-6 py-2.5 rounded-full text-btn !text-white bg-brand-red hover:bg-brand-red-hover transition shadow-lg shadow-brand-red/25 text-center cursor-pointer font-bold"
+                  style={{ color: '#ffffff' }}
                 >
                   {lang === 'pt' ? 'Aceitar Todos' : 'Accept All'}
                 </button>

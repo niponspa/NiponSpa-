@@ -59,6 +59,7 @@ import { BLOG_POSTS, BlogPost } from './data/blog';
 // Import image assets statically for Vite production bundles
 import spaHeroImg from './assets/images/japanese_spa_hero_1781089830835.png';
 import therapyHeroImg from './assets/images/japanese_therapy_1781089845836.png';
+import legacyTempleImg from './assets/images/IMG_7547.jpeg';
 
 // Let's use 2026-06-10 as our base date
 const BASE_DATE_STR = "2026-06-10";
@@ -139,22 +140,22 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="space-y-2">
-              <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-[0.22em] flex items-center gap-1.5">
+              <span className="text-label text-brand-red flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
                 {lang === 'pt' ? 'O Nosso Legado • 22 Anos' : 'Our Legacy • 22 Years'}
               </span>
-              <h2 className="text-3xl font-light tracking-tight text-white font-heading">
+              <h2 className="text-h2 text-white">
                 {lang === 'pt' ? 'Dedicação Integral ao Bem-estar' : 'Unwavering Dedication to Well-being'}
               </h2>
             </div>
 
             <div className="relative border-l-2 border-brand-red/30 pl-5 space-y-4">
-              <p className="text-base sm:text-lg font-serif italic text-gray-200 leading-relaxed font-normal">
+              <p className="text-body-lg italic text-gray-200">
                 {lang === 'pt'
                   ? '“O Nipon Spa nasceu da paixão de Vanessa Nascimento pelas terapias manuais e pela cultura japonesa de cuidar das pessoas com atenção, respeito e excelência.”'
                   : '“Nipon Spa was born from Vanessa Nascimento’s deep passion for manual therapies and the Japanese culture of caring for people with absolute focus, deep respect, and clinical excellence.”'}
               </p>
-              <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-sans font-light">
+              <p className="text-body-sm text-gray-400 font-light">
                 {lang === 'pt'
                   ? 'Ao longo de mais de duas décadas, milhares de clientes confiaram nos nossos cuidados, transformando o Nipon Spa numa referência em Lisboa. Hoje, esse legado continua através de uma nova geração que partilha os mesmos valores de dedicação, profissionalismo e atenção ao detalhe.'
                   : 'Over more than two decades, thousands of clients have trusted our care, turning Nipon Spa into an undisputed reference in Lisbon. Today, this legacy continues through a new generation sharing the exact same values of devotion, extreme professionalism, and micro-attention to detail.'}
@@ -164,20 +165,20 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
             {/* Premium horizontal stats display */}
             <div className="pt-6 grid grid-cols-3 gap-6 border-t border-brand-border/30">
               <div className="space-y-1 text-center sm:text-left">
-                <span className="text-2xl sm:text-3xl font-heading font-extrabold text-brand-red block tracking-tight">22+</span>
-                <span className="text-[9px] font-mono font-bold text-gray-400 uppercase tracking-widest block leading-tight">
+                <span className="text-h2 font-bold text-brand-red block">22+</span>
+                <span className="text-label-sm text-gray-400 block">
                   {lang === 'pt' ? 'Anos em Lisboa' : 'Years in Lisbon'}
                 </span>
               </div>
               <div className="space-y-1 text-center sm:text-left">
-                <span className="text-2xl sm:text-3xl font-heading font-extrabold text-[#cc0000] block tracking-tight">60.000+</span>
-                <span className="text-[9px] font-mono font-bold text-gray-400 uppercase tracking-widest block leading-tight">
+                <span className="text-h2 font-bold text-[#cc0000] block">60.000+</span>
+                <span className="text-label-sm text-gray-400 block">
                   {lang === 'pt' ? 'Atendimentos' : 'Treatments'}
                 </span>
               </div>
               <div className="space-y-1 text-center sm:text-left">
-                <span className="text-2xl sm:text-3xl font-heading font-extrabold text-brand-gold block tracking-tight">100%</span>
-                <span className="text-[9px] font-mono font-bold text-gray-400 uppercase tracking-widest block leading-tight">
+                <span className="text-h2 font-bold text-brand-gold block">100%</span>
+                <span className="text-label-sm text-gray-400 block">
                   {lang === 'pt' ? 'Personalizados' : 'Tailored Plans'}
                 </span>
               </div>
@@ -188,10 +189,16 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
           <div className="lg:col-span-5 w-full flex items-center justify-center">
             <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] rounded-2xl overflow-hidden border border-brand-border/40 shadow-2xl group">
               <img 
-                src="/imagens/IMG_7547.jpeg" 
+                src={legacyTempleImg || "/imagens/IMG_7547.jpeg"} 
                 alt="Nipon Spa Legado" 
                 className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.src.includes('/imagens/IMG_7547.jpeg')) {
+                    target.src = '/imagens/IMG_7547.jpeg';
+                  }
+                }}
               />
               {/* Elegant vignette/gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
@@ -207,13 +214,13 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
       {/* 3. LINHA DO TEMPO INTERATIVA */}
       <div className="bg-brand-charcoal border border-brand-border rounded-3xl p-6 sm:p-10 space-y-8 relative">
         <div className="space-y-2 text-center max-w-xl mx-auto">
-          <span className="text-brand-gold font-mono font-bold text-[10px] uppercase tracking-widest block">
+          <span className="text-label text-brand-gold block">
             {lang === 'pt' ? 'Cronologia de Excelência' : 'Chronology of Excellence'}
           </span>
-          <h3 className="text-2xl font-bold font-heading text-white">
+          <h3 className="text-h2 text-white">
             {lang === 'pt' ? 'A Nossa Linha do Tempo' : 'Our Legacy Timeline'}
           </h3>
-          <p className="text-xs text-gray-400 font-sans">
+          <p className="text-body-sm text-gray-400">
             {lang === 'pt' 
               ? 'Clique nos marcos cronológicos abaixo para viajar pela história do Nipon Spa e vivenciar a nossa transitoriedade de gerações.'
               : 'Click on the chronological milestones below to explore the history of Nipon Spa and discover our passing of the baton.'}
@@ -228,7 +235,7 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
               <button
                 key={idx}
                 onClick={() => setTimelineStep(idx)}
-                className={`relative py-3 text-xs sm:text-[13px] font-medium tracking-wide transition duration-200 cursor-pointer shrink-0 ${
+                className={`relative py-3 text-nav tracking-wide transition duration-200 cursor-pointer shrink-0 ${
                   isActive
                     ? 'text-[#cc0000] font-bold'
                     : 'text-gray-400 hover:text-white'
@@ -251,19 +258,19 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
         <div className="bg-brand-black/40 border border-brand-border/65 rounded-2xl p-6 sm:p-8 space-y-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-brand-border/40 pb-4">
             <div className="space-y-1">
-              <span className="text-[9px] bg-brand-red/15 text-brand-red border border-brand-red/35 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-mono font-bold">
+              <span className="text-label-sm bg-brand-red/15 text-brand-red border border-brand-red/35 px-2.5 py-0.5 rounded-full inline-block">
                 {steps[timelineStep].badge}
               </span>
-              <h4 className="text-xl font-heading font-extrabold text-white">
+              <h4 className="text-h3 text-white">
                 {steps[timelineStep].title}
               </h4>
             </div>
-            <span className="font-mono text-xs font-bold text-brand-gold select-none bg-brand-charcoal/85 border border-brand-border px-3.5 py-1.5 rounded-xl">
+            <span className="text-label text-brand-gold select-none bg-brand-charcoal/85 border border-brand-border px-3.5 py-1.5 rounded-xl">
               {steps[timelineStep].year}
             </span>
           </div>
 
-          <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-sans max-w-4xl">
+          <p className="text-body text-gray-300 max-w-4xl">
             {steps[timelineStep].desc}
           </p>
 
@@ -271,14 +278,14 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
           {timelineStep === 0 && (
             <div className="space-y-4 pt-4 border-t border-brand-border/30">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono text-brand-gold font-bold uppercase tracking-[0.2em] block">
+                <span className="text-label text-brand-gold block">
                   {lang === 'pt' ? 'HISTÓRIA DA FUNDAÇÃO' : 'FOUNDATION HISTORY'}
                 </span>
-                <p className="text-[10px] text-gray-500 font-mono italic">
+                <p className="text-caption text-gray-500 font-mono italic">
                   {lang === 'pt' ? 'O início da nossa jornada de cura em Lisboa' : 'The beginning of our healing journey in Lisbon'}
                 </p>
               </div>
-              <p className="text-xs text-gray-400 font-sans leading-relaxed">
+              <p className="text-body-sm text-gray-400">
                 {lang === 'pt' 
                   ? 'Vanessa Nascimento estabeleceu as bases do que viria a ser o espaço de referência em terapias japonesas de Lisboa. Desde o primeiro dia, o foco esteve na excelência técnica e no verdadeiro espírito Omotenashi.'
                   : 'Vanessa Nascimento laid down the foundations of what would become Lisbon\'s premier destination for Japanese therapies. From day one, our focus has been on technical mastery and genuine Omotenashi spirit.'}
@@ -291,10 +298,10 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
             <div className="space-y-8 pt-4 border-t border-brand-border/30">
               <div className="space-y-4">
                 <div className="space-y-1 text-center">
-                  <span className="text-[10px] font-mono text-brand-gold font-bold uppercase tracking-[0.2em] block">
+                  <span className="text-label text-brand-gold block">
                     {lang === 'pt' ? 'TESTEMUNHO HISTÓRICO: VANESSA NASCIMENTO' : 'HISTORICAL TESTIMONIAL: VANESSA NASCIMENTO'}
                   </span>
-                  <p className="text-[10px] text-gray-500 font-mono italic">
+                  <p className="text-caption text-gray-500 font-mono italic">
                     {lang === 'pt' ? 'O testemunho sincero sobre o nascimento do Nipon Spa:' : 'The heartfelt story about the inception of Nipon Spa:'}
                   </p>
                 </div>
@@ -308,15 +315,15 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
                   </div>
 
                   <div className="space-y-1 relative z-10">
-                    <h5 className="text-white text-sm font-heading font-medium">
+                    <h5 className="text-h4 text-white">
                       {lang === 'pt' ? 'O Meu Testemunho • Por Vanessa Nascimento' : 'My Testimony • By Vanessa Nascimento'}
                     </h5>
-                    <p className="text-xs text-gray-400 leading-relaxed font-sans max-w-md mx-auto">
+                    <p className="text-body-sm text-gray-400 max-w-md mx-auto">
                       {lang === 'pt'
                         ? 'Vanessa Nascimento partilha em primeira pessoa as suas inspirações, a busca pela excelência na arte de cuidar japonesa e como transformou uma visão num templo de paz no coração de Lisboa.'
                         : 'Vanessa Nascimento shares first-hand her inspirations, the search for absolute excellence in the Japanese art of care, and how she crafted an urban sanctuary of peace in Lisbon.'}
                     </p>
-                    <span className="text-[10px] text-brand-gold font-mono uppercase bg-brand-gold/10 border border-brand-gold/30 px-3 py-1 rounded-full inline-block mt-2 font-bold select-none">
+                    <span className="text-label-sm text-brand-gold bg-brand-gold/10 border border-brand-gold/30 px-3 py-1 rounded-full inline-block mt-2 select-none">
                       {lang === 'pt' ? '⏳ Vídeo Brevemente • Testemunho de Vanessa' : '⏳ Video Coming Soon • Vanessa’s Testimonial'}
                     </span>
                   </div>
@@ -326,19 +333,19 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
               {/* NOVA GERAÇÃO / EQUIPA DE ESPECIALISTAS */}
               <div className="border-t border-brand-border/30 pt-8 space-y-8 animate-fade-in">
                 <div className="space-y-6 text-center max-w-2xl mx-auto">
-                  <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-widest block">
+                  <span className="text-label text-brand-red block">
                     {lang === 'pt' ? 'Evolução & Rebranding' : 'Evolution & Rebranding'}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-bold font-heading text-white">
+                  <h3 className="text-h2 text-white">
                     {lang === 'pt' ? 'Preservando o Legado, Inspirando o Futuro' : 'Preserving the Legacy, Inspiring the Future'}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed">
+                  <p className="text-body text-gray-300">
                     {lang === 'pt' 
                       ? 'A transição para uma nova geração marca o início de uma nova era estratégica para o Nipon Spa. Unimos a excelência de rituais tradicionais com mais de 22 anos à inovação e dinamismo de uma equipa apaixonada.'
                       : 'The transition to a new generation marks the beginning of a new strategic era for Nipon Spa. We unite over 22 years of excellent traditional rituals with the innovation and dynamism of a passionate team.'}
                   </p>
                   <div className="pt-2">
-                    <span className="inline-flex items-center gap-2 text-xs font-mono text-brand-gold uppercase tracking-wider bg-brand-gold/10 border border-brand-gold/25 px-4 py-2 rounded-full font-bold">
+                    <span className="inline-flex items-center gap-2 text-label text-brand-gold bg-brand-gold/10 border border-brand-gold/25 px-4 py-2 rounded-full">
                       <span>✦</span>
                       {lang === 'pt' ? 'Conheça a nossa equipa de especialistas abaixo' : 'Meet our team of specialists below'}
                       <span>✦</span>
@@ -361,13 +368,13 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
       {/* 4. PORQUE ESCOLHER O NIPON SPA */}
       <div className="space-y-8 py-4">
         <div className="text-center max-w-xl mx-auto space-y-2">
-          <span className="text-brand-gold font-mono font-bold text-[10px] uppercase tracking-widest block">
+          <span className="text-label text-brand-gold block">
             {lang === 'pt' ? 'Diferenciais do Nosso Templo' : 'Why Choose Nipon Spa'}
           </span>
-          <h3 className="text-2xl font-bold font-heading text-white">
+          <h3 className="text-h2 text-white">
             {lang === 'pt' ? 'Porque escolher o Nipon Spa?' : 'Why Choose the Nipon Spa?'}
           </h3>
-          <p className="text-xs text-gray-400 font-sans">
+          <p className="text-body-sm text-gray-400">
             {lang === 'pt' 
               ? 'Uma síntese dos pilares que tornaram os nossos rituais tradicionais num marco insubstituível em Lisboa.'
               : 'Our key competitive advantages that make every physical treatment an unforgettable milestone of peace.'}
@@ -421,10 +428,10 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
           ].map((v, index) => {
             return (
               <div key={index} className="bg-brand-charcoal/65 border border-brand-border/60 rounded-2xl p-6 space-y-3 hover:border-brand-red/30 transition duration-300 text-left">
-                <h4 className="font-heading font-extrabold text-white text-base">
+                <h4 className="text-h4 text-white">
                   {v.title}
                 </h4>
-                <p className="text-xs text-gray-400 leading-relaxed font-sans font-light">
+                <p className="text-body-sm text-gray-400 font-light">
                   {v.desc}
                 </p>
               </div>
@@ -1499,7 +1506,7 @@ export default function App() {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-6 text-xs font-semibold tracking-widest uppercase h-full self-stretch items-stretch relative">
+            <nav className="hidden md:flex space-x-6 text-nav h-full self-stretch items-stretch relative">
               <button 
                 onClick={() => { setActiveTab('about'); }}
                 className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'about' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
@@ -1541,7 +1548,7 @@ export default function App() {
             {/* Header Contacts & CTA */}
             <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 lg:space-x-6">
               {/* Language Selector */}
-              <div className="flex items-center space-x-1 p-1 bg-white/5 border border-white/10 rounded-full text-[9px] font-bold tracking-widest uppercase">
+              <div className="flex items-center space-x-1 p-1 bg-white/5 border border-white/10 rounded-full text-label-sm">
                 <button 
                   onClick={() => setLang('pt')}
                   className={`px-1.5 sm:px-2 py-0.5 rounded-full cursor-pointer transition ${lang === 'pt' ? 'bg-[#cc0000] text-white' : 'text-gray-400 hover:text-white'}`}
@@ -1559,7 +1566,7 @@ export default function App() {
               {/* Primary Reservar Button */}
               <button 
                 onClick={() => { setActiveTab('reservar'); }} 
-                className={`px-5 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 relative rounded-full border ${
+                className={`px-5 py-2 text-btn transition-all duration-300 relative rounded-full border ${
                   activeTab === 'reservar'
                     ? 'bg-[#cc0000] border-[#cc0000] text-white shadow-lg shadow-[#cc0000]/15'
                     : 'border-brand-red bg-brand-red text-white hover:bg-brand-red-hover hover:border-brand-red-hover'
@@ -1604,7 +1611,7 @@ export default function App() {
             <div className="flex-1 flex flex-col justify-center space-y-6 py-6 items-center">
               <button 
                 onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 flex flex-col items-center ${activeTab === 'about' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-nav-mobile transition duration-200 flex flex-col items-center ${activeTab === 'about' ? 'text-[#ff3333]' : 'text-gray-400 hover:text-white'}`}
               >
                 <span>{t.navAbout}</span>
                 {activeTab === 'about' && (
@@ -1613,7 +1620,7 @@ export default function App() {
               </button>
               <button 
                 onClick={() => { setActiveTab('therapies'); setSelectedCategory('all'); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 flex flex-col items-center ${activeTab === 'therapies' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-nav-mobile transition duration-200 flex flex-col items-center ${activeTab === 'therapies' ? 'text-[#ff3333]' : 'text-gray-400 hover:text-white'}`}
               >
                 <span>{t.navTreatments}</span>
                 {activeTab === 'therapies' && (
@@ -1622,7 +1629,7 @@ export default function App() {
               </button>
               <button 
                 onClick={() => { setActiveTab('reviews'); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 flex flex-col items-center ${activeTab === 'reviews' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-nav-mobile transition duration-200 flex flex-col items-center ${activeTab === 'reviews' ? 'text-[#ff3333]' : 'text-gray-400 hover:text-white'}`}
               >
                 <span>{t.navReviews}</span>
                 {activeTab === 'reviews' && (
@@ -1631,7 +1638,7 @@ export default function App() {
               </button>
               <button 
                 onClick={() => { setActiveTab('blog'); setSelectedBlogPost(null); setIsMobileMenuOpen(false); }}
-                className={`text-lg font-bold tracking-widest uppercase transition duration-200 flex flex-col items-center ${activeTab === 'blog' ? 'text-[#ff3333] font-extrabold' : 'text-gray-400 hover:text-white'}`}
+                className={`text-nav-mobile transition duration-200 flex flex-col items-center ${activeTab === 'blog' ? 'text-[#ff3333]' : 'text-gray-400 hover:text-white'}`}
               >
                 <span>{t.navBlog}</span>
                 {activeTab === 'blog' && (
@@ -1724,24 +1731,24 @@ export default function App() {
                   transition={{ duration: 1.2, delay: 0.1 }}
                   className="mb-3 sm:mb-5"
                 >
-                  <span className="font-heading text-xs sm:text-sm tracking-[0.25em] sm:tracking-[0.35em] text-white/90 font-light block uppercase">
+                  <span className="text-label text-white/90 block">
                     {lang === 'pt' ? 'Tradição Milenar & Harmonia dos Sentidos' : 'Ancient Heritage & Harmonious Wellness'}
                   </span>
-                  <span className="text-[10px] font-mono tracking-[0.35em] text-brand-red uppercase block mt-1.5 opacity-90 font-bold">
+                  <span className="text-label-sm text-brand-red block mt-1.5">
                     Lisboa · Desde 2004
                   </span>
                 </motion.div>
 
                 {/* Central Brandpiece */}
                 <div className="relative my-6 sm:my-8 select-none">
-                  {/* Main Minimalist Title (using Outfit font-heading from Design System) */}
+                  {/* Main Minimalist Title (using text-display from Design System) */}
                   <motion.h1 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.4, delay: 0.3 }}
                     onMouseEnter={startZenSound}
                     onMouseLeave={stopZenSound}
-                    className="relative z-10 text-4xl sm:text-6xl md:text-7xl font-extralight text-white font-heading tracking-[0.3em] sm:tracking-[0.45em] uppercase pl-[0.3em] sm:pl-[0.45em] cursor-default"
+                    className="relative z-10 text-display text-white pl-[0.3em] sm:pl-[0.45em] cursor-default"
                   >
                     NIPON SPA
                   </motion.h1>
@@ -1749,19 +1756,19 @@ export default function App() {
                   {/* Subtle traditional Japanese seal & dividing accents */}
                   <div className="relative z-10 flex items-center justify-center gap-3 sm:gap-4 mt-3 opacity-80">
                     <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent"></span>
-                    <span className="text-xs tracking-[0.3em] text-white/75 font-sans font-light">
+                    <span className="text-label tracking-[0.25em] text-white/75">
                       日本スパ · 静寂と調和
                     </span>
                     <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent"></span>
                   </div>
                 </div>
 
-                {/* Soft, Soothing Description (using Inter font-sans from Design System) */}
+                {/* Soft, Soothing Description (using text-body-lg from Design System) */}
                 <motion.p 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.4, delay: 0.5 }}
-                  className="text-sm sm:text-base md:text-lg text-white/85 font-sans font-light leading-relaxed max-w-2xl mx-auto mb-10 px-4"
+                  className="text-body-lg text-white/85 max-w-2xl mx-auto mb-10 px-4"
                 >
                   {lang === 'pt' ? (
                     <>
@@ -1786,7 +1793,7 @@ export default function App() {
                       setActiveTab('reservar');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="w-full sm:w-auto bg-[#cc0000] hover:bg-brand-red-hover text-white px-8 py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-[#cc0000]/25 flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full sm:w-auto bg-[#cc0000] hover:bg-brand-red-hover text-white px-8 py-3.5 rounded-full text-btn transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-[#cc0000]/25 flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <span>{t.btnBookNow}</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -1801,7 +1808,7 @@ export default function App() {
                         if (elem) elem.scrollIntoView({ behavior: 'smooth' });
                       }, 100);
                     }}
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105 active:scale-95 border border-white/40 text-white hover:bg-white hover:text-black cursor-pointer backdrop-blur-sm shadow-sm"
+                    className="w-full sm:w-auto px-8 py-3.5 rounded-full text-btn transition-all duration-300 hover:scale-105 active:scale-95 border border-white/40 text-white hover:bg-white hover:text-black cursor-pointer backdrop-blur-sm shadow-sm"
                   >
                     {t.btnViewTreatments}
                   </button>
@@ -1832,14 +1839,14 @@ export default function App() {
             {/* Focus of Treatment Section (Main Highlight) */}
             <section id="programs-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
               <div className="text-center max-w-xl mx-auto space-y-3">
-                <span className="text-[#cc0000] font-mono font-bold text-[10px] uppercase tracking-widest block">
+                <span className="text-label text-[#cc0000] block">
                   {lang === 'pt' ? 'Programas Focados em Resultados' : 'Result-Focused Programs'}
                 </span>
-                <h3 className="text-3xl md:text-4xl font-light text-white font-heading tracking-tight leading-tight">
+                <h2 className="text-h2 text-white">
                   {lang === 'pt' ? 'Selecione o Seu Foco de Tratamento' : 'Select Your Treatment Focus'}
-                </h3>
+                </h2>
                 <div className="w-12 h-[1px] bg-[#cc0000]/50 mx-auto"></div>
-                <p className="text-xs text-gray-400 font-sans leading-relaxed">
+                <p className="text-body text-gray-400 max-w-xl mx-auto leading-relaxed">
                   {lang === 'pt' 
                     ? 'Cada sessão é totalmente personalizada para o seu objetivo principal de hoje. Escolha uma das opções abaixo para ver as durações, explicações e valores:'
                     : 'Each session is fully customized to your primary objective of the day. Choose one of the options below to see durations, explanations, and prices:'}
@@ -1848,7 +1855,6 @@ export default function App() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pt-4">
                 {FOCUS_AREAS.map(opt => {
-                  const IconComponent = opt.icon === 'Flame' ? Flame : opt.icon === 'Waves' ? Waves : Flower2;
                   return (
                     <div 
                       key={opt.id}
@@ -1867,20 +1873,17 @@ export default function App() {
                           </div>
                         )}
 
-                        <div className="flex justify-between items-center">
-                          <div className="p-2.5 bg-white/[0.04] border border-brand-border/40 rounded-2xl group-hover:scale-110 transition duration-300">
-                            <IconComponent className={`w-5 h-5 ${opt.icon === 'Waves' ? 'text-brand-gold' : 'text-[#cc0000]'}`} />
-                          </div>
-                          <span className="text-[9px] font-mono tracking-wider text-gray-400 bg-white/5 px-2.5 py-1 rounded-full">
+                        <div className="flex items-center">
+                          <span className="text-label-sm text-gray-400 bg-white/5 px-2.5 py-1 rounded-full">
                             {lang === 'pt' ? opt.badgePt : opt.badgeEn}
                           </span>
                         </div>
 
                         <div className="space-y-2">
-                          <h4 className="text-sm font-semibold text-white group-hover:text-[#cc0000] transition duration-200 leading-snug">
+                          <h4 className="text-h4 text-white group-hover:text-[#cc0000] transition duration-200">
                             {lang === 'pt' ? opt.titlePt : opt.titleEn}
                           </h4>
-                          <p className="text-[11px] text-gray-400 leading-relaxed">
+                          <p className="text-body-sm text-gray-400">
                             {lang === 'pt' ? opt.descPt : opt.descEn}
                           </p>
                         </div>
@@ -1891,7 +1894,7 @@ export default function App() {
                           onClick={() => {
                             setSelectedFocusArea(opt);
                           }}
-                          className="text-[10px] text-brand-red font-bold uppercase tracking-widest flex items-center space-x-1.5 hover:text-white transition duration-200 cursor-pointer"
+                          className="text-btn-sm text-brand-red flex items-center space-x-1.5 hover:text-white transition duration-200 cursor-pointer"
                         >
                           <span>{lang === 'pt' ? 'Selecionar' : 'Select'}</span>
                           <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition duration-200" />
@@ -1916,11 +1919,11 @@ export default function App() {
                   
                   <div className="space-y-6">
                     <div className="space-y-2">
-                      <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+                      <span className="text-label text-brand-red flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-red"></span>
                         {lang === 'pt' ? 'Excelência & Tradição' : 'Excellence & Tradition'}
                       </span>
-                      <h3 className="text-2xl sm:text-3xl font-light text-white font-heading tracking-tight">
+                      <h3 className="text-h2 text-white">
                         {lang === 'pt' ? 'Porque escolher o Nipon Spa?' : 'Why choose Nipon Spa?'}
                       </h3>
                       <div className="w-12 h-[1px] bg-brand-red/40"></div>
@@ -1933,52 +1936,40 @@ export default function App() {
                           titleEn: "Over 22 years in Telheiras",
                           descPt: "Tradição sólida e confiança no mesmo local servindo Lisboa.",
                           descEn: "Solid tradition and trust in the same location serving Lisbon.",
-                          icon: CalendarDays,
                         },
                         {
                           titlePt: "Mais de 60.000 atendimentos realizados",
                           titleEn: "Over 60,000 treatments completed",
                           descPt: "Experiência clínica comprovada no alívio de dor e tensão corporal.",
                           descEn: "Proven clinical experience in pain relief and muscle tension.",
-                          icon: Sparkles,
                         },
                         {
                           titlePt: "Formação com mestres japoneses",
                           titleEn: "Trained by Japanese masters",
                           descPt: "Técnicas autênticas e linhagem de conhecimento direto do Japão.",
                           descEn: "Authentic techniques and direct knowledge lineage from Japan.",
-                          icon: Award,
                         },
                         {
                           titlePt: "Protocolos personalizados",
                           titleEn: "Personalized protocols",
                           descPt: "Não acreditamos em terapias iguais. Cada corpo recebe um plano único.",
                           descEn: "We do not believe in same-for-all treatments. Every body is unique.",
-                          icon: Compass,
                         },
                         {
                           titlePt: "Cultura Omotenashi – a arte japonesa de cuidar",
                           titleEn: "Omotenashi Culture – the Japanese art of caring",
                           descPt: "Cuidado absoluto com atenção invisível e antecipação das suas necessidades.",
                           descEn: "Absolute care with invisible thoughtfulness, anticipating your needs.",
-                          icon: Flower2,
                         }
                       ].map((item, idx) => {
-                        const Icon = item.icon;
                         return (
-                          <div key={idx} className="flex items-start space-x-4 group">
-                            {/* Japanese style icon: Red circle like Hinomaru with gold/white icon */}
-                            <div className="w-10 h-10 rounded-full bg-brand-red/10 border border-brand-red/35 flex items-center justify-center text-brand-red shrink-0 group-hover:bg-[#cc0000] group-hover:text-white transition duration-300 shadow-sm">
-                              <Icon className="w-5 h-5" />
-                            </div>
-                            <div className="space-y-0.5">
-                              <h4 className="text-white font-heading font-medium text-sm group-hover:text-brand-red transition duration-200">
-                                {lang === 'pt' ? item.titlePt : item.titleEn}
-                              </h4>
-                              <p className="text-xs text-gray-400 font-sans leading-relaxed">
-                                {lang === 'pt' ? item.descPt : item.descEn}
-                              </p>
-                            </div>
+                          <div key={idx} className="space-y-1 group border-b border-brand-border/20 pb-3 last:border-b-0 last:pb-0">
+                            <h4 className="text-h4 text-white group-hover:text-brand-red transition duration-200">
+                              {lang === 'pt' ? item.titlePt : item.titleEn}
+                            </h4>
+                            <p className="text-body-sm text-gray-400">
+                              {lang === 'pt' ? item.descPt : item.descEn}
+                            </p>
                           </div>
                         );
                       })}
@@ -1995,17 +1986,17 @@ export default function App() {
 
                   <div className="space-y-6">
                     <div className="space-y-2">
-                      <span className="text-brand-gold font-mono font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+                      <span className="text-label text-brand-gold flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
                         {lang === 'pt' ? 'Sinais de Alerta' : 'Warning Signs'}
                       </span>
-                      <h3 className="text-2xl sm:text-3xl font-light text-white font-heading tracking-tight">
+                      <h3 className="text-h2 text-white">
                         {lang === 'pt' ? 'Quando procurar ajuda?' : 'When to seek help?'}
                       </h3>
                       <div className="w-12 h-[1px] bg-brand-gold/40"></div>
                     </div>
 
-                    <div className="space-y-4 text-gray-300 font-sans text-sm leading-relaxed font-light">
+                    <div className="space-y-4 text-body text-gray-300 font-light">
                       <p>
                         {lang === 'pt'
                           ? "Quanto mais cedo atuar, mais fácil é evitar que pequenas tensões se transformem em limitações do dia a dia."
@@ -2028,13 +2019,13 @@ export default function App() {
                       ].map((item, idx) => (
                         <div key={idx} className="flex items-center space-x-2 bg-white/5 border border-brand-border/40 px-3 py-2 rounded-xl">
                           <span className="w-1.5 h-1.5 rounded-full bg-brand-red shrink-0"></span>
-                          <span className="text-xs text-gray-300 font-mono">{lang === 'pt' ? item.pt : item.en}</span>
+                          <span className="text-label-sm text-gray-300">{lang === 'pt' ? item.pt : item.en}</span>
                         </div>
                       ))}
                     </div>
 
                     <div className="pt-4 border-t border-brand-border/20">
-                      <p className="text-xs text-brand-gold italic font-serif leading-relaxed text-center lg:text-left">
+                      <p className="text-body-sm text-brand-gold italic text-center lg:text-left">
                         {lang === 'pt' 
                           ? "“Há 22 anos a ajudar pessoas em Lisboa a sentirem-se melhor no seu próprio corpo.”"
                           : "“For 22 years helping people in Lisbon feel better in their own bodies.”"}
@@ -2048,7 +2039,7 @@ export default function App() {
                         setActiveTab('reservar');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
-                      className="w-full bg-[#cc0000] hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-widest py-3 rounded-full transition duration-300 shadow-md shadow-[#cc0000]/10 flex items-center justify-center space-x-2"
+                      className="w-full bg-[#cc0000] hover:bg-brand-red-hover text-white text-btn py-3 px-6 rounded-full transition duration-300 shadow-md shadow-[#cc0000]/10 flex items-center justify-center space-x-2"
                     >
                       <Flower2 className="w-4 h-4 text-white" />
                       <span>{lang === 'pt' ? 'Reservar Protocolo Personalizado' : 'Book Personalized Protocol'}</span>
@@ -2072,25 +2063,25 @@ export default function App() {
                   {/* Omotenashi Philosophy content */}
                   <div className="space-y-6">
                     <div className="space-y-2">
-                      <span className="text-brand-red font-mono font-bold text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+                      <span className="text-label text-brand-red flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
                         {lang === 'pt' ? 'Exclusividade • Omotenashi' : 'Exclusive • Omotenashi Philosophy'}
                       </span>
-                      <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-white font-heading">
+                      <h2 className="text-h2 text-white">
                         {lang === 'pt' ? 'A Alma do Cuidado' : 'The Soul of Care'}
                       </h2>
-                      <p className="text-xs font-mono text-brand-gold uppercase tracking-widest">
+                      <p className="text-label text-brand-gold">
                         {lang === 'pt' ? 'A Filosofia Omotenashi no Nipon Spa' : 'Omotenashi Philosophy at Nipon Spa'}
                       </p>
                     </div>
 
                     <div className="relative border-l-2 border-brand-red/40 pl-6 py-1 space-y-4">
-                      <p className="text-lg sm:text-xl font-serif italic text-gray-200 leading-relaxed font-normal">
+                      <p className="text-body-lg italic text-gray-200">
                         {lang === 'pt' 
                           ? '“No Japão, cuidar de alguém significa antecipar as suas necessidades antes mesmo que ele precise pedir.”'
                           : '“In Japan, caring for someone means anticipating their needs even before they have to ask.”'}
                       </p>
-                      <p className="text-sm text-gray-400 font-sans leading-relaxed font-light">
+                      <p className="text-body text-gray-400 font-light">
                         {lang === 'pt'
                           ? 'Este é o espírito Omotenashi que inspira cada atendimento no Nipon Spa. Sob a orientação de Arissa Matsumoto, nossa equipa cultiva a arte japonesa da atenção invisível, onde cada toque, o silêncio respeitoso, o aroma de madeira hinoki e o chá de boas-vindas formam um ritual completo de renovação espiritual e corporal.'
                           : 'This is the Omotenashi spirit that inspires every moment of care at Nipon Spa. Under the careful guidance of Arissa Matsumoto, our team cultivates the Japanese art of invisible thoughtfulness, where every touch, respectful silence, and authentic tea service form a deep, restoring ritual.'}
@@ -2098,7 +2089,7 @@ export default function App() {
                     </div>
 
                     {/* Aesthetic signature or highlight line */}
-                    <div className="pt-2 flex items-center space-x-3 text-gray-500 font-mono text-[10px] uppercase tracking-wider">
+                    <div className="pt-2 flex items-center space-x-3 text-label text-gray-500">
                       <Flower2 className="w-4 h-4 text-brand-red" />
                       <span>NIPON SPA • LISBOA OMOTENASHI LINEAGE</span>
                     </div>
@@ -2121,13 +2112,13 @@ export default function App() {
                         
                         {/* Placeholder labels */}
                         <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-brand-gold tracking-[0.25em] uppercase block font-bold">
+                          <span className="text-label text-brand-gold block">
                             {lang === 'pt' ? 'EXPERIÊNCIA CINEMÁTICA' : 'CINEMATIC EXPERIENCE'}
                           </span>
-                          <h4 className="text-white font-heading font-medium text-sm">
+                          <h4 className="text-h4 text-white">
                             {lang === 'pt' ? 'A Alma do Omotenashi' : 'The Soul of Omotenashi'}
                           </h4>
-                          <p className="text-[10px] text-gray-500 font-mono italic max-w-xs mx-auto">
+                          <p className="text-caption text-gray-500 font-mono italic max-w-xs mx-auto">
                             {lang === 'pt' 
                               ? 'O vídeo oficial está em fase de produção. Em breve estará disponível.'
                               : 'Omotenashi feature video is in production. Streaming is commencing soon.'}
@@ -2135,7 +2126,7 @@ export default function App() {
                         </div>
 
                         {/* Floating tag */}
-                        <span className="absolute top-2 right-2 bg-brand-red/10 border border-brand-red/30 px-2.5 py-1 rounded-full text-[9px] font-mono uppercase text-brand-red tracking-wider font-extrabold">
+                        <span className="absolute top-2 right-2 bg-brand-red/10 border border-brand-red/30 px-2.5 py-1 rounded-full text-label-sm text-brand-red">
                           {lang === 'pt' ? 'Em Breve' : 'Coming Soon'}
                         </span>
                       </div>
@@ -2152,13 +2143,13 @@ export default function App() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                   
                   <div className="lg:col-span-1 space-y-4 text-center lg:text-left">
-                    <span className="text-brand-red font-bold text-xs uppercase tracking-widest block">
+                    <span className="text-label text-brand-red block">
                       {lang === 'pt' ? 'Espaço em Lisboa' : 'Lisbon Space'}
                     </span>
-                    <h3 className="text-2xl font-bold text-white font-heading">
+                    <h3 className="text-h2 text-white">
                       {lang === 'pt' ? 'Onde nos Encontrar' : 'Where to Find Us'}
                     </h3>
-                    <p className="text-xs text-gray-400 leading-relaxed">
+                    <p className="text-body-sm text-gray-400">
                       {lang === 'pt' ? (
                         <>
                           Localizado numa das zonas mais tranquilas e de prestígio, com fácil parqueamento público ao redor.
@@ -2205,8 +2196,8 @@ export default function App() {
                           <MapPin className="w-5 h-5" />
                         </div>
                       </div>
-                      <h4 className="text-gray-900 font-bold font-heading text-base">Rua Prista Monteiro, 20 Loja B, Lisboa</h4>
-                      <p className="text-gray-500 text-xs mt-1 max-w-md">
+                      <h4 className="text-h4 text-gray-900">Rua Prista Monteiro, 20 Loja B, Lisboa</h4>
+                      <p className="text-body-sm text-gray-500 mt-1 max-w-md">
                         A menos de 1 km da Estrada da Luz, Benfica, de fácil acesso pela Segunda Circular.
                       </p>
                       
@@ -2215,13 +2206,13 @@ export default function App() {
                           href="https://maps.google.com/?q=Rua+Prista+Monteiro+20+Lisboa" 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="bg-brand-gray border border-brand-border text-gray-700 hover:text-black px-4 py-2 rounded-full text-xs font-semibold transition"
+                          className="bg-brand-gray border border-brand-border text-gray-700 hover:text-black px-4 py-2 rounded-full text-btn-sm transition"
                         >
                           Abrir Google Maps
                         </a>
                         <button 
                           onClick={() => copyRefToClipboard("Rua Prista Monteiro, 20 Loja B Lisboa 1600-253")}
-                          className="bg-[#cc0000] text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-brand-red-hover transition flex items-center space-x-1.5 shadow-md shadow-[#cc0000]/10"
+                          className="bg-[#cc0000] text-white px-4 py-2 rounded-full text-btn-sm hover:bg-brand-red-hover transition flex items-center space-x-1.5 shadow-md shadow-[#cc0000]/10"
                         >
                           <Copy className="w-3.5 h-3.5" />
                           <span>{isCopied ? 'Copiado!' : 'Copiar Morada'}</span>
@@ -2259,7 +2250,7 @@ export default function App() {
 
               {/* Text and Actions content */}
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] sm:tracking-[0.3em] text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-2xl mx-auto">
+                <h2 className="text-h1 text-white drop-shadow-2xl max-w-2xl mx-auto">
                   {lang === 'pt'
                     ? 'Menos dor, mais bem-estar.'
                     : 'Less pain, more well-being.'}
@@ -2267,7 +2258,7 @@ export default function App() {
 
                 {/* Arrow indicator to scroll down to content */}
                 <div className="pt-8 flex flex-col items-center space-y-3">
-                  <span className="text-[10px] font-mono tracking-[0.25em] text-gray-400 uppercase">
+                  <span className="text-label text-gray-400">
                     {lang === 'pt' ? 'Explore os tratamentos' : 'Explore our treatments'}
                   </span>
                   <button 
@@ -2288,13 +2279,13 @@ export default function App() {
               
               {/* Catalog Introduction */}
               <div className="text-center max-w-2xl mx-auto space-y-3">
-                <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#cc0000] mb-2 block font-mono">
+                <span className="text-label text-[#cc0000] mb-2 block">
                   {lang === 'pt' ? 'O Cuidado de Excelência em Lisboa' : 'Excellence of Traditional Care in Lisbon'}
                 </span>
-                <h2 className="text-3xl sm:text-4xl font-light text-white font-heading tracking-tight leading-tight">
+                <h2 className="text-h2 text-white">
                   {lang === 'pt' ? 'Tratamentos & Programas de Resultados' : 'Result-Driven Japanese Treatments'}
                 </h2>
-                <p className="text-xs text-gray-400 max-w-lg mx-auto leading-relaxed">
+                <p className="text-body text-gray-400 max-w-lg mx-auto leading-relaxed">
                   {lang === 'pt' 
                     ? 'No Nipon Spa, cada ritual é desenhado para reequilibrar o seu corpo e mente. Selecione o seu foco principal abaixo para conhecer as opções disponíveis:' 
                     : 'At Nipon Spa, each ritual is crafted to realign body and mind. Select your primary focus below to learn about available options:'}
@@ -2303,7 +2294,6 @@ export default function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pt-4 pb-12">
               {FOCUS_AREAS.map(opt => {
-                const IconComponent = opt.icon === 'Flame' ? Flame : opt.icon === 'Waves' ? Waves : Flower2;
                 return (
                   <div 
                     key={opt.id}
@@ -2322,20 +2312,17 @@ export default function App() {
                         </div>
                       )}
 
-                      <div className="flex justify-between items-center">
-                        <div className="p-2.5 bg-white/[0.04] border border-brand-border/40 rounded-2xl group-hover:scale-110 transition duration-300">
-                          <IconComponent className={`w-5 h-5 ${opt.icon === 'Waves' ? 'text-brand-gold' : 'text-[#cc0000]'}`} />
-                        </div>
-                        <span className="text-[9px] font-mono tracking-wider text-gray-400 bg-white/5 px-2.5 py-1 rounded-full">
+                      <div className="flex items-center">
+                        <span className="text-label-sm text-gray-400 bg-white/5 px-2.5 py-1 rounded-full">
                           {lang === 'pt' ? opt.badgePt : opt.badgeEn}
                         </span>
                       </div>
 
                       <div className="space-y-2">
-                        <h4 className="text-sm font-semibold text-white group-hover:text-[#cc0000] transition duration-200 leading-snug">
+                        <h4 className="text-h4 text-white group-hover:text-[#cc0000] transition duration-200">
                           {lang === 'pt' ? opt.titlePt : opt.titleEn}
                         </h4>
-                        <p className="text-[11px] text-gray-400 leading-relaxed">
+                        <p className="text-body-sm text-gray-400">
                           {lang === 'pt' ? opt.descPt : opt.descEn}
                         </p>
                       </div>
@@ -2346,7 +2333,7 @@ export default function App() {
                         onClick={() => {
                           setSelectedFocusArea(opt);
                         }}
-                        className="text-[10px] text-brand-red font-bold uppercase tracking-widest flex items-center space-x-1.5 hover:text-white transition duration-200 cursor-pointer"
+                        className="text-btn-sm text-brand-red flex items-center space-x-1.5 hover:text-white transition duration-200 cursor-pointer"
                       >
                         <span>{lang === 'pt' ? 'Selecionar' : 'Select'}</span>
                         <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition duration-200" />
@@ -2383,11 +2370,11 @@ export default function App() {
               {/* Text and Actions content */}
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
                 
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] sm:tracking-[0.3em] text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-2xl mx-auto" id="reservar-title">
+                <h2 className="text-h1 text-white drop-shadow-2xl max-w-2xl mx-auto" id="reservar-title">
                   {lang === 'pt' ? 'RESERVE O SEU MOMENTO' : 'RESERVE YOUR MOMENT'}
                 </h2>
 
-                <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto font-sans leading-relaxed font-light drop-shadow-md">
+                <p className="text-body-lg text-white max-w-2xl mx-auto drop-shadow-md">
                   {lang === 'pt'
                     ? 'Escolha as suas terapias de bem-estar preferidas e marque o seu horário ideal com facilidade.'
                     : 'Select your preferred wellness therapies and secure your ideal time slot easily.'}
@@ -2395,7 +2382,7 @@ export default function App() {
 
                 {/* Arrow indicator to scroll down to content */}
                 <div className="pt-8 flex flex-col items-center space-y-3">
-                  <span className="text-[10px] font-mono tracking-[0.25em] text-gray-400 uppercase">
+                  <span className="text-label text-gray-400">
                     {lang === 'pt' ? 'Ir para agendamento' : 'Go to scheduling'}
                   </span>
                   <button 
@@ -2421,10 +2408,10 @@ export default function App() {
                     <ShieldCheck className="w-5 h-5 text-brand-red" />
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-white">
+                    <h3 className="text-h4 text-white">
                       {lang === 'pt' ? 'Garantia de Ligação Segura' : 'Secure Connection Guarantee'}
                     </h3>
-                    <p className="text-xs text-gray-400 mt-1 max-w-lg">
+                    <p className="text-body-sm text-gray-400 mt-1 max-w-lg">
                       {lang === 'pt' 
                         ? 'O formulário de agendamento é carregado diretamente dos servidores certificados da DOC.pt para proteger os seus dados.' 
                         : 'The scheduling form is loaded directly from certified DOC.pt servers to protect your private information.'}
@@ -2437,7 +2424,7 @@ export default function App() {
                     href="https://nipon-spa-japones.doc.pt"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-2 shrink-0 select-none"
+                    className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-5 py-2.5 rounded-full text-btn-sm transition-all duration-300 flex items-center justify-center space-x-2 shrink-0 select-none"
                     id="fallback-button"
                   >
                     <BookOpen className="w-4 h-4" />
@@ -2447,7 +2434,7 @@ export default function App() {
                     href="https://wa.me/351917448484"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-[#25D366] hover:bg-[#20ba5a] text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-2 shrink-0 select-none shadow-md shadow-[#25D366]/15"
+                    className="bg-[#25D366] hover:bg-[#20ba5a] text-white px-5 py-2.5 rounded-full text-btn-sm transition-all duration-300 flex items-center justify-center space-x-2 shrink-0 select-none shadow-md shadow-[#25D366]/15"
                     id="whatsapp-booking-button"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -2477,13 +2464,13 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-10 animate-fade-in" id="book-ritual-page">
             {/* Page Title & Traditional Subtitle */}
             <div className="text-center space-y-3">
-              <span className="text-brand-red font-bold text-xs uppercase tracking-widest block font-mono">
+              <span className="text-label text-brand-red block">
                 {bookingTherapy.japaneseName} • {lang === 'pt' ? 'Garantia de Vaga Segura' : 'Secure Booking Guarantee'}
               </span>
-              <h1 className="text-3xl md:text-5xl font-extrabold text-white font-heading tracking-tight">
+              <h1 className="text-h1 text-white">
                 {lang === 'pt' ? 'Agendar o Seu Ritual Tradicional' : 'Book Your Traditional Ritual'}
               </h1>
-              <p className="text-xs md:text-sm text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-body text-gray-400 max-w-2xl mx-auto">
                 {lang === 'pt' 
                   ? 'Vivencie o verdadeiro acolhimento Omotenashi. Escolha a data, insira os seus dados de contacto e finalize o agendamento de forma fidedigna.' 
                   : 'Experience authentic Omotenashi hospitality. Select a day and slot, enter your direct contact information, and secure your session.'}
@@ -2492,7 +2479,7 @@ export default function App() {
 
             {/* Stepper Progress Bar */}
             <div className="max-w-xl mx-auto bg-brand-charcoal/40 border border-brand-border/60 p-4 rounded-2xl">
-              <div className="flex items-center justify-between text-[11px] sm:text-xs">
+              <div className="flex items-center justify-between text-body-sm">
                 {[
                   { step: 1, title: lang === 'pt' ? 'Agenda' : 'Schedule' },
                   { step: 2, title: lang === 'pt' ? 'Identificação' : 'Identification' },
@@ -2500,7 +2487,7 @@ export default function App() {
                   { step: 4, title: lang === 'pt' ? 'Confirmado' : 'Confirmed' }
                 ].map(item => (
                   <div key={item.step} className="flex items-center space-x-1 sm:space-x-2">
-                    <span className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold transition-all duration-300 ${bookingStep >= item.step ? 'bg-brand-red text-white scale-110 shadow-lg shadow-brand-red/30' : 'bg-brand-black text-gray-500 border border-brand-border'}`}>
+                    <span className={`w-6 h-6 rounded-full flex items-center justify-center text-label-sm font-bold transition-all duration-300 ${bookingStep >= item.step ? 'bg-brand-red text-white scale-110 shadow-lg shadow-brand-red/30' : 'bg-brand-black text-gray-500 border border-brand-border'}`}>
                       {item.step}
                     </span>
                     <span className={`hidden sm:inline ${bookingStep >= item.step ? 'text-white font-semibold' : 'text-gray-500'}`}>
@@ -3230,9 +3217,9 @@ export default function App() {
         {activeTab === 'bookings' && (
           <div className="max-w-3xl mx-auto px-4 sm:px-6 mt-12 space-y-8">
             <div className="text-center">
-              <span className="text-brand-red font-bold text-xs uppercase tracking-widest block mb-2">{t.accBadge}</span>
-              <h1 className="text-3xl font-black text-white font-heading tracking-tight">{t.accTitle}</h1>
-              <p className="text-xs text-gray-400 mt-2">
+              <span className="text-label text-brand-red block mb-2">{t.accBadge}</span>
+              <h1 className="text-h1 text-white">{t.accTitle}</h1>
+              <p className="text-body-sm text-gray-400 mt-2">
                 {t.accDesc}
               </p>
             </div>
@@ -3249,7 +3236,7 @@ export default function App() {
                     >
                       {/* Premium Shinto Stamp pattern for paid bookings */}
                       {booking.isPaid && (
-                        <div className="absolute right-4 top-4 border-2 border-brand-gold/20 font-bold font-heading text-[10px] uppercase tracking-wider text-brand-gold/85 px-2.5 py-1 rounded-lg transform rotate-[-5deg] select-none">
+                        <div className="absolute right-4 top-4 border-2 border-brand-gold/20 text-label-sm text-brand-gold/85 px-2.5 py-1 rounded-lg transform rotate-[-5deg] select-none">
                           {lang === 'pt' ? '✓ PAGO ONLINE' : '✓ PAID ONLINE'}
                         </div>
                       )}
@@ -3262,11 +3249,11 @@ export default function App() {
                             </span>
                           </div>
                           <div>
-                            <span className="text-[10px] font-bold text-brand-gold uppercase tracking-wider block">ID: {booking.id}</span>
-                            <h3 className="font-heading font-extrabold text-white text-base mt-0.5">
+                            <span className="text-label-sm text-brand-gold block">ID: {booking.id}</span>
+                            <h3 className="text-h4 text-white mt-0.5">
                               {correlatedTherapy ? getTherapyName(correlatedTherapy) : (lang === 'pt' ? 'Massagem Tradicional' : 'Traditional Therapy')}
                             </h3>
-                            <p className="text-xs text-gray-400 font-mono mt-0.5">
+                            <p className="text-body-sm text-gray-400 font-mono mt-0.5">
                               {lang === 'pt' ? 'Cliente' : 'Client'}: {booking.customerName} | {lang === 'pt' ? 'Fone' : 'Phone'}: {booking.customerPhone}
                             </p>
                           </div>
@@ -3286,7 +3273,7 @@ export default function App() {
                       </div>
 
                       {/* Display Payment Detail */}
-                      <div className="bg-brand-black/40 border border-brand-border/60 rounded-xl p-3 text-xs flex flex-wrap gap-4 items-center justify-between text-gray-400">
+                      <div className="bg-brand-black/40 border border-brand-border/60 rounded-xl p-3 text-body-sm flex flex-wrap gap-4 items-center justify-between text-gray-400">
                         <div>
                           {lang === 'pt' ? 'Método de Pagamento' : 'Payment Method'}: <span className="text-white uppercase font-bold">{booking.paymentMethod}</span>
                         </div>
@@ -3301,14 +3288,14 @@ export default function App() {
 
                       {/* Special info or comments if any */}
                       {booking.specialNotes && (
-                        <p className="text-xs text-gray-400 italic bg-brand-gray/30 p-2.5 rounded-lg border-l-2 border-brand-red">
+                        <p className="text-body-sm text-gray-400 italic bg-brand-gray/30 p-2.5 rounded-lg border-l-2 border-brand-red">
                           "{lang === 'pt' ? 'Nota' : 'Note'}: {booking.specialNotes}"
                         </p>
                       )}
 
                       {/* Interaction buttons */}
                       <div className="pt-2 flex justify-between items-center">
-                        <span className="text-[10px] text-gray-400">
+                        <span className="text-caption text-gray-400">
                           {lang === 'pt' ? 'Criado em' : 'Booked on'}: {new Date(booking.createdAt).toLocaleString(lang === 'pt' ? 'pt-PT' : 'en-US')}
                         </span>
                         
@@ -3320,14 +3307,14 @@ export default function App() {
                                 handleOpenBooking(correlatedTherapy);
                               }
                             }}
-                            className="text-xs text-gray-300 font-semibold hover:text-brand-gold px-3 py-1.5 rounded bg-brand-gray transition"
+                            className="text-btn-sm text-gray-300 hover:text-brand-gold px-3 py-1.5 rounded bg-brand-gray transition"
                           >
                             {lang === 'pt' ? 'Reagendar' : 'Reschedule'}
                           </button>
                           
                           <button
                             onClick={() => handleCancelBooking(booking.id)}
-                            className="text-xs text-brand-red/90 font-semibold hover:text-white px-3 py-1.5 rounded hover:bg-brand-red/25 transition flex items-center space-x-1 border border-brand-red/10"
+                            className="text-btn-sm text-brand-red/90 hover:text-white px-3 py-1.5 rounded hover:bg-brand-red/25 transition flex items-center space-x-1 border border-brand-red/10"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                             <span>{lang === 'pt' ? 'Desmarcar' : 'Cancel'}</span>
@@ -3343,14 +3330,14 @@ export default function App() {
                 <div className="w-16 h-16 bg-brand-red/10 text-brand-red rounded-full flex items-center justify-center mx-auto mb-4">
                   <CalendarDays className="w-8 h-8" />
                 </div>
-                <h3 className="text-white font-bold text-lg font-heading">{t.noBookingsTitle}</h3>
-                <p className="text-xs text-gray-400 max-w-sm mx-auto">
+                <h3 className="text-h3 text-white">{t.noBookingsTitle}</h3>
+                <p className="text-body-sm text-gray-400 max-w-sm mx-auto">
                   {t.noBookingsDesc}
                 </p>
                 <div className="pt-2">
                   <button
                     onClick={() => { setActiveTab('therapies'); }}
-                    className="bg-brand-red text-white text-xs px-5 py-2.5 rounded-xl font-bold uppercase tracking-wider"
+                    className="bg-brand-red text-white text-btn-sm px-5 py-2.5 rounded-xl transition"
                   >
                     {t.btnViewMenu}
                   </button>
@@ -3383,13 +3370,13 @@ export default function App() {
               {/* Text and Actions content */}
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
                 
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] sm:tracking-[0.3em] text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-3xl mx-auto">
+                <h2 className="text-h1 text-white drop-shadow-2xl max-w-3xl mx-auto">
                   {lang === 'pt' ? 'AVALIAÇÕES & TESTEMUNHOS' : 'REVIEWS & TESTIMONIALS'}
                 </h2>
 
                 {/* Arrow indicator to scroll down to content */}
                 <div className="pt-8 flex flex-col items-center space-y-3">
-                  <span className="text-[10px] font-mono tracking-[0.25em] text-gray-400 uppercase">
+                  <span className="text-label text-gray-400">
                     {lang === 'pt' ? 'Explore as avaliações' : 'Explore reviews'}
                   </span>
                   <button 
@@ -3591,11 +3578,9 @@ export default function App() {
 
               {/* Text and Actions content */}
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.25em] sm:tracking-[0.35em] text-white font-heading uppercase leading-tight drop-shadow-2xl">
+                <h2 className="text-h1 text-white drop-shadow-2xl">
                   {lang === 'pt' ? 'O NOSSO TEMPLO' : 'OUR SANCTUARY'}
                 </h2>
-
-
 
                 {/* Arrow indicator to scroll down to content */}
                 <div className="pt-8 flex flex-col items-center space-y-3">
@@ -3606,7 +3591,7 @@ export default function App() {
                     }}
                     className="group flex flex-col items-center text-gray-400 hover:text-white transition duration-200 focus:outline-none"
                   >
-                    <span className="text-[10px] font-mono tracking-widest uppercase mb-2">
+                    <span className="text-label text-gray-400 mb-2">
                       {lang === 'pt' ? 'Descubra a Nossa História' : 'Discover Our Story'}
                     </span>
                     <div className="w-8 h-12 rounded-full border border-white/25 flex justify-center p-2 relative group-hover:border-white/50 transition">
@@ -3635,10 +3620,10 @@ export default function App() {
               {/* Left Column: FAQ Grid */}
               <div className="lg:col-span-7 space-y-6">
                 <div>
-                  <h3 className="text-xs font-bold font-mono text-brand-gold uppercase tracking-widest mb-3">
+                  <span className="text-label text-brand-gold mb-3 block">
                     {lang === 'pt' ? 'Perguntas Frequentes • FAQ' : 'Frequently Asked Questions • FAQ'}
-                  </h3>
-                  <h2 className="text-2xl font-bold font-heading text-white">
+                  </span>
+                  <h2 className="text-h2 text-white">
                     {lang === 'pt' ? 'Preparar a sua Visita' : 'Preparing For Your Visit'}
                   </h2>
                 </div>
@@ -3665,9 +3650,9 @@ export default function App() {
                     }
                   ].map((faq, idx) => (
                     <div key={idx} className="bg-brand-charcoal border border-brand-border rounded-xl p-5 space-y-2">
-                      <span className="text-brand-red font-extrabold text-xs block font-mono font-bold">0{idx + 1}</span>
-                      <h4 className="text-sm font-bold text-white font-heading">{lang === 'pt' ? faq.qPt : faq.qEn}</h4>
-                      <p className="text-xs text-gray-400 leading-relaxed font-sans">{lang === 'pt' ? faq.aPt : faq.aEn}</p>
+                      <span className="text-label-sm text-brand-red block">0{idx + 1}</span>
+                      <h4 className="text-h4 text-white">{lang === 'pt' ? faq.qPt : faq.qEn}</h4>
+                      <p className="text-body-sm text-gray-400">{lang === 'pt' ? faq.aPt : faq.aEn}</p>
                     </div>
                   ))}
                 </div>
@@ -3676,21 +3661,21 @@ export default function App() {
               {/* Right Column: Physical Lisbon details Card */}
               <div className="lg:col-span-5 bg-brand-charcoal border border-brand-border rounded-3xl p-6 md:p-8 space-y-6">
                 <div className="border-b border-brand-border/60 pb-4 text-center">
-                  <span className="text-[10px] font-bold text-brand-red uppercase tracking-widest block font-mono mb-1">
+                  <span className="text-label-sm text-brand-red block mb-1">
                     {lang === 'pt' ? 'A Nossa Localização Fidedigna' : 'Our Authentic Lisbon Sanctuary'}
                   </span>
-                  <p className="text-xs text-gray-400 font-sans">
+                  <p className="text-body-sm text-gray-400">
                     {lang === 'pt' ? 'Um portal direto para o Japão Zen no coração de Telheiras, Lisboa.' : 'A direct portal to Zen Kyoto right in the heart of Telheiras, Lisbon.'}
                   </p>
                 </div>
 
-                <div className="space-y-4 text-xs font-sans">
+                <div className="space-y-4 text-body-sm">
                   <div className="flex items-start space-x-3">
                     <MapPin className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-white block font-heading mb-0.5">{lang === 'pt' ? 'Endereço:' : 'Address:'}</strong>
                       <span className="text-gray-400 block font-mono">Rua Prista Monteiro, 20 Loja B</span>
-                      <span className="text-[9px] text-[#888] font-mono">1600-253 Lisboa, Portugal</span>
+                      <span className="text-caption text-[#888] font-mono">1600-253 Lisboa, Portugal</span>
                     </div>
                   </div>
 
@@ -3745,13 +3730,13 @@ export default function App() {
                   {/* Text and Actions content */}
                   <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-7">
                     
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.2em] sm:tracking-[0.3em] text-white font-heading uppercase leading-tight drop-shadow-2xl max-w-2xl mx-auto">
+                    <h2 className="text-h1 text-white drop-shadow-2xl max-w-2xl mx-auto">
                       {lang === 'pt' ? 'SABEDORIA JAPONESA' : 'JAPANESE WISDOM'}
                     </h2>
 
                     {/* Arrow indicator to scroll down to content */}
                     <div className="pt-8 flex flex-col items-center space-y-3">
-                      <span className="text-[10px] font-mono tracking-[0.25em] text-gray-400 uppercase">
+                      <span className="text-label text-gray-400">
                         {lang === 'pt' ? 'Explore os artigos' : 'Explore articles'}
                       </span>
                       <button 
@@ -3790,23 +3775,23 @@ export default function App() {
                           {post.kanjiSymbol}
                         </div>
                         {/* Read time badge */}
-                        <div className="absolute bottom-3 left-3 bg-brand-black/75 px-2.5 py-1 border border-brand-border text-[9px] font-mono uppercase tracking-widest text-brand-gold rounded-full">
+                        <div className="absolute bottom-3 left-3 bg-brand-black/75 px-2.5 py-1 border border-brand-border text-label-sm text-brand-gold rounded-full">
                           {lang === 'pt' ? post.readTimePt : post.readTimeEn}
                         </div>
                       </div>
 
                       {/* Content block */}
                       <div className="p-6 flex-1 flex flex-col space-y-4">
-                        <div className="flex items-center justify-between text-[10px] font-mono text-gray-500 tracking-wider">
+                        <div className="flex items-center justify-between text-label-sm text-gray-500">
                           <span className="uppercase text-brand-gold">{lang === 'pt' ? post.categoryPt : post.categoryEn}</span>
                           <span>{post.date}</span>
                         </div>
 
                         <div className="space-y-2 flex-1">
-                          <h3 className="text-lg font-medium text-white group-hover:text-brand-red transition duration-200">
+                          <h3 className="text-h3 text-white group-hover:text-brand-red transition duration-200">
                             {lang === 'pt' ? post.titlePt : post.titleEn}
                           </h3>
-                          <p className="text-xs text-gray-400 font-sans leading-relaxed line-clamp-3">
+                          <p className="text-body-sm text-gray-400 line-clamp-3">
                             {lang === 'pt' ? post.excerptPt : post.excerptEn}
                           </p>
                         </div>
@@ -3816,7 +3801,7 @@ export default function App() {
                             setSelectedBlogPost(post);
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                           }}
-                          className="pt-2 text-[10px] font-bold text-brand-red font-mono uppercase tracking-widest flex items-center space-x-1 hover:text-white transition duration-200 cursor-pointer self-start"
+                          className="pt-2 text-btn-sm text-brand-red flex items-center space-x-1 hover:text-white transition duration-200 cursor-pointer self-start"
                         >
                           <span>{lang === 'pt' ? 'Ler Artigo' : 'Read Article'}</span>
                           <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition duration-200" />
@@ -3828,14 +3813,14 @@ export default function App() {
 
                 {/* EMAIL NEWSLETTER BLOCK */}
                 <div className="bg-brand-charcoal border border-brand-border p-8 md:p-12 text-center max-w-3xl mx-auto space-y-6 rounded-3xl">
-                  <span className="text-brand-gold font-mono font-bold text-xs uppercase tracking-widest block font-bold">
+                  <span className="text-label text-brand-gold block">
                     {lang === 'pt' ? 'HOSPITALIDADE POR CORREIO • SHINBUN' : 'HOSPITALITY BY MAIL • SHINBUN'}
                   </span>
                   <div className="space-y-2">
-                    <h3 className="text-xl md:text-2xl font-light text-white tracking-wide">
+                    <h3 className="text-h2 text-white">
                       {lang === 'pt' ? 'Subscreva as Crónicas do Nipon' : 'Subscribe to Nipon Chronicles'}
                     </h3>
-                    <p className="text-xs text-gray-400 max-w-lg mx-auto leading-relaxed">
+                    <p className="text-body text-gray-400 max-w-lg mx-auto">
                       {lang === 'pt' 
                         ? 'Receba pequenos ensaios quinzenais de Quioto, técnicas de redução de stress doméstico e avisos de vagas reservadas prioritárias diretamente no seu e-mail.'
                         : 'Receive bi-weekly essays on Kyoto wisdom, stress reduction hacks, and high-vacancy priority alerts directly in your inbox.'}
@@ -3844,10 +3829,10 @@ export default function App() {
 
                   {blogSubscribed ? (
                     <div className="bg-brand-red/10 border border-[#cc0000] p-4 max-w-md mx-auto animate-fade-in">
-                      <span className="text-xs font-mono font-bold text-white block uppercase tracking-widest">
+                      <span className="text-label text-white block">
                         {lang === 'pt' ? 'SUBSCRITO COM SUCESSO • ARIGATO' : 'SUBSCRIBED SUCCESSFULLY • ARIGATO'}
                       </span>
-                      <span className="text-[11px] text-gray-300 block mt-1">
+                      <span className="text-body-sm text-gray-300 block mt-1">
                         {lang === 'pt' ? 'Obrigado por se juntar à nossa comunidade espiritual.' : 'Thank you for joining our spiritual wellness community.'}
                       </span>
                     </div>
@@ -3863,24 +3848,25 @@ export default function App() {
                     >
                       <input 
                         type="email" 
-                        required
                         value={blogEmail}
                         onChange={(e) => setBlogEmail(e.target.value)}
-                        placeholder={lang === 'pt' ? 'Insira o seu endereço de e-mail...' : 'Enter your email address...'}
-                        className="bg-brand-black border border-brand-border text-white text-xs px-5 py-3 focus:outline-none focus:border-brand-red flex-1 font-mono rounded-full"
+                        placeholder={lang === 'pt' ? 'O seu e-mail...' : 'Your email...'}
+                        className="bg-brand-black border border-brand-border px-4 py-2.5 rounded-full text-body-sm text-white focus:outline-none focus:border-brand-red flex-1"
+                        required
                       />
                       <button 
                         type="submit"
-                        className="bg-[#cc0000] hover:bg-brand-red-hover text-white text-xs font-bold uppercase tracking-widest px-6 py-3 transition duration-200 cursor-pointer rounded-full"
+                        className="bg-[#cc0000] hover:bg-brand-red-hover text-white px-6 py-2.5 rounded-full text-btn transition duration-200 cursor-pointer"
                       >
-                        {lang === 'pt' ? 'Aderir' : 'Join'}
+                        {lang === 'pt' ? 'Subscrever' : 'Subscribe'}
                       </button>
                     </form>
                   )}
                 </div>
+
               </div>
-              </div>
-            ) : (
+            </div>
+          ) : (
               // READ ONE BLOG POST DETAIL VIEW
               <div className="space-y-8 animate-fade-in max-w-4xl mx-auto">
                 {/* Back Link */}
@@ -3889,7 +3875,7 @@ export default function App() {
                     setSelectedBlogPost(null);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="group inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-widest text-gray-400 hover:text-white transition duration-200 cursor-pointer"
+                  className="group inline-flex items-center space-x-2 text-btn-sm text-gray-400 hover:text-white transition duration-200 cursor-pointer"
                 >
                   <span className="group-hover:-translate-x-1 transition duration-200">←</span>
                   <span>{lang === 'pt' ? 'Voltar para o Blog' : 'Back to Blog'}</span>
@@ -3897,19 +3883,19 @@ export default function App() {
 
                 {/* Article Header block */}
                 <div className="space-y-4">
-                  <div className="flex flex-wrap gap-3 items-center text-xs font-mono tracking-widest text-[#cc0000] uppercase font-bold">
+                  <div className="flex flex-wrap gap-3 items-center text-label text-[#cc0000]">
                     <span>{lang === 'pt' ? selectedBlogPost.categoryPt : selectedBlogPost.categoryEn}</span>
                     <span className="text-gray-600 font-normal">•</span>
                     <span className="text-gray-400 font-normal">{selectedBlogPost.date}</span>
                     <span className="text-gray-600 font-normal">•</span>
-                    <span className="text-brand-gold font-normal font-mono lowercase">{lang === 'pt' ? selectedBlogPost.readTimePt : selectedBlogPost.readTimeEn}</span>
+                    <span className="text-brand-gold font-normal lowercase">{lang === 'pt' ? selectedBlogPost.readTimePt : selectedBlogPost.readTimeEn}</span>
                   </div>
 
-                  <h1 className="text-2xl md:text-4xl font-light text-white leading-tight font-heading tracking-tight">
+                  <h1 className="text-h1 text-white">
                     {lang === 'pt' ? selectedBlogPost.titlePt : selectedBlogPost.titleEn}
                   </h1>
 
-                  <p className="text-xs md:text-sm text-gray-400 leading-relaxed max-w-3xl italic">
+                  <p className="text-body-lg text-gray-400 max-w-3xl italic">
                     {lang === 'pt' ? selectedBlogPost.excerptPt : selectedBlogPost.excerptEn}
                   </p>
                 </div>
@@ -3930,12 +3916,12 @@ export default function App() {
                 </div>
 
                 {/* Paragraph Bodies */}
-                <div className="space-y-6 text-sm text-gray-300 font-sans leading-relaxed tracking-wide max-w-3xl mt-8">
+                <div className="space-y-6 text-body text-gray-300 max-w-3xl mt-8">
                   {(lang === 'pt' ? selectedBlogPost.contentPt : selectedBlogPost.contentEn).map((paragraph, index) => {
                     // Make the first paragraph distinct (dropcap-inspired layout)
                     if (index === 0) {
                       return (
-                        <p key={index} className="text-[15px] text-white leading-loose font-sans border-l-2 border-[#cc0000] pl-4">
+                        <p key={index} className="text-body-lg text-white border-l-2 border-[#cc0000] pl-4">
                           {paragraph}
                         </p>
                       );
@@ -3955,8 +3941,8 @@ export default function App() {
                       印
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-mono tracking-widest text-gray-500 block">Autor / Editorial</span>
-                      <span className="text-xs text-white font-mono uppercase tracking-widest font-bold">Nipon Spa Temple</span>
+                      <span className="text-caption uppercase text-gray-500 block">Autor / Editorial</span>
+                      <span className="text-label text-white">Nipon Spa Temple</span>
                     </div>
                   </div>
 
@@ -3965,7 +3951,7 @@ export default function App() {
                       setSelectedBlogPost(null);
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="border border-brand-border px-4 py-2 hover:bg-white/5 text-gray-400 hover:text-white text-[10px] font-bold uppercase tracking-widest transition-all rounded-full font-mono cursor-pointer"
+                    className="border border-brand-border px-4 py-2 hover:bg-white/5 text-gray-400 hover:text-white text-btn-sm transition-all rounded-full cursor-pointer"
                   >
                     {lang === 'pt' ? 'Outros Ensaios' : 'Other Essays'}
                   </button>
@@ -3973,7 +3959,7 @@ export default function App() {
 
                 {/* Related posts */}
                 <div className="pt-8 space-y-6 animate-fade-in">
-                  <h4 className="text-xs uppercase font-mono tracking-widest text-brand-gold font-bold">
+                  <h4 className="text-label text-brand-gold">
                     {lang === 'pt' ? 'Continue a Ler' : 'Continue Reading'}
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8">
@@ -3995,11 +3981,11 @@ export default function App() {
                           />
                         </div>
                         <div className="space-y-1">
-                          <span className="text-[9px] font-mono uppercase tracking-wider text-brand-gold block">{lang === 'pt' ? post.categoryPt : post.categoryEn}</span>
-                          <h5 className="text-xs font-bold text-white leading-snug font-sans line-clamp-1 group-hover:text-brand-red transition duration-200">
+                          <span className="text-label-sm text-brand-gold block">{lang === 'pt' ? post.categoryPt : post.categoryEn}</span>
+                          <h5 className="text-h4 text-white line-clamp-1 group-hover:text-brand-red transition duration-200">
                             {lang === 'pt' ? post.titlePt : post.titleEn}
                           </h5>
-                          <p className="text-[10px] text-gray-400 line-clamp-1 font-sans">{lang === 'pt' ? post.excerptPt : post.excerptEn}</p>
+                          <p className="text-body-sm text-gray-400 line-clamp-1">{lang === 'pt' ? post.excerptPt : post.excerptEn}</p>
                         </div>
                       </div>
                     ))}
@@ -4767,12 +4753,12 @@ export default function App() {
               {/* Modal Header */}
               <div className="bg-gray-50 p-6 md:p-8 border-b border-gray-200 flex items-center justify-between">
                 <div>
-                  <div className="flex items-center space-x-2 text-[10px] text-[#cc0000] font-mono uppercase tracking-[0.25em] mb-1 font-bold">
+                  <div className="flex items-center space-x-2 text-label-sm text-[#cc0000] mb-1">
                     <span>{lang === 'pt' ? 'Foco do Tratamento' : 'Treatment Focus'}</span>
                     <span>•</span>
                     <span>{lang === 'pt' ? selectedFocusArea.badgePt : selectedFocusArea.badgeEn}</span>
                   </div>
-                  <h2 className="text-xl md:text-2xl font-light text-gray-900 font-heading tracking-tight">
+                  <h2 className="text-h3 text-gray-900">
                     {lang === 'pt' ? selectedFocusArea.titlePt : selectedFocusArea.titleEn}
                   </h2>
                 </div>
@@ -4788,12 +4774,12 @@ export default function App() {
 
               {/* Modal Body: Levels Options */}
               <div className="p-6 md:p-8 space-y-8 overflow-y-auto max-h-[70vh]">
-                <p className="text-xs text-gray-600 leading-relaxed max-w-2xl font-sans">
+                <p className="text-body-sm text-gray-600 max-w-2xl">
                   {lang === 'pt' ? selectedFocusArea.descPt : selectedFocusArea.descEn}
                 </p>
 
                 <div className="space-y-6">
-                  <h3 className="text-[10px] font-bold text-[#cc0000] uppercase tracking-[0.2em] block font-mono border-b border-gray-200 pb-2">
+                  <h3 className="text-label text-[#cc0000] block border-b border-gray-200 pb-2">
                     {lang === 'pt' ? 'Selecione a Duração & Intensidade Ideal' : 'Select Your Ideal Duration & Intensity'}
                   </h3>
 
@@ -4807,46 +4793,46 @@ export default function App() {
                           <div className="space-y-4">
                             {/* Duration badge and Price */}
                             <div className="flex justify-between items-center">
-                              <span className="bg-brand-red/10 border border-brand-red/30 text-brand-red text-[10px] px-2.5 py-0.5 rounded-full font-mono tracking-wider font-extrabold">
+                              <span className="bg-brand-red/10 border border-brand-red/30 text-brand-red text-label-sm px-2.5 py-0.5 rounded-full">
                                 {level.duration} min
                               </span>
-                              <span className="text-lg font-bold text-gray-950 font-sans">
+                              <span className="text-h4 text-gray-950 font-bold">
                                 {level.price}€
                               </span>
                             </div>
 
                             {/* Level Name & Description */}
                             <div className="space-y-1.5">
-                              <h4 className="text-sm font-semibold text-gray-900 group-hover:text-[#cc0000] transition duration-200">
+                              <h4 className="text-h4 text-gray-900 group-hover:text-[#cc0000] transition duration-200">
                                 {lang === 'pt' ? level.namePt : level.nameEn}
                               </h4>
-                              <p className="text-[11px] text-gray-600 leading-relaxed min-h-[60px]">
+                              <p className="text-body-sm text-gray-600 min-h-[60px]">
                                 {lang === 'pt' ? level.descPt : level.descEn}
                               </p>
                             </div>
 
                             {/* Expected Outcomes */}
                             <div className="space-y-1.5 pt-3 border-t border-gray-200">
-                              <span className="text-[8px] font-bold text-[#cc0000] uppercase tracking-widest block font-mono">
+                              <span className="text-label-sm text-[#cc0000] block">
                                 {lang === 'pt' ? 'Resultados' : 'Outcomes'}
                               </span>
                               {(lang === 'pt' ? level.resultsPt : level.resultsEn).map((res, idx) => (
                                 <div key={idx} className="flex items-start space-x-2">
                                   <span className="text-[#cc0000] text-xs font-bold leading-none mt-0.5">✓</span>
-                                  <span className="text-[10px] text-gray-700 font-sans leading-tight">{res}</span>
+                                  <span className="text-body-sm text-gray-700 leading-tight">{res}</span>
                                 </div>
                               ))}
                             </div>
 
                             {/* Therapeutic Benefits */}
                             <div className="space-y-1.5 pt-3 border-t border-gray-200">
-                              <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest block font-mono">
+                              <span className="text-label-sm text-gray-500 block">
                                 {lang === 'pt' ? 'Benefícios' : 'Benefits'}
                               </span>
                               {(lang === 'pt' ? level.benefitsPt : level.benefitsEn).map((ben, idx) => (
                                 <div key={idx} className="flex items-start space-x-2">
                                   <span className="text-gray-400 text-xs leading-none">—</span>
-                                  <span className="text-[10px] text-gray-600 font-sans leading-tight">{ben}</span>
+                                  <span className="text-body-sm text-gray-600 leading-tight">{ben}</span>
                                 </div>
                               ))}
                             </div>
@@ -4870,7 +4856,7 @@ export default function App() {
                                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                                 }, 150);
                               }}
-                              className="w-full bg-[#cc0000] hover:bg-brand-red-hover text-white py-2 rounded-xl text-[9px] font-bold uppercase tracking-widest transition duration-300 flex items-center justify-center space-x-1 cursor-pointer"
+                              className="w-full bg-[#cc0000] hover:bg-brand-red-hover text-white py-2 rounded-xl text-btn-sm transition duration-300 flex items-center justify-center space-x-1 cursor-pointer"
                             >
                               <CalendarIcon className="w-3 h-3" />
                               <span>{lang === 'pt' ? 'Agendar' : 'Book Now'}</span>
@@ -5561,10 +5547,10 @@ export default function App() {
 
             {/* Column 2: Contacts */}
             <div>
-              <h5 className="text-white font-bold font-heading uppercase tracking-widest text-xs mb-4">
+              <h4 className="text-h4 uppercase tracking-widest text-white mb-4">
                 {lang === 'pt' ? 'Central de Reservas' : 'Booking Center'}
-              </h5>
-              <ul className="space-y-2.5 text-xs">
+              </h4>
+              <ul className="space-y-2.5 text-body-sm">
                 <li className="flex items-center space-x-2">
                   <Phone className="w-4 h-4 text-brand-red shrink-0" />
                   <a href="tel:+351917448484" className="hover:text-white font-mono">917 448 484</a>
@@ -5592,9 +5578,9 @@ export default function App() {
 
             {/* Column 4: Hours & Traditional note */}
             <div className="space-y-4">
-              <h5 className="text-white font-bold font-heading uppercase tracking-widest text-xs mb-4">
+              <h4 className="text-h4 uppercase tracking-widest text-white mb-4">
                 {lang === 'pt' ? 'Protocolo de Apoio' : 'Guest Support Protocol'}
-              </h5>
+              </h4>
               <div className="text-xs text-gray-400 leading-relaxed font-sans space-y-2">
                 {lang === 'pt' ? (
                   <>
@@ -5655,8 +5641,6 @@ export default function App() {
               >
                 {lang === 'pt' ? 'Livro de Reclamações' : 'Complaints Book'}
               </a>
-              <span>•</span>
-              <span onClick={() => { setActiveTab('staff-portal'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-brand-red font-bold cursor-pointer text-brand-gold">{lang === 'pt' ? 'Área do Staff' : 'Staff Portal'}</span>
             </div>
             
             <p className="font-mono text-[10px] uppercase">
