@@ -21,45 +21,7 @@ export default function NiponLogo({
  
   // Render high-fidelity SVG calligraphy if the image is disabled or we fallback to it
   const renderCalligraphyCircle = () => {
-    return (
-      <svg
-        width={circleSize}
-        height={circleSize}
-        viewBox="0 0 100 100"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0 transition-transform duration-300 hover:scale-105"
-      >
-        {/* Red Circle (Hinomaru) representing the Rising Sun of Japan */}
-        <circle cx="50" cy="50" r="42" fill="#E60012" />
-        
-        {/* Calligraphy strokes for '日' (Left side) */}
-        <g fill="#000000" style={{ mixBlendMode: 'normal' }}>
-          {/* Left vertical trunk */}
-          <path d="M 23 34 C 23.5 34 24 37 24 48 C 24 59 23 71 22.5 73 C 22.5 74.5 20.5 75 20 73 C 19.5 71 20 59 20.5 48 C 21 37 22 34 23 34 Z" parser-id="日-1" />
-          {/* Top bar and right vertical trunk with expressive corner hook */}
-          <path d="M 23 34.5 C 28 34 36.5 33 42 33.5 C 44 33.5 45 35 44.5 38.5 C 43 50 43.5 66 43.5 72.5 C 43.5 74.5 42 75 39.5 73.5 C 37 72 38 64.5 38.5 49 C 39 36 32 37 23 37 Z" parser-id="日-2" strokeLinejoin="miter" strokeLinecap="round" />
-          {/* Middle horizontal accent line representing the brush lift */}
-          <path d="M 24 52.5 C 27.5 52 33.5 51.5 38.5 51.5 C 40 51.5 40.5 53 38 53.5 C 35 54 29 54.5 24 54.5 C 23 54.5 23.2 52.5 24 52.5 Z" parser-id="日-3" />
-          {/* Bottom closing horizontal line */}
-          <path d="M 23 70 C 27.5 69.5 32 69 37 69 C 39.5 69 40 70.5 37.5 71 C 32.5 71.5 27.5 72 23 72 C 21.5 72 21.5 70.5 23 70 Z" parser-id="日-4" />
-        </g>
-        
-        {/* Calligraphy strokes for '本' (Right side) */}
-        <g fill="#000000">
-          {/* Main horizontal crossbar with soft entry and heavy exit brush terminals */}
-          <path d="M 50.5 44 C 56.5 41 66.5 37.5 79.5 35 C 81.5 34.5 82.5 36 80.5 37.5 C 73 41 64.5 44.5 52.5 47 C 49.5 47.5 48.5 45.5 50.5 44 Z" parser-id="本-1" />
-          {/* Central vertical trunk, slightly tapered */}
-          <path d="M 65 17 C 66 17 66.5 20 L 65.5 77 C 65 80.5 62.5 81.5 62 79 L 63 21 C 63.5 17 64 17 65 17 Z" parser-id="本-2" />
-          {/* Sweeping fluid left-downward diagonal tail */}
-          <path d="M 64.5 45 C 61 53.5 54.5 64 45.5 71 C 43.5 72.5 42.5 70 44.5 68.5 C 52 61 58.5 51.5 61.5 43.5 C 62.5 42 64.5 42.5 64.5 45 Z" parser-id="本-3" />
-          {/* Sweeping dynamic right-downward diagonal tail with heavy ink weight */}
-          <path d="M 65.5 47 C 69 54.5 75.5 63 83 67.5 C 85 68.7 84.5 70.5 82 69.5 C 75.5 66.5 69 58 64.5 49 C 64 48 65 46.5 65.5 47 Z" parser-id="本-4" />
-          {/* Short horizontal bar near base representing the origin/foundation notch */}
-          <path d="M 57 61.5 C 60.5 60.5 65 59.5 69.5 59 C 71 59 71.5 60.5 69 61 C 64 61.5 59.5 62 57 62.5 C 55.5 62.5 55.5 61.5 57 61.5 Z" parser-id="本-5" />
-        </g>
-      </svg>
-    );
+    return <NiponEmblem size={circleSize} />;
   };
  
   // If useOriginalImage is active, we render the high-res uploaded logo screenshot beautifully
@@ -152,5 +114,44 @@ export default function NiponLogo({
         </span>
       </div>
     </div>
+  );
+}
+
+export function NiponEmblem({ 
+  size = 44, 
+  className = '' 
+}: { 
+  size?: number; 
+  className?: string;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`shrink-0 ${className}`}
+    >
+      {/* Red Circle (Hinomaru) representing the Rising Sun of Japan */}
+      <circle cx="50" cy="50" r="42" fill="#E60012" />
+      
+      {/* Calligraphy strokes for '日' (Left side) */}
+      <g fill="#000000" style={{ mixBlendMode: 'normal' }}>
+        <path d="M 23 34 C 23.5 34 24 37 24 48 C 24 59 23 71 22.5 73 C 22.5 74.5 20.5 75 20 73 C 19.5 71 20 59 20.5 48 C 21 37 22 34 23 34 Z" parser-id="日-1" />
+        <path d="M 23 34.5 C 28 34 36.5 33 42 33.5 C 44 33.5 45 35 44.5 38.5 C 43 50 43.5 66 43.5 72.5 C 43.5 74.5 42 75 39.5 73.5 C 37 72 38 64.5 38.5 49 C 39 36 32 37 23 37 Z" parser-id="日-2" strokeLinejoin="miter" strokeLinecap="round" />
+        <path d="M 24 52.5 C 27.5 52 33.5 51.5 38.5 51.5 C 40 51.5 40.5 53 38 53.5 C 35 54 29 54.5 24 54.5 C 23 54.5 23.2 52.5 24 52.5 Z" parser-id="日-3" />
+        <path d="M 23 70 C 27.5 69.5 32 69 37 69 C 39.5 69 40 70.5 37.5 71 C 32.5 71.5 27.5 72 23 72 C 21.5 72 21.5 70.5 23 70 Z" parser-id="日-4" />
+      </g>
+      
+      {/* Calligraphy strokes for '本' (Right side) */}
+      <g fill="#000000">
+        <path d="M 50.5 44 C 56.5 41 66.5 37.5 79.5 35 C 81.5 34.5 82.5 36 80.5 37.5 C 73 41 64.5 44.5 52.5 47 C 49.5 47.5 48.5 45.5 50.5 44 Z" parser-id="本-1" />
+        <path d="M 65 17 C 66 17 66.5 20 L 65.5 77 C 65 80.5 62.5 81.5 62 79 L 63 21 C 63.5 17 64 17 65 17 Z" parser-id="本-2" />
+        <path d="M 64.5 45 C 61 53.5 54.5 64 45.5 71 C 43.5 72.5 42.5 70 44.5 68.5 C 52 61 58.5 51.5 61.5 43.5 C 62.5 42 64.5 42.5 64.5 45 Z" parser-id="本-3" />
+        <path d="M 65.5 47 C 69 54.5 75.5 63 83 67.5 C 85 68.7 84.5 70.5 82 69.5 C 75.5 66.5 69 58 64.5 49 C 64 48 65 46.5 65.5 47 Z" parser-id="本-4" />
+        <path d="M 57 61.5 C 60.5 60.5 65 59.5 69.5 59 C 71 59 71.5 60.5 69 61 C 64 61.5 59.5 62 57 62.5 C 55.5 62.5 55.5 61.5 57 61.5 Z" parser-id="本-5" />
+      </g>
+    </svg>
   );
 }

@@ -51,15 +51,18 @@ import { motion, AnimatePresence } from 'motion/react';
 import { THERAPIES, INITIAL_REVIEWS, generateAvailableSlots, generateMockReference } from './data';
 import { Therapy, Booking, PaymentMethod, Review } from './types';
 import { TRANSLATIONS } from './translations';
-import NiponLogo from './components/NiponLogo';
+import NiponLogo, { NiponEmblem } from './components/NiponLogo';
 import TeamSection from './components/TeamSection';
 import CookieConsentBanner from './components/CookieConsentBanner';
+import ZenIntroAnimation from './components/ZenIntroAnimation';
 import { BLOG_POSTS, BlogPost } from './data/blog';
 
 // Import image assets statically for Vite production bundles
 import spaHeroImg from './assets/images/japanese_spa_hero_1781089830835.png';
 import therapyHeroImg from './assets/images/japanese_therapy_1781089845836.png';
 import legacyTempleImg from './assets/images/IMG_7547.jpeg';
+import amandaImg from './assets/images/amanda.jpeg';
+import roomTatamiImg from './assets/images/nipon_sala_tatami_clean.jpg';
 
 // Let's use 2026-06-10 as our base date
 const BASE_DATE_STR = "2026-06-10";
@@ -448,7 +451,7 @@ export const FOCUS_AREAS = [
   {
     id: 'pain-relief',
     icon: 'Flame',
-    imageUrl: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=600',
+    imageUrl: amandaImg || '/imagens/amanda.jpeg',
     titlePt: 'Tratamento para dores e tensões',
     titleEn: 'Treatment for Pain & Tension',
     descPt: 'Focado no alívio de dor nas costas, tensão cervical, ombros rígidos e cansaço físico acumulado através de acupressão profunda adaptada.',
@@ -1492,6 +1495,9 @@ export default function App() {
   return (
     <div className={`min-h-screen bg-brand-black text-gray-200 selection:bg-brand-red selection:text-white relative overflow-hidden japanese-grid-overlay ${themeMode === 'bw' ? 'theme-bw' : ''}`}>
       
+      {/* Zen Japanese Symbol Entrance Animation on Page Load */}
+      <ZenIntroAnimation lang={lang} />
+
       {/* Decorative incense/glow red spheres */}
       <div className="absolute top-20 left-[-10%] w-[220px] h-[220px] rounded-full bg-brand-red/[0.03] blur-[150px] pointer-events-none breathing-glow-accent"></div>
       <div className="absolute bottom-40 right-[-10%] w-[240px] h-[240px] rounded-full bg-brand-gold/[0.02] blur-[160px] pointer-events-none"></div>
@@ -1687,7 +1693,7 @@ export default function App() {
           <div className="space-y-24">
             
             {/* Hero Banner Section - Minimalist Japanese Luxury aligned with Design System */}
-            <section id="hero-section" className="relative min-h-[90vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
+            <section id="hero-section" className="relative min-h-[90vh] sm:min-h-screen flex items-center overflow-hidden">
               {/* Background cover video with image poster fallback */}
               <div className="absolute inset-0 z-0">
                 {currentVideo.includes('youtube.com') || currentVideo.includes('youtu.be') ? (
@@ -1723,70 +1729,78 @@ export default function App() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_35%,rgba(10,10,10,0.65)_100%)] pointer-events-none" />
               </div>
 
-              <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center w-full">
-                {/* Top Delicate Subtitle (aligned with design system) */}
+              <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-left">
+                {/* Identification above the title */}
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.2, delay: 0.1 }}
-                  className="mb-3 sm:mb-5"
+                  className="mb-4 sm:mb-6 flex items-center gap-2.5 sm:gap-3"
                 >
-                  <span className="text-label text-white/90 block">
-                    {lang === 'pt' ? 'Tradição Milenar & Harmonia dos Sentidos' : 'Ancient Heritage & Harmonious Wellness'}
-                  </span>
-                  <span className="text-label-sm text-brand-red block mt-1.5">
-                    Lisboa · Desde 2004
+                  <motion.div
+                    initial={{ scale: 0.75, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    className="shrink-0"
+                  >
+                    <NiponEmblem 
+                      size={22} 
+                      className="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-[0_2px_8px_rgba(230,0,18,0.45)]" 
+                    />
+                  </motion.div>
+                  <span className="text-label text-white/90 text-xs sm:text-sm tracking-[0.22em] sm:tracking-[0.28em] block uppercase">
+                    {lang === 'pt'
+                      ? 'NIPON SPA · TERAPIAS JAPONESAS · TELHEIRAS, LISBOA'
+                      : 'NIPON SPA · JAPANESE THERAPIES · TELHEIRAS, LISBON'}
                   </span>
                 </motion.div>
 
-                {/* Central Brandpiece */}
-                <div className="relative my-6 sm:my-8 select-none">
-                  {/* Main Minimalist Title (using text-display from Design System) */}
+                {/* Central Brandpiece / Main Hero Heading */}
+                <div className="relative my-5 sm:my-7 select-none">
+                  {/* Main Title (H1) */}
                   <motion.h1 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.4, delay: 0.3 }}
                     onMouseEnter={startZenSound}
                     onMouseLeave={stopZenSound}
-                    className="relative z-10 text-display text-white pl-[0.3em] sm:pl-[0.45em] cursor-default"
+                    className="relative z-10 font-heading font-light text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] text-white leading-[1.18] sm:leading-[1.12] tracking-tight max-w-3xl cursor-default"
                   >
-                    NIPON SPA
+                    {lang === 'pt'
+                      ? 'A dor não tem de fazer parte da sua vida.'
+                      : 'Pain does not have to be part of your life.'}
                   </motion.h1>
 
                   {/* Subtle traditional Japanese seal & dividing accents */}
-                  <div className="relative z-10 flex items-center justify-center gap-3 sm:gap-4 mt-3 opacity-80">
-                    <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent"></span>
+                  <div className="relative z-10 flex items-center justify-start gap-3 sm:gap-4 mt-4 sm:mt-5 opacity-80">
+                    <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-white/40 to-transparent"></span>
                     <span className="text-label tracking-[0.25em] text-white/75">
                       日本スパ · 静寂と調和
                     </span>
-                    <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent"></span>
+                    <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-white/40"></span>
                   </div>
                 </div>
 
-                {/* Soft, Soothing Description (using text-body-lg from Design System) */}
-                <motion.p 
+                {/* Hero Supporting Text */}
+                <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.4, delay: 0.5 }}
-                  className="text-body-lg text-white/85 max-w-2xl mx-auto mb-10 px-4"
+                  className="max-w-2xl mb-8 sm:mb-10"
                 >
-                  {lang === 'pt' ? (
-                    <>
-                      “Onde o tempo desacelera e o corpo reencontra a sua serenidade natural através do cuidado atento e dos rituais milenares japoneses.”
-                    </>
-                  ) : (
-                    <>
-                      “Where time gently slows down and the body rediscovers its natural serenity through mindful care and ancient Japanese rituals.”
-                    </>
-                  )}
-                </motion.p>
+                  <p className="text-base sm:text-lg md:text-xl text-white/85 leading-relaxed font-light">
+                    {lang === 'pt'
+                      ? 'Há 22 anos em Lisboa, cuidamos de cada corpo com a tradição das terapias japonesas e protocolos personalizados.'
+                      : 'For 22 years in Lisbon, we care for each body with the tradition of Japanese therapies and personalized protocols.'}
+                  </p>
+                </motion.div>
 
                 {/* Actions aligned with Website Design System Buttons */}
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.4, delay: 0.7 }}
-                  className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-center justify-center"
+                  className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-start justify-start"
                 >
                   <button 
                     onClick={() => {
@@ -1821,7 +1835,7 @@ export default function App() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.5, delay: 1 }}
                 onClick={() => {
-                  const nextElem = document.getElementById('programs-section');
+                  const nextElem = document.getElementById('diferencial-section') || document.getElementById('programs-section');
                   if (nextElem) nextElem.scrollIntoView({ behavior: 'smooth' });
                   else window.scrollTo({ top: window.innerHeight * 0.9, behavior: 'smooth' });
                 }}
@@ -1834,6 +1848,151 @@ export default function App() {
                   <div className="w-full h-full bg-white/80 scroll-indicator-line" />
                 </div>
               </motion.div>
+            </section>
+
+            {/* O NOSSO DIFERENCIAL SECTION - Matched to Reference Design */}
+            <section id="diferencial-section" className="relative w-full bg-[#FAF7F2] py-14 sm:py-20 lg:py-24 text-[#1A1A1A] overflow-hidden">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-20 items-center">
+                  
+                  {/* Visual Side: Authentic Nipon Spa Tatami Room Photo */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 35, scale: 0.98 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                    className="lg:col-span-5 order-1 lg:order-1"
+                  >
+                    <div className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] w-full overflow-hidden shadow-2xl shadow-black/10 bg-[#E8E4DC]">
+                      <img 
+                        src={roomTatamiImg || "/imagens/nipon_sala_tatami_clean.jpg"} 
+                        alt="Gabinete de Tratamento Nipon Spa" 
+                        className="w-full h-full object-cover object-center transition-transform duration-700 ease-out hover:scale-[1.02]"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (!target.src.includes('/imagens/nipon_sala_tatami_clean.jpg')) {
+                            target.src = '/imagens/nipon_sala_tatami_clean.jpg';
+                          }
+                        }}
+                      />
+                    </div>
+                  </motion.div>
+
+                  {/* Content Side: Matched Typography & Hierarchy */}
+                  <div className="lg:col-span-7 order-2 lg:order-2 space-y-6 sm:space-y-7 text-left lg:pl-2">
+                    
+                    {/* Subtitle & Title */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 25 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                      className="space-y-3"
+                    >
+                      {/* Subtitle with red dash */}
+                      <div className="flex items-center gap-3">
+                        <span className="w-7 h-[1.5px] bg-[#B81414]"></span>
+                        <span className="text-[11px] sm:text-xs font-semibold tracking-[0.25em] text-[#B81414] uppercase">
+                          {lang === 'pt' ? 'O NOSSO DIFERENCIAL' : 'OUR DIFFERENCE'}
+                        </span>
+                      </div>
+
+                      {/* Main Title (Serif Editorial) */}
+                      <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] text-[#111111] font-serif font-normal leading-[1.18] tracking-tight">
+                        {lang === 'pt' ? (
+                          <>
+                            Mais do que um alívio<br className="hidden sm:inline" /> momentâneo.
+                          </>
+                        ) : (
+                          <>
+                            More than momentary<br className="hidden sm:inline" /> relief.
+                          </>
+                        )}
+                      </h2>
+                    </motion.div>
+
+                    {/* Main Narrative Text */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 25 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                      className="space-y-4 text-sm sm:text-base text-[#2E2E2E] font-sans leading-relaxed"
+                    >
+                      <p>
+                        {lang === 'pt'
+                          ? 'No Nipon Spa, não acreditamos em cuidados padronizados nem em soluções superficiais.'
+                          : 'At Nipon Spa, we do not believe in standardized care or superficial fixes.'}
+                      </p>
+                      <p>
+                        {lang === 'pt'
+                          ? 'Muitas pessoas chegam até nós depois de experimentarem massagens que apenas aliviam por instantes. O nosso cuidado é diferente.'
+                          : 'Many people come to us after experiencing massages that only relieve for brief moments. Our care is fundamentally different.'}
+                      </p>
+                      <p>
+                        {lang === 'pt'
+                          ? 'Ouvimos, avaliamos e adaptamos cada sessão ao corpo, à história e às necessidades de cada pessoa, com o objetivo de tratar a origem da tensão, da rigidez e da dor.'
+                          : 'We listen, evaluate, and tailor each session to the individual body, history, and needs, with the singular goal of addressing the root cause of tension, stiffness, and pain.'}
+                      </p>
+                      <p>
+                        {lang === 'pt'
+                          ? 'É por isso que nos posicionamos como um espaço de terapias japonesas e tratamento personalizado da dor, e não apenas como massagem ou estética.'
+                          : 'That is why we position ourselves as a sanctuary of Japanese therapies and personalized pain treatment, rather than ordinary massage or beauty aesthetics.'}
+                      </p>
+                    </motion.div>
+
+                    {/* Featured Quote with Red Vertical Line */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 25 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      className="border-l-2 border-[#B81414] pl-5 sm:pl-6 py-0.5 my-6 sm:my-8"
+                    >
+                      <p className="font-serif italic text-base sm:text-lg lg:text-xl text-[#1A1A1A] leading-relaxed">
+                        {lang === 'pt' ? (
+                          <>
+                            Não se trata apenas de um alívio momentâneo.<br />
+                            Trata-se de compreender o corpo e cuidar da dor com atenção, técnica e intenção.
+                          </>
+                        ) : (
+                          <>
+                            It is not merely about momentary relief.<br />
+                            It is about understanding the body and treating pain with attentiveness, technique, and intention.
+                          </>
+                        )}
+                      </p>
+                    </motion.div>
+
+                    {/* Underlined Action CTA Link */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.7, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      className="pt-2"
+                    >
+                      <button
+                        onClick={() => {
+                          const methodElem = document.getElementById('metodo-nipon') || document.getElementById('programs-section');
+                          if (methodElem) {
+                            methodElem.scrollIntoView({ behavior: 'smooth' });
+                          } else {
+                            setActiveTab('therapies');
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }
+                        }}
+                        className="inline-flex items-center gap-2.5 pb-1.5 border-b border-[#B81414] text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#111111] hover:text-[#B81414] transition-colors cursor-pointer group"
+                      >
+                        <span>{lang === 'pt' ? 'CONHECER O MÉTODO NIPON' : 'DISCOVER THE NIPON METHOD'}</span>
+                        <ArrowRight className="w-4 h-4 text-[#B81414] transform group-hover:translate-x-1.5 transition-transform duration-200" />
+                      </button>
+                    </motion.div>
+
+                  </div>
+                </div>
+              </div>
             </section>
 
             {/* Focus of Treatment Section (Main Highlight) */}
@@ -1866,8 +2025,14 @@ export default function App() {
                             <img 
                               src={opt.imageUrl} 
                               alt={lang === 'pt' ? opt.titlePt : opt.titleEn}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out"
+                              className={`w-full h-full object-cover ${opt.id === 'pain-relief' ? 'object-[center_58%]' : 'object-center'} group-hover:scale-105 transition-all duration-700 ease-out`}
                               referrerPolicy="no-referrer"
+                              onError={(e) => {
+                                const target = e.currentTarget;
+                                if (opt.id === 'pain-relief' && !target.src.includes('/imagens/amanda.jpeg')) {
+                                  target.src = '/imagens/amanda.jpeg';
+                                }
+                              }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-[#0a0a0a]/10 to-transparent pointer-events-none" />
                           </div>
@@ -2302,12 +2467,18 @@ export default function App() {
                     <div className="space-y-4">
                       {opt.imageUrl && (
                         <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-brand-border/30 bg-brand-charcoal/40">
-                          <img 
-                            src={opt.imageUrl} 
-                            alt={lang === 'pt' ? opt.titlePt : opt.titleEn}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out"
-                            referrerPolicy="no-referrer"
-                          />
+                            <img 
+                              src={opt.imageUrl} 
+                              alt={lang === 'pt' ? opt.titlePt : opt.titleEn}
+                              className={`w-full h-full object-cover ${opt.id === 'pain-relief' ? 'object-[center_58%]' : 'object-center'} group-hover:scale-105 transition-all duration-700 ease-out`}
+                              referrerPolicy="no-referrer"
+                              onError={(e) => {
+                                const target = e.currentTarget;
+                                if (opt.id === 'pain-relief' && !target.src.includes('/imagens/amanda.jpeg')) {
+                                  target.src = '/imagens/amanda.jpeg';
+                                }
+                              }}
+                            />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-[#0a0a0a]/10 to-transparent pointer-events-none" />
                         </div>
                       )}
