@@ -62,7 +62,7 @@ import spaHeroImg from './assets/images/japanese_spa_hero_1781089830835.png';
 import therapyHeroImg from './assets/images/japanese_therapy_1781089845836.png';
 import legacyTempleImg from './assets/images/IMG_7547.jpeg';
 import amandaImg from './assets/images/amanda.jpeg';
-import roomTatamiImg from './assets/images/nipon_sala_tatami_clean.jpg';
+import roomTatamiImg from './assets/images/IMG_7547.jpeg';
 
 // Let's use 2026-06-10 as our base date
 const BASE_DATE_STR = "2026-06-10";
@@ -1743,9 +1743,10 @@ export default function App() {
                     transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     className="shrink-0"
                   >
-                    <NiponEmblem 
-                      size={22} 
-                      className="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-[0_2px_8px_rgba(230,0,18,0.45)]" 
+                    <img 
+                      src="/assets/aistudio/Captura_de_ecra__2026-11-04__a_s_14.25.26_c51dbebc.png" 
+                      alt="Símbolo Nipon Spa" 
+                      className="w-5 h-5 sm:w-6 sm:h-6 object-contain drop-shadow-[0_2px_8px_rgba(230,0,18,0.45)]" 
                     />
                   </motion.div>
                   <span className="text-label text-white/90 text-xs sm:text-sm tracking-[0.22em] sm:tracking-[0.28em] block uppercase">
@@ -1865,14 +1866,14 @@ export default function App() {
                   >
                     <div className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] w-full overflow-hidden shadow-2xl shadow-black/10 bg-[#E8E4DC]">
                       <img 
-                        src={roomTatamiImg || "/imagens/nipon_sala_tatami_clean.jpg"} 
+                        src={roomTatamiImg || "/imagens/IMG_7547.jpeg"} 
                         alt="Gabinete de Tratamento Nipon Spa" 
                         className="w-full h-full object-cover object-center transition-transform duration-700 ease-out hover:scale-[1.02]"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           const target = e.currentTarget;
-                          if (!target.src.includes('/imagens/nipon_sala_tatami_clean.jpg')) {
-                            target.src = '/imagens/nipon_sala_tatami_clean.jpg';
+                          if (!target.src.includes('/imagens/IMG_7547.jpeg')) {
+                            target.src = '/imagens/IMG_7547.jpeg';
                           }
                         }}
                       />
@@ -1893,13 +1894,13 @@ export default function App() {
                       {/* Subtitle with red dash */}
                       <div className="flex items-center gap-3">
                         <span className="w-7 h-[1.5px] bg-[#B81414]"></span>
-                        <span className="text-[11px] sm:text-xs font-semibold tracking-[0.25em] text-[#B81414] uppercase">
+                        <span className="text-[11px] sm:text-xs font-heading font-semibold tracking-[0.25em] text-[#B81414] uppercase">
                           {lang === 'pt' ? 'O NOSSO DIFERENCIAL' : 'OUR DIFFERENCE'}
                         </span>
                       </div>
 
-                      {/* Main Title (Serif Editorial) */}
-                      <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] text-[#111111] font-serif font-normal leading-[1.18] tracking-tight">
+                      {/* Main Title (Sans-serif - Outfit) */}
+                      <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] text-[#111111] font-heading font-medium leading-[1.18] tracking-tight">
                         {lang === 'pt' ? (
                           <>
                             Mais do que um alívio<br className="hidden sm:inline" /> momentâneo.
@@ -1950,7 +1951,7 @@ export default function App() {
                       transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
                       className="border-l-2 border-[#B81414] pl-5 sm:pl-6 py-0.5 my-6 sm:my-8"
                     >
-                      <p className="font-serif italic text-base sm:text-lg lg:text-xl text-[#1A1A1A] leading-relaxed">
+                      <p className="font-sans italic text-base sm:text-lg lg:text-xl text-[#1A1A1A] leading-relaxed">
                         {lang === 'pt' ? (
                           <>
                             Não se trata apenas de um alívio momentâneo.<br />
@@ -1983,7 +1984,7 @@ export default function App() {
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                           }
                         }}
-                        className="inline-flex items-center gap-2.5 pb-1.5 border-b border-[#B81414] text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-[#111111] hover:text-[#B81414] transition-colors cursor-pointer group"
+                        className="inline-flex items-center gap-2.5 pb-1.5 border-b border-[#B81414] text-xs sm:text-sm font-heading font-semibold tracking-[0.2em] uppercase text-[#111111] hover:text-[#B81414] transition-colors cursor-pointer group"
                       >
                         <span>{lang === 'pt' ? 'CONHECER O MÉTODO NIPON' : 'DISCOVER THE NIPON METHOD'}</span>
                         <ArrowRight className="w-4 h-4 text-[#B81414] transform group-hover:translate-x-1.5 transition-transform duration-200" />

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { NiponEmblem } from './NiponLogo';
 
 interface ZenIntroAnimationProps {
   onComplete?: () => void;
@@ -65,17 +64,18 @@ export default function ZenIntroAnimation({
             className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border border-white/10 pointer-events-none"
           />
 
-          {/* Authentic Japanese Symbol from Logo */}
+          {/* Authentic Japanese Symbol Image provided by User */}
           <motion.div
             initial={{ opacity: 0, scale: 0.82, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="relative z-10 flex flex-col items-center"
           >
-            <div className="relative shadow-2xl shadow-[#E60012]/35 rounded-full p-1.5 transition-transform duration-700 hover:scale-105">
-              <NiponEmblem 
-                size={110} 
-                className="w-24 h-24 sm:w-28 sm:h-28 drop-shadow-[0_4px_30px_rgba(230,0,18,0.5)]" 
+            <div className="relative transition-transform duration-700 hover:scale-105">
+              <img 
+                src="/assets/aistudio/Captura_de_ecra__2026-11-04__a_s_14.25.26_c51dbebc.png"
+                alt="Símbolo Japonês Nipon Spa 日本"
+                className="w-28 h-auto sm:w-36 max-w-[150px] object-contain drop-shadow-[0_4px_35px_rgba(230,0,18,0.55)] select-none pointer-events-none"
               />
             </div>
 
