@@ -248,6 +248,29 @@ body {
   filter: none !important;
 }
 
+/* -------------------------------------------------------------
+   TRANSPARENT FROSTED GLASS HEADER (High Transparency & Fluid Blur)
+   ------------------------------------------------------------- */
+.header-glass {
+  background-color: rgba(10, 10, 10, 0.28) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+}
+
+.theme-bw .header-glass {
+  background-color: rgba(247, 247, 247, 0.38) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+}
+
+.header-glass.header-scrolled {
+  background-color: rgba(10, 10, 10, 0.65) !important;
+}
+
+.theme-bw .header-glass.header-scrolled {
+  background-color: rgba(247, 247, 247, 0.75) !important;
+}
+
 /* ==========================================
    BLACK & WHITE (B&W) THEME OVERRIDES (WHITE BACKGROUND)
    ========================================== */

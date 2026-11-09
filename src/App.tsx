@@ -758,6 +758,9 @@ export default function App() {
   const [cardCVV, setCardCVV] = useState<string>('');
   const [isCardFlipped, setIsCardFlipped] = useState<boolean>(false);
   
+  // Header scroll transparency state
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  
   // Verification / Simulation statuses
   const [bookingStep, setBookingStep] = useState<number>(1); // 1: Schedule, 2: Customer Info, 3: Payment, 4: Confirmed
   const [isProcessingPayment, setIsProcessingPayment] = useState<boolean>(false);
@@ -1042,6 +1045,16 @@ export default function App() {
         }
       } catch (e) {}
     };
+  }, []);
+
+  // Listen to scroll to adjust navbar background transparency
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -1467,8 +1480,12 @@ export default function App() {
       <div className="absolute top-20 left-[-10%] w-[220px] h-[220px] rounded-full bg-brand-red/[0.03] blur-[150px] pointer-events-none breathing-glow-accent"></div>
       <div className="absolute bottom-40 right-[-10%] w-[240px] h-[240px] rounded-full bg-brand-gold/[0.02] blur-[160px] pointer-events-none"></div>
 
-      {/* Floating Top Header */}
-      <header className="sticky top-0 z-40 bg-brand-black/95 backdrop-blur-md border-b border-brand-border/80 transition-all duration-300">
+      {/* Floating Transparent Top Header */}
+      <header className={`sticky top-0 z-40 header-glass transition-all duration-300 ${
+        isScrolled 
+          ? 'header-scrolled border-b border-brand-border/40 shadow-sm' 
+          : 'border-b border-brand-border/20'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Brand Logo & Shinto Emblem */}
