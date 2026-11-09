@@ -36,7 +36,6 @@ import {
   VolumeX,
   X,
   Menu,
-  Play,
   Award,
   Users,
   History,
@@ -60,9 +59,9 @@ import { BLOG_POSTS, BlogPost } from './data/blog';
 // Import image assets statically for Vite production bundles
 import spaHeroImg from './assets/images/japanese_spa_hero_1781089830835.png';
 import therapyHeroImg from './assets/images/japanese_therapy_1781089845836.png';
-import legacyTempleImg from './assets/images/IMG_7547.jpeg';
+import legacyTempleImg from './assets/images/home.jpeg';
 import amandaImg from './assets/images/amanda.jpeg';
-import roomTatamiImg from './assets/images/IMG_7547.jpeg';
+import roomTatamiImg from './assets/images/home.jpeg';
 
 // Let's use 2026-06-10 as our base date
 const BASE_DATE_STR = "2026-06-10";
@@ -192,14 +191,14 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
           <div className="lg:col-span-5 w-full flex items-center justify-center">
             <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] rounded-2xl overflow-hidden border border-brand-border/40 shadow-2xl group">
               <img 
-                src={legacyTempleImg || "/imagens/IMG_7547.jpeg"} 
+                src={legacyTempleImg || "/imagens/home.jpeg"} 
                 alt="Nipon Spa Legado" 
                 className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
                 onError={(e) => {
                   const target = e.currentTarget;
-                  if (!target.src.includes('/imagens/IMG_7547.jpeg')) {
-                    target.src = '/imagens/IMG_7547.jpeg';
+                  if (!target.src.includes('/imagens/home.jpeg')) {
+                    target.src = '/imagens/home.jpeg';
                   }
                 }}
               />
@@ -299,42 +298,8 @@ export function LegacyTimelineAndNewGen({ lang }: LegacyTimelineAndNewGenProps) 
           {/* STEP 1: 22 Anos de Sucesso (Vanessa's Testimonial Video and Nova Geração Specialists) */}
           {timelineStep === 1 && (
             <div className="space-y-8 pt-4 border-t border-brand-border/30">
-              <div className="space-y-4">
-                <div className="space-y-1 text-center">
-                  <span className="text-label text-brand-gold block">
-                    {lang === 'pt' ? 'TESTEMUNHO HISTÓRICO: VANESSA NASCIMENTO' : 'HISTORICAL TESTIMONIAL: VANESSA NASCIMENTO'}
-                  </span>
-                  <p className="text-caption text-gray-500 font-mono italic">
-                    {lang === 'pt' ? 'O testemunho sincero sobre o nascimento do Nipon Spa:' : 'The heartfelt story about the inception of Nipon Spa:'}
-                  </p>
-                </div>
-
-                {/* Vanessa's testimony simulated video container */}
-                <div className="relative overflow-hidden border border-brand-border bg-brand-black max-w-2xl mx-auto rounded-xl p-6 sm:p-8 text-center space-y-4 shadow-xl">
-                  <div className="absolute inset-0 opacity-15 bg-gradient-to-t from-brand-gold to-transparent pointer-events-none"></div>
-                  
-                  <div className="w-14 h-14 rounded-full bg-brand-charcoal border border-brand-gold flex items-center justify-center text-brand-gold mx-auto shadow animate-pulse">
-                    <Play className="w-5 h-5 text-brand-gold ml-0.5" />
-                  </div>
-
-                  <div className="space-y-1 relative z-10">
-                    <h5 className="text-h4 text-white">
-                      {lang === 'pt' ? 'O Meu Testemunho • Por Vanessa Nascimento' : 'My Testimony • By Vanessa Nascimento'}
-                    </h5>
-                    <p className="text-body-sm text-gray-400 max-w-md mx-auto">
-                      {lang === 'pt'
-                        ? 'Vanessa Nascimento partilha em primeira pessoa as suas inspirações, a busca pela excelência na arte de cuidar japonesa e como transformou uma visão num templo de paz no coração de Lisboa.'
-                        : 'Vanessa Nascimento shares first-hand her inspirations, the search for absolute excellence in the Japanese art of care, and how she crafted an urban sanctuary of peace in Lisbon.'}
-                    </p>
-                    <span className="text-label-sm text-brand-gold bg-brand-gold/10 border border-brand-gold/30 px-3 py-1 rounded-full inline-block mt-2 select-none">
-                      {lang === 'pt' ? '⏳ Vídeo Brevemente • Testemunho de Vanessa' : '⏳ Video Coming Soon • Vanessa’s Testimonial'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
               {/* NOVA GERAÇÃO / EQUIPA DE ESPECIALISTAS */}
-              <div className="border-t border-brand-border/30 pt-8 space-y-8 animate-fade-in">
+              <div className="space-y-8 animate-fade-in">
                 <div className="space-y-6 text-center max-w-2xl mx-auto">
                   <span className="text-label text-brand-red block">
                     {lang === 'pt' ? 'Evolução & Rebranding' : 'Evolution & Rebranding'}
@@ -1866,14 +1831,14 @@ export default function App() {
                   >
                     <div className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] w-full overflow-hidden shadow-2xl shadow-black/10 bg-[#E8E4DC]">
                       <img 
-                        src={roomTatamiImg || "/imagens/IMG_7547.jpeg"} 
+                        src={roomTatamiImg || "/imagens/home.jpeg"} 
                         alt="Gabinete de Tratamento Nipon Spa" 
                         className="w-full h-full object-cover object-center transition-transform duration-700 ease-out hover:scale-[1.02]"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           const target = e.currentTarget;
-                          if (!target.src.includes('/imagens/IMG_7547.jpeg')) {
-                            target.src = '/imagens/IMG_7547.jpeg';
+                          if (!target.src.includes('/imagens/home.jpeg')) {
+                            target.src = '/imagens/home.jpeg';
                           }
                         }}
                       />
@@ -1996,79 +1961,213 @@ export default function App() {
               </div>
             </section>
 
-            {/* Focus of Treatment Section (Main Highlight) */}
-            <section id="programs-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-              <div className="text-center max-w-xl mx-auto space-y-3">
-                <span className="text-label text-[#cc0000] block">
-                  {lang === 'pt' ? 'Programas Focados em Resultados' : 'Result-Focused Programs'}
-                </span>
-                <h2 className="text-h2 text-white">
-                  {lang === 'pt' ? 'Selecione o Seu Foco de Tratamento' : 'Select Your Treatment Focus'}
-                </h2>
-                <div className="w-12 h-[1px] bg-[#cc0000]/50 mx-auto"></div>
-                <p className="text-body text-gray-400 max-w-xl mx-auto leading-relaxed">
+            {/* SEÇÃO: MÉTODO NIPON & SELEÇÃO DE FOCO */}
+            <section id="metodo-nipon" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 pt-4">
+              {/* Header: Title & Philosophy */}
+              <div className="text-center max-w-3xl mx-auto space-y-4">
+                <div className="inline-flex items-center gap-2.5">
+                  <span className="w-6 h-[1.5px] bg-[#cc0000]"></span>
+                  <span className="text-label text-[#cc0000] tracking-[0.25em] font-heading font-semibold uppercase">
+                    {lang === 'pt' ? 'MÉTODO NIPON' : 'NIPON METHOD'}
+                  </span>
+                  <span className="w-6 h-[1.5px] bg-[#cc0000]"></span>
+                </div>
+                
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold text-white leading-tight tracking-tight">
                   {lang === 'pt' 
-                    ? 'Cada sessão é totalmente personalizada para o seu objetivo principal de hoje. Escolha uma das opções abaixo para ver as durações, explicações e valores:'
-                    : 'Each session is fully customized to your primary objective of the day. Choose one of the options below to see durations, explanations, and prices:'}
+                    ? 'Não tratamos apenas a dor. Procuramos compreender o que está por trás dela.'
+                    : 'We do not merely treat pain. We seek to understand what lies behind it.'}
+                </h2>
+                
+                <p className="text-base sm:text-lg text-gray-300 font-sans font-light leading-relaxed max-w-2xl mx-auto">
+                  {lang === 'pt'
+                    ? 'Porque cada corpo é único e cada tratamento também deve ser.'
+                    : 'Because every body is unique, and every treatment should be too.'}
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pt-4">
-                {FOCUS_AREAS.map(opt => {
-                  return (
-                    <div 
-                      key={opt.id}
-                      className="bg-white/[0.02] border border-brand-border/60 hover:border-[#cc0000]/60 p-6 rounded-3xl hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between group text-left relative"
-                    >
-                      <div className="space-y-4">
-                        {opt.imageUrl && (
-                          <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-brand-border/30 bg-brand-charcoal/40">
-                            <img 
-                              src={opt.imageUrl} 
-                              alt={lang === 'pt' ? opt.titlePt : opt.titleEn}
-                              className={`w-full h-full object-cover ${opt.id === 'pain-relief' ? 'object-[center_58%]' : 'object-center'} group-hover:scale-105 transition-all duration-700 ease-out`}
-                              referrerPolicy="no-referrer"
-                              onError={(e) => {
-                                const target = e.currentTarget;
-                                if (opt.id === 'pain-relief' && !target.src.includes('/imagens/amanda.jpeg')) {
-                                  target.src = '/imagens/amanda.jpeg';
-                                }
-                              }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-[#0a0a0a]/10 to-transparent pointer-events-none" />
-                          </div>
-                        )}
-
-                        <div className="flex items-center">
-                          <span className="text-label-sm text-gray-400 bg-white/5 px-2.5 py-1 rounded-full">
-                            {lang === 'pt' ? opt.badgePt : opt.badgeEn}
-                          </span>
-                        </div>
-
-                        <div className="space-y-2">
-                          <h4 className="text-h4 text-white group-hover:text-[#cc0000] transition duration-200">
-                            {lang === 'pt' ? opt.titlePt : opt.titleEn}
-                          </h4>
-                          <p className="text-body-sm text-gray-400">
-                            {lang === 'pt' ? opt.descPt : opt.descEn}
-                          </p>
-                        </div>
+              {/* The 4 Method Steps (01 Avaliar, 02 Identificar, 03 Tratar, 04 Reavaliar) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                {[
+                  {
+                    step: '01',
+                    titlePt: 'AVALIAR',
+                    titleEn: 'EVALUATE',
+                    descPt: 'Ouvimos o seu corpo e as suas queixas.',
+                    descEn: 'We listen to your body and your concerns.'
+                  },
+                  {
+                    step: '02',
+                    titlePt: 'IDENTIFICAR',
+                    titleEn: 'IDENTIFY',
+                    descPt: 'Reconhecemos tensões e necessidades.',
+                    descEn: 'We recognize tensions and specific needs.'
+                  },
+                  {
+                    step: '03',
+                    titlePt: 'TRATAR',
+                    titleEn: 'TREAT',
+                    descPt: 'Aplicamos técnicas adaptadas a si.',
+                    descEn: 'We apply customized techniques tailored to you.'
+                  },
+                  {
+                    step: '04',
+                    titlePt: 'REAVALIAR',
+                    titleEn: 'RE-EVALUATE',
+                    descPt: 'Acompanhamos a sua evolução a cada sessão.',
+                    descEn: 'We track your progress after every session.'
+                  }
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="relative bg-white/[0.02] border border-brand-border/60 hover:border-[#cc0000]/60 p-6 sm:p-7 rounded-2xl hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between group text-left shadow-sm"
+                  >
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-3xl font-heading font-extrabold text-[#cc0000] tracking-tight">
+                          {item.step}
+                        </span>
+                        <span className="w-2 h-2 rounded-full bg-[#cc0000]/40 group-hover:bg-[#cc0000] transition-colors"></span>
                       </div>
-
-                      <div className="pt-6 mt-6 border-t border-brand-border/30 flex justify-end">
-                        <button
-                          onClick={() => {
-                            setSelectedFocusArea(opt);
-                          }}
-                          className="text-btn-sm text-brand-red flex items-center space-x-1.5 hover:text-white transition duration-200 cursor-pointer"
-                        >
-                          <span>{lang === 'pt' ? 'Selecionar' : 'Select'}</span>
-                          <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition duration-200" />
-                        </button>
+                      
+                      <div className="space-y-2">
+                        <h4 className="text-base sm:text-lg font-heading font-bold text-white tracking-wider group-hover:text-[#cc0000] transition-colors">
+                          {lang === 'pt' ? item.titlePt : item.titleEn}
+                        </h4>
+                        <p className="text-sm text-gray-300 font-sans leading-relaxed">
+                          {lang === 'pt' ? item.descPt : item.descEn}
+                        </p>
                       </div>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
+              </div>
+
+              {/* Differentiator Highlight Card */}
+              <div className="max-w-4xl mx-auto">
+                <div className="border-l-4 border-[#cc0000] bg-white/[0.03] border-y border-r border-white/5 p-6 sm:p-8 rounded-r-2xl text-left space-y-2 shadow-lg">
+                  <h3 className="text-lg sm:text-xl font-heading font-semibold text-white">
+                    {lang === 'pt' ? 'O nosso diferencial?' : 'Our Difference?'}
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-300 font-sans leading-relaxed">
+                    {lang === 'pt' ? (
+                      <>
+                        <strong className="text-white font-medium">Não aplicamos técnicas iguais a todos.</strong>{' '}
+                        Criamos protocolos personalizados com foco no alívio da dor, na mobilidade e no bem-estar.
+                      </>
+                    ) : (
+                      <>
+                        <strong className="text-white font-medium">We never apply one-size-fits-all techniques.</strong>{' '}
+                        We craft personalized protocols focused on pain relief, mobility, and deep well-being.
+                      </>
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              {/* Treatment Focus Selection & Booking Direction */}
+              <div id="programs-section" className="space-y-8 pt-4">
+                <div className="text-center max-w-2xl mx-auto space-y-3">
+                  <div className="inline-flex items-center gap-2">
+                    <span className="w-4 h-[1px] bg-[#cc0000]"></span>
+                    <span className="text-label text-[#cc0000] tracking-widest font-heading font-semibold uppercase">
+                      {lang === 'pt' ? 'SELECIONE O SEU FOCO DE TRATAMENTO' : 'SELECT YOUR TREATMENT FOCUS'}
+                    </span>
+                    <span className="w-4 h-[1px] bg-[#cc0000]"></span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-heading font-medium text-white tracking-tight">
+                    {lang === 'pt' ? 'Direcionar para Agendamentos' : 'Proceed to Appointments'}
+                  </h3>
+                  <p className="text-body text-gray-400 max-w-xl mx-auto leading-relaxed">
+                    {lang === 'pt' 
+                      ? 'Selecione abaixo o seu objetivo principal para consultar as opções de duração e avançar de imediato para a reserva online:'
+                      : 'Select your main objective below to explore duration options and proceed immediately to online booking:'}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pt-2">
+                  {FOCUS_AREAS.map(opt => {
+                    return (
+                      <div 
+                        key={opt.id}
+                        className="bg-white/[0.02] border border-brand-border/60 hover:border-[#cc0000]/60 p-6 rounded-3xl hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between group text-left relative"
+                      >
+                        <div className="space-y-4">
+                          {opt.imageUrl && (
+                            <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-brand-border/30 bg-brand-charcoal/40">
+                              <img 
+                                src={opt.imageUrl} 
+                                alt={lang === 'pt' ? opt.titlePt : opt.titleEn}
+                                className={`w-full h-full object-cover ${opt.id === 'pain-relief' ? 'object-[center_58%]' : 'object-center'} group-hover:scale-105 transition-all duration-700 ease-out`}
+                                referrerPolicy="no-referrer"
+                                onError={(e) => {
+                                  const target = e.currentTarget;
+                                  if (opt.id === 'pain-relief' && !target.src.includes('/imagens/amanda.jpeg')) {
+                                    target.src = '/imagens/amanda.jpeg';
+                                  }
+                                }}
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-[#0a0a0a]/10 to-transparent pointer-events-none" />
+                            </div>
+                          )}
+
+                          <div className="flex items-center">
+                            <span className="text-label-sm text-gray-400 bg-white/5 px-2.5 py-1 rounded-full">
+                              {lang === 'pt' ? opt.badgePt : opt.badgeEn}
+                            </span>
+                          </div>
+
+                          <div className="space-y-2">
+                            <h4 className="text-h4 text-white group-hover:text-[#cc0000] transition duration-200">
+                              {lang === 'pt' ? opt.titlePt : opt.titleEn}
+                            </h4>
+                            <p className="text-body-sm text-gray-400">
+                              {lang === 'pt' ? opt.descPt : opt.descEn}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="pt-6 mt-6 border-t border-brand-border/30 flex items-center justify-between gap-3">
+                          <button
+                            onClick={() => {
+                              setSelectedFocusArea(opt);
+                            }}
+                            className="text-btn-sm text-gray-400 hover:text-white transition duration-200 cursor-pointer"
+                          >
+                            <span>{lang === 'pt' ? 'Ver Opções' : 'View Options'}</span>
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              const mappedTherapy = THERAPIES.find(t => t.id === opt.levels[0].id) || THERAPIES[0];
+                              setBookingTherapy(mappedTherapy);
+                              setActiveTab('reservar');
+                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
+                            className="text-btn-sm text-[#cc0000] flex items-center space-x-1.5 hover:text-white transition duration-200 cursor-pointer font-semibold"
+                          >
+                            <span>{lang === 'pt' ? 'Agendar' : 'Book'}</span>
+                            <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition duration-200" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Direct Action Link to Reserving */}
+                <div className="text-center pt-2">
+                  <button
+                    onClick={() => {
+                      setActiveTab('reservar');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-heading font-semibold text-gray-400 hover:text-white uppercase tracking-wider transition-colors cursor-pointer group"
+                  >
+                    <span>{lang === 'pt' ? 'Ou consulte todas as terapias na página de reservas' : 'Or view all therapies in the booking page'}</span>
+                    <ArrowRight className="w-4 h-4 text-[#cc0000] transform group-hover:translate-x-1 transition-transform duration-200" />
+                  </button>
+                </div>
               </div>
             </section>
 
@@ -2216,92 +2315,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* EXCLUSIVE SECTION: BLOCO OMOTENASHI & ARISSA MATSUMOTO */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="bg-gradient-to-br from-brand-charcoal via-brand-charcoal/90 to-brand-black border border-brand-border rounded-3xl p-6 sm:p-8 md:p-12 overflow-hidden relative">
-                {/* Background decorative Japanese Kanji */}
-                <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none select-none">
-                  <span className="text-[120px] font-extrabold font-serif text-white tracking-widest leading-none">持て成し</span>
-                </div>
-                
-                <div className="max-w-4xl mx-auto space-y-8 relative z-10 text-left">
-                  
-                  {/* Omotenashi Philosophy content */}
-                  <div className="space-y-6">
-                    <div className="space-y-2">
-                      <span className="text-label text-brand-red flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
-                        {lang === 'pt' ? 'Exclusividade • Omotenashi' : 'Exclusive • Omotenashi Philosophy'}
-                      </span>
-                      <h2 className="text-h2 text-white">
-                        {lang === 'pt' ? 'A Alma do Cuidado' : 'The Soul of Care'}
-                      </h2>
-                      <p className="text-label text-brand-gold">
-                        {lang === 'pt' ? 'A Filosofia Omotenashi no Nipon Spa' : 'Omotenashi Philosophy at Nipon Spa'}
-                      </p>
-                    </div>
 
-                    <div className="relative border-l-2 border-brand-red/40 pl-6 py-1 space-y-4">
-                      <p className="text-body-lg italic text-gray-200">
-                        {lang === 'pt' 
-                          ? '“No Japão, cuidar de alguém significa antecipar as suas necessidades antes mesmo que ele precise pedir.”'
-                          : '“In Japan, caring for someone means anticipating their needs even before they have to ask.”'}
-                      </p>
-                      <p className="text-body text-gray-400 font-light">
-                        {lang === 'pt'
-                          ? 'Este é o espírito Omotenashi que inspira cada atendimento no Nipon Spa. Sob a orientação de Arissa Matsumoto, nossa equipa cultiva a arte japonesa da atenção invisível, onde cada toque, o silêncio respeitoso, o aroma de madeira hinoki e o chá de boas-vindas formam um ritual completo de renovação espiritual e corporal.'
-                          : 'This is the Omotenashi spirit that inspires every moment of care at Nipon Spa. Under the careful guidance of Arissa Matsumoto, our team cultivates the Japanese art of invisible thoughtfulness, where every touch, respectful silence, and authentic tea service form a deep, restoring ritual.'}
-                      </p>
-                    </div>
-
-                    {/* Aesthetic signature or highlight line */}
-                    <div className="pt-2 flex items-center space-x-3 text-label text-gray-500">
-                      <Flower2 className="w-4 h-4 text-brand-red" />
-                      <span>NIPON SPA • LISBOA OMOTENASHI LINEAGE</span>
-                    </div>
-
-                    {/* Cinematic Video Placeholder */}
-                    <div className="relative group rounded-2xl overflow-hidden border border-brand-border/80 bg-brand-black aspect-video flex flex-col items-center justify-center p-6 text-center shadow-2xl transition duration-500 hover:border-brand-red/35 max-w-3xl">
-                      {/* Dark ambient background graphic simulating a premium tatami room */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent z-0"></div>
-                      
-                      {/* Delicate background circles representing Japanese flags or zen stone ripple */}
-                      <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-[#cc0000]/5 filter blur-xl group-hover:bg-[#cc0000]/10 transition duration-500"></div>
-                      <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-brand-gold/5 filter blur-xl"></div>
-                      
-                      {/* Center icons & play-like aesthetics */}
-                      <div className="relative z-10 flex flex-col items-center space-y-4">
-                        {/* Play Button Simulation */}
-                        <div className="w-16 h-16 rounded-full bg-brand-charcoal border border-brand-border flex items-center justify-center text-brand-gold shadow-lg group-hover:scale-105 group-hover:border-brand-red/50 transition duration-300">
-                          <Play className="w-6 h-6 text-brand-gold ml-1 animate-pulse" />
-                        </div>
-                        
-                        {/* Placeholder labels */}
-                        <div className="space-y-1">
-                          <span className="text-label text-brand-gold block">
-                            {lang === 'pt' ? 'EXPERIÊNCIA CINEMÁTICA' : 'CINEMATIC EXPERIENCE'}
-                          </span>
-                          <h4 className="text-h4 text-white">
-                            {lang === 'pt' ? 'A Alma do Omotenashi' : 'The Soul of Omotenashi'}
-                          </h4>
-                          <p className="text-caption text-gray-500 font-mono italic max-w-xs mx-auto">
-                            {lang === 'pt' 
-                              ? 'O vídeo oficial está em fase de produção. Em breve estará disponível.'
-                              : 'Omotenashi feature video is in production. Streaming is commencing soon.'}
-                          </p>
-                        </div>
-
-                        {/* Floating tag */}
-                        <span className="absolute top-2 right-2 bg-brand-red/10 border border-brand-red/30 px-2.5 py-1 rounded-full text-label-sm text-brand-red">
-                          {lang === 'pt' ? 'Em Breve' : 'Coming Soon'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </section>
 
             {/* Quick Location Spot */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
