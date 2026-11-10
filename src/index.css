@@ -2,15 +2,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-red: #cc0000;
-  --color-brand-red-hover: #e50000;
-  --color-brand-darkred: #800000;
-  --color-brand-black: #0a0a0a;
-  --color-brand-charcoal: #0d0d0d;
-  --color-brand-gray: #121212;
-  --color-brand-border: rgba(255, 255, 255, 0.1);
-  --color-brand-gold: #ff3333; /* Red highlight for typography previously in gold */
-  --color-brand-gold-pale: #ff6666;
+  --color-brand-red: #A42F2D;
+  --color-brand-red-hover: #8B2523;
+  --color-brand-darkred: #731E1D;
+  --color-brand-black: #F4F0EB;
+  --color-brand-charcoal: #EAE3D8;
+  --color-brand-gray: #D9CEC1;
+  --color-brand-border: #D9CEC1;
+  --color-brand-gold: #A42F2D;
+  --color-brand-gold-pale: #D9CEC1;
   
   --font-heading: 'Outfit', 'Inter', sans-serif;
   --font-sans: 'Inter', sans-serif;
@@ -20,28 +20,28 @@
 /* Custom styles for professional smooth scrolling and aesthetic oriental background patterns */
 html {
   scroll-behavior: smooth;
-  background-color: #0a0a0a;
+  background-color: #F4F0EB;
 }
 
 body {
   font-family: var(--font-sans);
-  color: #e5e5e5;
-  background-color: #0a0a0a;
+  color: #1D1D1B;
+  background-color: #F4F0EB;
 }
 
-/* Elegant scrollbar on beautiful dark surfaces */
+/* Elegant scrollbar on beautiful natural surfaces */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #F4F0EB;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: #D9CEC1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #cc0000;
+  background: #A42F2D;
 }
 
 /* ==========================================================================
@@ -747,4 +747,265 @@ html:has(.theme-bw)::-webkit-scrollbar-thumb:hover {
 .theme-bw .reservar-dark-hero button:hover span {
   color: #ffffff !important;
 }
+
+/* ==========================================================================
+   NOVA PALETA NIPON: MINIMALISMO JAPONÊS CONTEMPORÂNEO (AREIA & TERRA)
+   - Areia clara: #F4F0EB (Fundo principal)
+   - Pedra:       #D9CEC1 (Fundos secundários, cartões, detalhes e bordas)
+   - Terra:       #6E6258 (Textos secundários e elementos discretos)
+   - Preto suave: #1D1D1B (Títulos e textos principais)
+   - Vermelho:    #A42F2D (Vermelho Nipon para botões, destaques e identidade)
+   ========================================================================== */
+
+.theme-sand {
+  --color-brand-black: #F4F0EB;
+  --color-brand-charcoal: #EAE3D8;
+  --color-brand-gray: #D9CEC1;
+  --color-brand-border: #D9CEC1;
+  
+  --color-brand-red: #A42F2D;
+  --color-brand-red-hover: #8B2523;
+  --color-brand-darkred: #731E1D;
+  --color-brand-gold: #A42F2D;
+  --color-brand-gold-pale: #D9CEC1;
+
+  background-color: #F4F0EB !important;
+  color: #1D1D1B !important;
+}
+
+html:has(.theme-sand) {
+  background-color: #F4F0EB !important;
+}
+
+/* Scrollbar on sand background */
+.theme-sand::-webkit-scrollbar-track,
+html:has(.theme-sand)::-webkit-scrollbar-track {
+  background: #F4F0EB !important;
+}
+.theme-sand::-webkit-scrollbar-thumb,
+html:has(.theme-sand)::-webkit-scrollbar-thumb {
+  background: #D9CEC1 !important;
+  border-radius: 4px;
+}
+.theme-sand::-webkit-scrollbar-thumb:hover,
+html:has(.theme-sand)::-webkit-scrollbar-thumb:hover {
+  background: #A42F2D !important;
+}
+
+/* Traditional oriental paper grid texture on warm sand */
+.theme-sand.japanese-grid-overlay,
+.theme-sand .japanese-grid-overlay {
+  background-image: 
+    radial-gradient(rgba(110, 98, 88, 0.05) 1px, transparent 0),
+    radial-gradient(rgba(217, 206, 193, 0.04) 1.5px, transparent 0) !important;
+}
+
+/* Selection aesthetics */
+.theme-sand *::selection {
+  background-color: #A42F2D !important;
+  color: #FFFFFF !important;
+}
+
+/* Header: Frosted Glass on Sand */
+.theme-sand .header-glass {
+  background-color: rgba(244, 240, 235, 0.88) !important;
+  border-bottom-color: #D9CEC1 !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+}
+.theme-sand .header-glass.header-scrolled {
+  background-color: rgba(244, 240, 235, 0.96) !important;
+  box-shadow: 0 4px 20px rgba(110, 98, 88, 0.08) !important;
+}
+.theme-sand .header-glass nav button {
+  color: #6E6258 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.16em !important;
+}
+.theme-sand .header-glass nav button:hover {
+  color: #1D1D1B !important;
+}
+.theme-sand .header-glass nav button.text-\[\#ff3333\] {
+  color: #A42F2D !important;
+}
+.theme-sand .header-glass nav button .bg-\[\#ff3333\] {
+  background-color: #A42F2D !important;
+}
+
+/* 1. TYPOGRAPHY & TEXT HIERARCHY */
+.theme-sand h1:not(#hero-section *):not([class*="dark-hero"] *),
+.theme-sand h2:not(#hero-section *):not([class*="dark-hero"] *),
+.theme-sand h3:not(#hero-section *):not([class*="dark-hero"] *),
+.theme-sand h4:not(#hero-section *):not([class*="dark-hero"] *),
+.theme-sand h5:not(#hero-section *):not([class*="dark-hero"] *),
+.theme-sand h6:not(#hero-section *):not([class*="dark-hero"] *),
+.theme-sand [class*="font-heading"]:not(#hero-section *):not([class*="dark-hero"] *),
+.theme-sand [class*="text-h"]:not(#hero-section *):not([class*="dark-hero"] *),
+.theme-sand .text-display:not(#hero-section *):not([class*="dark-hero"] *),
+.theme-sand .text-white:not(.bg-brand-red *):not(.bg-brand-red):not(.bg-brand-red-hover *):not(.bg-brand-red-hover):not(.bg-\[\#cc0000\] *):not(.bg-\[\#cc0000\]):not(.bg-\[\#A42F2D\] *):not(.bg-\[\#A42F2D\]):not(#hero-section *):not(#hero-section):not([class*="dark-hero"] *):not([class*="dark-hero"]) {
+  color: #1D1D1B !important;
+}
+
+/* Primary body text: comfortable deep charcoal reading color */
+.theme-sand p:not(#hero-section *):not([class*="dark-hero"] *):not(.bg-brand-red *):not(.bg-\[\#cc0000\] *):not(.bg-\[\#A42F2D\] *),
+.theme-sand .text-gray-200,
+.theme-sand .text-gray-300 {
+  color: #2E2A27 !important;
+}
+
+/* Secondary texts, labels, metadata, dates, subtle icons: Terra (#6E6258) */
+.theme-sand .text-gray-400,
+.theme-sand .text-gray-500,
+.theme-sand [class*="text-label"]:not(#hero-section *):not([class*="dark-hero"] *):not(.bg-brand-red *):not(.bg-\[\#A42F2D\] *) {
+  color: #6E6258 !important;
+}
+
+/* Highlights in Vermelho Nipon (#A42F2D) */
+.theme-sand .text-brand-gold,
+.theme-sand .text-\[\#ff3333\],
+.theme-sand .text-brand-red,
+.theme-sand .text-\[\#cc0000\] {
+  color: #A42F2D !important;
+}
+
+/* Hero Section: Preserve authentic cinematic background and white typography */
+.theme-sand #hero-section h1,
+.theme-sand #hero-section h2,
+.theme-sand #hero-section h3,
+.theme-sand #hero-section .text-display,
+.theme-sand #hero-section .text-h1,
+.theme-sand #hero-section .text-h2,
+.theme-sand #hero-section p,
+.theme-sand #hero-section span:not(.text-brand-red):not(.text-\[\#cc0000\]):not(.text-\[\#A42F2D\]),
+.theme-sand #hero-section a {
+  color: #FFFFFF !important;
+}
+
+/* 2. BUTTONS & INTERACTIVE CTAS (VERMELHO NIPON #A42F2D) */
+.theme-sand .bg-brand-red,
+.theme-sand .bg-brand-red-hover,
+.theme-sand .bg-\[\#cc0000\],
+.theme-sand .bg-\[\#A42F2D\] {
+  background-color: #A42F2D !important;
+  color: #FFFFFF !important;
+  border-color: #A42F2D !important;
+}
+
+.theme-sand .bg-brand-red *,
+.theme-sand .bg-brand-red-hover *,
+.theme-sand .bg-\[\#cc0000\] *,
+.theme-sand .bg-\[\#A42F2D\] * {
+  color: #FFFFFF !important;
+}
+
+.theme-sand button.bg-brand-red:hover,
+.theme-sand a.bg-brand-red:hover,
+.theme-sand .bg-brand-red:not(span):hover,
+.theme-sand .bg-\[\#cc0000\]:hover,
+.theme-sand .hover\:bg-brand-red-hover:hover {
+  background-color: #8B2523 !important;
+}
+
+.theme-sand .border-brand-red {
+  border-color: #A42F2D !important;
+}
+.theme-sand .border-brand-border {
+  border-color: #D9CEC1 !important;
+}
+
+/* 3. SECTIONS & CONTAINERS */
+.theme-sand section.bg-brand-charcoal,
+.theme-sand .bg-brand-charcoal {
+  background-color: #ECE5DC !important;
+  border-color: #D9CEC1 !important;
+}
+
+/* Cards on Pedra & Areia */
+.theme-sand .bg-white\/\[0\.04\] {
+  background-color: #FAF7F2 !important;
+  border-color: #D9CEC1 !important;
+  box-shadow: 0 4px 16px rgba(110, 98, 88, 0.06) !important;
+}
+.theme-sand .bg-white\/\[0\.04\]:hover,
+.theme-sand .hover\:border-brand-red:hover {
+  border-color: #A42F2D !important;
+  box-shadow: 0 10px 24px rgba(164, 47, 45, 0.08) !important;
+}
+
+.theme-sand .bg-brand-charcoal\/40 {
+  background-color: rgba(217, 206, 193, 0.25) !important;
+  border-color: #D9CEC1 !important;
+}
+
+.theme-sand .bg-brand-gray\/60,
+.theme-sand .bg-brand-gray\/40 {
+  background-color: #ECE5DC !important;
+  border-color: #D9CEC1 !important;
+}
+
+/* Category tags / badges in Vermelho Nipon subtle tint */
+.theme-sand .bg-brand-red\/10,
+.theme-sand .bg-brand-red\/15 {
+  background-color: rgba(164, 47, 45, 0.08) !important;
+  color: #A42F2D !important;
+  border-color: rgba(164, 47, 45, 0.2) !important;
+}
+.theme-sand .bg-brand-red\/10 *,
+.theme-sand .bg-brand-red\/15 * {
+  color: #A42F2D !important;
+}
+
+/* 4. INPUTS & FORMS */
+.theme-sand input,
+.theme-sand select,
+.theme-sand textarea {
+  background-color: #FAF7F2 !important;
+  color: #1D1D1B !important;
+  border-color: #D9CEC1 !important;
+}
+.theme-sand input:focus,
+.theme-sand select:focus,
+.theme-sand textarea:focus {
+  border-color: #A42F2D !important;
+  box-shadow: 0 0 0 1px #A42F2D !important;
+}
+.theme-sand input::placeholder,
+.theme-sand textarea::placeholder {
+  color: #6E6258 !important;
+  opacity: 0.7 !important;
+}
+
+/* 5. FOOTER */
+.theme-sand footer {
+  background-color: #E6DFD5 !important;
+  border-top-color: #D9CEC1 !important;
+}
+.theme-sand footer * {
+  color: #6E6258 !important;
+}
+.theme-sand footer h4,
+.theme-sand footer h3,
+.theme-sand footer p.text-white {
+  color: #1D1D1B !important;
+}
+.theme-sand footer a:hover {
+  color: #A42F2D !important;
+}
+
+/* Logo transparent styling and variants */
+.theme-sand footer .logo-variant-white {
+  display: none !important;
+}
+.theme-sand footer .logo-variant-sand {
+  display: block !important;
+}
+
+/* Ensure mobile drawer (which has a dark backdrop) keeps the crisp white logo */
+.theme-sand .fixed .logo-variant-white {
+  display: block !important;
+}
+.theme-sand .fixed .logo-variant-sand {
+  display: none !important;
+}
+
 

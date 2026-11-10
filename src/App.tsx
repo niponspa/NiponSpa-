@@ -54,6 +54,7 @@ import NiponLogo, { NiponEmblem } from './components/NiponLogo';
 import TeamSection from './components/TeamSection';
 import CookieConsentBanner from './components/CookieConsentBanner';
 import ZenIntroAnimation from './components/ZenIntroAnimation';
+import HeroTypographicAnimation from './components/HeroTypographicAnimation';
 import { BLOG_POSTS, BlogPost } from './data/blog';
 
 // Import image assets statically for Vite production bundles
@@ -1471,7 +1472,7 @@ export default function App() {
   });
 
   return (
-    <div className={`min-h-screen bg-brand-black text-gray-200 selection:bg-brand-red selection:text-white relative overflow-hidden japanese-grid-overlay ${themeMode === 'bw' ? 'theme-bw' : ''}`}>
+    <div className="min-h-screen bg-brand-black text-gray-200 selection:bg-brand-red selection:text-white relative overflow-hidden japanese-grid-overlay theme-sand">
       
       {/* Zen Japanese Symbol Entrance Animation on Page Load */}
       <ZenIntroAnimation lang={lang} />
@@ -1490,14 +1491,14 @@ export default function App() {
           <div className="flex items-center justify-between h-20">
             {/* Brand Logo & Shinto Emblem */}
             <div className="flex items-center cursor-pointer" onClick={() => { setActiveTab('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-              <NiponLogo layout="horizontal" circleSize={40} inverse={true} />
+              <NiponLogo layout="horizontal" circleSize={40} inverse={false} />
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-6 text-nav h-full self-stretch items-stretch relative">
               <button 
                 onClick={() => { setActiveTab('about'); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'about' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
+                className={`transition duration-250 py-2 relative h-full flex items-center uppercase tracking-widest font-semibold text-xs ${activeTab === 'about' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navAbout}
                 {activeTab === 'about' && (
@@ -1506,7 +1507,7 @@ export default function App() {
               </button>
               <button 
                 onClick={() => { setActiveTab('therapies'); setSelectedCategory('all'); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'therapies' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
+                className={`transition duration-250 py-2 relative h-full flex items-center uppercase tracking-widest font-semibold text-xs ${activeTab === 'therapies' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navTreatments}
                 {activeTab === 'therapies' && (
@@ -1515,7 +1516,7 @@ export default function App() {
               </button>
               <button 
                 onClick={() => { setActiveTab('reviews'); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'reviews' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
+                className={`transition duration-250 py-2 relative h-full flex items-center uppercase tracking-widest font-semibold text-xs ${activeTab === 'reviews' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navReviews}
                 {activeTab === 'reviews' && (
@@ -1524,7 +1525,7 @@ export default function App() {
               </button>
               <button 
                 onClick={() => { setActiveTab('blog'); setSelectedBlogPost(null); }}
-                className={`transition duration-250 py-2 relative h-full flex items-center ${activeTab === 'blog' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
+                className={`transition duration-250 py-2 relative h-full flex items-center uppercase tracking-widest font-semibold text-xs ${activeTab === 'blog' ? 'text-[#ff3333] font-bold' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.navBlog}
                 {activeTab === 'blog' && (
@@ -1711,106 +1712,21 @@ export default function App() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_35%,rgba(10,10,10,0.65)_100%)] pointer-events-none" />
               </div>
 
-              <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-left">
-                {/* Identification above the title */}
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.2, delay: 0.1 }}
-                  className="mb-4 sm:mb-6 flex items-center gap-2.5 sm:gap-3"
-                >
-                  <motion.div
-                    initial={{ scale: 0.75, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="shrink-0"
-                  >
-                    <img 
-                      src="/assets/aistudio/Captura_de_ecra__2026-11-04__a_s_14.25.26_c51dbebc.png" 
-                      alt="Símbolo Nipon Spa" 
-                      className="w-5 h-5 sm:w-6 sm:h-6 object-contain drop-shadow-[0_2px_8px_rgba(230,0,18,0.45)]" 
-                    />
-                  </motion.div>
-                  <span className="text-label text-white/90 text-xs sm:text-sm tracking-[0.22em] sm:tracking-[0.28em] block uppercase">
-                    {lang === 'pt'
-                      ? 'NIPON SPA · TERAPIAS JAPONESAS · TELHEIRAS, LISBOA'
-                      : 'NIPON SPA · JAPANESE THERAPIES · TELHEIRAS, LISBON'}
-                  </span>
-                </motion.div>
-
-                {/* Central Brandpiece / Main Hero Heading */}
-                <div className="relative my-5 sm:my-7 select-none">
-                  {/* Main Title (H1) */}
-                  <motion.h1 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.4, delay: 0.3 }}
-                    onMouseEnter={startZenSound}
-                    onMouseLeave={stopZenSound}
-                    className="relative z-10 font-heading font-light text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] text-white leading-[1.18] sm:leading-[1.12] tracking-tight max-w-3xl cursor-default"
-                  >
-                    {lang === 'pt'
-                      ? 'A dor não tem de fazer parte da sua vida.'
-                      : 'Pain does not have to be part of your life.'}
-                  </motion.h1>
-
-                  {/* Subtle traditional Japanese seal & dividing accents */}
-                  <div className="relative z-10 flex items-center justify-start gap-3 sm:gap-4 mt-4 sm:mt-5 opacity-80">
-                    <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-white/40 to-transparent"></span>
-                    <span className="text-label tracking-[0.25em] text-white/75">
-                      日本スパ · 静寂と調和
-                    </span>
-                    <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-white/40"></span>
-                  </div>
-                </div>
-
-                {/* Hero Supporting Text */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.4, delay: 0.5 }}
-                  className="max-w-2xl mb-8 sm:mb-10"
-                >
-                  <p className="text-base sm:text-lg md:text-xl text-white/85 leading-relaxed font-light">
-                    {lang === 'pt'
-                      ? 'Há 22 anos em Lisboa, cuidamos de cada corpo com a tradição das terapias japonesas e protocolos personalizados.'
-                      : 'For 22 years in Lisbon, we care for each body with the tradition of Japanese therapies and personalized protocols.'}
-                  </p>
-                </motion.div>
-
-                {/* Actions aligned with Website Design System Buttons */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.4, delay: 0.7 }}
-                  className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-start justify-start"
-                >
-                  <button 
-                    onClick={() => {
-                      setActiveTab('reservar');
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className="w-full sm:w-auto bg-[#cc0000] hover:bg-brand-red-hover text-white px-8 py-3.5 rounded-full text-btn transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-[#cc0000]/25 flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <span>{t.btnBookNow}</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                  
-                  <button 
-                    onClick={() => {
-                      setActiveTab('therapies');
-                      setSelectedCategory('all');
-                      setTimeout(() => {
-                        const elem = document.getElementById('catalog-element');
-                        if (elem) elem.scrollIntoView({ behavior: 'smooth' });
-                      }, 100);
-                    }}
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-full text-btn transition-all duration-300 hover:scale-105 active:scale-95 border border-white/40 text-white hover:bg-white hover:text-black cursor-pointer backdrop-blur-sm shadow-sm"
-                  >
-                    {t.btnViewTreatments}
-                  </button>
-                </motion.div>
-              </div>
+              <HeroTypographicAnimation
+                lang={lang}
+                onBookNow={() => {
+                  setActiveTab('reservar');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                onLearnMethod={() => {
+                  const elem = document.getElementById('metodo-nipon') || document.getElementById('programs-section');
+                  if (elem) {
+                    elem.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                startZenSound={startZenSound}
+                stopZenSound={stopZenSound}
+              />
 
               {/* Minimalist Japanese Vertical "S C R O L L" Indicator */}
               <motion.div 

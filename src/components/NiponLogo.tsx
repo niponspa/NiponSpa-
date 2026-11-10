@@ -1,5 +1,6 @@
 import React from 'react';
-import originalLogo from '../assets/images/WhatsApp Image 2026-06-10 at 13.48.56.jpeg';
+import originalLogoLight from '../assets/images/nipon_logo_transparent.png';
+import originalLogoWhite from '../assets/images/nipon_logo_transparent_white.png';
 
 interface NiponLogoProps {
   layout?: 'horizontal' | 'vertical';
@@ -15,67 +16,47 @@ export default function NiponLogo({
   inverse = true,
   circleSize = 44,
   useOriginalImage = true
- }: NiponLogoProps) {
-  
-  const originalLogoUrl = originalLogo;
- 
+}: NiponLogoProps) {
   // Render high-fidelity SVG calligraphy if the image is disabled or we fallback to it
   const renderCalligraphyCircle = () => {
     return <NiponEmblem size={circleSize} />;
   };
- 
-  // If useOriginalImage is active, we render the high-res uploaded logo screenshot beautifully
+
+  // If useOriginalImage is active, we render the authentic, transparent high-res logo
   if (useOriginalImage) {
     const isCentered = !className.includes('items-start');
     
     return (
-      <>
-        {/* Invisible SVG filter declaration to dynamically map black text/graphics to white while fully preserving the red circle */}
-        <svg width="0" height="0" className="absolute pointer-events-none" style={{ position: 'absolute', width: 0, height: 0 }}>
-          <defs>
-            <filter id="keep-red-white-text">
-              {/* Generate white mask strictly for black/dark pixels where R is low but element is present (A is high) */}
-              <feColorMatrix type="matrix" values="
-                0 0 0 0 1
-                0 0 0 0 1
-                0 0 0 0 1
-                -5 5 0 3 0" result="whiteMask"/>
-              <feMerge>
-                <feMergeNode in="SourceGraphic" />
-                <feMergeNode in="whiteMask" />
-              </feMerge>
-            </filter>
-          </defs>
-        </svg>
-
-        {layout === 'vertical' ? (
-          <div className={`flex flex-col ${isCentered ? 'items-center' : 'items-start'} ${className}`}>
-            {/* Fully transparent wrapper without the white card */}
-            <div className="hover:scale-105 transition-all duration-300 flex items-center justify-center max-w-[160px] sm:max-w-[180px]">
-              <img 
-                src={originalLogoUrl} 
-                alt="Nipon Spa Original Logo" 
-                className="object-contain w-full h-auto logo-filter-responsive"
-                style={{ maxHeight: circleSize * 2.8 }}
-                referrerPolicy="no-referrer"
-              />
-            </div>
-          </div>
-        ) : (
-          <div className={`flex items-center space-x-3.5 select-none ${className}`}>
-            {/* Fully transparent, elegant, compact wrapper without the white badge */}
-            <div className="flex items-center justify-center hover:scale-[1.03] transition-all duration-200">
-              <img 
-                src={originalLogoUrl} 
-                alt="Nipon Spa Logo" 
-                className="object-contain logo-filter-responsive"
-                style={{ height: circleSize * 1.25, width: 'auto' }}
-                referrerPolicy="no-referrer"
-              />
-            </div>
-          </div>
-        )}
-      </>
+      <div className={layout === 'vertical' 
+        ? `flex flex-col ${isCentered ? 'items-center' : 'items-start'} ${className}` 
+        : `flex items-center space-x-3.5 select-none ${className}`
+      }>
+        <div className={`flex items-center justify-center transition-transform duration-200 hover:scale-[1.02] ${layout === 'vertical' ? 'max-w-[170px]' : ''}`}>
+          <img 
+            src={inverse ? originalLogoWhite : originalLogoLight} 
+            alt="Nipon Spa Japonês" 
+            className={`object-contain transition-opacity duration-200 ${inverse ? 'logo-variant-white' : 'logo-variant-dark'}`}
+            style={layout === 'vertical' 
+              ? { maxHeight: circleSize * 2.8, width: 'auto' } 
+              : { height: circleSize * 1.25, width: 'auto' }
+            }
+            referrerPolicy="no-referrer"
+          />
+          {/* Fallback dark text version when on theme-sand footer */}
+          {inverse && (
+            <img 
+              src={originalLogoLight} 
+              alt="Nipon Spa Japonês" 
+              className="object-contain transition-opacity duration-200 logo-variant-sand hidden"
+              style={layout === 'vertical' 
+                ? { maxHeight: circleSize * 2.8, width: 'auto' } 
+                : { height: circleSize * 1.25, width: 'auto' }
+              }
+              referrerPolicy="no-referrer"
+            />
+          )}
+        </div>
+      </div>
     );
   }
 
