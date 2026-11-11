@@ -921,13 +921,18 @@ html:has(.theme-sand)::-webkit-scrollbar-thumb:hover {
 }
 
 /* Cards on Pedra & Areia */
-.theme-sand .bg-white\/\[0\.04\] {
+.theme-sand .bg-white\/\[0\.04\],
+.theme-sand .bg-white\/\[0\.02\],
+.theme-sand #programs-section .rounded-3xl {
   background-color: #FAF7F2 !important;
   border-color: #D9CEC1 !important;
   box-shadow: 0 4px 16px rgba(110, 98, 88, 0.06) !important;
 }
 .theme-sand .bg-white\/\[0\.04\]:hover,
+.theme-sand .bg-white\/\[0\.02\]:hover,
+.theme-sand #programs-section .rounded-3xl:hover,
 .theme-sand .hover\:border-brand-red:hover {
+  background-color: #FFFFFF !important;
   border-color: #A42F2D !important;
   box-shadow: 0 10px 24px rgba(164, 47, 45, 0.08) !important;
 }

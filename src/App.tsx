@@ -736,6 +736,18 @@ export default function App() {
     return 'https://www.youtube.com/watch?v=AY5qcIq5u2g';
   });
 
+  // Sequential Background Animation State for Hero: folha.gif -> massage.gif
+  const [heroBgAnimation, setHeroBgAnimation] = useState<'folha' | 'massage'>('folha');
+
+  useEffect(() => {
+    // Sequence starts with folha.gif, then smoothly transitions to massage.gif
+    const interval = setInterval(() => {
+      setHeroBgAnimation((prev) => (prev === 'folha' ? 'massage' : 'folha'));
+    }, 8500);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const t = TRANSLATIONS[lang];
 
   // Translation helpers for therapies dynamically
@@ -1677,39 +1689,30 @@ export default function App() {
             
             {/* Hero Banner Section - Minimalist Japanese Luxury aligned with Design System */}
             <section id="hero-section" className="relative min-h-[90vh] sm:min-h-screen flex items-center overflow-hidden">
-              {/* Background cover video with image poster fallback */}
-              <div className="absolute inset-0 z-0">
-                {currentVideo.includes('youtube.com') || currentVideo.includes('youtu.be') ? (
-                  <div 
-                    className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-brand-black bg-cover bg-center"
-                    style={{ backgroundImage: `url(${spaHeroImg})` }}
-                  >
-                    <iframe
-                      src={getYouTubeEmbedUrl(currentVideo)}
-                      title="Japanese Nature Ambient"
-                      className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 opacity-65 scale-105 pointer-events-none transition-opacity duration-1000"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      frameBorder="0"
-                    />
-                  </div>
-                ) : (
-                  <video 
-                    key={currentVideo}
-                    ref={videoRef}
-                    autoPlay 
-                    loop 
-                    muted 
-                    playsInline 
-                    poster={spaHeroImg}
-                    className="w-full h-full object-cover object-center opacity-65 transition-opacity duration-1000"
-                  >
-                    <source src={currentVideo} type="video/mp4" />
-                  </video>
-                )}
+              {/* Background sequential ambient animations: folha.gif -> massage.gif (pasta fundo) */}
+              <div className="absolute inset-0 z-0 overflow-hidden">
+                {/* 1. Folha GIF (Japanese Nature, Mount Fuji & Maple Leaves) */}
+                <img 
+                  src="/fundo/folha.gif" 
+                  alt="Nipon Spa Nature Ambient"
+                  className={`absolute inset-0 w-full h-full object-cover object-center scale-100 pointer-events-none transition-opacity duration-1200 ease-in-out ${
+                    heroBgAnimation === 'folha' ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                  }`}
+                />
+                
+                {/* 2. Massage GIF (Japanese Massage Ritual in Tatami Room) */}
+                <img 
+                  src="/fundo/massage.gif" 
+                  alt="Nipon Spa Massage Ritual Ambient"
+                  className={`absolute inset-0 w-full h-full object-cover object-center scale-100 pointer-events-none transition-opacity duration-1200 ease-in-out ${
+                    heroBgAnimation === 'massage' ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                  }`}
+                />
+
                 {/* Master gradients and vignette overlays for pristine readability and cinematic depth */}
-                <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/20 to-brand-black/50 pointer-events-none" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_35%,rgba(10,10,10,0.65)_100%)] pointer-events-none" />
+                <div className="absolute inset-0 bg-black/35 pointer-events-none z-20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-brand-black/40 pointer-events-none z-20" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(10,10,10,0.6)_100%)] pointer-events-none z-20" />
               </div>
 
               <HeroTypographicAnimation
@@ -4867,24 +4870,24 @@ export default function App() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="bg-white border border-gray-200 rounded-3xl max-w-4xl w-full my-8 overflow-hidden flex flex-col shadow-2xl relative text-gray-900"
+              className="bg-[#F4F0EB] border border-[#D9CEC1] rounded-3xl max-w-4xl w-full my-8 overflow-hidden flex flex-col shadow-2xl relative text-[#1D1D1B]"
             >
               {/* Modal Header */}
-              <div className="bg-gray-50 p-6 md:p-8 border-b border-gray-200 flex items-center justify-between">
+              <div className="bg-[#EAE3D9] p-6 md:p-8 border-b border-[#D9CEC1] flex items-center justify-between">
                 <div>
-                  <div className="flex items-center space-x-2 text-label-sm text-[#cc0000] mb-1">
+                  <div className="flex items-center space-x-2 text-label-sm text-[#A42F2D] mb-1 font-heading font-semibold uppercase tracking-wider">
                     <span>{lang === 'pt' ? 'Foco do Tratamento' : 'Treatment Focus'}</span>
                     <span>•</span>
                     <span>{lang === 'pt' ? selectedFocusArea.badgePt : selectedFocusArea.badgeEn}</span>
                   </div>
-                  <h2 className="text-h3 text-gray-900">
+                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-[#1D1D1B] tracking-tight">
                     {lang === 'pt' ? selectedFocusArea.titlePt : selectedFocusArea.titleEn}
                   </h2>
                 </div>
                 
                 <button 
                   onClick={() => setSelectedFocusArea(null)}
-                  className="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:text-gray-900 hover:bg-gray-200 flex items-center justify-center transition border border-gray-200 hover:border-brand-red cursor-pointer"
+                  className="w-9 h-9 rounded-full bg-[#D9CEC1]/50 text-[#6E6258] hover:text-[#1D1D1B] hover:bg-[#D9CEC1] flex items-center justify-center transition-all border border-[#D9CEC1] hover:border-[#A42F2D] cursor-pointer"
                   aria-label="Close"
                 >
                   <X className="w-4 h-4" />
@@ -4893,12 +4896,12 @@ export default function App() {
 
               {/* Modal Body: Levels Options */}
               <div className="p-6 md:p-8 space-y-8 overflow-y-auto max-h-[70vh]">
-                <p className="text-body-sm text-gray-600 max-w-2xl">
+                <p className="text-body-sm text-[#6E6258] max-w-2xl leading-relaxed">
                   {lang === 'pt' ? selectedFocusArea.descPt : selectedFocusArea.descEn}
                 </p>
 
                 <div className="space-y-6">
-                  <h3 className="text-label text-[#cc0000] block border-b border-gray-200 pb-2">
+                  <h3 className="text-label text-[#A42F2D] block border-b border-[#D9CEC1] pb-2 font-heading font-semibold uppercase tracking-wider">
                     {lang === 'pt' ? 'Selecione a Duração & Intensidade Ideal' : 'Select Your Ideal Duration & Intensity'}
                   </h3>
 
@@ -4907,58 +4910,58 @@ export default function App() {
                       return (
                         <div 
                           key={level.id}
-                          className="bg-gray-50 border border-gray-200 rounded-2xl p-5 hover:bg-gray-100/50 transition-all duration-300 flex flex-col justify-between text-left group hover:border-[#cc0000]/40 hover:shadow-sm"
+                          className="bg-[#FAF7F2] border border-[#D9CEC1] rounded-2xl p-5 hover:bg-white transition-all duration-300 flex flex-col justify-between text-left group hover:border-[#A42F2D]/50 hover:shadow-md"
                         >
                           <div className="space-y-4">
                             {/* Duration badge and Price */}
                             <div className="flex justify-between items-center">
-                              <span className="bg-brand-red/10 border border-brand-red/30 text-brand-red text-label-sm px-2.5 py-0.5 rounded-full">
+                              <span className="bg-[#D9CEC1]/50 border border-[#D9CEC1] text-[#6E6258] text-label-sm font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                                 {level.duration} min
                               </span>
-                              <span className="text-h4 text-gray-950 font-bold">
+                              <span className="text-2xl text-[#1D1D1B] font-heading font-black">
                                 {level.price}€
                               </span>
                             </div>
 
                             {/* Level Name & Description */}
                             <div className="space-y-1.5">
-                              <h4 className="text-h4 text-gray-900 group-hover:text-[#cc0000] transition duration-200">
+                              <h4 className="text-lg font-heading font-bold text-[#1D1D1B] group-hover:text-[#A42F2D] transition duration-200">
                                 {lang === 'pt' ? level.namePt : level.nameEn}
                               </h4>
-                              <p className="text-body-sm text-gray-600 min-h-[60px]">
+                              <p className="text-body-sm text-[#6E6258] min-h-[60px] leading-relaxed">
                                 {lang === 'pt' ? level.descPt : level.descEn}
                               </p>
                             </div>
 
                             {/* Expected Outcomes */}
-                            <div className="space-y-1.5 pt-3 border-t border-gray-200">
-                              <span className="text-label-sm text-[#cc0000] block">
+                            <div className="space-y-1.5 pt-3 border-t border-[#D9CEC1]">
+                              <span className="text-label-sm text-[#A42F2D] block font-heading font-semibold uppercase tracking-wider">
                                 {lang === 'pt' ? 'Resultados' : 'Outcomes'}
                               </span>
                               {(lang === 'pt' ? level.resultsPt : level.resultsEn).map((res, idx) => (
                                 <div key={idx} className="flex items-start space-x-2">
-                                  <span className="text-[#cc0000] text-xs font-bold leading-none mt-0.5">✓</span>
-                                  <span className="text-body-sm text-gray-700 leading-tight">{res}</span>
+                                  <span className="text-[#A42F2D] text-xs font-bold leading-none mt-0.5">✓</span>
+                                  <span className="text-body-sm text-[#1D1D1B] leading-tight font-medium">{res}</span>
                                 </div>
                               ))}
                             </div>
 
                             {/* Therapeutic Benefits */}
-                            <div className="space-y-1.5 pt-3 border-t border-gray-200">
-                              <span className="text-label-sm text-gray-500 block">
+                            <div className="space-y-1.5 pt-3 border-t border-[#D9CEC1]">
+                              <span className="text-label-sm text-[#6E6258] block font-heading font-semibold uppercase tracking-wider">
                                 {lang === 'pt' ? 'Benefícios' : 'Benefits'}
                               </span>
                               {(lang === 'pt' ? level.benefitsPt : level.benefitsEn).map((ben, idx) => (
                                 <div key={idx} className="flex items-start space-x-2">
-                                  <span className="text-gray-400 text-xs leading-none">—</span>
-                                  <span className="text-body-sm text-gray-600 leading-tight">{ben}</span>
+                                  <span className="text-[#A42F2D] text-xs leading-none">—</span>
+                                  <span className="text-body-sm text-[#6E6258] leading-tight">{ben}</span>
                                 </div>
                               ))}
                             </div>
                           </div>
 
                           {/* CTA Button */}
-                          <div className="pt-5 mt-5 border-t border-gray-200">
+                          <div className="pt-5 mt-5 border-t border-[#D9CEC1]">
                             <button
                               onClick={() => {
                                 // Find corresponding global therapy from static database matching duration/id
@@ -4975,9 +4978,9 @@ export default function App() {
                                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                                 }, 150);
                               }}
-                              className="w-full bg-[#cc0000] hover:bg-brand-red-hover text-white py-2 rounded-xl text-btn-sm transition duration-300 flex items-center justify-center space-x-1 cursor-pointer"
+                              className="w-full bg-[#A42F2D] hover:bg-[#8B2523] text-white py-2.5 rounded-xl text-btn-sm transition duration-300 flex items-center justify-center space-x-1.5 cursor-pointer font-semibold shadow-sm hover:shadow uppercase tracking-wider text-xs"
                             >
-                              <CalendarIcon className="w-3 h-3" />
+                              <CalendarIcon className="w-3.5 h-3.5" />
                               <span>{lang === 'pt' ? 'Agendar' : 'Book Now'}</span>
                             </button>
                           </div>
